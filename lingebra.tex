@@ -1,0 +1,295 @@
+\documentclass[a5paper,12pt]{amsbook}
+
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{color}
+\usepackage{svg}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definice}[chapter]
+\newtheorem{example}{Příklad}[chapter]
+
+\begin{document}
+
+\title{Lineární algebra pro debily}
+\author{Ondřej Stárek}
+\maketitle
+
+\chapter{Úvod}
+
+\noindent Tento text se snaží čtenáře uvést do problematiky některé pokročilejší lineární algebry.
+Je vedena pocitem autora, že pokud překročíte hranici prvního kurzu algebry (za vektorové
+prostory), učitelé zapomněli učit a utápí se v nadšené záplavě písmenek a symbolů, namísto
+vysvětlování souvislostí.
+
+Text si neklade žádné nároky na matematickou přesnost. Koneckonců nenapsal ho matematik,
+ale programátor, který se samostudiem pokoušel naučit něco nového. Spíše se jedná o poznámky
+a popsané úvahy, které musel udělat, když se prokousával spoustou matematických textů
+a pokoušel se je pochopit. Vlastně tímto textem danou látku vysvětluje především sám sobě.
+Přesto si autor fandí, že pro jiné samouky by text mohl být přínosem a ulehčí jim cestu
+k pochopení.
+
+Text je určený samoukům, kteří už v současné době znají základy lineární algebry: maticové
+operace, tělesa a vektorové prostory.
+
+\chapter{Lineární zobrazení}
+
+\section{Definice}
+
+\noindent Lineární zobrazení je všeobecně známý pojem, obvykle probíraný již v základním kurzu
+algebry. Nicméně i u něho autorovi zůstala řada nejasností. Proto se mu bude věnovat.
+
+Co vlastně takové lineární zobrazení je? Není na tom nic složitého: jedná se
+o zobrazení/transformaci/převod vektorů z jednoho vektorového prostoru do jiného. Zobrazení ovšem
+není libovolné - musí zachovávat strukturu vektorového prostoru. To znamená, že pokud nějaký vektor
+ve zdrojovém prostoru vynásobím skalárem, obrazem násobku bude stejný násobek jeho obrazu. Pokud
+sečtu dva vektory, obrazem součtu bude součet jejich obrazů. 
+
+Pokud myšlenka stále není jasná, zkusme to na obrázku. Zde je ukázka transformace, která prodlužuje
+měřítko na vodorovné ose. Na levém obrázku je původní součet dvou vektorů. Vpravo jsou všechny vektory
+přetransformované. Je vidět, že vůbec nezáleží, zda vektory nejdříve sečteme, a pak transformujeme,
+anebo nejdříve transformujeme, a pak sečteme.
+
+\begin{center}
+\includesvg[width=200pt]{lintrans1}
+\end{center}
+
+\noindent Požadovat po lineárním zobrazení tyto podmínky je poměrně přirozené. Díky nim cokoliv, co můžeme
+prohlásit o vektorech ve zdrojovém prostoru, platí zároveň i na jejich obrazech.
+
+Nyní víme, co bychom od lineárního zobrazení očekávali, zkusme ho tedy přesněji nadefinovat.
+
+\begin{definition}
+Mějme vektorové prostory $\mathbb{V}$ a $\mathbb{W}$ oba nad tělesem $\mathbb{T}$ a zobrazení $L: \mathbb{V}\rightarrow\mathbb{W}$. Zobrazení $L$ je linerání zobrazení právě tehdy pokud platí:
+
+\begin{enumerate}
+  \item $\forall\mathbf{x}\in\mathbb{V},\forall\alpha\in\mathbb{T}\;L(\alpha\mathbf{x})=\alpha L(\mathbf{x})$
+  \item $\forall\mathbf{x},\mathbf{y}\in\mathbb{V}\;L(\mathbf{x}+\mathbf{y})=L(\mathbf{x})+L(\mathbf{y})$
+\end{enumerate}
+
+\end{definition}
+
+\noindent Definice je v principu jednoduchá, ale protože ďábel tkví v detailech, probereme ji podrobněji:
+
+\begin{itemize}
+  \item povšimněte si, že oba vektorové prostory jsou nad stejným tělesem. To je nutnost, jinak bychom
+    nebyli schopní obraz vektoru násobit stejným skalárem. Linerní zobrazení tedy jsou omezená pouze
+    na prostory nad stejným tělesem.
+  \item V zápisu jsou použité stejné značky pro sčítání vektorů a pro násobení skalárem. Ale to neznamená,
+    že se vždy jedná o stejné operace. V některých případech se jedná o operace prostoru $\mathbb{V}$
+    a v jiném o operace prostoru $\mathbb{W}$. Nechávám na čtenáři, ať si odvodí, kdy se jedná o kterou
+    (nehledejte v tom žádný chyták).
+  \item Obě podmínky jsou poměrně přímočaré. První říká, že lineární zobrazení zachovává operaci násobení
+    skalárem, druhá, že zachovává operaci sčítání vektorů.
+\end{itemize}
+
+Abych neskončil jenom u písmenek, ukažme si několik příkladů.
+
+\begin{example}\textbf{Identita} - jedno z nejjednodušších zobrazení je takové, které převádí vektor
+na ten samý:
+\begin{equation*}
+L:\,\mathbb{V}\rightarrow\mathbb{V}:\;L(\mathbf{x})=\mathbf{x}
+\end{equation*} 
+Je triviální si dokázat, že obě podmínky definice jsou zachované. Aby ne, když původní vektor
+a jeho obraz jsou stejné.
+
+Identita je zároveň ukázkou typické situace. Ačkoliv definice lineárního zobrazení pracuje se dvěma
+prostory, typické použití je zobrazení do stejného prostoru, tedy kdy oba prostory jsou stejné.
+
+\end{example}
+
+\begin{example}\label{example:rotate}\textbf{Rotace} vektoru o nějaký úhel je dalším běžným příkladem
+lineárního zobrazení:
+\begin{center}
+\includesvg[width=200pt]{lintrans2}
+\end{center}
+Rotace nemění délku vektorů, pouze ho pootočí. První podmínka tedy splněna je - nezávisí zda
+vektor prodloužíme před nebo až po transformaci. Druhá podmínka je graficky také splněna - oba zdrojové
+vektory i jejich součet se otočí stejně. Formální důkaz si čtenář určitě dokáže udělat sám.
+
+\end{example}
+
+\begin{example}\label{example:polynoms}\textbf{Substituce v polynomu}. Zkusme nyní ne úplně tradiční
+vektorový prostor polynomů do řádu 3. Vektory prostoru tedy jsou funkce typu
+\begin{equation*}
+p(x)=ax^{3}+bx^{2}+cx+d
+\end{equation*}
+Operace násobení skalárem a sčítání polynomů jsou definované tak, jak jsme u polynomů zvyklí.
+Nyní proveďme substituci $x=\frac{t}{2}$
+\begin{equation*}
+p(\frac{t}{2})=a\left(\frac{t}{2}\right)^{3}+b\left(\frac{t}{2}\right)^{2}+c\left(\frac{t}{2}\right)+d 
+  = \frac{a}{8}t^{3}+\frac{b}{4}t^{2}+\frac{c}{2}t+d
+\end{equation*} 
+\noindent Je vidět, že výsledek substituce je opět polynom řádu 3. Tedy tato substituce funguje
+jako zobrazení z našeho prostoru do našeho prostoru. Jedná se o lineární zobrazení?
+\begin{enumerate}
+  \item Obrazem vektoru $\alpha p(x)$ je
+    \begin{equation*}
+      \alpha\frac{a}{8}t^{3}+\alpha\frac{b}{4}t^{2}+\alpha\frac{c}{2}t+\alpha{}d 
+      = \alpha p(\frac{t}{2})
+    \end{equation*}
+  \item Obrazem vektoru $p_1(x) + p_2(x)$ je
+    \begin{equation*}
+      \frac{a_1+a_2}{8}t^{3}+\frac{b_1+b_2}{4}t^{2}+\frac{c_1+c_2}{2}t+d_1+d_2
+      = p_1(\frac{t}{2})+p_2(\frac{t}{2})
+    \end{equation*}
+\end{enumerate}
+Obě podmínky definice lineárního zobrazení jsou zřejmě splněné, takže substituce
+je lineárním zobrazením.
+
+K čemu nám něco takového je? Například tato substituce je základem velmi elegantního algoritmu
+pro kreslení křivek, který si parametrickou rovnici $p(t)=0$ rozkrájí na drobné úseky
+tak, aby na každém z nich byl rozdíl mezi $t=0$ a $t=1$ právě jeden pixel zobrazovacího zařízení.
+
+\end{example}
+
+\section{Souřadnice a báze}
+
+\noindent Ze základního kurzu lineární algebry víme, že každý vektor nějakého vektorového prostoru lze
+vyjádřit jako lineární kombinaci bázových vektorů (koeficienty lineární kombinace se nazývají
+\textit{souřadnice}). Ačkoliv báze mohou být různé, počet bázových vektorů je vždy stejný
+a definuje \textit{dimenzi vektorového prostoru}. Omezme se nyní na prostory s konečnou dimenzí
+a zkusme zapřemýšlet o vyjádření lineárního zobrazení v souřadnicích.
+
+Vezměme si tedy zdrojový vektorový prostor $\mathbb{V}$ dimenze $n$ a jeho bázi 
+$\mathbf{b}_{V}=\{b_{v_1},b_{v_2},\ldots,b_{v_n}\}$. Stejně tak cílový vektorový prostor $\mathbb{W}$
+dimenze $m$ a jeho bázi $\mathbf{b}_{W}=\{b_{w_1},b_{w_2},\ldots,b_{w_m}\}$. A mějme lineární zobrazení
+$L: \mathbb{V}\rightarrow\mathbb{W}$ mezi nimi. Víme, že každý vektor $\mathbf{v}\in\mathbb{V}$
+lze vyjádřit jako lineární kombinaci
+\begin{equation*}
+\mathbf{v}=v_{1}b_{v_1}+v_{2}b_{v_2}+\cdots+v_{n}b_{v_n}
+\end{equation*} 
+Pokud tento vektor použijeme jako argument lineárního zobrazení, tak za použití obou podmínek
+z definice:
+\begin{equation*}
+\begin{split}
+L(\mathbf{v})&=L(v_{1}b_{v_1}+v_{2}b_{v_2}+\cdots+v_{n}b_{v_n})\\
+  &=v_{1}L(b_{v_1})+v_{2}L(b_{v_2})+\cdots+v_{n}L(b_{v_n})
+\end{split}
+\end{equation*} 
+Tedy obraz vektoru $\mathbf{v}$ je lineární kombinace obrazů bázových vektorů. Pokud i obrazy bázových
+vektorů vyjádříme v souřadnicích prostoru $\mathbb{W}$, lze lineární zobrazení zapsat pomocí maticové
+aritmetiky (násobení skalárem a sčítání vektorů lze dělat po složkách souřadnic):
+\begin{equation*}
+\left(\begin{array}{c}
+w_{1}\\
+w_{2}\\
+\vdots\\
+w_{m}
+\end{array}\right)=\left(\begin{array}{cccc}
+a_{11} & a_{21} & \cdots & a_{n1}\\
+a_{12} & a_{22} & \cdots & a_{n2}\\
+\vdots & \vdots & \ddots & \vdots\\
+a_{1m} & a_{2m} & \cdots & a_{nm}
+\end{array}\right)\left(\begin{array}{c}
+v_{1}\\
+v_{2}\\
+\vdots\\
+v_{n}
+\end{array}\right)
+\end{equation*}
+nebo zjednodušeně:
+\begin{equation*}
+\overrightarrow{\mathbf{w}}=\mathbf{L}\overrightarrow{\mathbf{v}}
+\end{equation*}
+kde sloupce matice $\mathbf{L}$ jsou souřadnice obrazů zdrojové báze a $\overrightarrow{\mathbf{v}}$
+a $\overrightarrow{\mathbf{w}}$ jsou souřadnice vektorů $\mathbf{v}$ a $\mathbf{w}$.
+
+\begin{example}Pokračujme v příkladu \ref{example:rotate}. Pokud vektor pootočíme o úhel $\alpha$,
+situace bude vypadat takto:
+\begin{center}
+\includesvg[width=200pt]{rotate}
+\end{center}
+Souřadnice původního vektoru jsou
+\begin{align*} 
+x &= d\cos\beta\\ 
+y &= d\sin\beta
+\end{align*}
+kde $d$ je délka vektoru. Souřadnice transformovaného vektoru jsou
+\begin{align*} 
+x' &= d\cos(\beta+\alpha) = d\cos\beta\cos\alpha - d\sin\beta\sin\alpha\\ 
+y' &= d\sin(\beta+\alpha) = d\sin\beta\cos\alpha + d\cos\beta\sin\alpha
+\end{align*}
+Když dosadíme za $d$ z původních souřadnice dostáváme
+\begin{align*} 
+x' &= x\cos\alpha - y\sin\alpha\\ 
+y' &= x\sin\alpha + y\cos\alpha
+\end{align*}
+V maticovém tvaru rotaci vyjádříme takto:
+\begin{equation*}
+\left(\begin{array}{cc}
+\cos\alpha & -\sin\alpha\\
+\sin\alpha & \cos\alpha\\
+\end{array}\right)\left(\begin{array}{c}
+x\\
+y
+\end{array}\right)=\left(\begin{array}{c}
+x'\\
+y'
+\end{array}\right)
+\end{equation*}
+Transformace v této podobě je používaná například v počítačové grafice. Grafik
+vytvoří model, aniž by znal jeho umístění ve scéně. Ten, kdo scénu kompletuje,
+model někam umístí a otočí si ho podle potřeby.
+
+Otočení souřadnicového systému je samozřejmě také běžná činnost ve fyzice.
+
+\end{example}
+
+\begin{example}Vraťme se k příkladu \ref{example:polynoms} a vezměme si jednoduchou bázi prostoru
+$\{x^3, x^2, x, 1\}$, polynom $p(x)$ vyjádřený jako souřadnice je $(a, b, c, d)^T$ a matice zobrazení
+vypadá takto:
+\begin{equation*}
+\left(\begin{array}{cccc}
+\frac{1}{8} & 0 & 0 & 0\\
+0 & \frac{1}{4} & 0 & 0\\
+0 & 0 & \frac{1}{2} & 0\\
+0 & 0 & 0 & 1
+\end{array}\right)\left(\begin{array}{c}
+a\\
+b\\
+c\\
+d
+\end{array}\right)=\left(\begin{array}{c}
+\frac{1}{8}a\\
+\frac{1}{4}b\\
+\frac{1}{2}c\\
+d
+\end{array}\right)
+\end{equation*}
+Ptáte se, k čemu nám to je? Už jsem zmínil, že tato substituce je základ pro jeden
+algoritmus. Jenže ouha, počítače neumí jednoduše kouknout na nějaký vzoreček a do
+něho substituovat. Co ale umí skvěle, je násobit matice. Tím, že jsme polynom vyjádřili
+jako souřadnice a substituci jako matici, jsme získali snadný způsob, jak algoritmus
+naimplementovat.
+\end{example}
+
+Nyní víme, jak lineární zobrazení vyjádřit jako matici. Protože každý vektor lze vyjádřit
+jako lineární kombinaci bázových vektorů, jsme matici schopni vytvořit vždy (skládá se ze
+souřadnic obrazů zdrojové báze). Tzn. \textbf{pro každé lineární zobrazení} (stále uvažujeme
+prostory s konečnou dimenzí) \textbf{existuje jeho matice}.
+
+Co už se ovšem v knížkách algebry obvykle nezdůrazňuje, že předchozí platí i \textbf{obráceně}.
+\textbf{Každá dvourozměrná matice definuje lineární zobrazení.} Z definice maticových operací
+totiž platí:
+\begin{enumerate}
+  \item
+    \begin{equation*}
+      \mathbf{A}\left(\alpha\overrightarrow{\mathbf{x}}\right)=
+          \alpha\left(\mathbf{A}\overrightarrow{\mathbf{x}}\right)
+    \end{equation*}
+  \item
+    \begin{equation*}
+      \mathbf{A}\left(\overrightarrow{\mathbf{x_1}}+\overrightarrow{\mathbf{x_2}}\right)=
+          \mathbf{A}\overrightarrow{\mathbf{x_1}}+\mathbf{A}\overrightarrow{\mathbf{x_2}}
+    \end{equation*}
+\end{enumerate}
+I když se jedná o poměrně triviální fakt, jde o podstatnou myšlenkovou úvahu.
+Autor měl například dlouho problém pochopit termín \textit{podobnost matic}. Matice je jenom
+pole čísel, proto podobnost nedává žádný smysl, obzvláště pokud podobné matice mají zcela
+rozdílná čísla. Jejich podobnost spočívá v tom, že odpovídají stejnému lineárnímu zobrazení
+v různých bázích. I další pojmy algebry, například vlastní čísla matice, dávají smysl až
+s tímto pozorováním.
+
+\end{document}
