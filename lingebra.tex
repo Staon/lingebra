@@ -10,6 +10,14 @@
 \newtheorem{definition}{Definice}[chapter]
 \newtheorem{example}{Příklad}[chapter]
 
+% Book styles
+\newcommand{\myscalar}[1]{#1}
+\newcommand{\myvec}[1]{\mathbf{#1}}
+\newcommand{\mycoord}[1]{\overrightarrow{\mathbf{#1}}}
+\newcommand{\mymatrix}[1]{\mathbf{#1}}
+\newcommand{\myspace}[1]{\mathbb{#1}}
+\newcommand{\mymap}[1]{#1}
+
 \begin{document}
 
 \title{Lineární algebra pro debily}
@@ -61,11 +69,15 @@ prohlásit o vektorech ve zdrojovém prostoru, platí zároveň i na jejich obra
 Nyní víme, co bychom od lineárního zobrazení očekávali, zkusme ho tedy přesněji nadefinovat.
 
 \begin{definition}
-Mějme vektorové prostory $\mathbb{V}$ a $\mathbb{W}$ oba nad tělesem $\mathbb{T}$ a zobrazení $L: \mathbb{V}\rightarrow\mathbb{W}$. Zobrazení $L$ je linerání zobrazení právě tehdy pokud platí:
+Mějme vektorové prostory $\myspace{V}$ a $\myspace{W}$ oba nad tělesem $\myspace{T}$ a zobrazení
+$\mymap{L}: \myspace{V}\rightarrow\myspace{W}$. Zobrazení $\mymap{L}$ je linerání zobrazení právě tehdy
+pokud platí:
 
 \begin{enumerate}
-  \item $\forall\mathbf{x}\in\mathbb{V},\forall\alpha\in\mathbb{T}\;L(\alpha\mathbf{x})=\alpha L(\mathbf{x})$
-  \item $\forall\mathbf{x},\mathbf{y}\in\mathbb{V}\;L(\mathbf{x}+\mathbf{y})=L(\mathbf{x})+L(\mathbf{y})$
+  \item $\forall\myvec{x}\in\myspace{V},\forall\myscalar{\alpha}\in\myspace{T}\;
+    \mymap{L}(\myscalar{\alpha}\myvec{x})=\myscalar{\alpha}L(\myvec{x})$
+  \item $\forall\myvec{x},\myvec{y}\in\myspace{V}\;\mymap{L}(\myvec{x}+\myvec{y})
+    =\mymap{L}(\myvec{x})+\mymap{L}(\myvec{y})$
 \end{enumerate}
 
 \end{definition}
@@ -77,8 +89,8 @@ Mějme vektorové prostory $\mathbb{V}$ a $\mathbb{W}$ oba nad tělesem $\mathbb
     nebyli schopní obraz vektoru násobit stejným skalárem. Linerní zobrazení tedy jsou omezená pouze
     na prostory nad stejným tělesem.
   \item V zápisu jsou použité stejné značky pro sčítání vektorů a pro násobení skalárem. Ale to neznamená,
-    že se vždy jedná o stejné operace. V některých případech se jedná o operace prostoru $\mathbb{V}$
-    a v jiném o operace prostoru $\mathbb{W}$. Nechávám na čtenáři, ať si odvodí, kdy se jedná o kterou
+    že se vždy jedná o stejné operace. V některých případech se jedná o operace prostoru $\myspace{V}$
+    a v jiném o operace prostoru $\myspace{W}$. Nechávám na čtenáři, ať si odvodí, kdy se jedná o kterou
     (nehledejte v tom žádný chyták).
   \item Obě podmínky jsou poměrně přímočaré. První říká, že lineární zobrazení zachovává operaci násobení
     skalárem, druhá, že zachovává operaci sčítání vektorů.
@@ -89,7 +101,7 @@ Abych neskončil jenom u písmenek, ukažme si několik příkladů.
 \begin{example}\textbf{Identita} - jedno z nejjednodušších zobrazení je takové, které převádí vektor
 na ten samý:
 \begin{equation*}
-L:\,\mathbb{V}\rightarrow\mathbb{V}:\;L(\mathbf{x})=\mathbf{x}
+\mymap{L}:\,\myspace{V}\rightarrow\myspace{V}:\;\mymap{L}(\myvec{x})=\myvec{x}
 \end{equation*} 
 Je triviální si dokázat, že obě podmínky definice jsou zachované. Aby ne, když původní vektor
 a jeho obraz jsou stejné.
@@ -139,8 +151,9 @@ Obě podmínky definice lineárního zobrazení jsou zřejmě splněné, takže 
 je lineárním zobrazením.
 
 K čemu nám něco takového je? Například tato substituce je základem velmi elegantního algoritmu
-pro kreslení křivek, který si parametrickou rovnici $p(t)=0$ rozkrájí na drobné úseky
-tak, aby na každém z nich byl rozdíl mezi $t=0$ a $t=1$ právě jeden pixel zobrazovacího zařízení.
+pro kreslení křivek, který si parametrickou rovnici $p(t)=0$ pomocí této substituce rozkrájí
+na drobné úseky tak, aby na každém z nich byl rozdíl mezi $p(0)$ a $p(1)$ právě jeden pixel
+zobrazovacího zařízení.
 
 \end{example}
 
@@ -152,25 +165,30 @@ vyjádřit jako lineární kombinaci bázových vektorů (koeficienty lineární
 a definuje \textit{dimenzi vektorového prostoru}. Omezme se nyní na prostory s konečnou dimenzí
 a zkusme zapřemýšlet o vyjádření lineárního zobrazení v souřadnicích.
 
-Vezměme si tedy zdrojový vektorový prostor $\mathbb{V}$ dimenze $n$ a jeho bázi 
-$\mathbf{b}_{V}=\{b_{v_1},b_{v_2},\ldots,b_{v_n}\}$. Stejně tak cílový vektorový prostor $\mathbb{W}$
-dimenze $m$ a jeho bázi $\mathbf{b}_{W}=\{b_{w_1},b_{w_2},\ldots,b_{w_m}\}$. A mějme lineární zobrazení
-$L: \mathbb{V}\rightarrow\mathbb{W}$ mezi nimi. Víme, že každý vektor $\mathbf{v}\in\mathbb{V}$
-lze vyjádřit jako lineární kombinaci
+Vezměme si tedy zdrojový vektorový prostor $\myspace{V}$ dimenze $n$ a jeho bázi 
+$\{\myvec{b_{v_1}},\myvec{b_{v_2}},\ldots,\myvec{b_{v_n}}\}$. Stejně tak cílový
+vektorový prostor $\myspace{W}$ dimenze $m$ a jeho bázi $\{\myvec{b_{w_1}}, \myvec{b_{w_2}},
+\ldots,\myvec{b_{w_m}}\}$. A mějme lineární zobrazení $\mymap{L}: \myspace{V}\rightarrow\myspace{W}$
+mezi nimi. Víme, že každý vektor $\myvec{v}\in\myspace{V}$ lze vyjádřit jako lineární kombinaci
 \begin{equation*}
-\mathbf{v}=v_{1}b_{v_1}+v_{2}b_{v_2}+\cdots+v_{n}b_{v_n}
+\myvec{v}=\myscalar{v_{1}}\myvec{b_{v_1}}+\myscalar{v_{2}}\myvec{b_{v_2}}+\cdots+\myscalar{v_{n}}
+  \myvec{b_{v_n}}
 \end{equation*} 
 Pokud tento vektor použijeme jako argument lineárního zobrazení, tak za použití obou podmínek
 z definice:
 \begin{equation*}
 \begin{split}
-L(\mathbf{v})&=L(v_{1}b_{v_1}+v_{2}b_{v_2}+\cdots+v_{n}b_{v_n})\\
-  &=v_{1}L(b_{v_1})+v_{2}L(b_{v_2})+\cdots+v_{n}L(b_{v_n})
+\myvec{w}=L(\myvec{v})&=\mymap{L}(\myscalar{v_{1}}\myvec{b_{v_1}}+\myscalar{v_{2}}\myvec{b_{v_2}}
+    +\cdots+\myscalar{v_{n}}\myvec{b_{v_n}})\\
+  &=\myscalar{v_{1}}\mymap{L}(\myvec{b_{v_1}})+\myscalar{v_{2}}\mymap{L}(\myvec{b_{v_2}})+\cdots
+    +\myscalar{v_{n}}\mymap{L}(\myvec{b_{v_n}})
 \end{split}
 \end{equation*} 
-Tedy obraz vektoru $\mathbf{v}$ je lineární kombinace obrazů bázových vektorů. Pokud i obrazy bázových
-vektorů vyjádříme v souřadnicích prostoru $\mathbb{W}$, lze lineární zobrazení zapsat pomocí maticové
-aritmetiky (násobení skalárem a sčítání vektorů lze dělat po složkách souřadnic):
+Tedy obraz vektoru $\myvec{v}$ je lineární kombinace obrazů bázových vektorů.
+Pokud i obrazy bázových vektorů vyjádříme v souřadnicích prostoru $\myspace{W}$, lze lineární
+zobrazení zapsat pomocí maticové aritmetiky (tzn. obrazy vektorů báze v předchozí rovnici
+vyjádříme jako souřadnice v prostoru $\myspace{W}$ a sčítáním po složkách získáme souřadnice
+vektoru $\myvec{w}$):
 \begin{equation*}
 \left(\begin{array}{c}
 w_{1}\\
@@ -178,10 +196,10 @@ w_{2}\\
 \vdots\\
 w_{m}
 \end{array}\right)=\left(\begin{array}{cccc}
-a_{11} & a_{21} & \cdots & a_{n1}\\
-a_{12} & a_{22} & \cdots & a_{n2}\\
+\mymap{L}(\myvec{b_{v_1}})_1 & \mymap{L}(\myvec{b_{v_2}})_1 & \cdots & \mymap{L}(\myvec{b_{v_n}})_1\\
+\mymap{L}(\myvec{b_{v_1}})_2 & \mymap{L}(\myvec{b_{v_2}})_2 & \cdots & \mymap{L}(\myvec{b_{v_n}})_2\\
 \vdots & \vdots & \ddots & \vdots\\
-a_{1m} & a_{2m} & \cdots & a_{nm}
+\mymap{L}(\myvec{b_{v_1}})_m & \mymap{L}(\myvec{b_{v_2}})_m & \cdots & \mymap{L}(\myvec{b_{v_n}})_m
 \end{array}\right)\left(\begin{array}{c}
 v_{1}\\
 v_{2}\\
@@ -191,10 +209,10 @@ v_{n}
 \end{equation*}
 nebo zjednodušeně:
 \begin{equation*}
-\overrightarrow{\mathbf{w}}=\mathbf{L}\overrightarrow{\mathbf{v}}
+\mycoord{w}=\mymatrix{L}\mycoord{v}
 \end{equation*}
-kde sloupce matice $\mathbf{L}$ jsou souřadnice obrazů zdrojové báze a $\overrightarrow{\mathbf{v}}$
-a $\overrightarrow{\mathbf{w}}$ jsou souřadnice vektorů $\mathbf{v}$ a $\mathbf{w}$.
+kde sloupce matice $\mymatrix{L}$ jsou souřadnice obrazů zdrojové báze a $\mycoord{v}$
+a $\mycoord{w}$ jsou souřadnice vektorů $\myvec{v}$ a $\myvec{w}$.
 
 \begin{example}Pokračujme v příkladu \ref{example:rotate}. Pokud vektor pootočíme o úhel $\alpha$,
 situace bude vypadat takto:
@@ -211,7 +229,7 @@ kde $d$ je délka vektoru. Souřadnice transformovaného vektoru jsou
 x' &= d\cos(\beta+\alpha) = d\cos\beta\cos\alpha - d\sin\beta\sin\alpha\\ 
 y' &= d\sin(\beta+\alpha) = d\sin\beta\cos\alpha + d\cos\beta\sin\alpha
 \end{align*}
-Když dosadíme za $d$ z původních souřadnice dostáváme
+Když dosadíme za $d$ z původních souřadnic dostáváme
 \begin{align*} 
 x' &= x\cos\alpha - y\sin\alpha\\ 
 y' &= x\sin\alpha + y\cos\alpha
@@ -270,26 +288,34 @@ jako lineární kombinaci bázových vektorů, jsme matici schopni vytvořit vž
 souřadnic obrazů zdrojové báze). Tzn. \textbf{pro každé lineární zobrazení} (stále uvažujeme
 prostory s konečnou dimenzí) \textbf{existuje jeho matice}.
 
-Co už se ovšem v knížkách algebry obvykle nezdůrazňuje, že předchozí platí i \textbf{obráceně}.
-\textbf{Každá dvourozměrná matice definuje lineární zobrazení.} Z definice maticových operací
-totiž platí:
+V knížkách algebry se už obvykle příliš nezdůrazňuje, že předchozí platí i \textbf{obráceně}, tedy 
+že \textbf{každá dvourozměrná matice určuje nějaké lineární zobrazení.}
+
+Každý vektor lze jednoznačně vyjádřit jako souřadnice. I opačně každé souřadnice odpovídají nějakému
+vektoru (obsahují koeficienty lineární kombinace báze a z definice vektorového prostoru je každá
+lineární kombinace vektorů opět vektor). Tudíž, pokud matici $\mymatrix{A}$ vynásobíme souřadnicemi
+libovolného vektoru, získáme opět souřadnice nějakého vektoru. A protože z definice maticových
+operací platí
 \begin{enumerate}
-  \item
-    \begin{equation*}
-      \mathbf{A}\left(\alpha\overrightarrow{\mathbf{x}}\right)=
-          \alpha\left(\mathbf{A}\overrightarrow{\mathbf{x}}\right)
-    \end{equation*}
-  \item
-    \begin{equation*}
-      \mathbf{A}\left(\overrightarrow{\mathbf{x_1}}+\overrightarrow{\mathbf{x_2}}\right)=
-          \mathbf{A}\overrightarrow{\mathbf{x_1}}+\mathbf{A}\overrightarrow{\mathbf{x_2}}
-    \end{equation*}
+  \item$
+      \mymatrix{A}\left(\myscalar{\alpha}\mycoord{x}\right)=
+          \myscalar{\alpha}\left(\mymatrix{A}\mycoord{x}\right)$,
+  \item$
+      \mymatrix{A}\left(\mycoord{x_1}+\mycoord{x_2}\right)=
+          \mymatrix{A}\mycoord{x_1}+\mymatrix{A}\mycoord{x_2}$,
 \end{enumerate}
+jsou splněné obě podmínky definice lineárního zobrazení.
+
+Povšiměte si, že v předchozím vůbec nedefinuji, o jaké konkrétní prostory se jedná. Matice tedy
+určuje obecně nekonečně mnoho lineárních zobrazení mezi libovolnými vektorovými prostory dimenzí
+odpovídajících rozměrům matice.
+
 I když se jedná o poměrně triviální fakt, jde o podstatnou myšlenkovou úvahu.
 Autor měl například dlouho problém pochopit termín \textit{podobnost matic}. Matice je jenom
 pole čísel, proto podobnost nedává žádný smysl, obzvláště pokud podobné matice mají zcela
 rozdílná čísla. Jejich podobnost spočívá v tom, že odpovídají stejnému lineárnímu zobrazení
-v různých bázích. I další pojmy algebry, například vlastní čísla matice, dávají smysl až
-s tímto pozorováním.
+v různých bázích (transformace bází viz. kapitola XXX). I další pojmy algebry, například vlastní
+čísla matice, dávají smysl až s tímto pozorováním. Matematici často mezi oběma pojmy tiše přechází,
+což před pochopením této souvislosti samoukům, jako jsem já, způsobuje bolení hlavy.
 
 \end{document}
