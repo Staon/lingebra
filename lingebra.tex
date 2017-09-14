@@ -51,7 +51,7 @@ algebry. Nicméně i u něho autorovi zůstala řada nejasností. Proto se mu bu
 Co vlastně takové lineární zobrazení je? Není na tom nic složitého: jedná se
 o zobrazení/transformaci/převod vektorů z jednoho vektorového prostoru do jiného. Zobrazení ovšem
 není libovolné - musí zachovávat strukturu vektorového prostoru. To znamená, že pokud nějaký vektor
-ve zdrojovém prostoru vynásobím skalárem, obrazem násobku bude stejný násobek jeho obrazu. Pokud
+ve zdrojovém prostoru vynásobím skalárem, obrazem jeho násobku bude stejný násobek jeho obrazu. Pokud
 sečtu dva vektory, obrazem součtu bude součet jejich obrazů. 
 
 Pokud myšlenka stále není jasná, zkusme to na obrázku. Zde je ukázka transformace, která prodlužuje
@@ -96,7 +96,21 @@ pokud platí:
     skalárem, druhá, že zachovává operaci sčítání vektorů.
 \end{itemize}
 
-Abych neskončil jenom u písmenek, ukažme si několik příkladů.
+\noindent Přímo z definice vyplývá jedna zajímavá vlastnost: obraz nulového prvku musí být opět
+nulový prvek:
+\begin{align*}
+\myvec{v} + \myvec{0} &= \myvec{v} \\
+\mymap{L}(\myvec{v} + \myvec{0}) &= \mymap{L}(\myvec{v}) \\
+\mymap{L}(\myvec{v}) + \mymap{L}(\myvec{0}) &= \mymap{L}(\myvec{v}) \\
+\mymap{L}(\myvec{v}) - \mymap{L}(\myvec{v}) + \mymap{L}(\myvec{0}) 
+    &= \mymap{L}(\myvec{v}) - \mymap{L}(\myvec{v}) \\
+\mymap{L}(\myvec{0}) &= \myvec{0}
+\end{align*}
+(První řádka je z definice vektorového prostoru, další dvě řádky jsou aplikace definice
+lineárního zobrazení, čtvrtá přičítá opačný vektor k obrazu vektoru $\myvec{v}$.) Důsledkem
+této vlastnosti je, že posunutí (přičtení nenulového vektoru) \textbf{není} lineární zobrazení
+(nulu převede na neulový vektor). To je v praxi poměrně velké omezení a matematici ho řeší
+pomocí tzv. affinních zobrazení a prostorů, které si podrobněji probereme v kapitole XXX.
 
 \begin{example}\textbf{Identita} - jedno z nejjednodušších zobrazení je takové, které převádí vektor
 na ten samý:
@@ -335,16 +349,19 @@ vektor, nedokáže vytvořit bázi, protože množina nulových vektorů není l
 
 Mějme tedy opět lineární zobrazení $\mymap{L}: \myspace{V}\rightarrow\myspace{W}$, kde $\myspace{V}$
 a $\myspace{W}$ jsou vektorové prostory konečných dimenzí $n > 0$ a $m > 0$, a bázi prostoru $\myspace{V}$
-$\{\myvec{v_1}, \myvec{v_2}, \ldots, \myvec{v_n}\}$. Za jakých podmínek bude množina obrazů báze
-$\{\mymap{L}(\myvec{v_1}), \mymap{L}(\myvec{v_2}), \ldots, \mymap{L}(\myvec{v_n})\}$ bází prostoru
-$\myspace{W}$? Z definice báze
+$\{\myvec{v_1}, \myvec{v_2}, \ldots, \myvec{v_n}\}$. Jaké podmníky musí lineární zobrazení
+splnit, aby množina obrazů bází $\{\mymap{L}(\myvec{v_1}), \mymap{L}(\myvec{v_2}), \ldots, 
+\mymap{L}(\myvec{v_n})\}$ byla bází prostoru $\myspace{W}$? Z definice báze víme, že
 \begin{enumerate}
-  \item musí generovat celý prostor $\myspace{W}$,
-  \item musí být lineárně nezávislá.
+  \item musí generovat celý prostor $\myspace{W}$
+  \item a musí být lineárně nezávislá.
 \end{enumerate}
-První podmínku lze splnit poměrně snadno. Znamená, že každý prvek prostoru $\myspace{W}$ musí být
-lineární kombinací obrazů báze, a z definice lineárního zobrazení musí být obrazem nějakého
-vektoru prostoru $\myspace{V}$:
+Je zřejmé, že dimenze obou prostorů musí být stejné. Pokud je $n < m$, pak existuje vektor, který
+obrazy bází nedokáží vygenerovat. Naopak pokud $n > m$, pak množina obrazů báze není lineárně
+nezávislá.
+
+První podmínku lze splnit poměrně snadno. Každý vektor prostoru $\myspace{W}$, který je
+generovaný obrazy báze, musí být obrazem nějakého vektoru prostoru $\myspace{V}$:
 \begin{equation*}
 \begin{split}
 \myvec{w}
@@ -354,11 +371,11 @@ vektoru prostoru $\myspace{V}$:
       + \myscalar{\alpha{}_n}\myvec{v_n}) = \mymap{L}(\myvec{v})
 \end{split}
 \end{equation*}
-Lineární zobrazení tedy musí být \textbf{na} (stručné označení, že každý prvek prostoru 
-$\myspace{W}$ je obrazem nějakého prvku prostoru $\myspace{V}$), protože pak je možné
-každý prvek prostoru $\myspace{W}$ vyjádřit jako lineární kombinaci obrazů báze. Pokud
-by nebylo \textbf{na}, znamená to, že existuje vektor, který nelze vyjádřit jako lineární
-kombinaci obrazů báze, tudíž množina obrazů báze negeneruje celý prostor $\myspace{W}$.
+Pokud tedy obrazy báze mají generovat celý prostor $\myspace{W}$, musí být zobrazení \textbf{na}
+(stručné označení, že každý prvek prostoru $\myspace{W}$ je obrazem nějakého prvku prostoru
+$\myspace{V}$). Úvaha platí i obráceně: pokud je zobrazení \textbf{na}, lze každý vektor
+prostoru $\myspace{W}$ vyjádřit jako lineární kombinaci obrazů báze - každý vektor má
+svůj vzor a předchozí rovnici lze aplikovat pozpátku.
 
 Druhá podmínka je složitější. Pokud je množina obrazů báze lineárně závislá, pak existuje
 nenulová lineární kombinace
@@ -391,8 +408,8 @@ K tomuto vyjádření vektoru $\myvec{w}$ je možné libovolně přičítat prvn
 \end{equation*}
 Protože obě kombinace jsou nenulové, je zřejmé, že vektor $\myvec{w}$ je obrazem dvou různých
 vektorů z prostoru $\myspace{V}$ (jejich souřadnice jsou rozdílné). Znamená to tedy, že
-linerání zobrazení \textbf{není prosté}. Tedy, pokud zobrazení \textbf{je prosté}, pak je množina
-obrazů báze lineárně nezávislá\footnote{
+linerání zobrazení \textbf{není prosté} (stručné označení, že jeden obraz může mít více vzorů).
+Tedy, pokud zobrazení \textbf{je prosté}, pak je množina obrazů báze lineárně nezávislá\footnote{
   Pokud jste se v poslední větě ztratili, jedná se o tzv. \textit{nepřímý důkaz}, kdy se
   implikace $A\Rightarrow B$ dokazuje jako $\lnot B\Rightarrow\lnot A$. Já jsem dokázal, že pokud
   množina obrazů je lineárně závislá, pak zobrazení není prosté. Tedy obráceně pokud zobrazení
@@ -403,23 +420,98 @@ Získali jsme tedy dvě nutné a zároveň postačující podmínky. Lineární 
 je \textbf{prosté} a \textbf{na} transformuje bázi na jinou bázi a tedy slouží jako transformace
 souřadnicového systému.
 
-Otázka zní, zda je možné tvrdit i opak: každé lineární zobrazení prosté a na transformuje bázi.
-I toto platí, ačkoliv důkaz zde dělat nebudu. Lze udělat podobným způsobem a čtenář ho najde
-určitě podstatně elegantnější podobě v učebnicích algebry.
+Otázka zní, zda je možné tvrdit i opak: každé lineární zobrazení, které transformuje bázi,
+je \textbf{prosté} a \textbf{na}. I toto platí. Důkaz první podmínky jsme již udělali (vztah
+mezi generováním celého prostoru a \textbf{na} jsme ukázali v obou směrech). Důkaz
+druhé podmínky jde udělat podobným způsobem. Zvídavý čtenář ho jistě nalezne v podstatně
+elegantnějších podobách v učebnicích algebry.
 
-Položmě si nyní otázku: mohou být dimenze prostoru $\myspace{V}$ a $\myspace{W}$ rozdílné?
-Odpověď zní nikoliv, nemohou:
+Nyní tedy víme, že lineární zobrazení \textbf{prosté} a \textbf{na} funguje jako transformace
+báze. Takové zobrazení se nazývá \textit{bijekce} a má jednu fajn vlastnost: existuje pro něj
+inverzní zobrazení. Je opět poměrně jednoduché si ukázat, že i inverzní zobrazení je lineární:
 \begin{enumerate}
-  \item $m < n$: obrazů báze je více, než je dimenze prostoru $\myspace{W}$, tudíž obrazy
-      nemohou být lineárně nezávislé. A proto ani zobrazení nemůže být \textbf{prosté}.
-  \item $m > n$: obrazů báze je méně, tudíž musí existovat další vektor, který nelze vyjádřit
-      jako lineární kombinaci obrazů báze. Tedy zobrazení není \textbf{na}.
+  \item $\mymap{L}^{-1}(\myscalar{\alpha}\mymap{L}(\myvec{v})) 
+      = \mymap{L^{-1}}(\mymap{L}(\myscalar{\alpha}\myvec{v})) = \myscalar{\alpha}\myvec{v}$
+  \item $\mymap{L}^{-1}(\mymap{L}(\myvec{v_1}) + \mymap{L}(\myvec{v_2}))
+      = \mymap{L}^{-1}(\mymap{L}(\myvec{v_1} + \myvec{v_2}))
+      = \myvec{v_1} + \myvec{v_2}$.
 \end{enumerate}
-
-Nyní tedy víme, že lineární zobrazení prosté a na funguje jako transformace báze. Takové
-zobrazení se nazývá \textit{bijekce} a má jednu fajn vlastnost: existuje pro něj inverzní
-zobrazení. To tedy znamená, že pokud přetransformuji souřadnicový systém, vždy jsem schopen
+Důsledkem je tedy fakt, že pokud přetransformuji souřadnicový systém, vždy jsem schopen
 se vrátit zpět k původním souřadnicím.
+
+Doteď jsme transformovali bázi, ale nepotřebovali jsme si žádnou zvolit. Snesme se nyní
+z abstraktních výšin do praktického užití a zauvažujme o transformaci v souřadnicích.
+Víme, že každé lineární zobrazení lze vyjádřit jako matici. Abychom tak mohli učinit,
+obecně nám v zápisu začnou figurovat 4 báze:
+\begin{enumerate}
+  \item báze určující vzorové souřadnice,
+  \item transformovaná báze (kterou chceme transformovat),
+  \item báze určující souřadnice obrazů,
+  \item přetransformovaná báze (kterou jsme transformovali).
+\end{enumerate}
+To je poněkud matoucí, ale není na tom nic těžkého. Když tedy lineární zobrazení vyjádříme
+jako matici, dostáváme:
+\begin{equation*}
+\mymatrix{L}\mycoord{b} = \mycoord{b'}
+\end{equation*}
+kde $\mycoord{b}$ je vektor báze (2) vyjádřený jako souřadnice báze (1), $\mycoord{b'}$ je
+přetransformovaný vektor z báze (4) vyjádřený jako souřadnice báze (3) a sloupce matice
+$\mymatrix{L}$ jsou obrazy vektorů báze (1) vyjádřené jako souřadnice báze (3) (viz. kapitola
+XXX). Ztratili jste se? Zkuste si to ještě jednou, chce to jen trochu pečlivosti. Báze
+(1) a (2) jsou obvykle stejné. Pak vektory $\mycoord{b}$ mají jednoduchý tvar 
+$(0, \ldots, 0, 1, 0, \ldots, 0)^T$ a sloupce matice $\mymatrix{L}$ obsahují přímo obrazy
+transformované báze.
+
+Protože oba prostory musí mít stejnou dimenzi, matice $\mymatrix{L}$ musí být čtvercová.
+Navíc sloupce tvoří bázi, tudíž musí být lineárně nezávislé. Podle velké věty algebry
+je hodnost matice a hodnost transponované matice stejná, tudíž musí mít i lineárně
+nezávislé řádky. Tedy, matice je regulární. Pro regulární matici existuje inverzní matice,
+která nepříliš překvapivě odpovídá inverznímu zobrazení:
+\begin{align*}
+\mymatrix{L}\mycoord{v} &= \mycoord{w} \\
+\mymatrix{L}^{-1}\mymatrix{L}\mycoord{v} &= \mymatrix{L}^{-1}\mycoord{w} \\
+\mycoord{v} &= \mymatrix{L}^{-1}\mycoord{w} \\
+\end{align*}
+Matice $\mymatrix{L}^{-1}$ tedy odpovídá lineárnímu zobrazení, které každému obrazu
+přiřadí jeho vzor, což je definice inverzního zobrazení.
+
+Nyní si situaci ještě zjednodušme. Omezme se na transformaci z prostoru $\myspace{V}$
+konečné dimenze do stejného prostoru $\mymap{L}: \myspace{V}\rightarrow\myspace{V}$.
+Pokud báze (1), (2) a (3) vezmeme stejné, bude matice $\mymatrix{L}$ obsahovat přímo
+přetransformované bázové vektory vyjádřené jako souřadnice původní báze.
+
+Za těchto podmínek si můžeme položit otázku: jak se změní souřadnice vektoru $\myvec{v}$,
+pokud přetransformujeme souřadnicový systém? Tato otázka je důležitá pro praxi, například
+Newtonovo jablko padá k zemi s určitým vektorem rychlosti v daném časovém okamžiku. Jaké
+bude mít vektor souřadnice, pokud například pootočíme souřadnicovou soustavu? Zkusme se
+kouknout:
+\begin{equation*}
+\myvec{v} = \myscalar{v_1}\myvec{b_1} + \cdots + \myscalar{v_n}\myvec{b_n}
+          = \myscalar{v'_1}\mymap{L}(\myvec{b_1}) + \cdots + \myscalar{v'_n}\mymap{L}(\myvec{b_n})
+\end{equation*}
+kde $\myscalar{v_i}$ jsou souřadnice vektoru před transformací, $\myscalar{v'_i}$ jsou souřadnice
+vektoru po transformaci, $\myvec{b_i}$ jsou vektory báze před transformací a $\mymap{L}(\myvec{b_i})$
+vektory báze po transformaci. Pokud toto zapíšeme jako souřadnice vůči bázi před transformací, získáme
+\begin{equation*}
+\mymatrix{I}\mycoord{v} = \mymatrix{L}\mycoord{v'}
+\end{equation*}
+Vektory báze před transformací vyjádřené jako souřadnice vůči sobě tvoří jednotkovou matici
+$\mymatrix{I}$. Obrazy vektorů báze vyjádřené jako souřadnice vůči bázi před transformací
+tvoří matici transformace $\mymatrix{L}$ (viz. XXX). Pokud tuto rovnici zleva vynásobíme
+inverzní maticí $\mymatrix{L}^{-1}$ (matice transformace je regulární, proto inverzní
+matice existuje) dostaneme
+\begin{equation*}
+\mymatrix{L}^{-1}\mycoord{v} = \mycoord{v'}
+\end{equation*}
+Souřadnice vektoru se tedy transformují \textbf{opačně}, než se transformuje báze.
+Například pokud souřadnicovou soustavu otočíme o úhel $\alpha$ doprava, souřadnice vektoru
+se změní tak, jakoby se vektor v původní souřadnicové soustavě otočil o stejný úhel doleva.
+Pokud zvětším měřítko, souřadnice vektoru se změní, jakoby se měřítko vektoru zmenšilo (viz.
+příklad XXX).
+
+Tato vlastnost se nazývá \textit{kontravariance} a budeme se jí společně s jejím protějškem
+\textit{kovariancí} zabývat v kapitole XXX.
+
 
 \end{document}
 
