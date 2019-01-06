@@ -17,12 +17,15 @@
 \newcommand{\mymatrix}[1]{\mathbf{#1}}
 \newcommand{\myspace}[1]{\mathbb{#1}}
 \newcommand{\mymap}[1]{#1}
+\newcommand{\mydual}[1]{\myspace{#1^{*}}}
 
 \begin{document}
 
 \title{Lineární algebra pro debily}
 \author{Ondřej Stárek}
 \maketitle
+
+\tableofcontents
 
 \chapter{Úvod}
 
@@ -512,6 +515,206 @@ příklad XXX).
 Tato vlastnost se nazývá \textit{kontravariance} a budeme se jí společně s jejím protějškem
 \textit{kovariancí} zabývat v kapitole XXX.
 
+\chapter{Duální vektorový prostor}
+
+\section{Definice}
+
+\noindent Pokud opustíme klidné vody vektorových prostorů, dostáváme se do bouřlivého oceánu
+nepochopitlených úkazů. A hned prvním úkazem, o který si samouk nabije pusu, je \textit{duální
+vektorový prostor}. Posuďte sami, něco takového najdete na Wikipedii:
+
+\begin{definition}
+Mějme vektorový prostor $\myspace{V}$ nad tělesem $\myspace{T}$. Pak \textbf{duální vektorový
+prostor k prostoru $\myspace{V}$}, značený jako $\mydual{V}$, je množina všech lineárních
+zobrazení $\mymap{\varphi}: \myspace{V}\rightarrow\myspace{T}$ doplněná o operace sčítání
+a skalárního násobení:
+
+\begin{enumerate}
+  \item $(\mymap{\varphi} + \mymap{\psi})(\myvec{x}) = \mymap{\varphi}(\myvec{x}) + \mymap{\psi}(\myvec{x})$
+  \item $(\myscalar{\alpha}\mymap{\varphi})(\myvec{x}) = \myscalar{\alpha}(\mymap{\varphi}(\myvec{x}))$
+\end{enumerate}
+
+\end{definition}
+
+\noindent Jasné ne?
+
+Ani se nemusíte pokoušet definici pochopit a už jste ztracení. Jaké lineární zobrazení z vektorového
+prostoru do tělesa, když podle definice má jít o zobrazení z vektorového prostoru do vektorového
+prostoru? Tady se totiž tiše zamlčel fakt, že těleso je možné chápat jako vektorový prostor sám
+nad sebou, kdy operace vektorového sčítání a skalárního násobení přímo odpovídají sčítání a násobení
+definovaného pro těleso. Je triviální si ověřit, že axiomy vektorového prostoru jsou v této situaci
+vlastně shodné s odpovídajícími axiomy tělesa.
+
+Dobře, nyní jsme si ujasnili formální stránku věci. Pojďme si zkusit vydedukovat, k čemu by něco
+takového bylo. Pro tento účel nejdříve potřebujeme rozebrat význam prvků duálního prostoru.
+
+\section{Lineární forma}
+
+\noindent Lineární zobrazení do vlastního tělesa má svoji důležitost, a proto dostalo svůj vlastní
+název \textbf{lineární forma}. Duální prostor je tedy množina všech lineárních forem nad příslušným
+vektorovým prostorem. Lineární forma braná jako prvek duálního prostoru se obvykle nazývá 
+\textbf{kovektor}.
+
+Víme, že každé lineární zobrazení v konečných prostorech lze vyjádřit jako matici. Lineární forma
+je zobrazení do tělesa, tedy prostoru s dimenzí 1. Její matice tedy bude mít pouze jednu řádku:
+\begin{equation*}
+\myscalar{K}=\mycoord{\varphi}^T\mycoord{x} = \myscalar{\varphi_1}\myscalar{x_1} + \cdots + \myscalar{\varphi_n}\myscalar{x_n}
+\end{equation*}
+Pokud si zavzpomínáte na sladké časy na základní škole, možná si také vzpomenete, že rovnice, kterou
+jsme dostali, se nápadně podobá rovnici plochy, kterou jsme se učili v základech geometrie. A nejedná
+se o podobu náhodnou. Pomocí lineární formy můžeme zobecnit pojem \textbf{plocha} jako množinu vektorů,
+pro které forma vrací stejnou hodnotu.
+
+Všimli jste si? Nyní už pro definici plochy nepotřebujeme žádný geometrický význam. Plochu tak
+lze nadefinovat i nad naprosto podivnými vektorovými prostory, nemusí to být jenom $\mathbb{R}^3$.
+
+Ovšem tvrdit, že lineární forma určuje plochu, by bylo chybné. Forma určuje obecně nekonečně mnoho
+ploch - pro různé prvky tělesa různé plochy.
+
+\begin{example}\label{example:linforma1}Lineární formy v $\mathbb{R}^2$: pokud si vezmeme příklad
+dvourozměrného prostoru, zde ``plocha`` je přímka. Linerání forma tedy určuje rovnoběžné přímky.
+Příklad je na obrázku.
+
+\begin{center}
+\includesvg[width=200pt]{linforma}
+\end{center}
+
+\noindent Červená šipka vyjadřuje normálu přímky. Pokud souřadnice normály vypíšeme do řádkového
+vektoru, získáme ono maticové vyjádření lineární formy.
+
+Ve standardní geometrii nás příliš nezajímala velikost normálového vektoru. Pokud nebyl nulový, určoval
+přímku stejně bez ohledu na velikost. V počítačové grafice je například zcela běžné, že se normála
+upravuje tak, aby měla jednotkovou velikost.
+
+Ovšem v případě duálních prostorů nás velikost zajímá. Různé velikosti normálových vektorů odpovídají
+různým lineárním formám, tedy různým prvkům duálního prostoru.
+
+Geometricky nám velikost normály určuje ``hustotu`` přímek v jejím směru. Pokud je normála malá,
+odstup přímek pro stejný rozdíl $K$ bude větší. Pokud je normála velká, odstup bude menší. Můžeme
+na to koukat jako na vrstevnice plochy, která je vztyčená ve třetí ose. Čím větší je normála, tím
+je tato plocha strmější.
+
+Analogie s vrstevnicemi je všeobecně používaná. V učebnicích se kovektory na obrázcích často značí
+jako sekvence paralelních ploch - vrstevnice jakési pro nás nepředstavitelné čtyřrozměrné plochy.
+
+\end{example}
+
+\begin{example}\label{example:linforma2}Kreslení křivky. Jako další příklad si zkusme položit následující
+úkol: máme dva body, mezi kterými chceme nakreslit křivku. V krajních bodech máme určený tečný vektor.
+Jeho směr definuje tečnu křivky, jeho délka určuje, jak moc se křivka bude k tečně ``lepit``. Naším úkolem
+je nalézt parametrické vyjádření křivky. Parametr si označíme jako $t$ a standardně ho necháme se pohybovat
+v intervalu \textit{<0, 1>}. Situace je ukázaná na obrázku.
+
+\begin{center}
+\includesvg[width=200pt]{curve}
+\end{center}
+
+Už jsme si ukázali, že polynomy do určitého stupně tvoří vektorový prostor. Předpokládejme tedy, že
+naše parametrické vyjádření bude polynom třetího stupně. Proč zrovna třetího? Máme 4 okrajové podmínky
+(dva krajní body a dva tečné vektory), tudíž dává smysl použít prostor s dimenzí 4. Uvidíme později.
+
+V principu vlastně chceme získat dva polynomy - jeden vyjadřující $x$ v závislosti na parametru $t$
+a druhý vyjadřující $y$ v závislosti na parametru $t$. Následující odvození řeší souřadnici $x$, postup
+pro druhou souřadnici je ekvivalentní.
+
+Náš hledaný polynom tedy vypadá 
+\begin{equation*}
+p(t)=at^3 + bt^2 + ct + d
+\end{equation*}
+V bázi $\{t^3, t^2, t, 1\}$ jsou jeho souřadnice $(a, b, c, d)^T$. Abychom spočítali koeficienty
+polynomu, musíme využít okrajové podmínky, které máme. Začněme prvním krajním bodem:
+\begin{equation*}
+x_0 = p(0) = 0a + 0b + 0c + d = \left(0, 0, 0, 1\right)\left(\begin{array}{c}
+a\\
+b\\
+c\\
+d
+\end{array}\right)
+\end{equation*}
+Hodnotu polynomu pro $t=0$ jsme vyjádřili jako součin řádkového vektoru a sloupcového vektoru. Sloupcový
+vektor jsou souřadnice vektoru v prostoru polynomů. Řádkový vektor tak určuje lineární formu. V tomto
+případě nám lineární forma vrací hodnotu polynomu v $0$.\footnote{
+  V XXX jsme si řekli, že každá matice určuje nějaké lineární zobrazení. Řádkový vektor je vlastně také
+  matice, proto nám určuje lineární zobrazení. Jinak bychom samozřejmě mohli ověřit, zda zobrazení
+  ``hodnota polynomu v bodě 0`` splňuje podmínky lineárního zobrazení. To je poměrně triviální úkol.
+}
+
+O kousek výše jsme říkali, že lineární forma zobecňuje pojem plocha. V tomto případě ``plochu`` tvoří
+všechny polynomy, které v bodě $0$ mají stejnou hodnotu. A nás konkrétně zajímá ``plocha``, kdy tato
+hodnota je $x_0$.
+
+Zcela analogicky využijeme druhý krajní bod:
+\begin{equation*}
+x_1 = p(1) = a + b + c + d = \left(1, 1, 1, 1\right)\left(\begin{array}{c}
+a\\
+b\\
+c\\
+d
+\end{array}\right)
+\end{equation*}
+Pro využití tečných vektorů musíme polynom nejdříve zderivovat:
+\begin{equation*}
+p'(t)=3at^2 + 2bt + c
+\end{equation*}
+a následně opět dosadit za parametr $t$ nulu a jedničku:
+\begin{equation*}
+\Delta x_0 = p'(0) = c = \left(0, 0, 1, 0\right)\left(\begin{array}{c}
+a\\
+b\\
+c\\
+d
+\end{array}\right)
+\end{equation*}
+\begin{equation*}
+\Delta x_1 = p'(1) = 3a + 2b + c = \left(3, 2, 1, 0\right)\left(\begin{array}{c}
+a\\
+b\\
+c\\
+d
+\end{array}\right)
+\end{equation*}
+Opět jsme získali dvě lineární formy, které vrací hodnotu derivace polynomu v bodě $0$ a $1$.
+
+Celkově nám všechny čtyři okrajové podmínky určují 4 ``plochy``. A my potřebujeme najít jejich
+průsečík. Tím získáváme jednoduchou soustavu rovnic\footnote{
+  Zde je vidět, proč jsme zvolili polynom třetího stupně. Máme 4 rovnice a abychom měli
+  jednoznačné řešení, potřebujeme 4-rozměrný prostor. Pokud by měl méně rozměrů, okrajové
+  podmínky by nemohly být nezávislé. Pokud by byl větší, polynomů by bylo nekonečně mnoho.
+}
+\begin{equation*}
+\left(\begin{array}{cccc}
+0 & 0 & 0 & 1\\
+1 & 1 & 1 & 1\\
+0 & 0 & 1 & 0\\
+3 & 2 & 1 & 0
+\end{array}\right)\left(\begin{array}{c}
+a\\
+b\\
+c\\
+d
+\end{array}\right)=\left(\begin{array}{c}
+x_0\\
+x_1\\
+\Delta x_0\\
+\Delta x_1
+\end{array}\right)
+\end{equation*}
+jejíž řešení je
+\begin{equation*}
+\begin{split}
+a &= 2x_0 - 2x_1 + \Delta x_0 + \Delta x_1\\
+b &= -3x_0 + 3x_1 - 2\Delta x_0 - \Delta x_1\\
+c &= \Delta x_0\\
+d &= x_0
+\end{split}
+\end{equation*}
+Hurá, nyní známe koeficienty polynomu a můžeme si celkem snadno křivku mezi body nakreslit.
+
+Zvídavý čtenář si může za domácí úkol vyzkoušet, že slavné Bezierovy kubiky jsou shodné s námi
+nalezeným polynomem, pouze třetí a čtvrtá krajní podmínka je $3\Delta x_0$ a $3\Delta x_1$ (tzn.
+křivky se k tečným vektorům ``lepí`` o něco agresivněji).
+
+\end{example}
 
 \end{document}
 
