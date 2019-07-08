@@ -5,6 +5,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{color}
 \usepackage{svg}
+\usepackage{amsmath}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definice}[chapter]
@@ -558,7 +559,7 @@ vektorovým prostorem. Lineární forma braná jako prvek duálního prostoru se
 Víme, že každé lineární zobrazení v konečných prostorech lze vyjádřit jako matici. Lineární forma
 je zobrazení do tělesa, tedy prostoru s dimenzí 1. Její matice tedy bude mít pouze jednu řádku:
 \begin{equation*}
-\myscalar{K}=\mycoord{\varphi}^T\mycoord{x} = \myscalar{\varphi_1}\myscalar{x_1} + \cdots + \myscalar{\varphi_n}\myscalar{x_n}
+\myscalar{K}=\mymap{L}(\myvec{x}) = \mycoord{\varphi}^T\mycoord{x} = \myscalar{\varphi_1}\myscalar{x_1} + \cdots + \myscalar{\varphi_n}\myscalar{x_n}
 \end{equation*}
 Pokud si zavzpomínáte na sladké časy na základní škole, možná si také vzpomenete, že rovnice, kterou
 jsme dostali, se nápadně podobá rovnici plochy, kterou jsme se učili v základech geometrie. A nejedná
@@ -591,10 +592,10 @@ různým lineárním formám, tedy různým prvkům duálního prostoru.
 
 Geometricky nám velikost normály určuje ``hustotu`` přímek v jejím směru. Pokud je normála malá,
 odstup přímek pro stejný rozdíl $K$ bude větší. Pokud je normála velká, odstup bude menší. Můžeme
-na to koukat jako na vrstevnice plochy, která je vztyčená ve třetí ose. Čím větší je normála, tím
+na to koukat jako na vrstevnice plochy, která je vztyčená do třetí osy. Čím větší je normála, tím
 je tato plocha strmější.
 
-Analogie s vrstevnicemi je všeobecně používaná. V učebnicích se kovektory na obrázcích často značí
+Analogie s vrstevnicemi je všeobecně používaná. V učebnicích se kovektory na obrázcích často kreslí
 jako sekvence paralelních ploch - vrstevnice jakési pro nás nepředstavitelné čtyřrozměrné plochy.
 
 \end{example}
@@ -715,6 +716,131 @@ nalezeným polynomem, pouze třetí a čtvrtá krajní podmínka je $3\Delta x_0
 křivky se k tečným vektorům ``lepí`` o něco agresivněji).
 
 \end{example}
+
+\noindent Pojďme se nyní zamyslet nad případem, kdy do lineární formy dosadíme nulový vektor. Již víme
+(viz. XXX), že obrazem nulového vektoru je opět nulový vektor. V případě lineární formy nulový
+prvek tělesa. Pokud tedy přijmeme geometrickou představu lineární formy jako ``vrstevnice``
+nadřazené plochy z prostoru o jeden řád větší, pak tato plocha vždy \textbf{prochází počátkem
+souřadnicového systému}: $\mymap{L}(\myvec{0}) = \myscalar{0}$, tedy vrstevnice pro $K = 0$ prochází
+počátkem.
+
+Ve fyzice se mluví o \textit{volných vektorech} - tzn. vektor má velikost a směr, ale není vázaný
+ke konkrétnímu bodu v prostoru. Kovektory se chovají stejně - zajímá nás pouze prudkost a směr
+sklonu plochy, ale ne, kde je nadřazená plocha v prostoru umístěná.
+
+Tento význam je ve fyzice, často používaný. Typický kovektor je např. gradient, tzn. tečná plocha
+funkce (hodnota funkce přidává rozměr navíc). Gradient se sice počítá pro konkrétní bod funkce,
+jeho složky (parciální derivace v daném bodě) už ovšem tuto informaci dále nenesou.
+
+Na závěr kapitoly proberme krajní případ: $\mymap{L}(\myvec{x}) = \myscalar{0}$. V geometrickém významu je
+zřejmé, že tato rovnice neurčuje žádnou plochu ve vektorovém prostoru, nad kterým je forma definovaná,
+protože normálový vektor je nulový. Nicméně jedná se o platnou lineární formu a její geometrický
+význam jsou ``vrstevnice`` nadřazené plochy, která je rovnoběžná se ``základnou`` - například gradient
+konstantní funkce nebo gradient funkce v lokálním extrému.
+
+\subsection{Shrnutí}
+
+Lineární forma tedy zobecňuje pojem plocha (rovina): rovnice $L(\mycoord{x}) = \myscalar{K}$ definuje
+plochu i nad prostory, kde tento pojem nemá geometrickou představu.
+
+Protože nás ale zajímá i délka normály, lineární forma určuje plochu v prostoru, který je o jeden
+rozměr větší. Geometricky lineární forma definuje ``vrstevnice`` této plochy do prostoru, nad kterým
+je forma definovaná. Tato plocha je určená jednoznačně, kromě jejího umístění.
+
+\section{Vektorový prostor?}
+
+\noindent Pozorný čtenář si možná všiml, že jsme v definici duálního vektorového prostoru poněkud
+podváděli. Nadefinovali jsme duální prostor, ale nijak jsme neprokázali, že se jedná o vektorový
+prostor. Pojďme to nyní rychle napravit.
+
+Ve skutečnosti je to dost snadné. Sčítání a násobení skalárem je definované pomocí operací nad tělesem,
+takže zcela přirozeně splňuje podmínky pro komutativitu, asociativitu, distribuci a násobení jednotkovým
+prvkem:
+\begin{equation*}
+\begin{split}
+\varphi(x) + \psi(x) &= \psi(x) + \varphi(x)\\
+(\varphi(x) + \psi(x)) + \theta(x) &= \varphi(x) + (\psi(x) + \theta(x))\\
+\alpha(\beta \varphi(x)) &= (\alpha\beta)\varphi(x)\\
+\alpha(\varphi(x) + \psi(x)) &= \alpha\varphi(x) + \alpha\psi(x)\\
+(\alpha + \beta)\varphi(x) &= \alpha\varphi(x) + \beta\varphi(x)\\
+\myscalar{1}\varphi(x) &= \varphi(x)
+\end{split}
+\end{equation*}
+Nyní potřebujeme nalézt nulový prvek tak, aby:
+\begin{equation*}
+\begin{split}
+\myvec{0}(x) + \varphi(x) &= \varphi(x)
+\end{split}
+\end{equation*}
+Takovou podmínku přirozeně splňuje lineární forma
+\begin{equation*}
+\begin{split}
+\myvec{0}(x) &= \myscalar{0}
+\end{split}
+\end{equation*}
+která, jak jsme si ukázali v předchozí kapitole, je krajním případem, a tudíž i snadno očekávatelná.
+A s existujícím nulovým prvkem už není problém nalézt opačný prvek, jako lineární formu danou předpisem
+\begin{equation*}
+\begin{split}
+-\varphi(x) &= \myscalar{-1}\varphi(x)
+\end{split}
+\end{equation*}
+
+Nyní věříme, že duální prostor je vektorový prostor. Zkusme nyní zkonstruovat jeho bázi.
+
+Mějme vektorový prostor $\myspace{V}$ s bází $\{\myvec{b_1}, \ldots, \myvec{b_n}\}$ a k němu duální
+vektorový prostor $\mydual{V}$. Pro libovolný kovektor $\mymap{\varphi} \in \mydual{V}$ a libovolný
+vektor $\myvec{x} = \myscalar{\alpha_1}\myvec{b_1} + \cdots + \myscalar{\alpha_n}\myvec{b_n} \in 
+\myspace{V}$ můžeme (z~definice lineárního zobrazení) napsat:
+\begin{equation*}
+\mymap{\varphi}(\myvec{x}) = \mymap{\varphi}(\myscalar{\alpha_1}\myvec{b_1} + \cdots 
+  + \myscalar{\alpha_n}\myvec{b_n}) = \myscalar{\alpha_1}\mymap{\varphi}(\myvec{b_1}) + \cdots
+  + \myscalar{\alpha_n}\mymap{\varphi}(\myvec{b_n})
+\end{equation*}
+Zvolme nyní kovektory $\{\mymap{\epsilon_1}, \ldots, \mymap{\epsilon_n}\}$ takové, aby platilo
+\begin{equation*}
+\mymap{\epsilon_i}(\myvec{b_j}) = 
+\begin{cases}
+1 & i = j\\
+0 & i \neq j
+\end{cases}
+\end{equation*}
+a vyjádřeme (opět z definice lineárního zobrazení) jejich obrazy vektoru $\myvec{x}$
+\begin{equation*}
+\mymap{\epsilon_i}(\myvec{x}) = \myscalar{\alpha_1}\mymap{\epsilon_i}(\myvec{b_1}) + \cdots
+  + \myscalar{\alpha_n}\mymap{\epsilon_i}(\myvec{b_n}) = \myscalar{\alpha_i}\mymap{\epsilon_i}(\myvec{b_i})
+\end{equation*}
+Nyní můžeme kovektory $\mymap{\epsilon_i}$ dosadit do vyjádření kovektoru $\mymap{\varphi}$ 
+(nejdříve ke každému prvku součtu přinásobíme 1, následně otočíme pořadí součinu):
+\begin{equation*}
+\begin{split}
+\mymap{\varphi}(\myvec{x}) &= \myscalar{\alpha_1}\mymap{\varphi}(\myvec{b_1}) + \cdots
+  + \myscalar{\alpha_n}\mymap{\varphi}(\myvec{b_n}) \\
+&= \myscalar{\alpha_1}\mymap{\varphi}(\myvec{b_1})\mymap{\epsilon_1}(\myvec{b_1}) + \cdots
+  + \myscalar{\alpha_n}\mymap{\varphi}(\myvec{b_n})\mymap{\epsilon_n}(\myvec{b_n}) \\
+&= \mymap{\varphi}(\myvec{b_1})\mymap{\epsilon_1}(\myvec{x}) + \cdots
+  + \mymap{\varphi}(\myvec{b_n})\mymap{\epsilon_n}(\myvec{x})
+\end{split}
+\end{equation*}
+Hodnoty $\mymap{\varphi}(\myvec{b_i})$ (dále značeno jako $\myscalar{\mu_i}$) jsou skaláry,
+tedy libovolný kovektor můžeme vyjádřit jako lineární kombinaci kovektorů $\mymap{\epsilon_i}$.
+Abychom je mohli považovat za bázi, zbývá dokázat, že jsou lineárně nezávislé. Předpokládejme tedy,
+že existuje nenulová kombinace taková
+\begin{equation*}
+\myvec{0}(\myvec{x}) = \myscalar{\mu_1}\mymap{\epsilon_1}(\myvec{x}) + \cdots 
+  + \myscalar{\mu_n}\mymap{\epsilon_n}(\myvec{x})
+\end{equation*}
+tedy alespoň jedno $\myscalar{\mu_i} \neq 0$. Pokud za vektor $\myvec{x}$ dosadíme vektor báze
+$\myvec{b_i}$, dostaneme
+\begin{equation*}
+\myvec{0}(\myvec{b_i}) = \myscalar{\mu_i}\mymap{\epsilon_i}(\myvec{b_i}) = \myscalar{\mu_i} \neq 0
+\end{equation*}
+což je spor s původním předpokladem. Nenulová kombinace tedy neexistuje a množina kovektorů
+$\{\mymap{\epsilon_1}, \ldots, \mymap{\epsilon_n}\}$ je lineárně nezávislá.
+
+Zkonstruovali jsme tedy bázi $\{\mymap{\epsilon_1}, \ldots, \mymap{\epsilon_n}\}$ duálního prostoru.
+Její velikost je $n$, tedy duální vektorový prostor \textbf{má stejnou dimenzi}, jako prostor, nad
+kterým je definovaný.
 
 \end{document}
 
