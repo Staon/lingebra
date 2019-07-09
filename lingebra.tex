@@ -595,6 +595,8 @@ odstup přímek pro stejný rozdíl $K$ bude větší. Pokud je normála velká,
 na to koukat jako na vrstevnice plochy, která je vztyčená do třetí osy. Čím větší je normála, tím
 je tato plocha strmější.
 
+Anebo jinak, délka normály je velikost, o kolik plocha v jejím směru vzroste na jednotkovou vzdálenost.
+
 Analogie s vrstevnicemi je všeobecně používaná. V učebnicích se kovektory na obrázcích často kreslí
 jako sekvence paralelních ploch - vrstevnice jakési pro nás nepředstavitelné čtyřrozměrné plochy.
 
@@ -842,5 +844,77 @@ Zkonstruovali jsme tedy bázi $\{\mymap{\epsilon_1}, \ldots, \mymap{\epsilon_n}\
 Její velikost je $n$, tedy duální vektorový prostor \textbf{má stejnou dimenzi}, jako prostor, nad
 kterým je definovaný.
 
+O kousek výše jsme libovolný kovektor vyjádřili jako
+\begin{equation*}
+\begin{split}
+\mymap{\varphi}(\myvec{x}) &= \myscalar{\alpha_1}\mymap{\varphi}(\myvec{b_1}) + \cdots
+  + \myscalar{\alpha_n}\mymap{\varphi}(\myvec{b_n}) \\
+&= \myscalar{\alpha_1}\myscalar{\mu_1} + \cdots + \myscalar{\alpha_n}\myscalar{\mu_n}
+\end{split}
+\end{equation*}
+Pokud vektor $\myvec{x}$ vyjádříme jako sloupcový vektor, získáme následující maticový součin
+\begin{equation*}
+\mymap{\varphi}(\myvec{x}) = \left(\begin{array}{ccc}
+\myscalar{\mu_1} & \cdots & \myscalar{\mu_n}
+\end{array}\right)\left(\begin{array}{c}
+\myscalar{\alpha_1}\\
+\vdots\\
+\myscalar{\alpha_n}
+\end{array}\right)
+\end{equation*}
+Kovektor zde působí jako \textbf{řádkový vektor}. Odtud také plyne, že v mnoha textech a učebnicích
+se kovektor ztotožňuje s řádkovým vektorem a zjednodušeně se tvrdí, že kovektor je řádkový vektor.
+
+\begin{example}\label{example:covector1}Ortogonální báze. Vezměme si příklad dvourozměrného
+aritmetického vektorového prostoru $\mathbb{R}^2$ s ortogonální bází $\{\myvec{b_1}, \myvec{b_2}\}$.
+Geometricky vrstevnice kovektoru $\mymap{\epsilon_1}$ o hodnotě 1 musí procházet
+vektorem $\myvec{b_1}$ a vrstevnice o hodnotě 0 musí procházet vektorem $\myvec{b_2}$.
+\begin{center}
+\includesvg[width=200pt]{covector_orthogonal}
+\end{center}
+Vrstevnice bázového kovektoru jsou tedy rovnoběžné s druhou osou.
+
+Bázový kovektor vyjádřený jako řádkový vektor po vyřešení soustavy dvou rovnic vypadá takto
+\begin{equation*}
+\begin{split}
+\left(\begin{array}{cc}1 & 0\end{array}\right)\left(\begin{array}{c}1\\0\end{array}\right) &= 1\\
+\left(\begin{array}{cc}1 & 0\end{array}\right)\left(\begin{array}{c}0\\1\end{array}\right) &= 0
+\end{split}
+\end{equation*}
+
+\end{example}
+
+\begin{example}\label{example:covector2}Reciproční báze. Předchozí příklad nebyl příliš zajímavý.
+Po všech útrapách s definováním lineární formy a duálního prostoru jsme dostali úplně stejný
+řádkový vektor jako byl bázový sloupcový. Což není moc objevné.
+
+Skutečná zábava s duální bází totiž začíná až v okamžiku, kdy báze vektorového prostoru není
+ortogonální. Vezměme si případ báze $\myvec{b_1} = (2, 0)^T$ a $\myvec{b_2} = (1, 2)^T$ zobrazeném
+na následujícím obrázku
+\begin{center}
+\includesvg[width=200pt]{covector_general}
+\end{center}
+Číselně kovektor $\mymap{\epsilon_1}$ vychází takto\footnote{
+  Povšimněte si, že bázové vektory zde vyjadřujeme jako souřadnice ortonormální báze. To je záměr,
+  aby bylo něco vidět. Pokud bychom souřadnice psali vůči nim samotným, dostali bychom stejná čísla
+  jako v předchozím příkladu a neměli bychom viditelný geometrický význam.
+}
+\begin{equation*}
+\begin{split}
+\left(\begin{array}{cc}\frac{1}{2} & -\frac{1}{4}\end{array}\right)\left(\begin{array}{c}2\\0\end{array}\right) &= 1\\
+\left(\begin{array}{cc}\frac{1}{2} & -\frac{1}{4}\end{array}\right)\left(\begin{array}{c}1\\2\end{array}\right) &= 0
+\end{split}
+\end{equation*}
+a kovektor $\mymap{\epsilon_2}$ takto
+\begin{equation*}
+\begin{split}
+\left(\begin{array}{cc}0 & \frac{1}{2}\end{array}\right)\left(\begin{array}{c}2\\0\end{array}\right) &= 0\\
+\left(\begin{array}{cc}0 & \frac{1}{2}\end{array}\right)\left(\begin{array}{c}1\\2\end{array}\right) &= 1
+\end{split}
+\end{equation*}
+Pokud mluvíme o duální bázi v geometrickém významu, označuje se také někdy jako \textbf{reciproční báze}.
+Vektor reciproční báze $\mymap{\epsilon_i}$ je vždy kolmý na všechny bázové vektory kromě $\myvec{b_i}$.
+
+\end{example}
 \end{document}
 
