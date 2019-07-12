@@ -574,10 +574,10 @@ ploch - pro různé prvky tělesa různé plochy.
 
 \begin{example}\label{example:linforma1}Lineární formy v $\mathbb{R}^2$: pokud si vezmeme příklad
 dvourozměrného prostoru, zde ``plocha`` je přímka. Linerání forma tedy určuje rovnoběžné přímky.
-Příklad je na obrázku.
+Příklad je na obrázku (K je hodnota vrstevnice).
 
 \begin{center}
-\includesvg[width=200pt]{linforma}
+\includesvg[width=170pt]{linforma}
 \end{center}
 
 \noindent Červená šipka vyjadřuje normálu přímky. Pokud souřadnice normály vypíšeme do řádkového
@@ -595,7 +595,8 @@ odstup přímek pro stejný rozdíl $K$ bude větší. Pokud je normála velká,
 na to koukat jako na vrstevnice plochy, která je vztyčená do třetí osy. Čím větší je normála, tím
 je tato plocha strmější.
 
-Anebo jinak, délka normály je velikost, o kolik plocha v jejím směru vzroste na jednotkovou vzdálenost.
+Anebo jinak, délka normály je velikost, o kolik plocha v jejím směru vzroste na jednotkovou
+vzdálenost.
 
 Analogie s vrstevnicemi je všeobecně používaná. V učebnicích se kovektory na obrázcích často kreslí
 jako sekvence paralelních ploch - vrstevnice jakési pro nás nepředstavitelné čtyřrozměrné plochy.
@@ -844,6 +845,12 @@ Zkonstruovali jsme tedy bázi $\{\mymap{\epsilon_1}, \ldots, \mymap{\epsilon_n}\
 Její velikost je $n$, tedy duální vektorový prostor \textbf{má stejnou dimenzi}, jako prostor, nad
 kterým je definovaný.
 
+Bázi, kterou jsme zkonstruovali, nazýváme \textbf{duální báze}. Aby nedošlo k mýlce, neplést se
+spojením \textit{báze duálního prostoru}! Zatímco druhé označuje libovolnou bázi duálního
+prostoru včetně té první, duální báze je jedna konkrétní báze duálního prostoru svázaná s
+jednou konkrétní bází vektorového prostoru. Jinými slovy, pokud si zvolím bázi vektorového
+prostoru, existuje k němu jedna konkrétní duální báze.
+
 O kousek výše jsme libovolný kovektor vyjádřili jako
 \begin{equation*}
 \begin{split}
@@ -863,34 +870,79 @@ Pokud vektor $\myvec{x}$ vyjádříme jako sloupcový vektor, získáme následu
 \end{array}\right)
 \end{equation*}
 Kovektor zde působí jako \textbf{řádkový vektor}. Odtud také plyne, že v mnoha textech a učebnicích
-se kovektor ztotožňuje s řádkovým vektorem a zjednodušeně se tvrdí, že kovektor je řádkový vektor.
+se kovektor s řádkovým vektorem ztotožňuje.
 
-\begin{example}\label{example:covector1}Ortogonální báze. Vezměme si příklad dvourozměrného
-aritmetického vektorového prostoru $\mathbb{R}^2$ s ortogonální bází $\{\myvec{b_1}, \myvec{b_2}\}$.
-Geometricky vrstevnice kovektoru $\mymap{\epsilon_1}$ o hodnotě 1 musí procházet
-vektorem $\myvec{b_1}$ a vrstevnice o hodnotě 0 musí procházet vektorem $\myvec{b_2}$.
+\begin{example}\label{example:covector1}Ortonormální báze. Ortonormální báze je taková báze,
+kdy pro skalární součin\footnote{
+  O skalárním součinu jsme v tomto textu dosud nemluvili. Tak nějak se očekává, že ho čtenář
+  zná.
+} každé dvojice bázových vektorů platí:
+\begin{equation*}
+\myvec{b_i}\cdot\myvec{b_j} = 
+\begin{cases}
+1 & i = j\\
+0 & i \neq j
+\end{cases}
+\end{equation*}
+Z definice duální báze platí
+\begin{equation*}
+\mymap{\epsilon_i}(\myvec{b_i}) = 1 = \left(\epsilon_{i_1}, \ldots, \epsilon_{i_n}\right)
+\left(\begin{array}{c}
+b_{i_1} \\
+\vdots \\
+b_{i_n}\end{array}\right)
+\end{equation*}
+a z definice skalárního součinu platí:
+\begin{equation*}
+\left(b_{i_1}, \ldots, b_{i_n}\right)
+\left(\begin{array}{c}
+b_{i_1} \\
+\vdots \\
+b_{i_n}\end{array}\right) = 1
+\end{equation*}
+Je tedy zřejmé, že $\epsilon_{i_j} = b_{i_j}$. Jinými slovy, kovektory duální báze budou mít
+zcela totožné souřadnice\footnote{
+  Pozor! Nejedná se o stejné vektory. Vektory a kovektory ``žijí`` každý v jiném prostoru.
+  Shodné budou pouze jejich souřadnice.
+}.
+
+Podívejme se na tuto situaci geometricky. Na následujícím obrázku je zobrazena ortonormální
+báze v prostoru $\mathbb{R}^2$ (červeně) a naznačené ``vrstevnice`` kovektoru $\mymap{\epsilon_1}$:
 \begin{center}
 \includesvg[width=200pt]{covector_orthogonal}
 \end{center}
-Vrstevnice bázového kovektoru jsou tedy rovnoběžné s druhou osou.
+Vrstevnice kovektoru $\mymap{\epsilon_1}$ o hodnotě 1 musí procházet vektorem $\myvec{b_1}$
+a vrstevnice o hodnotě 0 musí procházet vektorem $\myvec{b_2}$. Zároveň z vlastností lineární
+formy víme, že nultá vrstevnice musí procházet počátkem. Vrstevnice bázového kovektoru jsou
+tedy rovnoběžné s druhou osou.
 
-Bázový kovektor vyjádřený jako řádkový vektor po vyřešení soustavy dvou rovnic vypadá takto
-\begin{equation*}
-\begin{split}
-\left(\begin{array}{cc}1 & 0\end{array}\right)\left(\begin{array}{c}1\\0\end{array}\right) &= 1\\
-\left(\begin{array}{cc}1 & 0\end{array}\right)\left(\begin{array}{c}0\\1\end{array}\right) &= 0
-\end{split}
-\end{equation*}
+\medskip\noindent
+Pozorování, že souřadnice ortonormální báze jsou shodné se souřadnicemi jejich duální báze,
+je podstatně důležitější, než se na první pohled zdá. A zároveň vysvětluje další
+z nevysvětlitelných problémů, na které samouk při studiu narazí.
+
+Pokud se kouknete do libovolné učebnice, s klidným svědomím vám kreslí vektory i kovektory
+jako šipečky nebo jako vrstevnice do jednoho obrázku. Což je dost podstatný nesoulad,
+protože vektory a kovektory jsou prvky dvou zcela rozdílných prostorů.
+
+Pozorování ortonormální báze tento problém vysvětluje. Plocha papíru obvykle symbolizuje
+aritmetický vektor s ortonormální bází a geometrické vyjádření vektorů (ty ``šipečky``)
+jsou jejich souřadnice vůči této bázi. Protože souřadnice ortonormální báze a její duální
+báze jsou shodné, lze i kovektory kreslit jako ``šipečky`` na stejném papíru ve stejné
+souřadnicové síti.
+
+Jako bychom na papíru měli dvě průhledné vrstvy - jednu pro vektory, druhou pro kovektory.
+Každá vrstva je oddělená (jiný prostor), ale my je vidíme dohromady jako jeden obrázek.
 
 \end{example}
 
-\begin{example}\label{example:covector2}Reciproční báze. Předchozí příklad nebyl příliš zajímavý.
-Po všech útrapách s definováním lineární formy a duálního prostoru jsme dostali úplně stejný
-řádkový vektor jako byl bázový sloupcový. Což není moc objevné.
+\begin{example}\label{example:covector2}Reciproční báze. Po všech útrapách s definováním
+lineární formy a duálního prostoru jsme v předchozím příkladu dostali úplně stejný
+řádkový vektor jako byl bázový sloupcový. Což je poněkud frustrující.
 
-Skutečná zábava s duální bází totiž začíná až v okamžiku, kdy báze vektorového prostoru není
-ortogonální. Vezměme si případ báze $\myvec{b_1} = (2, 0)^T$ a $\myvec{b_2} = (1, 2)^T$ zobrazeném
-na následujícím obrázku
+Naštěstí skutečná zábava s duální bází totiž začíná až v okamžiku, kdy báze vektorového prostoru
+není ortonormální. Vezměme si případ báze $\myvec{b_1} = (2, 0)^T$ a $\myvec{b_2} = (1, 2)^T$
+zobrazeném na následujícím obrázku
 \begin{center}
 \includesvg[width=200pt]{covector_general}
 \end{center}

@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="28.01807mm"
-   height="29.298149mm"
-   viewBox="0 0 99.276626 103.81234"
+   width="22.382954mm"
+   height="30.618723mm"
+   viewBox="0 0 79.309678 108.49154"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
@@ -253,9 +253,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.959798"
-     inkscape:cx="58.07662"
-     inkscape:cy="26.861672"
+     inkscape:zoom="5.6"
+     inkscape:cx="52.043557"
+     inkscape:cy="55.255603"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -271,12 +271,12 @@
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:object-nodes="true"
-     inkscape:snap-global="false">
+     inkscape:snap-global="true">
     <inkscape:grid
        type="xygrid"
        id="grid3336"
-       originx="-21.176693"
-       originy="-936.64098" />
+       originx="-21.143644"
+       originy="-931.96182" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -294,7 +294,7 @@
      inkscape:label="Vrstva 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-21.176693,-11.908884)">
+     transform="translate(-21.143643,-11.908884)">
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Mstart)"
        d="M 30,17.362205 30,107.3622"
@@ -302,65 +302,82 @@
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
-       d="m 25,102.3622 90,0"
+       d="m 25,102.3622 70,0"
        id="path3340"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.69999999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 25,67.3622 30,40"
+       d="M 25,62.362201 50,112.3622"
        id="path4274"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
     <path
        inkscape:connector-curvature="0"
        id="path4276"
-       d="m 25,47.3622 45,60"
+       d="M 25,32.362201 65,112.3622"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.69999999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        sodipodi:nodetypes="cc" />
     <path
        sodipodi:nodetypes="cc"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.69999999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 25,27.3622 60,80"
+       d="M 35,22.362201 80,112.3622"
        id="path4278"
        inkscape:connector-curvature="0" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="47.185673"
-       y="111.85712"
+       x="43.120319"
+       y="116.85712"
        id="text4280"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4282"
-         x="47.185673"
-         y="111.85712">K = 1</tspan></text>
+         x="43.120319"
+         y="116.85712">K = 1</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="62.792271"
-       y="111.83076"
+       x="58.625393"
+       y="116.62898"
        id="text4284"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4286"
-         x="62.792271"
-         y="111.83076">K = 2</tspan></text>
+         x="58.625393"
+         y="116.62898">K = 2</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="79.597725"
-       y="112.10712"
+       x="73.536812"
+       y="116.52654"
        id="text4288"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="79.597725"
-         y="112.10712"
+         x="73.536812"
+         y="116.52654"
          id="tspan4292">K = 3</tspan></text>
     <path
        style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#a80000;stroke-width:0.69999999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend)"
-       d="m 55,67.3622 20,-15"
+       d="m 60,72.362201 20,-10"
        id="path4315"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.69999999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 25,92.362201 35,112.3622"
+       id="path4266"
+       inkscape:connector-curvature="0" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text4268"
+       y="116.77908"
+       x="27.82741"
+       style="font-style:normal;font-weight:normal;font-size:5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         id="tspan4270"
+         y="116.77908"
+         x="27.82741"
+         sodipodi:role="line">K = 0</tspan></text>
   </g>
 </svg>
