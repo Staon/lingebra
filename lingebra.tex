@@ -19,6 +19,8 @@
 \newcommand{\myspace}[1]{\mathbb{#1}}
 \newcommand{\mymap}[1]{#1}
 \newcommand{\mydual}[1]{\myspace{#1^{*}}}
+\newcommand{\mydouble}[1]{\myspace{#1^{**}}}
+\newcommand{\mycocovec}[1]{\myvec{\widehat{#1}}}
 
 \begin{document}
 
@@ -926,7 +928,7 @@ jako šipečky nebo jako vrstevnice do jednoho obrázku. Což je dost podstatný
 protože vektory a kovektory jsou prvky dvou zcela rozdílných prostorů.
 
 Pozorování ortonormální báze tento problém vysvětluje. Plocha papíru obvykle symbolizuje
-aritmetický vektor s ortonormální bází a geometrické vyjádření vektorů (ty ``šipečky``)
+aritmetický prostor s ortonormální bází a geometrické vyjádření vektorů (ty ``šipečky``)
 jsou jejich souřadnice vůči této bázi. Protože souřadnice ortonormální báze a její duální
 báze jsou shodné, lze i kovektory kreslit jako ``šipečky`` na stejném papíru ve stejné
 souřadnicové síti.
@@ -966,6 +968,235 @@ a kovektor $\mymap{\epsilon_2}$ takto
 \end{equation*}
 Pokud mluvíme o duální bázi v geometrickém významu, označuje se také někdy jako \textbf{reciproční báze}.
 Vektor reciproční báze $\mymap{\epsilon_i}$ je vždy kolmý na všechny bázové vektory kromě $\myvec{b_i}$.
+
+\section{Geometrické souvislosti}
+
+\noindent Také vás na střední škole štvalo, že vám předhodili informace, ale už neřekli, proč platí?
+Osobně jsem vždy bádal, proč skalární součin je násobek velikosti vektoru a velikosti průmětu druhého
+vektoru. Stejně jsem nechápal, proč koeficienty obecné rovnice přímky/plochy jsou údajně její normála.
+
+\medskip\noindent
+Pokud se bavíme o geometrickém významu, obvykle pracujeme v prostoru $\mathbb{R}^n$ s ortonormální
+bází. Plocha papíru, na kterou kreslíme čáry, simuluje dvourozměrný prostor a pozice bodů jsou
+souřadnice vůči ortonormální bázi. Tedy i v této kapitole se omezíme na ortonormální bázi.
+
+Začněme velikostí vektoru. Pokud udělám skalární součin vektoru se sebou samým, dostanu:
+\begin{equation*}
+\myvec{a}\cdot\myvec{a} = {a_1}^2 + \cdots + {a_n}^2
+\end{equation*}
+získávám známou Pythagorovskou větu, takže skalární součin vektoru se sebou samým můžeme označit
+jako kvadrát velikosti:
+\begin{equation*}
+\|\myvec{a}\|^2 = \myvec{a}\cdot\myvec{a}
+\end{equation*}
+Správně? No, bohužel úplně ne. Pythagorova věta je definovaná a dokázaná pro trojúhelník. Tady ale máme
+obecně více stran ($n$). Pokud zagooglíte a hledáte důkazy Pythagorovy věty ve více rozměrech,
+většinou jsou postavené na skalárním součinu. Čímž vzniká poněkud cyklický důkaz: obecná Pythagorova
+věta se dokazuje pomocí skalárního součinu, zatímco pro důkaz vlastností skalárního součinu budeme
+potřebovat obecnou Pythagorovu větu.
+
+Naštěstí samozřejmě existuje důkaz i bez skalárních součinů. Jednoduše nejdříve spočítáte velikost
+průmětu vektoru do dvou souřadnic. Pak přidáte třetí, čímž opět vznikne pravoúhlý trojúhelník, pak
+další a další až máte celkovou délku. (Důkaz si může čtenář udělat za domácí úkol.)
+
+Tedy nakonec je skutečně možné skalární součin se sebou samým považovat za velikost vektoru. Podívejme
+se nyní, jak je to se skalárním součinem, pokud jsou vektory rozdílné:
+\begin{center}
+\includesvg[width=200pt]{dotproduct}
+\end{center}
+Zkusme nyní vyjádřit velikost vektoru rozdílu (na obrázku červeně):
+\begin{equation*}
+\begin{split}
+\|\myvec{a}-\myvec{b}\|^2 &= (\myvec{a}-\myvec{b})\cdot(\myvec{a}-\myvec{b}) \\
+  &= \myvec{a}\cdot\myvec{a} - 2(\myvec{a}\cdot\myvec{b}) + \myvec{a}\cdot\myvec{b} \\
+  &= \|\myvec{a}\|^2 + \|\myvec{b}\|^2 - 2(\myvec{a}\cdot\myvec{b})
+\end{split}
+\end{equation*}
+Nyní zkusme vyjádřit velikost červené hrany pomocí známé cosinové věty\footnote{
+  Neplést s Kozinovou větou! Cosinovou větu zde dokazovat nebudeme, čtenář důkaz může snadno nalézt
+  na Internetu. Pro naše účely je potřeba vědět, že se dá dokázat geometricky bez potřeby skalárního
+  součinu.
+}:
+\begin{equation*}
+\|\myvec{a}-\myvec{b}\|^2 = \|\myvec{a}\|^2 + \|\myvec{b}\|^2 - 2\|\myvec{a}\|\|\myvec{b}\|cos\theta
+\end{equation*}
+Porovnáme-li obě rovnice, snadno získáváme očekávanou závislost:
+\begin{equation*}
+\myvec{a}\cdot\myvec{b} = \|\myvec{a}\|\|\myvec{b}\|cos\theta
+\end{equation*}
+Odtud už pak snadno vyplývá geometrický význam ``násobek délky vektoru krát násobek průmětu druhého
+vektoru do prvního`` - $\|\myvec{a}\|cos\theta$ je průmět vektoru $\myvec{a}$ do vektoru $\myvec{b}$.
+Skalární součin je symetrický, takže samozřejmě funguje i průmět $\myvec{b}$ do $\myvec{a}$.
+
+Pokud jste si právě udělali pašáka, jak jsme to hezky dokázali, je potřeba podotknout, že ještě chybí
+část důkazu, kdy $\theta$ je 0 nebo 180 stupňů - pak nelze sestrojit trojúhelník a nelze použít
+cosinovou větu. Zkuste si to za domácí úkol. Nápověda: v tomto případě jde jeden vektor vyjádřit
+jako skalární násobek druhého.
+
+\medskip\noindent
+Přesuňme se nyní k obecné rovnici přímky. Na střední škole nám řekli, že tato rovnice určuje
+přímku/plochu:
+\begin{equation*}
+a_1x_1 + \cdots + a_nx_n + C = 0
+\end{equation*}
+s tím, že koeficienty $a_1, \ldots, a_n$ definují její normálový vektor. Je tomu skutečně tak?
+
+Přepišme nyní rovnici do této podoby:
+\begin{equation*}
+a_1x_1 + \cdots + a_nx_n = -C
+\end{equation*}
+z předchozích kapitol víme, že levá strana rovnice je lineární forma s dosazeným bodem:
+\begin{equation*}
+\left(a_1, \ldots, a_n\right)\left(\begin{array}{c}x_1 \\ \vdots \\ x_n\end{array}\right)
+\end{equation*}
+Zvolme si dva body $\mycoord{x_1} \neq \mycoord{x_2}$, pro které rovnice platí:
+\begin{equation*}
+\begin{split}
+a_1x_{1_1} + \cdots + a_nx_{1_n} &= -C \\
+a_1x_{2_1} + \cdots + a_nx_{2_n} &= -C
+\end{split}
+\end{equation*}
+Pokud rovnice odečteme, získáváme
+\begin{equation*}
+a_1(x_{1_1} - x_{2_1}) + \cdots + a_n(x_{1_n} - x_{2_n}) = 0
+\end{equation*}
+což je jinak zapsaný skálární součin
+\begin{equation*}
+\left(\begin{array}{c}a_1 \\ \vdots \\ a_n\end{array}\right)\cdot\left(\begin{array}{c}x_{1_1}-x_{2_1} \\
+  \vdots \\ x_{1_n} - x_{2_n}\end{array}\right) = \mycoord{a} \cdot (\mycoord{x_1} - \mycoord{x_2}) = 0
+\end{equation*}
+Tedy, skalární součin vektoru $\mycoord{a}$ s jakýmkoliv směrovým vektorem v ploše je 0, tedy vektory
+musí být kolmé.
+
+Vektor $\mycoord{a}$ jsou souřadnice kovektoru v ortonormální bázi, proto platí geometrická analogie
+``vrstevnic`` a jejich normály popisovaná v kapitole XXX.
+
+\section{Duální prostor duálního prostoru}
+
+\noindent V matematice je normální, že ze šíleností můžete skládat další šílenosti. Protože duální
+prostor je vektorový prostor, pak je možné vytvořit duální prostor duálního prostoru jako
+$\mydual{(\mydual{V})}$ obvykle značený jako $\mydouble{V}$.
+
+V principu by duální prostor duálního prostoru ani nebyl příliš zajímavý. Chová se úplně stejně, jako
+každý jiný duální prostor. Ale přece jenom jednu význačnou vlastnost má - existuje pro něj
+\textbf{přirozený isomorfismus} z jeho prapůvodního vektorového prostoru. Důsledkem tedy je, že duální
+prostor duálního je v principu stejný jako původní vektorový prostor. Dvojnásobnou aplikací duality
+se tak dostáváme zpět na začátek.
+
+Isomorfismus je v principu zobrazení z jednoho prostoru do jiného, takové aby \textit{zachovalo strukturu}.
+Jinými slovy pokud mám isomorfismus, mohu problém v jednom prostoru převést do druhého, vyřešit ho tam,
+a následně převést zpět. Výsledky, které takto dostanu, budou zcela shodné, jako kdybychom problém počítali
+celou dobu v prvním prostoru. Transformace souřadnic popsané v kapitole XXX jsou příkladem isomorfismu.
+
+Dva prostory jsou isomorfní, pokud existuje nějaký isomorfismus mezi nimi.
+
+Obecně musí být isomorfismus zobrazení \textbf{prosté} a \textbf{na}, aby bylo možné provést transformaci
+jednoznačně tam i zpět. V případě vektorových prostorů musí být navíc \textbf{lineární}, aby zachovával
+strukturu vektorových prostorů.
+
+\medskip\noindent
+Každé dva vektorové prostory stejné konečné dimense jsou isomorfní. To lze velmi snadno dokázat konstrukcí
+zobrazení:
+\begin{equation*}
+\mymap{\Phi(\myvec{x})} = \mymap{\Phi(\alpha_1\myvec{v_1} + \cdots + \alpha_2\myvec{v_n})} = \alpha_1\myvec{w_1}
+ + \cdots + \alpha_n\myvec{w_n} = \myvec{y}
+\end{equation*}
+Jinými slovy jsme vektoru $\myvec{x} \in \myspace{V}$ přiřadili vektor $\myvec{y} \in \myspace{W}$, který má
+v cílovém prostoru stejné souřadnice. Je jednoduché dokázat, že se jedná o isomorfismus: souřadnice jednoznačně
+identifikují vektor, tudíž každý vektor má pouze jeden obraz a každý obraz má pouze jeden vzor. Zachování
+operací vektorového prostoru také jednoduše vyplývá z chování souřadnic.
+
+Takový isomorfismus je sice zcela platný, ale člověk ho tak nějak necítí přirozeně. Není vidět žádný důvod,
+proč byl pro nějaký vektor zvolený zrovna tento obraz. Pokud změníme některou z bází, změní se i zobrazení
+a obrazy vektorů budou jiné. My bychom však chtěli vytvořit isomorfismus, kde přiřazení obrazu bude mít
+nějaký smysl. A to bez ohledu na zvolenou bázi.
+
+\medskip\noindent
+Konstrukci přirozeného isomorfismu mezi vektorovým prostorem a jeho dvojitým duálním zkusíme vysvětlit opět
+na geometrické analogii v $\mathbb{R}^2$. Kovektor jsme geometricky kreslili jako vrstevnice. A hodnota kovektoru
+(kovektor je lineární forma) pro daný vektor říká, kolik vrstevnic vektor "protnul". Dá se na to také koukat,
+jakobychom umístili pravítko ve směru souřadnic kovektoru a změřili průmět vektoru na toto pravítko. Velikost
+kovektoru definuje hustotu značek na pravítku.
+
+Pokud pro jeden vektor a jeden kovektor znám jeho hodnotu $\myvec{f(\myvec{x})} = K$, nedokážu zrekonstruovat
+zpět vektor $\myvec{x}$, protože možných vektorů na stejné vrstevnici je nekonečně mnoho. Ze dvou (jsme stále
+v $\mathbb{R}^2$) už to možné je - pokud nalezneme průsečík obou vrstevnic, získáme hledaný vektor:
+
+\begin{center}
+\includesvg[width=200pt]{rulers}
+\end{center}
+
+\noindent Takto získávám dvě rovnice
+\begin{equation*}
+\begin{split}
+\myvec{f_1}(\myvec{x}) = K_1 \\
+\myvec{f_2}(\myvec{x}) = K_2
+\end{split}
+\end{equation*}
+které jednoznačně určují vektor $\myvec{x}$.
+
+V případě duálního-duálního prostoru bychom chtěli najít isomorfismus, který by každému prvku prostoru
+$\myspace{V}$ přiřadil prvek prostoru $\mydouble{V}$, který by na obrázku vypadal stejně jako vektor
+$\myvec{x}$. Tím bychom ukázali, že dvojnásobnou aplikací duality se dostáváme zpět k prostoru,
+ze kterého jsme vyšli. Přesněji k prostoru, který je přirozeně isomorfní, takže isomorfní prvky prostorů
+můžeme chováním považovat za shodné.
+
+Pokud tedy předchozí dvě rovnice zapíšu jako souřadnice v ortonormální bázi:
+\begin{equation*}
+\begin{split}
+\left(f_{1_1} f_{1_2}\right)\left(\begin{array}{c}
+x_1 \\
+x_2\end{array}\right) = K_1 \\
+\left(f_{2_1} f_{2_2}\right)\left(\begin{array}{c}
+x_1 \\
+x_2\end{array}\right) = K_2 \\
+\end{split}
+\end{equation*}
+a součin otočím
+\begin{equation*}
+\begin{split}
+\left(x_1 x_2\right)\left(\begin{array}{c}
+f_{1_1} \\
+f_{1_2}\end{array}\right) = K_1 \\
+\left(x_1 x_2\right)\left(\begin{array}{c}
+f_{2_1} \\
+f_{2_2}\end{array}\right) = K_2
+\end{split}
+\end{equation*}
+získám dvakrát maticový zápis stejné lineární formy s dosazenými kovektory $\myvec{f_1}$ a $\myvec{f_2}$:
+\begin{equation*}
+\begin{split}
+\mycocovec{x}(\myvec{f_1}) = K_1 \\
+\mycocovec{x}(\myvec{f_2}) = K_2
+\end{split}
+\end{equation*}
+Je vidět, že souřadnice ko-ko-vektoru $\mycocovec{x}$ v duální-duální bázi jsou stejné, jako souřadnice
+vektoru $\myvec{x}$ v ortonormálních souřadnicích prostoru $\myspace{V}$, tedy ``graficky`` by na obrázku
+vypadaly stejně. Stejně tak je vidět, že nezávisí na volbě kovektorů $\myvec{f}$.
+
+Tímto způsobem můžeme vytvořit odpovídající ko-ko-vektor pro každý vektor prostoru $\myspace{V}$, a tedy
+můžeme nadefinovat zobrazení $\myspace{V}\rightarrow\mydouble{V}: \Psi(\myvec{x}) = \mycocovec{x}$.
+A pokud toto zobrazení je isomorfismus, podařilo se nám najít, co jsme hledali.
+
+\medskip\noindent
+Přechozí postup ovšem trochu podváděl. Celou akci jsme dělali v rámci jedné (ortonormální) báze. My jsme
+ale chtěli zkonstruovat přirozený isomorfismus, jehož konstrukce na bázi nezáleží. Proto začneme znovu,
+tentokrát bez geometrické interpretace.
+
+Mějme vektorový prostor $\myspace{V}$ nad tělesem $\myspace{T}$ a k němu duální vektorový prostor $\mydual{V}$
+a duální-duální prostor $\mydouble{V}$. Pro každý prvek $\myvec{x}\in\myspace{V}$ zkonstruujeme zobrazení
+$\mydual{V}\rightarrow\myspace{T}: \mycocovec{x}(\myvec{f}) = \myvec{f}(\myvec{x})$.
+Toto zobrazení je lineární forma, protože
+\begin{equation*}
+\begin{split}
+\mycocovec{x}(\myvec{f} + \alpha\myvec{g}) = (\myvec{f} + \alpha\myvec{g})(\myvec{x}) 
+     = \myvec{f}(\myvec{x}) + \alpha\myvec{g}(\myvec{x})
+     = \mycocovec{x}(\myvec{f}) + \alpha\mycocovec{x}(\myvec{g})
+\end{split}
+\end{equation*}
+a tedy je prvkem duálního-duálního prostoru $\mydouble{V}$. Nadefinujme nyní zobrazení
+$\myspace{V}\rightarrow\mydouble{V}: \Psi(\myvec{x}) = \mycocovec{x}$. Zbývá
+dokázat, že toto zobrazení je isomorfismus.
 
 \end{example}
 \end{document}
