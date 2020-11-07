@@ -576,13 +576,11 @@ ploch - pro různé prvky tělesa různé plochy.
 
 \begin{example}\label{example:linforma1}Lineární formy v $\mathbb{R}^2$: pokud si vezmeme příklad
 dvourozměrného prostoru, zde ``plocha`` je přímka. Linerání forma tedy určuje rovnoběžné přímky.
-Příklad je na obrázku (K je hodnota vrstevnice).
-
+Příklad je na obrázku (čísla jsou hodnoty vrstevnic).
 \begin{center}
-\includesvg[width=170pt]{linforma}
+\includesvg[width=120pt]{linforma}
 \end{center}
-
-\noindent Červená šipka vyjadřuje normálu přímky. Pokud souřadnice normály vypíšeme do řádkového
+Červená šipka vyjadřuje normálu přímky. Pokud souřadnice normály vypíšeme do řádkového
 vektoru, získáme ono maticové vyjádření lineární formy.
 
 Ve standardní geometrii nás příliš nezajímala velikost normálového vektoru. Pokud nebyl nulový, určoval
@@ -602,6 +600,16 @@ vzdálenost.
 
 Analogie s vrstevnicemi je všeobecně používaná. V učebnicích se kovektory na obrázcích často kreslí
 jako sekvence paralelních ploch - vrstevnice jakési pro nás nepředstavitelné čtyřrozměrné plochy.
+
+\medskip\noindent
+Na linerání formu lze koukat také jako na určité pravítko. Pokud vezmu vektor a dosadím ho do linerání
+formy, získám skalární hodnotu odpovídající průmětu vektoru naměřenou na imaginárním pravítku, které
+umístím ve směru normály vrstevnic s nulou v počátku. Délka normály je pak nepřímo úměrná hustotě značek
+na pravítku.
+
+Tato analogie osvětluje v budoucnu vyžadovanou podmínku, aby linerání forma vracela pro stejný vektor
+stejnou hodnotu bez ohledu na zvolenou bázi vektorového prostoru. Pravítko prostě musí stejný vektor
+změřit pokaždé stejně.
 
 \end{example}
 
@@ -752,6 +760,7 @@ Protože nás ale zajímá i délka normály, lineární forma určuje plochu v 
 rozměr větší. Geometricky lineární forma definuje ``vrstevnice`` této plochy do prostoru, nad kterým
 je forma definovaná. Tato plocha je určená jednoznačně, kromě jejího umístění.
 
+\vfill
 \section{Vektorový prostor?}
 
 \noindent Pozorný čtenář si možná všiml, že jsme v definici duálního vektorového prostoru poněkud
@@ -838,7 +847,7 @@ Abychom je mohli považovat za bázi, zbývá dokázat, že jsou lineárně nez�
 tedy alespoň jedno $\myscalar{\mu_i} \neq 0$. Pokud za vektor $\myvec{x}$ dosadíme vektor báze
 $\myvec{b_i}$, dostaneme
 \begin{equation*}
-\myvec{0}(\myvec{b_i}) = \myscalar{\mu_i}\mymap{\epsilon_i}(\myvec{b_i}) = \myscalar{\mu_i} \neq 0
+\myvec{0}(\myvec{b_i}) = \myscalar{\mu_i}\mymap{\epsilon_i}(\myvec{b_i}) = \myscalar{\mu_i} = 0
 \end{equation*}
 což je spor s původním předpokladem. Nenulová kombinace tedy neexistuje a množina kovektorů
 $\{\mymap{\epsilon_1}, \ldots, \mymap{\epsilon_n}\}$ je lineárně nezávislá.
@@ -969,6 +978,8 @@ a kovektor $\mymap{\epsilon_2}$ takto
 Pokud mluvíme o duální bázi v geometrickém významu, označuje se také někdy jako \textbf{reciproční báze}.
 Vektor reciproční báze $\mymap{\epsilon_i}$ je vždy kolmý na všechny bázové vektory kromě $\myvec{b_i}$.
 
+\end{example}
+
 \section{Geometrické souvislosti}
 
 \noindent Také vás na střední škole štvalo, že vám předhodili informace, ale už neřekli, proč platí?
@@ -1008,7 +1019,7 @@ Zkusme nyní vyjádřit velikost vektoru rozdílu (na obrázku červeně):
 \begin{equation*}
 \begin{split}
 \|\myvec{a}-\myvec{b}\|^2 &= (\myvec{a}-\myvec{b})\cdot(\myvec{a}-\myvec{b}) \\
-  &= \myvec{a}\cdot\myvec{a} - 2(\myvec{a}\cdot\myvec{b}) + \myvec{a}\cdot\myvec{b} \\
+  &= \myvec{a}\cdot\myvec{a} - 2(\myvec{a}\cdot\myvec{b}) + \myvec{b}\cdot\myvec{b} \\
   &= \|\myvec{a}\|^2 + \|\myvec{b}\|^2 - 2(\myvec{a}\cdot\myvec{b})
 \end{split}
 \end{equation*}
@@ -1115,7 +1126,7 @@ nějaký smysl. A to bez ohledu na zvolenou bázi.
 Konstrukci přirozeného isomorfismu mezi vektorovým prostorem a jeho dvojitým duálním zkusíme vysvětlit opět
 na geometrické analogii v $\mathbb{R}^2$. Kovektor jsme geometricky kreslili jako vrstevnice. A hodnota kovektoru
 (kovektor je lineární forma) pro daný vektor říká, kolik vrstevnic vektor "protnul". Dá se na to také koukat,
-jakobychom umístili pravítko ve směru souřadnic kovektoru a změřili průmět vektoru na toto pravítko. Velikost
+jakobychom umístili pravítko ve směru souřadnic kovektoru a změřili průmět vektoru na něj. Velikost
 kovektoru definuje hustotu značek na pravítku.
 
 Pokud pro jeden vektor a jeden kovektor znám jeho hodnotu $\myvec{f(\myvec{x})} = K$, nedokážu zrekonstruovat
@@ -1194,10 +1205,202 @@ Toto zobrazení je lineární forma, protože
      = \mycocovec{x}(\myvec{f}) + \alpha\mycocovec{x}(\myvec{g})
 \end{split}
 \end{equation*}
-a tedy je prvkem duálního-duálního prostoru $\mydouble{V}$. Nadefinujme nyní zobrazení
+(nejprve se aplikuje definice zobrazení, následně definice operací sčítání a násobení skalárem duálního
+prostoru) a tedy je prvkem duálního-duálního prostoru $\mydouble{V}$. Nadefinujme nyní zobrazení
 $\myspace{V}\rightarrow\mydouble{V}: \Psi(\myvec{x}) = \mycocovec{x}$. Zbývá
 dokázat, že toto zobrazení je isomorfismus.
 
-\end{example}
+\medskip\noindent
+Že je zobrazení lineární, se dá dokázat poměrně snadno:
+\begin{equation*}
+\begin{split}
+\Psi(\myvec{x} + \alpha\myvec{y})(\myvec{f}) &= \mycocovec{\myvec{x} + \alpha\myvec{y}}(\myvec{f})
+     = \myvec{f}(\myvec{x} + \alpha\myvec{y}) = \myvec{f}(\myvec{x}) + \alpha\myvec{f}(\myvec{y}) \\
+     &= \mycocovec{x}(\myvec{f}) + \alpha\mycocovec{y}(\myvec{f})
+     = \Psi(\myvec{x})(\myvec{f}) + \alpha\Psi(\myvec{y})(\myvec{f}) \\
+     &= (\Psi(\myvec{x}) + \alpha\Psi(\myvec{y}))(\myvec{f})
+\end{split}
+\end{equation*}
+(Nejprve se aplikuje definice zobrzení. Pak se aplikuje definice zobrazení přiřazeného vektoru.
+Tím získáme lineární formu z duálního prostoru. Pak můžeme aplikovat vlastnosti lineárního
+zobrazení. A nakonec se z definic obou zobrazení a definice duálního prostoru dostáváme k linerání
+kombinaci obrazů.)
+
+\medskip\noindent
+Důkaz, že je zobrazení prosté je poněkud složitější. Předpokládejme, že máme dva rozdílné vektory
+$\myvec{x_1}\neq\myvec{x_2}\in\myspace{V}$, pro které zobrazení vrací stejné hodnoty
+$\Psi(\myvec{x_1}) = \Psi(\myvec{x_2})$. Jestliže oba obrazy jsou stejné, pak musí platit:
+\begin{equation*}
+\begin{split}
+\myvec{0} = \Psi(\myvec{x_1}) - \Psi(\myvec{x_2}) = \Psi(\myvec{x_1} - \myvec{x_2}) = \Psi(\myvec{y})
+\end{split}
+\end{equation*}
+kde vektor zřejmě $\myvec{y}\neq\myvec{0}$. Z definicí musí dále platit:
+\begin{equation*}
+\begin{split}
+\forall \myvec{f}\in\mydual{V}: \Psi(\myvec{y})(\myvec{f}) = \mycocovec{y}(\myvec{f}) 
+    = \myvec{f}(\myvec{y}) = 0
+\end{split}
+\end{equation*}
+Jestliže musí platit pro každý prvek duálního prostoru, můžeme dosadit libovolný kovektor
+duální báze:
+\begin{equation*}
+\begin{split}
+\myvec{\epsilon_i}(\myvec{y}) &= \myvec{\epsilon_i}(y_{1}\myvec{v_1} + \cdots + y_{n}\myvec{v_n})
+    = y_{1}\myvec{\epsilon_i}(\myvec{v_1}) + \cdots + y_{n}\myvec{\epsilon_i}(\myvec{v_n}) \\
+    &= y_{i}\myvec{\epsilon_i}(\myvec{v_i}) = 0
+\end{split}
+\end{equation*}
+Je zřejmé, že aby rovnice platila, musí být souřadnice vektoru $y_i = 0$. Protože předchozí rovnice
+musí platit pro každý vektor duální báze, musí být všechny souřadnice vektoru $\myvec{y}$ nulové,
+což je v rozporu s předpokladem. Zobrazení tedy je prosté.
+
+\medskip\noindent
+Zaobrazení je \textbf{na} poměrně jednoduchou úvahou: pokud je zobrazení prosté a oba prostory
+mají stejnou konečnou dimenzi, pak zobrazení musí být i \textbf{na}. (Důkaz si zkuste udělat
+na dobrou noc doma. V principu převedu bázi prostoru $\myspace{V}$. Tak získám vektory, které
+jsou také lineárně nezávislé. Pokud by nebyly, zobrazení by nebylo prosté, protože obraz
+nenulové lineární kombinace v prostoru $\myspace{V}$ by dal obraz nulového vektoru v prostoru
+$\mydouble{V}$. Takže obrazy báze jsou opět báze a musí být schopné vygenerovat všechny prvky.)
+
+\section{Kovektor v souřadnicích}
+
+\noindent
+Již jsme několikrát označovali kovektor za řádkový vektor, několikrát jsme ho vyjadřovali jako
+souřadnice v ortonormální bázi. Pojďme si nyní chování kovektoru v souřadnicích probrat pořádně.
+
+Mějme tedy vektorový prostor $\myspace{V}$ s konečnou bází ${\myvec{v_1}, \hdots , \myvec{v_n}}$.
+K němu mějme příslušný duální prostor $\mydual{V}$ s bází
+${\myvec{\delta_1}, \hdots , \myvec{\delta_n}}$ (míněna obecně báze, nikoliv jen duální báze).
+Nyní vezměme libovolný vektor
+$\myvec{x}\in\myspace{V}: \myvec{x} = x_1\myvec{v_1} + \cdots + x_n\myvec{v_n}$
+a libovolný kovektor
+$\myvec{\varphi}\in\mydual{V}: \myvec{\varphi} = \varphi_1\myvec{\delta_1} + \cdots + \varphi_n\myvec{\delta_n}$
+Pokud vektor dosadíme do kovektoru, oba vyjádříme jako lineární kombinaci báze a využijeme
+vlastnosti lineárního zobrazení a definicí obou vektorových prostorů, získáme:
+\begin{equation*}
+\begin{split}
+\myvec{\varphi}(\myvec{x}) &= \myvec{\varphi}(x_1\myvec{v_1} + \cdots + x_n\myvec{v_n})
+     = x_1\myvec{\varphi}(\myvec{v_1}) + \cdots + x_n\myvec{\varphi}(\myvec{v_n}) \\
+    &= x_1((\varphi_1\myvec{\delta_1} + \cdots + \varphi_n\myvec{\delta_n})(\myvec{v_1}) + \cdots
+       + x_n((\varphi_1\myvec{\delta_1} + \cdots + \varphi_n\myvec{\delta_n})(\myvec{v_n}) \\
+    &= x_1(\varphi_1\myvec{\delta_1}(\myvec{v_1}) + \cdots + \varphi_n\myvec{\delta_n}(\myvec{v_1})) 
+    + \cdots \\
+    & \;\;\;\;\; + x_n(\varphi_1\myvec{\delta_1}(\myvec{v_n}) + \cdots + \varphi_n\myvec{\delta_n}(\myvec{v_n}))
+\end{split}
+\end{equation*}
+Tento velmi nepřehledný zápis můžeme přepsat do jednouššího maticového tvaru:
+\begin{equation*}
+\myvec{\varphi}(\myvec{x}) = \left(\varphi_1 \cdots \varphi_n\right)
+\left(\begin{array}{ccc}
+\myvec{\delta_1}(\myvec{v_1}) & \cdots & \myvec{\delta_1}(\myvec{v_n}) \\
+\vdots & \ddots & \vdots \\
+\myvec{\delta_n}(\myvec{v_1}) & \cdots & \myvec{\delta_n}(\myvec{v_n})
+\end{array}\right)\left(\begin{array}{c}x_1 \\ \vdots \\ x_n\end{array}\right)
+\end{equation*}
+Prostřední čtvercová matice je definovaná zvolenými bázemi a dosazením souřadnic
+vektoru a kovektoru do vzorečku dokážeme jednoduše spočítat hodnotu kovektoru
+pro daný vektor.
+
+Pokud si vzpomenete, jak jsme ji definovali, zjistíte, že pro duální bázi bude
+prostřední matice \textbf{jednotková}. Pokud se tedy omezíme pouze na duální
+bázi ke zvolené bázi prostoru $\myspace{V}$ (což je běžné), můžeme prostřední
+matici vynechat a dostáváme se k obvyklému součinu ``řádkového vektoru se
+sloupcovým``:
+\begin{equation*}
+\myvec{\varphi}(\myvec{x}) = \left(\varphi_1 \cdots \varphi_n\right)
+\left(\begin{array}{c}x_1 \\ \vdots \\ x_n\end{array}\right)
+= \mycoord{\varphi}^T\mycoord{x}
+\end{equation*}
+
+\medskip\noindent
+Omezme se tedy pouze na duální bázi a zapřemýšlejme, jak se chovají souřadnice
+kovektoru, pokud přetransformujeme bázi prostoru $\myspace{V}$ pomocí lineárního
+zobrazení určeného maticí $\mymatrix{T}$.
+
+Už víme, že souřadnice vektorů se transformují \textit{kontravariantně}:
+\begin{equation*}
+\mycoord{x'} = \mymatrix{T}^{-1}\mycoord{x}
+\end{equation*}
+a tedy
+\begin{equation*}
+\mycoord{x} = \mymatrix{T}\mycoord{x'}
+\end{equation*}
+Kovektor je lineární forma, která je nezávislá na souřadnicích, tudíž musí pro
+transformované souřadnice vracet stejnou hodnotu:
+\begin{equation*}
+K = \mycoord{\varphi}^T\mycoord{x} = \mycoord{\varphi}^T\mymatrix{T}\mycoord{x'}
+\end{equation*}
+Tím tedy získávám, že nové souřadnice kovektoru jsou:
+\begin{equation*}
+\mycoord{\varphi'}^T = \mycoord{\varphi}^T\mymatrix{T}
+\end{equation*}
+a po převedení na sloupcový vektor\footnote{
+  Autor osobně považuje ztotožňování kovektoru s řádkovým vektorem za velmi matoucí.
+  Kovektor je sám vektorem v duálním prostoru, tudíž dává smysl ho vyjádřit
+  jako sloupcový vektor.}
+\begin{equation*}
+\mycoord{\varphi'} = \mymatrix{T}^T\mycoord{\varphi}
+\end{equation*}
+Je tedy zřejmé, že zatímco souřadnice vektoru se mění podle inverzní matice, souřadnice
+kovektoru se mění podle transponované transformační matice. Tato vlastnost se nazývá
+\textit{kovariance}.
+
+Co si pod tímto názvem máme představit? Obvyklé učebnice a texty na Internetu vám v tento
+okamžik obvykle tvrdí, že souřadnice se transformují shodně s bází. To opět samoukům
+působí bolesti hlavy, protože to logicky nedává smysl. Pokud orotuji souřadnicovou
+soustavu, tak se kovektor musí změnit přece úplně stejně, jako vektor. Aby normála
+vrstevnic udržela shodný směr, musí se přece transformovat proti směru rotace.
+
+Odvozená transponovaná matice problém vysvětluje. Inverzní matice rotace souřadnic
+(viz příklad XXX) je totiž shodná s její transponovanou maticí:
+\begin{equation*}
+\begin{split}
+\mymatrix{T}^T &= \left(\begin{array}{cc}
+\cos\alpha & -\sin\alpha\\
+\sin\alpha & \cos\alpha\\
+\end{array}\right)^T = \left(\begin{array}{cc}
+\cos\alpha & \sin\alpha\\
+-\sin\alpha & \cos\alpha\\
+\end{array}\right) \\
+&= \left(\begin{array}{cc}
+\cos-\alpha & -\sin-\alpha\\
+\sin-\alpha & \cos-\alpha\\
+\end{array}\right) = \mymatrix{T}^{-1}
+\end{split}
+\end{equation*}
+A proto i kovektor na rotaci souřadnic reaguje stejně jako vektor.
+
+Naopak matice pro změnu měřítka se transpozicí nemění:
+\begin{equation*}
+\begin{split}
+\mymatrix{T}^T &= \left(\begin{array}{cc}
+\beta_1 & 0 \\
+0 & \beta_2 \\
+\end{array}\right)^T = \left(\begin{array}{cc}
+\beta_1 & 0 \\
+0 & \beta_2 \\
+\end{array}\right) = \mymatrix{T}
+\end{split}
+\end{equation*}
+a kovektor tak změnu měřítka sleduje. Pokud se bázové vektory prodlouží,
+prodlouží se i kovektor, což znamená, že se vrstevnice více zahustí:
+\begin{center}
+\includesvg[width=220pt]{covector_transformation}
+\end{center}
+Na obrázku jsme dvakrát zvětšili bázové vektory. Druhá situace je ale
+nakreslená v měřítku tak, aby stejné souřadnice v první a druhé bázi odpovídaly
+stejnému bodu v ploše. Tím se vektor opticky zmenšil o polovinu a vrstevnice
+se dvakrát zahustily. A hustota vrstevnic je nepřímo úměrná délce kovektoru.
+Pokud by se vrstevnice nezahustily, začal by vektor s polovičními souřadnicemi
+dosazením do kovektoru vracet jinou hodnotu.
+
+Kovariance tedy neznamená, že se kovektory transformují stejně jako báze, ale
+že se transformují stejně na změnu měřítka. Pokud se vektor báze zvětší, zvětší
+se i souřadnice kovektoru. Pokud se vektor báze zmenší, zmenší se souřadnice
+také. Z pohledu rotace souřadnicového systému se ovšem kovektor v souřadnicích
+chová stejně jako vektor.
+
 \end{document}
+
 
