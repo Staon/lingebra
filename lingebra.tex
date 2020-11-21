@@ -6,6 +6,7 @@
 \usepackage{color}
 \usepackage{svg}
 \usepackage{amsmath}
+\usepackage{blkarray}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definice}[chapter]
@@ -1400,6 +1401,295 @@ Kovariance tedy neznamená, že se kovektory transformují stejně jako báze, a
 se i souřadnice kovektoru. Pokud se vektor báze zmenší, zmenší se souřadnice
 také. Z pohledu rotace souřadnicového systému se ovšem kovektor v souřadnicích
 chová stejně jako vektor.
+
+\chapter{Tensory}
+
+\noindent
+Tato kapitola je hlavní důvod, proč se autor pustil do samostudia lineární algebry.
+Tensorová algebra potažmo tensorový kalkul je matematický základ obecné teorie
+relativity a dalších fyzikálních disciplín jako mechanika pevných těles nebo kvantová
+fyzika.
+
+Bohužel právě zde nabýváte dojmu, že učitelé zapomněli učit. Každá učebnice, která
+se mi dostala do ruky, se utápí ve změti písmenek a indexů. Vtipálek Zahradník pro
+jistotu kapitolu o tensorech napsal Jiráskovskou češtinou, aby se již takhle nečitelná
+učebnice stala nečitelnou ještě více. Bakalářská práce Michala Řepíka z pedagogické
+fakulty (sic!) neobsahuje ani jednu větu, která by se normálním jazykem pokoušela
+vysvětlil, co a k čemu to je.
+
+Zkusme tento nedostatek tedy napravit.
+
+\section{Co to ten tensor sakra je?}
+
+\noindent
+Pokud se pokoušíte pochopit tensorovou algebru, učebnice vám obvykle poskytují informace
+jako:
+\begin{itemize}
+  \item tensory jsou zobecnění vektorů.
+  \item Tensory jsou objekty s definovaným chováním při transformaci souřadnic.
+  \item Tensor je multidimenzionální pole.
+  \item Tensor je prvek prostoru vzniklého tensorovým součinem vektorových prostorů.
+\end{itemize}
+Nevím, jak vy, ale já si pod tímto nic představit nedokázal. Zobecnění vektorů? Vektor
+si jde představovat jako šipku. Zobecnění si mám představit jak? Změna souřadnic? OK,
+chápu, že nějak definovaně mění, takže v principu na souřadnicích nezávisí, ale co
+s takovým objektem dělat? Multidimenzionální pole? OK, ale jaký význam má který prvek?
+A o tensorovém součinu snad radši ani nemluvit.
+
+Pokud je učebnice poněkud pokrokovější, tak vám také dá příklady:
+\begin{itemize}
+  \item skalár je tensor řádu 0,
+  \item vektor a kovektor jsou tensory řádu 1
+  \item a lineární zobrazení je dokonce tensor řádu 2.
+\end{itemize}
+
+\noindent
+Jasné, ne? Situaci navíc komplikuje, že existují 3 různé, různě obecné, způsoby,
+jak tensory zavést. Do toho se plete Einsteinova sumační notace, která samoukům
+dokáže značně zamotat hlavu. Aby toho nebylo málo, ještě je možné za určitých podmínek
+nerozlišovat kovariantní a kontravariantní složky, takže samouk narazí jednou na text,
+který je rozlišuje, a jindy na text, který je nerozlišuje, a jen těžko hledá, co mají
+společného. Jiné texty se snaží tensor násilně namapovat do matice, čímž se dost těžko
+hledá, jak se odlišují od lineárního zobrazení. A sakra, pokud je tensor multidimenzionální
+pole, co má být ta kovariantní a kontravariantní složka?
+
+Taková vstupní bariéra pro získání znalosti je škoda, protože základní idea tensorů není
+vůbec nijak komplikovaná.
+
+V následujícím příkladu budeme používat některé pojmy a operace,
+které jsme dosud nevysvětlili. To je záměr - získáváte tak kotvu, ke které se můžete
+vrátit, až v budoucnu danou věc budeme probírat více teoreticky. Pokud pojmu nebudete
+rozumnět, nelamte si s ním zatím hlavu - podstatné je sledovat kroky, které
+příklad dělá, a co z nich nakonec vyjde.
+
+\begin{example}
+
+Ideu tensorové algebry si zkusíme ukázat na poměrně jednoduchém příkladu
+\textbf{konvoluce polynomů}:
+\begin{equation*}
+\myvec{f}(u) = \int_\alpha^\beta \myvec{a}(\tau)\myvec{b}(u - \tau)d\tau
+\end{equation*}
+Pokud jste se dosud s konvolucí nesetkali, nevěšte hlavu. Pro účely příkladu to není
+potřeba, stačí věřit, že se počítá tak, jak je výše napsáno.
+
+Pokud jste se naopak setkali, možná vás zarazilo, že neintegruji od nekonečna do
+nekonečna. Integrál od nekonečna do nekonečna u polynomů není říliš zajímavý, protože
+polynom roste/klesá nade všechny meze. Takže v příkladu předpokládám, že polynomy jsou
+``uříznuté`` a integrál lze napsat pouze v konečném intervalu.
+
+Už víme, že polynom lze vyjádřit jako souřadnice v prostoru polynomů. Pro jednoduchost
+příkladu si vezmeme dva polynomy řádu 1:
+\begin{equation*}
+\begin{split}
+\myvec{a}(t) = a_1 t + a_2 \\
+\myvec{b}(t) = b_1 t + b_2
+\end{split}
+\end{equation*}
+\vbox
+
+\medskip\noindent
+Výpočet konvoluce polynomů musíme zahájit substitucí\footnote{
+  Pro mezivýpočty budeme používat polynom $\myvec{p}$. Substituce pak samozřejmě
+  je do polynomu $\myvec{b}$.
+}:
+\begin{equation*}
+\begin{split}
+\myvec{p}(u - t) = p_1(u - t) + p_2 = -p_1t + (p_1 u + p_2)
+\end{split}
+\end{equation*}
+Integrujeme přes $t$, $u$ v této situaci považujeme za konstantu. Ze zápisu
+je poměrně zjevné, že substituce funguje jako lineární zobrazení
+$\mathcal{P}_1\rightarrow\mathcal{P}_1$, které můžeme zapsat jako matici\footnote{
+  Z nějakého důvodu mi blockarray environment přidává na konec jednu prázdnou řádku.
+  Lépe jsem následující matici naformátovat nedokázal.
+}:
+\begin{equation*}
+\left(\begin{blockarray}{cc}
+\begin{block}{(cc)}
+-1 & 0 \\
+\end{block}
+\begin{block}{(cc)}
+ u & 1 \\
+\end{block}
+\end{blockarray}\right)\left(
+\begin{array}{c}
+p_1 \\ p_2
+\end{array}\right) = \left(
+\begin{array}{c}
+-p_1 + 0 p_2 \\ p_1 u + p_2
+\end{array}
+\right)
+\end{equation*}
+Povšimněte si použitého závorkování v matici. Z hlediska tensorů totiž na lineární
+zobrazení koukáme jako na sloupcový (kontravariantní) vektor řádkových (kovariantních)
+vektorů. Tím se dostáváme k oněm kontravariantním a kovariantním složkám - linerání
+zobrazení má jednu kontravariantní (sloupcový první index) a kovariantní (řádkový
+druhý index) složku. Neboli se jedná o tensor (1, 1).
+
+Pokud tedy na lineární zobrazení aplikuji sloupcový vektor, roznásobím jím každý řádkový
+vektor a dostanu tak jako výsledek sloupcový vektor. Je potřeba podotknout, že zde
+se již nejedná o maticový součin, ale o obecnější \textbf{Kroneckerův součin}.
+V případě násobení řádkového a sloupcového vektoru jsou oba shodné.
+
+Zatím nic zajímavého ani nového. Třeba vás ale zaujme novinka, že na kontravariantní
+složku lineárního zobrazení můžete také aplikovat kovektor. Mějme například kovektor,
+který vrací hodnotu polynomu v bodě 1. Pokud ho aplikuji na lineární zobrazení
+\begin{equation*}
+\left(\begin{blockarray}{cc}
+\begin{block}{(cc)}
+-1 & 0 \\
+\end{block}
+\begin{block}{(cc)}
+ u & 1 \\
+\end{block}
+\end{blockarray}\right)\left(
+\begin{array}{cc}
+1 & 1
+\end{array}\right) = \left(
+1\left(\begin{array}{cc}-1 & 0\end{array}\right) + 1\left(\begin{array}{cc}u & 1\end{array}\right)
+\right) = \left(\begin{array}{cc}
+u - 1 & 1
+\end{array}\right)
+\end{equation*}
+získám kovektor, který vrací hodnotu v bodě 1 polynomu po substituci.
+
+\medskip\noindent
+Další operaci, kterou s polynomy potřebujeme provést, je jejich roznásobení:
+\begin{equation*}
+\begin{split}
+\myvec{p}(t)\myvec{q}(t) = (p_1 t + p_2)(q_1 t + q_2) = p_1q_1t^2 + p_2q_1t + p_1q_2t + p_2q_2
+\end{split}
+\end{equation*}
+Tato operace na vstupu přijímá dva polynomy řádu 1 a na výstup dává jeden polynom
+řádu 2. I tuto operaci můžeme zapsat do trojrozměnrné ``matice``:
+\begin{equation*}
+\left(\begin{blockarray}{cccccc}
+\begin{block}{(c(cc)(cc)c)}
+& 1 & 0 & 0 & 0 &\\
+\end{block}
+\begin{block}{(c(cc)(cc)c)}
+& 0 & 1 & 1 & 0 & \\
+\end{block}
+\begin{block}{(c(cc)(cc)c)}
+& 0 & 0 & 0 & 1 &\\
+\end{block}
+\end{blockarray}\right)
+\end{equation*}
+Každý prvek matice má tři souřadnice: první kontravariantní určuje řádku v sloupcovém vektoru,
+druhá kovariantní určuje sloupec prvního vnořeného řádkového vektoru a třetí kovariantní
+opět sloupec druhého vnořeného řádkového vektoru. Matice tedy má jednu kontravariantní a dvě
+kovariantní složky, jedná se tedy o tensor (1, 2).
+
+Pokud na tento tensor aplikujeme dva sloupcové vektory reprezentující souřadnice polynomů
+\begin{equation*}
+\begin{split}
+& \left(\begin{blockarray}{cccccc}
+\begin{block}{(c(cc)(cc)c)}
+& 1 & 0 & 0 & 0 &\\
+\end{block}
+\begin{block}{(c(cc)(cc)c)}
+& 0 & 1 & 1 & 0 & \\
+\end{block}
+\begin{block}{(c(cc)(cc)c)}
+& 0 & 0 & 0 & 1 &\\
+\end{block}
+\end{blockarray}\right)
+\left(\begin{array}{c}p_1 \\ p_2\end{array}\right)
+\left(\begin{array}{c}q_1 \\ q_2\end{array}\right)= \\ = &
+\left(\begin{blockarray}{c}
+\begin{block}{(c)}
+p_1\left(\begin{array}{cc}1 & 0\end{array}\right) + p_2\left(\begin{array}{cc}0 & 0\end{array}\right) \\
+\end{block}
+\begin{block}{(c)}
+p_1\left(\begin{array}{cc}0 & 1\end{array}\right) + p_2\left(\begin{array}{cc}1 & 0\end{array}\right) \\
+\end{block}
+\begin{block}{(c)}
+p_1\left(\begin{array}{cc}0 & 0\end{array}\right) + p_2\left(\begin{array}{cc}0 & 1\end{array}\right) \\
+\end{block}
+\end{blockarray}\right)
+\left(\begin{array}{c}q_1 \\ q_2\end{array}\right)= \\ = &
+\left(\begin{blockarray}{c}
+\begin{block}{(c)}
+\begin{array}{cc}p_1 & 0\end{array} \\
+\end{block}
+\begin{block}{(c)}
+\begin{array}{cc}p_2 & p_1\end{array} \\
+\end{block}
+\begin{block}{(c)}
+\begin{array}{cc}0 & p_2\end{array} \\
+\end{block}
+\end{blockarray}\right)
+\left(\begin{array}{c}q_1 \\ q_2\end{array}\right)= 
+\begin{blockarray}{(c)}
+p_1q_1 \\
+p_2q_1 + p_1q_2 \\
+p_2q_2 \\
+\end{blockarray}
+\end{split}
+\end{equation*}
+jako výstup získáme souřadnice polynomu vzniklého jejich vynásobením. Tensor tedy funguje
+jako zobrazení $\mathcal{P}_1\times\mathcal{P}_1\rightarrow\mathcal{P}_2$.
+
+Tím ale legrace nekončí. My totiž na tento tensor můžeme aplikovat tensor, který nám vznikl
+v předchozím kroku substitucí:
+\begin{equation*}
+\begin{split}
+&\left(\begin{blockarray}{cccccc}
+\begin{block}{(c(cc)(cc)c)}
+& 1 & 0 & 0 & 0 &\\
+\end{block}
+\begin{block}{(c(cc)(cc)c)}
+& 0 & 1 & 1 & 0 & \\
+\end{block}
+\begin{block}{(c(cc)(cc)c)}
+& 0 & 0 & 0 & 1 &\\
+\end{block}
+\end{blockarray}\right)
+\left(\begin{blockarray}{cc}
+\begin{block}{(cc)}
+-1 & 0 \\
+\end{block}
+\begin{block}{(cc)}
+ u & 1 \\
+\end{block}
+\end{blockarray}\right) = \\ = &
+\left(\begin{blockarray}{cccc}
+\begin{block}{(c(c)(c)c)}
+& 1\left(\begin{array}{cc}-1 & 0\end{array}\right) + 0\left(\begin{array}{cc}u & 1\end{array}\right) &
+  0\left(\begin{array}{cc}-1 & 0\end{array}\right) + 0\left(\begin{array}{cc}u & 1\end{array}\right) & \\
+\end{block}
+\begin{block}{(c(c)(c)c)}
+& 0\left(\begin{array}{cc}-1 & 0\end{array}\right) + 1\left(\begin{array}{cc}u & 1\end{array}\right) &
+  1\left(\begin{array}{cc}-1 & 0\end{array}\right) + 0\left(\begin{array}{cc}u & 1\end{array}\right) & \\
+\end{block}
+\begin{block}{(c(c)(c)c)}
+& 0\left(\begin{array}{cc}-1 & 0\end{array}\right) + 0\left(\begin{array}{cc}u & 1\end{array}\right) &
+  0\left(\begin{array}{cc}-1 & 0\end{array}\right) + 1\left(\begin{array}{cc}u & 1\end{array}\right) & \\
+\end{block}
+\end{blockarray}\right) = \\ = &
+\left(\begin{blockarray}{cccccc}
+\begin{block}{(c(cc)(cc)c)}
+& -1 & 0 & 0 & 0 &\\
+\end{block}
+\begin{block}{(c(cc)(cc)c)}
+& u & 1 & -1 & 0 & \\
+\end{block}
+\begin{block}{(c(cc)(cc)c)}
+& 0 & 0 & u & 1 &\\
+\end{block}
+\end{blockarray}\right)
+\end{split}
+\end{equation*}
+Kombinací těchto dvou zobrazení jsme získali zobrazení, které vrací polynom vzniklý
+vynásobením $\myvec{p}(t)\myvec{q}(u - t)$.
+
+Povšimněte si, že jsme tensor aplikovali na třetí souřadnici (nejvíce vnořené řádkové vektory),
+která odpovídá polynomu $\myvec{q}$, tedy jsme substituovali do $\myvec{q}$. Nic nám samozřejmě
+nebrání substituovat do $\myvec{p}$, tedy aplikovat tensor na druhou souřadnici. V tomto případě
+by nám dokonce vyšlo to samé, protože násobení polynomů je komutativní. Obecně ale tensorový součin
+komutativní není a aplikací na různé složky dostáváme různé výsledky.
+
+\end{example}
 
 \end{document}
 
