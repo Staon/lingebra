@@ -1527,9 +1527,10 @@ zobrazení má jednu kontravariantní (sloupcový první index) a kovariantní (
 druhý index) složku. Neboli se jedná o tensor (1, 1).
 
 Pokud tedy na lineární zobrazení aplikuji sloupcový vektor, roznásobím jím každý řádkový
-vektor a dostanu tak jako výsledek sloupcový vektor. Je potřeba podotknout, že zde
-se již nejedná o maticový součin, ale o obecnější \textbf{Kroneckerův součin}.
-V případě násobení řádkového a sloupcového vektoru jsou oba shodné.
+vektor a dostanu tak jako výsledek sloupcový vektor. V případě tensorů se již nepracuje
+se standardním maticovým součinem, ale s obecnějším \textbf{Kroneckerovým součinem}
+a operací \textbf{kontrakce tensoru}. V tomto konkrétním případě je však výsledek
+shodný.
 
 Zatím nic zajímavého ani nového. Třeba vás ale zaujme novinka, že na kontravariantní
 složku lineárního zobrazení můžete také aplikovat kovektor. Mějme například kovektor,
@@ -1689,7 +1690,186 @@ nebrání substituovat do $\myvec{p}$, tedy aplikovat tensor na druhou souřadni
 by nám dokonce vyšlo to samé, protože násobení polynomů je komutativní. Obecně ale tensorový součin
 komutativní není a aplikací na různé složky dostáváme různé výsledky.
 
+\medskip\noindent
+A pokračujeme v krasojízdě. Pro výpočet konvoluce potřebujeme vynásobený polynom zintegrovat:
+\begin{equation*}
+\int\myvec{p}(t)dt = \int(p_1t^2 + p_2t + p_3)dt = \frac{1}{3}p_1t^3 + \frac{1}{2}p_2t^2 + p_3t
+\end{equation*}
+Integrační konstantu jsme nezapomněli. Protože nám jde o určitý integrál, kde se nakonec
+odečte, považujeme ji za 0. Pokud by nebyla nulová, funkce by nebyla lineární zobrazení,
+tedy ani tensor. S nulovou konstantou se jedná o lineární zobrazení
+$\mathcal{P}_2\rightarrow\mathcal{P}_3$.
+
+A opět lineární zobrazení můžeme vyjádřit jako matici:
+\begin{equation*}
+\left(\begin{blockarray}{ccc}
+\begin{block}{(ccc)}
+\frac{1}{3} & 0 & 0 \\
+\end{block}
+\begin{block}{(ccc)}
+ 0 & \frac{1}{2} & 0 \\
+\end{block}
+\begin{block}{(ccc)}
+ 0 & 0 & 1 \\
+\end{block}
+\begin{block}{(ccc)}
+ 0 & 0 & 0 \\
+\end{block}
+\end{blockarray}\right)\left(
+\begin{array}{c}
+p_1 \\ p_2 \\ p_3
+\end{array}\right) = \left(
+\begin{array}{c}
+\frac{1}{3}p_1 \\ \frac{1}{2}p_2 \\ p_3 \\ 0
+\end{array}
+\right)
+\end{equation*}
+Získali jsme tak jakýsi operátor, do kterého můžeme dosadit polynom a získáme jeho integrál. Pro
+výpočet konvoluce potřebujeme dosadit polynom vzniklý vynásobením $\myvec{p}(t)\myvec{q}(u - t)$.
+Nikoho už by nemělo překvapit, že na tensor integrace aplikujeme tensor vzniklý v předchozím
+kroku:
+\begin{equation*}
+\begin{split}
+&\left(\begin{blockarray}{ccc}
+\begin{block}{(ccc)}
+\frac{1}{3} & 0 & 0 \\
+\end{block}
+\begin{block}{(ccc)}
+ 0 & \frac{1}{2} & 0 \\
+\end{block}
+\begin{block}{(ccc)}
+ 0 & 0 & 1 \\
+\end{block}
+\begin{block}{(ccc)}
+ 0 & 0 & 0 \\
+\end{block}
+\end{blockarray}\right)
+\left(\begin{blockarray}{cccccc}
+\begin{block}{(c(cc)(cc)c)}
+& -1 & 0 & 0 & 0 &\\
+\end{block}
+\begin{block}{(c(cc)(cc)c)}
+& u & 1 & -1 & 0 & \\
+\end{block}
+\begin{block}{(c(cc)(cc)c)}
+& 0 & 0 & u & 1 &\\
+\end{block}
+\end{blockarray}\right)
+ = \\ = &
+\left(\begin{blockarray}{c}
+\begin{block}{(c)}
+\frac{1}{3}\left(\left(\begin{array}{cc}-1 & 0\end{array}\right)\left(\begin{array}{cc}0 & 0\end{array}\right)\right) \\
+\end{block}
+\begin{block}{(c)}
+\frac{1}{2}\left(\left(\begin{array}{cc}u & 1\end{array}\right)\left(\begin{array}{cc}-1 & 0\end{array}\right)\right) \\
+\end{block}
+\begin{block}{(c)}
+1\left(\left(\begin{array}{cc}0 & 0\end{array}\right)\left(\begin{array}{cc}u & 1\end{array}\right)\right) \\
+\end{block}
+\begin{block}{(c)}
+\left(\left(\begin{array}{cc}0 & 0\end{array}\right)\left(\begin{array}{cc}0 & 0\end{array}\right)\right) \\
+\end{block}
+\end{blockarray}\right)
+= \\ = &
+\left(\begin{blockarray}{cccccc}
+\begin{block}{(c(cc)(cc)c)}
+& -\frac{1}{3} & 0 & 0 & 0 &\\
+\end{block}
+\begin{block}{(c(cc)(cc)c)}
+& \frac{1}{2}u & \frac{1}{2} & -\frac{1}{2} & 0 & \\
+\end{block}
+\begin{block}{(c(cc)(cc)c)}
+& 0 & 0 & u & 1 &\\
+\end{block}
+\begin{block}{(c(cc)(cc)c)}
+& 0 & 0 & 0 & 0 &\\
+\end{block}
+\end{blockarray}\right)
+\end{split}
+\end{equation*}
+čímž jsme získali tensor, který po dosazení polynomů $\myvec{p}$ a $\myvec{q}$ vrací primitivní funkci konvolučního
+integrálu.
+
+\medskip\noindent
+A začínáme se blížit do finiše. Jako poslední krok potřebujeme dosadit integrační konstanty $\alpha$ a $\beta$
+a výsledek navzájem odečíst. Hodnota polynomu v konkrétním bodě je nám již známý kovektor:
+\begin{equation*}
+\myvec{p}(\alpha) = p_1\alpha^3 + p_2\alpha^2 + p_3\alpha + p_4
+\end{equation*}
+což lze vyjádřit jako matici:
+\begin{equation*}
+\left(\begin{array}{cccc}\alpha^3 & \alpha^2 & \alpha & 1\end{array}\right)
+\left(\begin{array}{c}p_1 \\ p_2 \\ p_3 \\ p_4 \end{array}\right)
+\end{equation*}
+Kovektor můžeme aplikovat na kontravariantní složku tensoru, který nám vyšel v předchozím kroku:
+\begin{equation*}
+\begin{split}
+&\left(\begin{blockarray}{cccccc}
+\begin{block}{(c(cc)(cc)c)}
+& -\frac{1}{3} & 0 & 0 & 0 &\\
+\end{block}
+\begin{block}{(c(cc)(cc)c)}
+& \frac{1}{2}u & \frac{1}{2} & -\frac{1}{2} & 0 & \\
+\end{block}
+\begin{block}{(c(cc)(cc)c)}
+& 0 & 0 & u & 1 &\\
+\end{block}
+\begin{block}{(c(cc)(cc)c)}
+& 0 & 0 & 0 & 0 &\\
+\end{block}
+\end{blockarray}\right)
+\left(\begin{array}{cccc}\alpha^3 & \alpha^2 & \alpha & 1\end{array}\right)
+= \\ = &
+\;(
+\alpha^3((\begin{array}{cc}-\frac{1}{3} & 0\end{array})(\begin{array}{cc}0 & 0\end{array}))
+  + \alpha^2((\begin{array}{cc}\frac{1}{2}u & \frac{1}{2}\end{array})(\begin{array}{cc}-\frac{1}{2} & 0\end{array})) \\
+  + & \;\alpha((\begin{array}{cc}0 & 0\end{array})(\begin{array}{cc}u & 1\end{array}))
+  + 1((\begin{array}{cc}0 & 0\end{array})(\begin{array}{cc}0 & 0\end{array}))
+)
+= \\ = &
+((\begin{array}{cc}-\frac{1}{3}\alpha^3 + \frac{1}{2}\alpha^2u & \frac{1}{2}\alpha^2\end{array})
+  (\begin{array}{cc}-\frac{1}{2}\alpha^2 + \alpha u & \alpha\end{array}))
+\end{split}
+\end{equation*}
+Tím jsme získali tensor (0, 2) se dvěma kovariantními složkami. Pokud stejným způsobem aplikujeme
+kovektor pro integrační konstantu $\beta$ a výsledné tensory po složkách navzájem odečteme, získáme
+opět (0, 2) tensor:
+\begin{equation*}
+\begin{split}
+((\begin{array}{cc}\frac{1}{3}(\alpha^3 - \beta^3) + \frac{1}{2}u(\beta^2 - \alpha^2) & \frac{1}{2}(\beta^2 - \alpha^2)\end{array}) \\
+  (\begin{array}{cc}\frac{1}{2}(\alpha^2 - \beta^2) + u(\beta - \alpha) & \beta - \alpha\end{array}))
+\end{split}
+\end{equation*}
+Tento tensor funguje jako zobrazení $\mathcal{P}_1\times\mathcal{P}_1\rightarrow\mathbb{R}$. Pokud do něj
+dosadíme dva polynomy, získáme hodnotu jejich konvoluce v bodě $u$ (což si čtenář může ověřit, pokud si
+konvoluci dvou polynomů spočítá přímo).
+
 \end{example}
+
+\noindent
+Jaké ponaučení si z příkladu můžeme vzít? Na jeho začátku jsme si nadefinovali polynomy $\myvec{a}$
+a $\myvec{b}$, ale v průběhu jsme je už nikdy nepoužili. Výsledkem příkladu totiž je operátor, na
+který je možné aplikovat jakékoliv dva polynomy včetně těchto dvou.
+
+Tensory a tensorová algebra jsou tedy vlastně systém operátorů a možností, jak je aplikovat a kombinovat.
+V příkladu jsme viděli, že např. tensor násobení dvou polynomů lze aplikovat na dva polynomy. Ale stejně
+tak jsme ho aplikovali na tensor, který substituoval do polynomu, čímž vznikl nový tensor/operátor.
+
+Pokud jste se někdy setkali s počítačovou grafikou, znáte kombinaci transformací. Grafik vezme objekt,
+aplikuje na něj několik transformací (typicky ho posune v prostoru, otočí ho a zvětší nebo zmenší).
+Každá transformace má svou matici, a pokud se vynásobí, vznikne transformace, která je kombinuje
+dohromady.
+
+Tensory tedy nejsou ani tak zobecněním vektorů, jako spíše zobecněním principu skládání operací s vektory.
+V příkladu jsme zkombinovali dohromady operaci substituce do polynomu, násobení dvou polynomů, integraci
+polynomu a dosazení hodnoty do polynomu. A tadáá, jako výsledek jsme dostali operátor, který je schopný
+pro libovolné dva polynomy spočítat jejich konvoluci.
+
+Takže, cože to ten tensor vlastně je? Kromě dvou krajních případů (skalár a vektor), tensor je operátor.
+Operátor, který může vzít vektory, kovektory, jiné tensory a stvořit nový tensor. Operátor, který se může
+zkombinovat s jiným operátorem a stvořit tak nový operátor. Tensor není libovolný operátor, musí splňovat
+určité podmínky (označované jako multilinearita), což ovšem v lineární algebře není příliš překvapivé.
+A samozřejmě není možné aplikovat každý tensor na každý tensor. O tom však až v dalších kapitolách.
 
 \end{document}
 
