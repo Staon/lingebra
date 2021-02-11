@@ -1871,6 +1871,133 @@ zkombinovat s jiným operátorem a stvořit tak nový operátor. Tensor není li
 určité podmínky (označované jako multilinearita), což ovšem v lineární algebře není příliš překvapivé.
 A samozřejmě není možné aplikovat každý tensor na každý tensor. O tom však až v dalších kapitolách.
 
+\section{Kroneckerův součin}
+
+\noindent
+Dříve než se pustíme přímo do tensorů, rozeberme podrobněji operaci, která nás dále bude neustále provázet:
+\textit{Kroneckerův součin}. Kroneckerův součin pracuje nad poli čísel, což pro nás bude vyjádření tensoru
+v souřadnicích. Základní princip je jednoduchý: každý prvek levého operandu nahradíme pravým operandem a jeho
+prvky vynásobíme nahrazenou hodnotou. Například:
+
+\begin{equation*}
+\begin{split}
+& \left(\begin{array}{c}1 \\ 2\end{array}\right)\otimes\left(\begin{array}{c}3 \\ 4\end{array}\right) =
+\left(\begin{blockarray}{c}
+\begin{block}{c}
+1 \left(\begin{array}{c}3 \\ 4\end{array}\right) \\
+2 \left(\begin{array}{c}3 \\ 4\end{array}\right) \\
+\end{block}
+\end{blockarray}\right) =
+\left(\begin{blockarray}{c}
+\begin{block}{(c)}
+1 \times 3 \\
+1 \times 4 \\
+\end{block}
+\begin{block}{(c)}
+2 \times 3 \\
+2 \times 4 \\
+\end{block}
+\end{blockarray}\right) =
+\left(\begin{blockarray}{c}
+\begin{block}{(c)}
+3 \\
+4 \\
+\end{block}
+\begin{block}{(c)}
+6 \\
+8 \\
+\end{block}
+\end{blockarray}\right)
+\end{split}
+\end{equation*}
+Výsledkem tedy je dvourozměrné pole - první index určuje vnořené pole, druhý index prvek v něm, tedy
+$a_{11} = 3, a_{12} = 4, a_{21} = 6, a_{22} = 8$.
+
+Obecně tedy, pokud mám k-rozměrné pole $a$ a n-rozměrné pole $b$, jejich Kroneckerův součin 
+$s = a \otimes b$ bude "k plus n"-rozměrné pole s prvky podle předpisu:
+\begin{equation*}
+s_{i_1 \cdots i_k j_1 \cdots j_n} = a_{i_1 \cdots i_k} b_{j_1 \cdots j_n}
+\end{equation*}
+Kroneckerův součin je vlastně poměrně jednoduchá operace, která vynásobí každý prvek s každým
+a uspořádá je do nového pole kopírujícího struktury původních dvou.
+
+Kroneckerův součin demonstruje jev, se kterým se v tensorové algebře budeme potýkat: příliš rychle
+narůstá složitost. Pokud vynásobím dvě pole, rozměr výsledného pole roste se součtem rozměrů polí,
+počet prvků roste s násobkem počtu prvků. Velmi záhy tak zápis ve dvourozměrné ploše papírů přestane
+být čitelný a budeme se muset uchylovat k zápisu po složkách s indexy, jako je popsaný součin výše.
+Ale i v tomto zápisu začne počet indexů přerůstat hladinu srozumitelnosti.
+
+\section{Jak zavést tensory pořádně?}
+
+\noindent
+Až doteď jsme na tensory koukali intuitivně jako na nějaká pole čísel, různé ``divně`` zapsané matice.
+Nyní zkusíme tensory zavést formálněji. A myšlenku ukážeme na příkladu lineárních zobrazení.
+
+Možná jste už někde zaslechli tvrzení, že lineární zobrazení je tensor řádu 2, přesněji tensor $(1,1)$,
+který má jednu kontravariantní a jednu kovariantní složku. Co to má znamenat? Jako první idea se nabízí
+zkonstruovat lineární zobrazení jako kombinaci jednoho vektoru a jednoho kovektoru. A když jsme v
+předchozí kapitole probrali Kroneckerův součin, tak použijeme ten:
+
+\begin{equation*}
+\begin{split}
+& \left(\begin{array}{c} a_1 \\ a_2\end{array}\right)\otimes\left(\begin{array}{cc}b_1 & b_2\end{array}\right) =
+\left(\begin{blockarray}{cc}
+\begin{block}{(cc)}
+a_1 b_1 & a_1 b_2 \\
+\end{block}
+\begin{block}{(cc)}
+a_2 b_1 & a_2 b_2 \\
+\end{block}
+\end{blockarray}\right)
+\end{split}
+\end{equation*}
+Pokud si odmyslíte vnitřní závorkování, vznikla nám matice, tedy skutečně lineární zobrazení.
+
+Je ovšem také zřejmé, že druhá řádka je násobek první, tudíž řádky nejsou lineárně nezávislé. Obecně
+pokud vynásobíme vektor a kovektor, vznikne matice stupně 1, tzn. pouze s jednou lineárně nezávislou
+řádkou. Tímto způsobem tedy jsme schopní vytvořit pouze velmi omezenou množinu lineárních
+zobrazení\footnote{
+    V principu jde o lineární zobrazení, které jakýkoliv vektor nasměruje vždy do stejného
+    směru a pouze mu změní velikost.
+}.
+
+Pokud tedy chceme dostat něco užitečnějšího, musíme k problému přistoupit jinak. Na všechna lineární
+zobrazení $\myspace{V}\rightarrow\myspace{W}$ prostorů s konečnou dimenzí můžeme koukat
+jako na vektorový prostor: matice dvou zobrazení sečteme po složkách, násobení skalárem roznásobí
+všechny složky. Čtenář si může za domácí úkol dokázat, že taková konstrukce splňuje axiomy
+vektorového prostoru.
+
+Naším cílem tedy bude pomocí Kroneckerova součinu zkonstruovat bázi prostoru lineárních zobrazení.
+A samozřejmě se přímo nabízí zkonstruovat je z bází prostoru vektoru a kovektoru.
+
+\begin{example}
+Vezměme nejjednodušší příklad: dvourozměrný vektorový prostor $\myspace{V}$ a jeho duální prostor
+$\mydual{V}$ s ortonormální bází.
+\begin{equation*}
+e_1 = \left(\begin{array}{c}1 \\ 0\end{array}\right),
+e_2 = \left(\begin{array}{c}0 \\ 1\end{array}\right),
+\epsilon_1 = \left(\begin{array}{cc}1 & 0\end{array}\right),
+\epsilon_2 = \left(\begin{array}{cc}0 & 1\end{array}\right)
+\end{equation*}
+Pokud zkombinuji každý s každým, získám čtyři matice:
+\begin{equation*}
+\begin{split}
+e_1 \otimes \epsilon_1 &= \left(\begin{array}{c}1 \\ 0\end{array}\right) \otimes \left(\begin{array}{cc}1 & 0\end{array}\right) =
+\left(\begin{array}{cc}1 & 0 \\ 0 & 0 \end{array}\right) \\
+e_1 \otimes \epsilon_2 &= \left(\begin{array}{c}1 \\ 0\end{array}\right) \otimes \left(\begin{array}{cc}0 & 1\end{array}\right) =
+\left(\begin{array}{cc}0 & 1 \\ 0 & 0 \end{array}\right) \\
+e_2 \otimes \epsilon_1 &= \left(\begin{array}{c}0 \\ 1\end{array}\right) \otimes \left(\begin{array}{cc}1 & 0\end{array}\right) =
+\left(\begin{array}{cc}0 & 0 \\ 1 & 0 \end{array}\right) \\
+e_2 \otimes \epsilon_2 &= \left(\begin{array}{c}0 \\ 1\end{array}\right) \otimes \left(\begin{array}{cc}0 & 1\end{array}\right) =
+\left(\begin{array}{cc}0 & 0 \\ 0 & 1 \end{array}\right)
+\end{split}
+\end{equation*}
+V tomto jednoduchém případě je zcela zřejmé, že matice jsou lineárně nezávislé a jsou schopné vygenerovat libovolnou matici
+(koeficienty lineární kombinace přímo odpovídají hodnotám, které na konkrétní pozici chceme). Kombinací bázových vektorů
+a kovektorů nám vznikla báze prostoru lineárních zobrazení.
+
+\end{example}
+
 \end{document}
 
 
