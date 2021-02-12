@@ -1927,6 +1927,29 @@ počet prvků roste s násobkem počtu prvků. Velmi záhy tak zápis ve dvouroz
 být čitelný a budeme se muset uchylovat k zápisu po složkách s indexy, jako je popsaný součin výše.
 Ale i v tomto zápisu začne počet indexů přerůstat hladinu srozumitelnosti.
 
+Co můžeme o Kroneckerově součinu říci dále? Tak např. je \textbf{asociativní}:
+\begin{equation*}
+(a \otimes b) \otimes c = a \otimes (b \otimes c)
+\end{equation*}
+což poměrně jednoduše vyplývá z toho, že násobení prvků je asociativní:
+\begin{equation*}
+(a_{i_1 \cdots i_n} b_{j_1 \cdots j_o})c_{k_1 \cdots k_p} = a_{i_1 \cdots i_n} (b_{j_1 \cdots j_o} c_{k_1 \cdots k_p})
+\end{equation*}
+I na násobení skalárem (roznásobení každého prvku pole) se chová očekávaně:
+\begin{equation*}
+\alpha (a \otimes b) = (\alpha a) \otimes b = a \otimes (\alpha b)
+\end{equation*}
+což opět jednodušše vyplývá z asociativity a komutativity násobení jednotlivých prvků:
+\begin{equation*}
+\alpha (a_{i_1 \cdots i_n} b_{j_1 \cdots j_o}) = (\alpha a_{i_1 \cdots i_n}) b_{j_1 \cdots j_o}
+= a_{i_1 \cdots i_n} (\alpha b_{j_1 \cdots j_o})
+\end{equation*}
+
+Kroneckerův součin ale \textbf{není obecně komutativní}: $a \otimes b \neq b \otimes a$. Ale
+je v principu ``skorokomutativní``. Otočením operandů vzniknou stejné prvky, protože násobení
+prvků komutativní je, ale změní se pořadí indexů. Takže vznikne pole se stejnými hodnotami,
+ale jinak rozvržené, a které permutací indexů dokážeme přetransformovat do stejné podoby.
+
 \section{Jak zavést tensory pořádně?}
 
 \noindent
@@ -1961,18 +1984,19 @@ zobrazení\footnote{
     směru a pouze mu změní velikost.
 }.
 
-Pokud tedy chceme dostat něco užitečnějšího, musíme k problému přistoupit jinak. Na všechna lineární
-zobrazení $\myspace{V}\rightarrow\myspace{W}$ prostorů s konečnou dimenzí můžeme koukat
-jako na vektorový prostor: matice dvou zobrazení sečteme po složkách, násobení skalárem roznásobí
-všechny složky. Čtenář si může za domácí úkol dokázat, že taková konstrukce splňuje axiomy
-vektorového prostoru.
+Je tedy zřejmé, že tensory obecně nemůžeme konstruovat tak, že vezmeme menší tensory a zkombinujeme
+je, ale musíme k problému přistoupit jinak. Výchozí myšlenka pro nás bude fakt, že matice stejného
+rozměru tvoří vektorový prostor (za domácí úkol si dokažte, že splňují axiomy). A stejně tak
+i všechna lineární zobrazení $\myspace{V}\rightarrow\myspace{W}$ tvoří vektorový prostor
+(koukněte se, jak jsme nadefinovali sčítání a násobení skalárem v kapitole XXX o lineárních
+formách).
 
-Naším cílem tedy bude pomocí Kroneckerova součinu zkonstruovat bázi prostoru lineárních zobrazení.
-A samozřejmě se přímo nabízí zkonstruovat je z bází prostoru vektoru a kovektoru.
+To znamená, že naší snahou bude vytvořit bázi matic resp. lineárních zobrazení. Máme Kroneckerův
+součin a přímo se nabízí zkombinovat bázové vektory a kovektory.
 
 \begin{example}
-Vezměme nejjednodušší příklad: dvourozměrný vektorový prostor $\myspace{V}$ a jeho duální prostor
-$\mydual{V}$ s ortonormální bází.
+Vezměme nejjednodušší příklad dvourozměrného vektorového prostoru $\myspace{V}$ a jeho duálního
+prostoru $\mydual{V}$ s ortonormální bází.
 \begin{equation*}
 e_1 = \left(\begin{array}{c}1 \\ 0\end{array}\right),
 e_2 = \left(\begin{array}{c}0 \\ 1\end{array}\right),
@@ -1997,6 +2021,22 @@ V tomto jednoduchém případě je zcela zřejmé, že matice jsou lineárně ne
 a kovektorů nám vznikla báze prostoru lineárních zobrazení.
 
 \end{example}
+
+\noindent
+Máme tedy jasnou myšlenku: tensor bude prvek vektorového prostoru, který vznikne kombinací vektorových
+prostorů tensorů menších řádů. Což znamená, že rekursivně se dostaneme až ke krajním případům: tensorům
+řádu 1, tedy k vektorům a kovektorům. Tzn. takzvaně kontravariantní a kovariantní složky tensoru
+odpovídají krajním prostorům vektorů a kovektorů, ze kterých je složený prostor ve kterém se tensor
+nachází.
+
+Jak už jsme si ukázali, Kroneckerův součin je asociativní, takže nezáleží, jakým postupem prostor
+složíme. Např. pokud budu chtít složit prostor $\myspace{V} \otimes \mydual{V} \otimes \myspace{V}
+\otimes \myspace{V}$, je jedno, jestli nejdříve sloučím první dva a druhé dva, a následně je dám
+dohromady, nebo jestli budu postupně po jednom přidávat. Na druhou stranu součin není komutativní,
+takže na pořadí záleží a není možné ho měnit.
+
+Myšlenka nastíněna, nyní nás čeká skutečná práce: musíme dokázat, že složením bází dvou prostorů
+získáme opět bázi.
 
 \end{document}
 
