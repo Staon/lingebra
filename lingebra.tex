@@ -11,6 +11,8 @@
 \theoremstyle{definition}
 \newtheorem{definition}{Definice}[chapter]
 \newtheorem{example}{Příklad}[chapter]
+\newtheorem{theorem}{Věta}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
 
 % Book styles
 \newcommand{\myscalar}[1]{#1}
@@ -1950,16 +1952,25 @@ je v principu ``skorokomutativní``. Otočením operandů vzniknou stejné prvky
 prvků komutativní je, ale změní se pořadí indexů. Takže vznikne pole se stejnými hodnotami,
 ale jinak rozvržené, a které permutací indexů dokážeme přetransformovat do stejné podoby.
 
-\section{Jak zavést tensory pořádně?}
+\section{Jak zavést tensory?}
 
 \noindent
 Až doteď jsme na tensory koukali intuitivně jako na nějaká pole čísel, různé ``divně`` zapsané matice.
-Nyní zkusíme tensory zavést formálněji. A myšlenku ukážeme na příkladu lineárních zobrazení.
+Pole čísel je ale prostě jenom pole čísel. Tensorem ho dělají až operace, které s ním lze provádět.
+A abychom mohli definovat operace, musíme tensory zavést formálně.
 
-Možná jste už někde zaslechli tvrzení, že lineární zobrazení je tensor řádu 2, přesněji tensor $(1,1)$,
-který má jednu kontravariantní a jednu kovariantní složku. Co to má znamenat? Jako první idea se nabízí
-zkonstruovat lineární zobrazení jako kombinaci jednoho vektoru a jednoho kovektoru. A když jsme v
-předchozí kapitole probrali Kroneckerův součin, tak použijeme ten:
+Zatímco předchozí kapitoly o vektorových a duálních prostorech se pokoušely zavádět vektory
+a kovektory obecně, a teprve později přešly do souřadnic, u tensorů půjdeme opačnou cestou.
+Následující kapitoly až do odvolání budou pracovat s aritmetickými vektory, kovektory a tensory,
+tzn. v podobě polí čísel, protože to je asi nejvíc běžný způsob a asi taky nevíc názorný zpusob,
+jak se tensory zavádí. A teprve později se pokusíme definici zobecnit, aby byla na souřadnicích
+nezávislá.
+
+Než začneme být formálnější, začněme příkladem. Možná jste už někde zaslechli tvrzení, že lineární
+zobrazení je tensor řádu 2, přesněji tensor $(1,1)$, který má jednu kontravariantní a jednu
+kovariantní složku. Co to má znamenat? Jako první idea se nabízí zkonstruovat lineární zobrazení
+jako kombinaci jednoho vektoru a jednoho kovektoru. A když jsme v předchozí kapitole probrali
+Kroneckerův součin, tak použijeme ten:
 
 \begin{equation*}
 \begin{split}
@@ -2036,7 +2047,120 @@ dohromady, nebo jestli budu postupně po jednom přidávat. Na druhou stranu sou
 takže na pořadí záleží a není možné ho měnit.
 
 Myšlenka nastíněna, nyní nás čeká skutečná práce: musíme dokázat, že složením bází dvou prostorů
-získáme opět bázi.
+získáme opět bázi. Pro tento účel nejdříve musíme dokázat, že tensory stvořené Kroneckerovým
+součinem z báze menších prostorů jsou lineárně nezávislé. A protože celkvový důkaz se příliš utápí
+v indexech, nejdříve ho uděláme pro speciální malý případ.
+
+\begin{example}
+Mějme dvourozměrný vektorový prostor $\myspace{V}$ s bází
+\begin{equation*}
+\begin{split}
+\myvec{v_1} &= \left(\begin{array}{c}v_{11} \\ v_{12}\end{array}\right) \\
+\myvec{v_2} &= \left(\begin{array}{c}v_{21} \\ v_{22}\end{array}\right)
+\end{split}
+\end{equation*}
+a k němu příslušný duální prostor $\mydual{V}$ s bází
+\begin{equation*}
+\begin{split}
+\myvec{\theta_1} &= \left(\begin{array}{cc}\theta_{11} & \theta_{12}\end{array}\right) \\
+\myvec{\theta_2} &= \left(\begin{array}{cc}\theta_{21} & \theta_{22}\end{array}\right)
+\end{split}
+\end{equation*}
+Nyní budeme předpokládat, že lineární zobrazení vzniklá kombinací bázových vektorů a kovektorů
+jsou lineárně závislá, tzn. že existuje nenulová kombinace taková, že
+\begin{equation*}
+\alpha (\myvec{v_1}\otimes\myvec{\theta_1}) + \beta (\myvec{v_1}\otimes\myvec{\theta_2}) 
+  + \gamma (\myvec{v_2}\otimes\myvec{\theta_1}) + \delta (\myvec{v_2}\otimes\myvec{\theta_2}) = \myvec{0}
+\end{equation*}
+což ve složkách vypadá:
+\begin{equation*}
+\begin{split}
+\alpha\left(\begin{array}{cc}v_{11}\theta_{11} & v_{11}\theta_{12} \\ v_{12}\theta_{11} & v_{12}\theta_{12}\end{array}\right)
++ \beta\left(\begin{array}{cc}v_{11}\theta_{21} & v_{11}\theta_{22} \\ v_{12}\theta_{21} & v_{12}\theta_{22}\end{array}\right)
++ \gamma\left(\begin{array}{cc}v_{21}\theta_{11} & v_{21}\theta_{12} \\ v_{22}\theta_{11} & v_{22}\theta_{12}\end{array}\right) \\
++\; \delta\left(\begin{array}{cc}v_{21}\theta_{21} & v_{21}\theta_{22} \\ v_{22}\theta_{21} & v_{22}\theta_{22}\end{array}\right)
+= \left(\begin{array}{cc} 0 & 0 \\ 0 & 0 \end{array}\right)
+\end{split}
+\end{equation*}
+tak vznikají 4 rovnice:
+\begin{equation*}
+\begin{split}
+\alpha v_{11}\theta_{11} + \beta v_{11}\theta_{21} + \gamma v_{21}\theta_{11} + \delta v_{21}\theta_{21} &= 0 \\
+\alpha v_{11}\theta_{12} + \beta v_{11}\theta_{22} + \gamma v_{21}\theta_{12} + \delta v_{21}\theta_{22} &= 0 \\
+\alpha v_{12}\theta_{11} + \beta v_{12}\theta_{21} + \gamma v_{22}\theta_{11} + \delta v_{22}\theta_{21} &= 0 \\
+\alpha v_{12}\theta_{12} + \beta v_{12}\theta_{22} + \gamma v_{22}\theta_{12} + \delta v_{22}\theta_{22} &= 0
+\end{split}
+\end{equation*}
+členy nyní přeskládáme a uzávorkujeme:
+\begin{equation*}
+\begin{split}
+(\alpha v_{11} + \gamma v_{21})\theta_{11} + (\beta v_{11} + \delta v_{21})\theta_{21} &= 0 \\
+(\alpha v_{11} + \gamma v_{21})\theta_{12} + (\beta v_{11} + \delta v_{21})\theta_{22} &= 0 \\
+(\alpha v_{12} + \gamma v_{22})\theta_{11} + (\beta v_{12} + \delta v_{22})\theta_{21} &= 0 \\
+(\alpha v_{12} + \gamma v_{22})\theta_{12} + (\beta v_{12} + \delta v_{22})\theta_{22} &= 0
+\end{split}
+\end{equation*}
+Nyní se pozorně podívejte na obsahy závorek. Zjistíte, že se tam po všech potřebných složkách
+objevují lineární kombinace $\alpha\myvec{v_1} + \gamma\myvec{v_2}$
+a $\beta\myvec{v_1} + \delta\myvec{v_2}$. Je tedy zřejmé, že alespoň jedna závorka musí být nenulová.
+V opačném případě by vektory $\myvec{v_1}$ a $\myvec{v_2}$ nebyly lineárně nezávislé, potažmo ani
+báze.
+
+Tuto nenulovou závorku si zvolím a vezmu všechny rovnice, ve kterých se vyskytuje (např. všechny rovnice,
+kde je $\alpha v_{12} + \gamma v_{22}$, pokud to je ta nenulová). Je vidět, že tyto rovnice určují po
+složkách nenulovou lineární kombinaci (alespoň jeden z koeficientů je nenulový - to je ta naše závorka)
+vektorů $\myvec{\theta_1}$ a $\myvec{\theta_2}$, která ovšem dává nulový prvek (nuly na pravé straně rovnice).
+Tzn. vektory $\myvec{\theta_1}$ a $\myvec{\theta_2}$ jsou lineárně závislé, což je spor s původním předpokladem,
+že tvoří bázi. Tedy lineární zobrazení vzniklá kombinací bázových vektorů a kovektorů jsou lineárně nezávislá.
+
+\end{example}
+
+\noindent
+Tak a teď obecně.
+
+\begin{lemma}
+Mějme prostor $\myspace{T}$ polí řádu $n$ s bází $\myvec{t^1},\hdots,\myvec{t^q}$
+a druhý prostor $\myspace{V}$ polí řádu $m$ s bází $\myvec{v^1},\hdots,\myvec{v^r}$.
+Množina polí vzniklých Kroneckerovým součinem bázových vektorů $\myvec{z^{11}} = \myvec{t^1}\otimes\myvec{v^1},
+\hdots,\myvec{z^{1r}} = \myvec{t^1}\otimes\myvec{v^r},\myvec{z^{21}} = \myvec{t^2}\otimes\myvec{v^1},\hdots,
+\myvec{z^{qr}} = \myvec{t^q}\otimes\myvec{v^r}$ je lineárně nezávislá vzhledem ke standardním operacím
+násobení skalárem a sčítání po složkách.
+\end{lemma}
+
+\begin{proof}
+Důkaz povedeme úplně stejně, jako v předchozím příkladu. Budeme předpokládat, že existuje nenulová lineární
+kombinace
+\begin{equation*}
+\alpha^{11}\myvec{z^{11}} + \cdots + \alpha^{qr}\myvec{z^{qr}} = \myvec{0}
+\end{equation*}
+Pokud rovnici rozepíšeme do složek, dostaneme \textbf{spoustu} rovnic ve všech možných kombinacích spodních
+indexů $i_1,\hdots,i_n,j_1,\hdots,j_m$:
+\begin{equation*}
+\alpha^{11}t^1_{i_1\hdots i_n}v^1_{j_1\hdots j_m} + \alpha^{12}t^1_{i_1\hdots i_n}v^2_{j_1\hdots j_m} + \cdots 
++ \alpha^{qr}t^q_{i_1\hdots i_n}t^r_{j_1\hdots j_m} = 0
+\end{equation*}
+Pokud rovnice přeskládáme a uzávorkujeme:
+\begin{equation*}
+\begin{split}
+(\alpha^{11}t^1_{i_1\hdots i_n} + \alpha^{21}t^2_{i_1\hdots i_n} + \cdots + \alpha^{q1}t^q_{i_1\hdots i_n})v^1_{j_1\hdots j_m} & \\
++ (\alpha^{12}t^1_{i_1\hdots i_n} + \alpha^{22}t^2_{i_1\hdots i_n} + \cdots + \alpha^{q2}t^q_{i_1\hdots i_n})v^2_{j_1\hdots j_m} & \\
+\vdots & \\
++ (\alpha^{1r}t^1_{i_1\hdots i_n} + \alpha^{2r}t^2_{i_1\hdots i_n} + \cdots + \alpha^{qr}t^q_{i_1\hdots i_n})v^r_{j_1\hdots j_m} & = 0
+\end{split}
+\end{equation*}
+Pokud se podíváte na obsah závorek, zjistíte, že obsahují $r$ různých lineárních kombinací přes všechny potřebné složky polí
+$\myvec{t^1},\hdots,\myvec{t^q}$. (Že skutečně pro všechny složky je vidět, pokud si zafixuji indexy $j_1,\hdots,j_m$ do jedné
+konkrétní hodnoty. Pak musí existovat rovnice pro všechny kombinace $i_1,\hdots,i_n$.) Tedy, alespoň jedna závorka musí být nenulová,
+protože jinak by pole $\myvec{t^1},\hdots,\myvec{t^q}$ nebyla lineárně nezávislá, potažmo by nebyla báze.
+
+Jednu nenulovou závorku si zvolím a vyberu všechny rovnice, které ji obsahují. Získám tak nenulovou (protože obsahuje mou zvolenou
+nenulovou závorku) lineární kombinaci přes všechny složky polí $\myvec{v^1},\hdots,\myvec{v^r}$ (tentokrát jsou zafixované indexy
+$i_1,\hdots,i_n$, které určují zvolenou závorku, a musí se proiterovat všechny kombinace indexů $j_1,\hdots,j_m$), která ovšem dává
+nulové pole. To je v rozporu s předpokladem, že pole $\myvec{v^1},\hdots,\myvec{v^r}$ tvoří bázi, potažmo jsou lineárně nezávislá.
+Tedy, nenulová lineární kombinace polí $\myvec{z^{11}},\hdots,\myvec{z^{qr}}$ nemůže existovat.
+
+\end{proof}
+
 
 \end{document}
 
