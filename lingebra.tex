@@ -1285,8 +1285,8 @@ vlastnosti lineárního zobrazení a definicí obou vektorových prostorů, zís
 \begin{split}
 \myvec{\varphi}(\myvec{x}) &= \myvec{\varphi}(x_1\myvec{v_1} + \cdots + x_n\myvec{v_n})
      = x_1\myvec{\varphi}(\myvec{v_1}) + \cdots + x_n\myvec{\varphi}(\myvec{v_n}) \\
-    &= x_1((\varphi_1\myvec{\delta_1} + \cdots + \varphi_n\myvec{\delta_n})(\myvec{v_1}) + \cdots
-       + x_n((\varphi_1\myvec{\delta_1} + \cdots + \varphi_n\myvec{\delta_n})(\myvec{v_n}) \\
+    &= x_1(\varphi_1\myvec{\delta_1} + \cdots + \varphi_n\myvec{\delta_n})(\myvec{v_1}) + \cdots
+       + x_n(\varphi_1\myvec{\delta_1} + \cdots + \varphi_n\myvec{\delta_n})(\myvec{v_n}) \\
     &= x_1(\varphi_1\myvec{\delta_1}(\myvec{v_1}) + \cdots + \varphi_n\myvec{\delta_n}(\myvec{v_1})) 
     + \cdots \\
     & \;\;\;\;\; + x_n(\varphi_1\myvec{\delta_1}(\myvec{v_n}) + \cdots + \varphi_n\myvec{\delta_n}(\myvec{v_n}))
@@ -1330,20 +1330,22 @@ a tedy
 \mycoord{x} = \mymatrix{T}\mycoord{x'}
 \end{equation*}
 Kovektor je lineární forma, která je nezávislá na souřadnicích, tudíž musí pro
-transformované souřadnice vracet stejnou hodnotu:
+transformované souřadnice vracet stejnou hodnotu (kovektor budeme dále zapisovat
+jako řádkový vektor). 
 \begin{equation*}
-K = \mycoord{\varphi}^T\mycoord{x} = \mycoord{\varphi}^T\mymatrix{T}\mycoord{x'}
+K = \mycoord{\varphi}\mycoord{x} = \mycoord{\varphi}\mymatrix{T}\mycoord{x'}
 \end{equation*}
 Tím tedy získávám, že nové souřadnice kovektoru jsou:
 \begin{equation*}
-\mycoord{\varphi'}^T = \mycoord{\varphi}^T\mymatrix{T}
+\mycoord{\varphi'} = \mycoord{\varphi}\mymatrix{T}
 \end{equation*}
-a po převedení na sloupcový vektor\footnote{
+Abychom mohli snadno porovnat rozdíl chování kovektorů a vektorů, převedeme kovektory
+na sloupcový vektor\footnote{
   Autor osobně považuje ztotožňování kovektoru s řádkovým vektorem za velmi matoucí.
   Kovektor je sám vektorem v duálním prostoru, tudíž dává smysl ho vyjádřit
   jako sloupcový vektor.}
 \begin{equation*}
-\mycoord{\varphi'} = \mymatrix{T}^T\mycoord{\varphi}
+\mycoord{\varphi'}^T = \mymatrix{T}^T\mycoord{\varphi}^T
 \end{equation*}
 Je tedy zřejmé, že zatímco souřadnice vektoru se mění podle inverzní matice, souřadnice
 kovektoru se mění podle transponované transformační matice. Tato vlastnost se nazývá
@@ -1872,6 +1874,90 @@ Operátor, který může vzít vektory, kovektory, jiné tensory a stvořit nov�
 zkombinovat s jiným operátorem a stvořit tak nový operátor. Tensor není libovolný operátor, musí splňovat
 určité podmínky (označované jako multilinearita), což ovšem v lineární algebře není příliš překvapivé.
 A samozřejmě není možné aplikovat každý tensor na každý tensor. O tom však až v dalších kapitolách.
+
+\section{Bilineární a multilineární zobrazení}
+
+\noindent
+Než se pustíme do definice tensorů, je potřeba zavést v nadpisu zmíněné pojmy. Až doteď jsme znali
+\textit{linenární zobrazení}, tzn. zobrazení z vektorového prostoru do jiného vektorového prostoru,
+které zachovávalo sčítání vektorů a násobení skalárem: $\varphi(\alpha\myvec{u} + \myvec{v}) =
+\alpha\varphi(\myvec{u}) + \varphi(\myvec{v})$. S lineárními zobrazeními se dobře počítá, dají se
+elegantně skládat a obecně jsou to pro nás již dobře známá zvířátka.
+
+Na druhou stranu množství reálných problémů, které dokážeme popsat lineárním zobrazením, je poměrně
+omezené. Zaprvé obvykle potřebujeme pracovat s více vektory než s jedním. Zadruhé linearita je celkem
+vzácná vlastnost, obzvláště od doby, kdy Einstein rozbil krásně lineární newtonovskou mechaniku.
+Proto je potřeba náš záběr rozšířit a bilineární zobrazení je jednou z možností.
+
+\begin{definition}
+Mějme vektorové prostory $\myspace{U}$, $\myspace{V}$ a $\myspace{W}$ nad tělesem $\myspace{T}$
+a zobrazení $\mymap{B}: \myspace{U}\times\myspace{V}\rightarrow\myspace{W}$. Zobrazení $\mymap{L}$ je
+\textit{bilinerání} právě tehdy pokud platí:
+
+\begin{enumerate}
+  \item $\forall\myvec{u_1},\myvec{u_2}\in\myspace{U},\forall\myvec{v}\in\myspace{V}\;
+    \mymap{B}(\myvec{u_1} + \myvec{u_2}, \myvec{v}) = \mymap{B}(\myvec{u_1}, \myvec{v}) + \mymap{B}(\myvec{u_2}, \myvec{v})$
+  \item $\forall\myvec{u}\in\myspace{U},\forall\myvec{v_1},\myvec{v_2}\in\myspace{V}\;
+    \mymap{B}(\myvec{u}, \myvec{v_1} + \myvec{v_2}) = \mymap{B}(\myvec{u}, \myvec{v_1}) + \mymap{B}(\myvec{u}, \myvec{v_2})$
+  \item $\forall\myvec{u}\in\myspace{U},\forall\myvec{v}\in\myspace{V},\forall\myscalar{\alpha}\in\myspace{T}\;
+    \mymap{B}(\myscalar{\alpha}\myvec{u}, \myvec{v}) = \myscalar{\alpha}\mymap{B}(\myvec{u}, \myvec{v}) =
+      \mymap{B}(\myvec{u}, \myscalar{\alpha}\myvec{v})$
+\end{enumerate}
+
+\end{definition}
+
+\noindent
+Přídavné jméno bilineární je odvozené od pozorování, že zobrazení se z pohledu jednoho parametru chová lineárně.
+Pokud si vyberete jeden parametr a druhý zafixujete (tzn. dosadíte konstantu), získáte dobře známé lineární
+zobrazení. Pokud např. nadefinuji $\mymap{L}(\myvec{u}) = \mymap{B}(\myvec{u}, \myvec{a})$, pak
+\begin{equation*}
+\mymap{L}(\myscalar{\alpha}\myvec{u_1} + \myvec{u_2}) = \mymap{B}(\myscalar{\alpha}\myvec{u_1} + \myvec{u_2}, \myvec{a})
+  = \myscalar{\alpha}\mymap{B}(\myvec{u_1}, \myvec{a}) + \mymap{B}(\myvec{u_2}, \myvec{a})
+  = \myscalar{\alpha}\mymap{L}(\myvec{u_1}) + \mymap{L}(\myvec{u_2})
+\end{equation*}
+Tedy dobrá, máme bilineární zobrazení. Nastavené podmínky na první pohled vypadají dost vycucané z prstu.
+Co jsme schopni bilineárním zobrazením popsat? K čemu nám taková konstrukce je?
+
+Ve skutečnosti bilineární zobrazení je velmi přirozené a pracujeme s ním každou chvíli už někdy od druhé třídy
+základní školy. Nevěříte?
+
+\begin{example}
+Vezměme si zobrazení $\mymap{P}: \myspace{R}\times\myspace{R}\rightarrow\myspace{R}$ dané předpisem
+$\mymap{P}(\myscalar{a}, \myscalar{b}) = \myscalar{a}\myscalar{b}$. Jinými slovy zobrazení, které vrátí
+násobek dvou čísel. Pokud chování obyčejného násobení dvou čísel porovnáte s podmínkami, které jsme
+si položili na bilineární zobrazení, získáte silný pocit deja vu:
+\begin{enumerate}
+  \item $(\myvec{a} + \myvec{b})\myvec{c} = \myvec{a}\myvec{c} + \myvec{b}\myvec{c}$
+  \item $\myvec{a}(\myvec{b} + \myvec{c}) = \myvec{a}\myvec{b} + \myvec{a}\myvec{c}$
+  \item $(\myvec{a}\myvec{b})\myvec{c} = \myvec{a}(\myvec{b}\myvec{c}) = \myvec{b}(\myvec{a}\myvec{c})$
+\end{enumerate}
+\end{example}
+
+\noindent
+Stručně řečeno bilineární zobrazení je zobecnění operací, které obvykle známe pod názvem \textit{součin} -
+jako bilineární zobrazení lze např. popsat násobení reálných čísel, skalární součin, vektorový součin,
+násobení polynomů. A určitě dokážete nalézt další příklady.
+
+\medskip\noindent
+\textit{Multilineární zobrazení} je jednoduché rozšíření bilineárního na více parametrů. Příkladem může
+například být zobrazení kombinující vektorový a skalární součin:
+\begin{equation*}
+\mymap{M}(\myvec{u}, \myvec{v}, \myvec{w}) = (\myvec{u}\times\myvec{v})\cdot\myvec{w}
+\end{equation*}
+Podmínky 1 a 2 se zopakují pro další parametry, v podmínce 3 skalár ``navštíví`` i další parametry.
+
+\section{Jak zavést tensory, aneb univerzální vlastnost}
+
+\noindent
+Původně jsem měl záměr zavádět tensory tak, jak je běžné ve většině učebnic: nejdříve je předvést
+v podobě vícerozměrných polí, a následně se propracovávat k obecnějším definicím. Jenže jak jsem se
+pročítal materiály a snažil se pochopit ne matematický aparát ale podstatu tensorů - k čemu jsou,
+co s nimi lze popsat, jak si nadefinovat vlastní - zjistil jsem, že právě ta nejobecnější definice
+je paradoxně nejjednodušší a nejvíc intuitivní. Proto i v této kapitole nakonec budu pokračovat
+tak, jako v předchozích - začneme s obecnou definicí nezávislou na volbě bází a teprve později budeme
+rozebírat, jak se tensory chovají v souřadnicích.
+
+
 
 \section{Kroneckerův součin}
 
