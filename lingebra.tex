@@ -1936,7 +1936,7 @@ si položili na bilineární zobrazení, získáte silný pocit deja vu:
 \noindent
 Stručně řečeno bilineární zobrazení je zobecnění operací, které obvykle známe pod názvem \textit{součin} -
 jako bilineární zobrazení lze např. popsat násobení reálných čísel, skalární součin, vektorový součin,
-násobení polynomů. A určitě dokážete nalézt další příklady.
+násobení polynomů nebo součin matic. A určitě dokážete nalézt další příklady.
 
 \medskip\noindent
 \textit{Multilineární zobrazení} je jednoduché rozšíření bilineárního na více parametrů. Příkladem může
@@ -1946,17 +1946,143 @@ například být zobrazení kombinující vektorový a skalární součin:
 \end{equation*}
 Podmínky 1 a 2 se zopakují pro další parametry, v podmínce 3 skalár ``navštíví`` i další parametry.
 
+\begin{example}
+Příkladem multilineárního zobrazení je determinant. Vezměme si 3 vektory $\myvec{u}$, 
+$\myvec{v}$ a $\myvec{w}\in\myspace{R}^3$. Vektory uspořádejme po řádkách do matice:
+\begin{align*}
+D(\myvec{u}, \myvec{v}, \myvec{w}) =
+\begin{vmatrix}
+u_1 & u_2 & u_3 \\
+v_1 & v_2 & v_3 \\
+w_1 & w_2 & w_3
+\end{vmatrix}
+\end{align*}
+Zobrazení $D$ je multilineární, jak lze snadno nahlédnout. Pokud některý z parametrů
+vynásobím skalárem, skalár se objeví jednou v každém z termů, tudíž lze vytknout.
+\begin{align*}
+D(\myscalar{\alpha}\myvec{u}, \myvec{v}, \myvec{w}) =
+\begin{vmatrix}
+\myscalar{\alpha}u_1 & \myscalar{\alpha}u_2 & \myscalar{\alpha}u_3 \\
+v_1 & v_2 & v_3 \\
+w_1 & w_2 & w_3
+\end{vmatrix}
+=
+\myscalar{\alpha}
+\begin{vmatrix}
+u_1 & u_2 & u_3 \\
+v_1 & v_2 & v_3 \\
+w_1 & w_2 & w_3
+\end{vmatrix}
+= \myscalar{\alpha}D(\myvec{u}, \myvec{v}, \myvec{w})
+\end{align*}
+Pokud jeden parametr bude součet dvou vektorů, v každém z termů bude součet příslušných
+souřadnic. Je možné součet v termu roznásobit, následně termy přeuzávorkovat tak,
+aby daly součet dvou determinantů.
+\begin{align*}
+D(\myvec{u} + \myvec{z}, \myvec{v}, \myvec{w}) =
+\begin{vmatrix}
+u_1 + z_1 & u_2 + z_2 & u_3 + z_3 \\
+v_1 & v_2 & v_3 \\
+w_1 & w_2 & w_3
+\end{vmatrix}
+= \\
+\begin{vmatrix}
+u_1 & u_2 & u_3 \\
+v_1 & v_2 & v_3 \\
+w_1 & w_2 & w_3
+\end{vmatrix}
++
+\begin{vmatrix}
+z_1 & z_2 & z_3 \\
+v_1 & v_2 & v_3 \\
+w_1 & w_2 & w_3
+\end{vmatrix}
+= D(\myvec{u}, \myvec{v}, \myvec{w}) + D(\myvec{z}, \myvec{v}, \myvec{w})
+\end{align*}
+\end{example}
+
 \section{Jak zavést tensory, aneb univerzální vlastnost}
 
 \noindent
 Původně jsem měl záměr zavádět tensory tak, jak je běžné ve většině učebnic: nejdříve je předvést
 v podobě vícerozměrných polí, a následně se propracovávat k obecnějším definicím. Jenže jak jsem se
-pročítal materiály a snažil se pochopit ne matematický aparát ale podstatu tensorů - k čemu jsou,
-co s nimi lze popsat, jak si nadefinovat vlastní - zjistil jsem, že právě ta nejobecnější definice
+pročítal materiály a snažil se pochopit nikoliv matematický aparát ale spíše podstatu tensorů - k čemu
+jsou, co s nimi lze popsat, jak si nadefinovat vlastní - zjistil jsem, že právě ta nejobecnější definice
 je paradoxně nejjednodušší a nejvíc intuitivní. Proto i v této kapitole nakonec budu pokračovat
 tak, jako v předchozích - začneme s obecnou definicí nezávislou na volbě bází a teprve později budeme
 rozebírat, jak se tensory chovají v souřadnicích.
 
+\begin{definition}
+Mějme vektorové prostory $\myspace{U}$, $\myspace{V}$, $\myspace{W}$ a bilineární zobrazení
+z $\myspace{U}\times\myspace{V}$ do vektorového prostoru značeného jako $\myspace{U}\otimes\myspace{V}$
+$\phi: \myspace{U}\times\myspace{V}\rightarrow\myspace{U}\otimes\myspace{V}$. Bilineární zobrazení
+$\phi$ budeme nazývat \textit{tensorový součin} a prvky prostoru $\myspace{U}\otimes\myspace{V}$
+\textit{tensory} právě tehdy když platí:
+\begin{enumerate}	
+\item množina obrazů $\left\lbrace\phi(u, v)|u\in\myspace{U}, v\in\myspace{V}\right\rbrace$ generuje celý
+    prostor $\myspace{U}\otimes\myspace{V}$ (tzn. každý prvek prostoru lze vyjádřit jako lineární
+    kombinaci prvků množiny obrazů).
+\item Pro libovolné bilineární zobrazení $f: \myspace{U}\times\myspace{V}\rightarrow\myspace{W}$
+    (tzn. $f\in\mathcal{B}(\myspace{U}\times\myspace{V}, \myspace{W})$) existuje lineární zobrazení
+    $F: \myspace{U}\otimes\myspace{V}\rightarrow\myspace{W}$ takové, že $f(\myvec{u}, \myvec{v})
+    = F(\phi(\myvec{u}, \myvec{v}))$ (nebo jinak $f = \phi\circ F$).
+\end{enumerate}
+\end{definition}
+
+Na začátku kapitoly jsem sliboval, že tato definice bude nejvíce intuitivní a snadná. A jsem si dost
+jistý, že vám teď tak nepřipadá. Proto si ji nyní rozebereme podrobněji. V této situaci v učebnicích
+naleznete podobný obrázek:
+\begin{center}
+\includesvg[width=200pt]{universal_property}
+\end{center}
+Tentokrát výjimečně nebudu kritizovat, myslím si, že se jedná o hezkou visualizaci výše uvedeného.
+Minimálně si po něm můžete během čtení jezdit prstem.
+
+První bod definice je spíše technický a bude potřeba v následných důkazech. V tento okamžik
+se jím příliš zabývat nemusíme.
+
+Druhý bod je mnohem podstatnější. Umožňuje nám tzv. \textit{linearizovat bilineární
+zobrazení}. Pomocí tensorového součinu dokážeme převést libovolné bilineární zobrazení na lineární
+zobrazení. A to se nám vyplatí, protože s lineárním zobrazením už umíme pracovat.
+
+Např. pokud máme prostory s konečnou bází (tzn. vektory vyjádřené jako souřadnice) dokážeme
+bilineární zobrazení vyjádřit jako ``pole čísel``, stejně jako to dokážeme pro libovolné lineární
+zobrazení. Pokud si vzpomínáte na motivační příklad, pracovali jsme s poli čísel vyjádřené jako
+vnořované řádkové a sloupcové vektory (tzn. vektory vektorů, ve výsledku prostě pole s $n$ indexy).
+
+Anebo lineární zobrazení dokážeme skládat dohromady. Převedením na lineární zobrazení dokážeme
+skládat i bilineární formy. I to jsme v motivačním příkladu dělali - např. zobrazení integrující
+polynom jsme složili dohromady s tensorem násobícím dva polynomy.
+
+Samozřejmě, jak už to bývá, zde dochází ke zmatení pojmů. Ve fyzice se jako tensor označuje
+právě ono pole hodnot, které representuje lineární zobrazení potažmo bilineární. My jsme ale
+jako tensor označili prvky prostoru $\myspace{U}\otimes\myspace{V}$. Toto zaměňování vychází
+z alternativní definice tensorů, kterou také časem (možná) probereme. Pro účely tohoto textu
+budeme slovem \textit{tensor} označovat lineární zobrazení $F$, pokud explicitně neuvedeme,
+že se jedná o prvek tensorového prostoru.
+
+Druhý bod konečně přichází s intuitivní představou, co můžeme tensory popsat. Tensor odpovídá
+bilineárnímu (a později tensory rozšíříme na multilineární) zobrazení. Tzn. cokoliv, co se
+chová jako nějaká forma násobení lze vyjádřit tensorovou algebrou. Pokud jste dosud podobně
+jako já přemýšleli nad obecným pravidlem popisujícím vyjadřovací sílu tensorů, nyní máte odpověď.
+
+Nutno podotknout, že v tento okamžik je naše konstrukce jenom labutí píseň. Vymysleli jsme si
+podmínky, abychom mohli převést libovolné bilineární zobrazení na lineární, ale není zaručené,
+že vůbec existuje něco, co je dokáže splnit. A je na nás, abychom existenci takového prostoru
+dokázali.
+
+\begin{example}
+Vezměme si vektorový prostor $\myspace{R}^2$ se standardním skalárním součinem. Pokud pracujeme
+s ortonormální bází, skalární součin je daný předpisem
+\begin{equation*}
+\mycoord{x}\cdot\mycoord{y} = x_1 y_1 + x_2 y_2
+\end{equation*}
+Skalární součin tak tvoří bilineární zobrazení (jak se čtenář jistě dokáže sám přesvědčit),
+tedy na základě předchozích úvah bychom měli být schopní ho vyjádřit jako tensor.
+
+První problém, který musíme vyřešit je fakt, že předpis je definovaný pro ortonormální bázi.
+My ale chceme vytvořit předpis pro bilineární zobrazení fungující v jakékoliv bázi.
+\end{example}
 
 
 \section{Kroneckerův součin}
