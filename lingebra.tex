@@ -2013,36 +2013,36 @@ tak, jako v předchozích - začneme s obecnou definicí nezávislou na volbě b
 rozebírat, jak se tensory chovají v souřadnicích.
 
 \begin{definition}
-Mějme vektorové prostory $\myspace{U}$, $\myspace{V}$, $\myspace{W}$ a bilineární zobrazení
+Mějme vektorové prostory $\myspace{U}$, $\myspace{V}$ a bilineární zobrazení
 z $\myspace{U}\times\myspace{V}$ do vektorového prostoru značeného jako $\myspace{U}\otimes\myspace{V}$
 $\phi: \myspace{U}\times\myspace{V}\rightarrow\myspace{U}\otimes\myspace{V}$. Bilineární zobrazení
-$\phi$ budeme nazývat \textit{tensorový součin} a prvky prostoru $\myspace{U}\otimes\myspace{V}$
-\textit{tensory} právě tehdy když platí:
+$\phi$ budeme nazývat \textit{tensorový součin} a prostor $\myspace{U}\otimes\myspace{V}$ jako
+\textit{tensorový součin prostorů} $\myspace{U}$ a $\myspace{V}$ právě tehdy pokud platí:
 \begin{enumerate}	
 \item množina obrazů $\left\lbrace\phi(u, v)|u\in\myspace{U}, v\in\myspace{V}\right\rbrace$ generuje celý
     prostor $\myspace{U}\otimes\myspace{V}$ (tzn. každý prvek prostoru lze vyjádřit jako lineární
     kombinaci prvků množiny obrazů).
-\item Pro libovolné bilineární zobrazení $f: \myspace{U}\times\myspace{V}\rightarrow\myspace{W}$
-    (tzn. $f\in\mathcal{B}(\myspace{U}\times\myspace{V}, \myspace{W})$) existuje lineární zobrazení
+\item Pro libovolný vektorový prostor $\myspace{W}$ a libovolné bilineární zobrazení
+    $f: \myspace{U}\times\myspace{V}\rightarrow\myspace{W}$ existuje lineární zobrazení
     $F: \myspace{U}\otimes\myspace{V}\rightarrow\myspace{W}$ takové, že $f(\myvec{u}, \myvec{v})
-    = F(\phi(\myvec{u}, \myvec{v}))$ (nebo jinak $f = \phi\circ F$).
+    = F(\phi(\myvec{u}, \myvec{v}))$ (jinak značeno $f = \phi\circ F$).
 \end{enumerate}
 \end{definition}
 
 Na začátku kapitoly jsem sliboval, že tato definice bude nejvíce intuitivní a snadná. A jsem si dost
-jistý, že vám teď tak nepřipadá. Proto si ji nyní rozebereme podrobněji. V této situaci v učebnicích
-naleznete podobný obrázek:
-\begin{center}
-\includesvg[width=200pt]{universal_property}
-\end{center}
-Tentokrát výjimečně nebudu kritizovat, myslím si, že se jedná o hezkou visualizaci výše uvedeného.
-Minimálně si po něm můžete během čtení jezdit prstem.
+jistý, že vám teď tak nepřipadá. Proto si ji nyní rozebereme podrobněji.
 
 První bod definice je spíše technický a bude potřeba v následných důkazech. V tento okamžik
 se jím příliš zabývat nemusíme.
 
-Druhý bod je mnohem podstatnější. Umožňuje nám tzv. \textit{linearizovat bilineární
-zobrazení}. Pomocí tensorového součinu dokážeme převést libovolné bilineární zobrazení na lineární
+Zato ten druhý je zajímavější. Pro přehlednost si ukážeme obrázek, který vám umožní si během
+čtení ukazovat prstem, o čem zrovna mluvíme.
+\begin{center}
+\includesvg[width=200pt]{universal_property}
+\end{center}
+
+Druhý bod definice totiž říká, že každé bilineární zobrazení můžeme \textit{linearizovat}.
+Pomocí tensorového součinu dokážeme převést libovolné bilineární zobrazení na lineární
 zobrazení. A to se nám vyplatí, protože s lineárním zobrazením už umíme pracovat.
 
 Např. pokud máme prostory s konečnou bází (tzn. vektory vyjádřené jako souřadnice) dokážeme
@@ -2051,37 +2051,180 @@ zobrazení. Pokud si vzpomínáte na motivační příklad, pracovali jsme s pol
 vnořované řádkové a sloupcové vektory (tzn. vektory vektorů, ve výsledku prostě pole s $n$ indexy).
 
 Anebo lineární zobrazení dokážeme skládat dohromady. Převedením na lineární zobrazení dokážeme
-skládat i bilineární formy. I to jsme v motivačním příkladu dělali - např. zobrazení integrující
+skládat i bilineární zobrazení. I to jsme v motivačním příkladu dělali - např. zobrazení integrující
 polynom jsme složili dohromady s tensorem násobícím dva polynomy.
 
-Samozřejmě, jak už to bývá, zde dochází ke zmatení pojmů. Ve fyzice se jako tensor označuje
-právě ono pole hodnot, které representuje lineární zobrazení potažmo bilineární. My jsme ale
-jako tensor označili prvky prostoru $\myspace{U}\otimes\myspace{V}$. Toto zaměňování vychází
-z alternativní definice tensorů, kterou také časem (možná) probereme. Pro účely tohoto textu
-budeme slovem \textit{tensor} označovat lineární zobrazení $F$, pokud explicitně neuvedeme,
-že se jedná o prvek tensorového prostoru.
+Možná vás poněkud zarazilo, že v definici není použitý pojem tensor. Pouze tensorový součin.
+To není opomenutí. Definice pojmu tensoru je trochu obtížná. První možnost je považovat
+za tensory prvky prostoru $\myspace{U}\otimes\myspace{V}$. To zní logicky, ale nebude to
+odpovídat tomu, co za tensory považují fyzici. Ti si totiž pod pojmem tensor představují
+ono zmiňované ``pole čísel``, které v naší definici odpovídá lineárnímu zobrazení $F$.
+Zároveň ale pole je uspořádané tak, aby neslo informace o bilineárním zobrazení $\phi$
+- sami jsme v motivačním příkladu viděli, že dokážeme na tensor aplikovat přímo vektory,
+tzn. nějakým skrytým způsobem se provedla transformace do $\myspace{U}\otimes\myspace{V}$.
+
+Zároveň existují další definice, které tensory zavádějí. A v nich by pojem tensor odkazoval
+zase na jiné prvky jiného prostoru. Jak je vidět, pojem tensor není úplně jednoznačný.
+V následujícím textu ho budeme používat volně ve významu $\phi$ a $F$ dohromady, tzn. jako
+alternativní vyjádření nějakého bilineárního (pozdějí multilineárního) zobrazení.
 
 Druhý bod konečně přichází s intuitivní představou, co můžeme tensory popsat. Tensor odpovídá
 bilineárnímu (a později tensory rozšíříme na multilineární) zobrazení. Tzn. cokoliv, co se
-chová jako nějaká forma násobení lze vyjádřit tensorovou algebrou. Pokud jste dosud podobně
-jako já přemýšleli nad obecným pravidlem popisujícím vyjadřovací sílu tensorů, nyní máte odpověď.
+chová jako nějaká forma násobení, lze vyjádřit jako tensor. Pokud jste dosud, podobně jako já,
+tápali nad obecným popisem vyjadřovací schopnosti tensorů, nyní máte odpověď.
 
 Nutno podotknout, že v tento okamžik je naše konstrukce jenom labutí píseň. Vymysleli jsme si
 podmínky, abychom mohli převést libovolné bilineární zobrazení na lineární, ale není zaručené,
 že vůbec existuje něco, co je dokáže splnit. A je na nás, abychom existenci takového prostoru
-dokázali.
+dokázali. Než se však do tohoto důkazu pustíme, zkusíme nějakou dobu zkoumat, co jsme si
+vlastně nadefinovali.
 
 \begin{example}
-Vezměme si vektorový prostor $\myspace{R}^2$ se standardním skalárním součinem. Pokud pracujeme
-s ortonormální bází, skalární součin je daný předpisem
+Začněme příkladem. Vezměme si vektorový prostor $\myspace{R}^2$ se standardním skalárním součinem.
+Pokud pracujeme s ortonormální bází, skalární součin je daný předpisem
 \begin{equation*}
-\mycoord{x}\cdot\mycoord{y} = x_1 y_1 + x_2 y_2
+\myvec{x}\cdot\myvec{y} = x_1 y_1 + x_2 y_2
 \end{equation*}
 Skalární součin tak tvoří bilineární zobrazení (jak se čtenář jistě dokáže sám přesvědčit),
 tedy na základě předchozích úvah bychom měli být schopní ho vyjádřit jako tensor.
 
 První problém, který musíme vyřešit je fakt, že předpis je definovaný pro ortonormální bázi.
 My ale chceme vytvořit předpis pro bilineární zobrazení fungující v jakékoliv bázi.
+
+Pro tento účel si zavedeme dva kovektory $\epsilon_1$ a $\epsilon_2$, které pro daný vektor
+spočítají jeho průmět do os ortonormální báze. Zvídavý čtenář si jistě dokáže
+ověřit, že se skutečně jedná o kovektory (vynásobení vektoru vynásobí průmět, součtu vektorů
+odpovídá součet průmětů). Předpis tak můžeme přepsat do podoby:
+\begin{equation*}
+\myvec{x}\cdot\myvec{y} = \epsilon_1(\myvec{x})\epsilon_1(\myvec{y})
+    + \epsilon_2(\myvec{x})\epsilon_2(\myvec{y})
+\end{equation*}
+
+Nyní si vezměme transformační matici $\mymatrix{T}$, která převede ortonormální bázi
+$\myvec{e_1}$ a $\myvec{e_2}$ do libovolné jiné báze $\myvec{\widetilde{e_1}}$
+a $\myvec{\widetilde{e_2}}$. Už víme, že transformační matice obsahuje po sloupcích obrazy nové
+báze vyjádřené v souřadnicích té původní
+\begin{equation*}
+\mymatrix{T} = \left(\begin{array}{cc}
+\widetilde{e_{1_1}} & \widetilde{e_{2_1}} \\
+\widetilde{e_{1_2}} & \widetilde{e_{2_2}}
+\end{array}\right)
+\end{equation*}
+Touto maticí převedeme známou (průmět vektoru do osy ortonormální báze je v ortonorální
+bázi přímo konkrétní souřadnice vektoru) podobu kovektorů $\epsilon_1$ a $\epsilon_2$
+v ortonormální bázi do obecné báze.
+\begin{equation*}
+\begin{split}
+\mycoord{\epsilon_1} &= 
+\left(\begin{array}{cc}1 & 0\end{array}\right)
+\left(\begin{array}{cc}
+\widetilde{e_{1_1}} & \widetilde{e_{2_1}} \\
+\widetilde{e_{1_2}} & \widetilde{e_{2_2}}
+\end{array}\right) =
+\left(\begin{array}{cc}\widetilde{e_{1_1}} & \widetilde{e_{2_1}}\end{array}\right) \\
+\mycoord{\epsilon_2} &= 
+\left(\begin{array}{cc}0 & 1\end{array}\right)
+\left(\begin{array}{cc}
+\widetilde{e_{1_1}} & \widetilde{e_{2_1}} \\
+\widetilde{e_{1_2}} & \widetilde{e_{2_2}}
+\end{array}\right) =
+\left(\begin{array}{cc}\widetilde{e_{1_2}} & \widetilde{e_{2_2}}\end{array}\right) \\
+\end{split}
+\end{equation*}
+Nyní můžeme předpis pro skalární součin přepsat do podoby (souřadnice vektorů $\myvec{x}$
+a $\myvec{y}$ jsou vůči obecné bázi $\myvec{\widetilde{e_1}}$ a $\myvec{\widetilde{e_2}}$)
+\begin{equation*}
+\begin{split}
+\myvec{x}\cdot\myvec{y} =
+\left(
+  \left(\begin{array}{cc}\widetilde{e_{1_1}} & \widetilde{e_{2_1}}\end{array}\right)
+  \left(\begin{array}{c}x_1 \\ x_2\end{array}\right)
+\right)
+\left(
+  \left(\begin{array}{cc}\widetilde{e_{1_1}} & \widetilde{e_{2_1}}\end{array}\right)
+  \left(\begin{array}{c}y_1 \\ y_2\end{array}\right)
+\right) + \\
+\left(
+  \left(\begin{array}{cc}\widetilde{e_{1_2}} & \widetilde{e_{2_2}}\end{array}\right)
+  \left(\begin{array}{c}x_1 \\ x_2\end{array}\right)
+\right)
+\left(
+  \left(\begin{array}{cc}\widetilde{e_{1_2}} & \widetilde{e_{2_2}}\end{array}\right)
+  \left(\begin{array}{c}y_1 \\ y_2\end{array}\right)
+\right)
+\end{split}
+\end{equation*}
+Pokud všechno roznásobíte, sečtete, přeuzávorkujete a zpětně vrátíte do maticového
+součinu, získáte následující předpis
+\begin{equation*}
+\myvec{x}\cdot\myvec{y} =
+\left(\begin{array}{cc}x_1 & x_2\end{array}\right)
+\left(\begin{array}{cc}
+  \widetilde{e_{1_1}}\widetilde{e_{1_1}} + \widetilde{e_{1_2}}\widetilde{e_{1_2}} &
+  \widetilde{e_{1_1}}\widetilde{e_{2_1}} + \widetilde{e_{1_2}}\widetilde{e_{2_2}} \\
+  \widetilde{e_{2_1}}\widetilde{e_{1_1}} + \widetilde{e_{2_2}}\widetilde{e_{1_2}} &
+  \widetilde{e_{2_1}}\widetilde{e_{2_1}} + \widetilde{e_{2_2}}\widetilde{e_{2_2}}
+\end{array}\right)
+\left(\begin{array}{c}y_1 \\ y_2\end{array}\right)
+\end{equation*}
+kde jednotlivé položky prostřední matice odpovídají
+\begin{equation*}
+\myvec{x}\cdot\myvec{y} =
+\left(\begin{array}{cc}x_1 & x_2\end{array}\right)
+\left(\begin{array}{cc}
+  \myvec{\widetilde{e_1}}\cdot\myvec{\widetilde{e_1}} &
+  \myvec{\widetilde{e_1}}\cdot\myvec{\widetilde{e_2}} \\
+  \myvec{\widetilde{e_2}}\cdot\myvec{\widetilde{e_1}} &
+  \myvec{\widetilde{e_2}}\cdot\myvec{\widetilde{e_2}}
+\end{array}\right)
+\left(\begin{array}{c}y_1 \\ y_2\end{array}\right)
+\end{equation*}
+
+Jak toto napasovat na naši definici? Nejdříve přetransformujme vektory skrz tensorový součin
+\begin{equation*}
+\begin{split}
+\phi(\myvec{x}, \myvec{y}) = \phi(x_1\myvec{\widetilde{e_1}} + x_2\myvec{\widetilde{e_2}},
+  y_1\myvec{\widetilde{e_1}} + y_2\myvec{\widetilde{e_2}})
+\end{split}
+\end{equation*}
+Z vlastností bilineárního zobrazení zápis můžeme přepsat jako
+\begin{equation*}
+\begin{split}
+\phi(\myvec{x}, \myvec{y}) =
+  x_1 y_1 \phi(\myvec{\widetilde{e_1}}, \myvec{\widetilde{e_1}})
+  + x_1 y_2 \phi(\myvec{\widetilde{e_1}}, \myvec{\widetilde{e_2}})
+  + x_2 y_1 \phi(\myvec{\widetilde{e_2}}, \myvec{\widetilde{e_1}})
+  + x_2 y_2 \phi(\myvec{\widetilde{e_2}}, \myvec{\widetilde{e_2}})
+\end{split}
+\end{equation*}
+Teď potřebujeme nalézt lineární zobrazení $F$ takové, aby výsledek vždy byl skalární
+součin $\myvec{x}\cdot\myvec{y}$. Pokud porovnáme výše uvedený součin matic, získáme
+lineární zobrazení
+\begin{equation*}
+\begin{split}
+F(\phi(\myvec{\widetilde{e_1}}, \myvec{\widetilde{e_1}})) &=
+    \myvec{\widetilde{e_1}}\cdot\myvec{\widetilde{e_1}} \\
+F(\phi(\myvec{\widetilde{e_1}}, \myvec{\widetilde{e_2}})) &=
+    \myvec{\widetilde{e_1}}\cdot\myvec{\widetilde{e_2}} \\
+F(\phi(\myvec{\widetilde{e_2}}, \myvec{\widetilde{e_1}})) &=
+    \myvec{\widetilde{e_2}}\cdot\myvec{\widetilde{e_1}} \\
+F(\phi(\myvec{\widetilde{e_2}}, \myvec{\widetilde{e_2}})) &=
+    \myvec{\widetilde{e_2}}\cdot\myvec{\widetilde{e_2}} \\
+\end{split}
+\end{equation*}
+Pokud oprávněně váháte, zda $F$ je skutečně lineární zobrazení, vězte, že
+$\phi(\myvec{\widetilde{e_1}}, \myvec{\widetilde{e_1}})$, 
+$\phi(\myvec{\widetilde{e_1}}, \myvec{\widetilde{e_2}})$,
+$\phi(\myvec{\widetilde{e_2}}, \myvec{\widetilde{e_1}})$ a
+$\phi(\myvec{\widetilde{e_2}}, \myvec{\widetilde{e_2}})$ tvoří bázi prostoru
+$\myvec{U}\otimes\myvec{W}$, což si časem dokážeme. A pokud známe obrazy
+báze, známe celé lineární zobrazení (to koneckonců jsou ta čísla, pokud
+lineární zobrazení vyjádříme jako matici).
+
+\medskip\noindent
+Pochopili jste příklad? Pokud ano, udělejte si pašáka. Právě jste stvořili
+\textbf{metrický tensor}, který je základem obecné teorie relativity (samozřejmě
+ale ve 4-rozměrném prostoročase).
 \end{example}
 
 
