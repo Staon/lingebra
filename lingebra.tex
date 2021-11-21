@@ -2013,19 +2013,19 @@ tak, jako v předchozích - začneme s obecnou definicí nezávislou na volbě b
 rozebírat, jak se tensory chovají v souřadnicích.
 
 \begin{definition}
-Mějme vektorové prostory $\myspace{U}$, $\myspace{V}$ a bilineární zobrazení
-z $\myspace{U}\times\myspace{V}$ do vektorového prostoru značeného jako $\myspace{U}\otimes\myspace{V}$
-$\phi: \myspace{U}\times\myspace{V}\rightarrow\myspace{U}\otimes\myspace{V}$. Bilineární zobrazení
-$\phi$ budeme nazývat \textit{tensorový součin} a prostor $\myspace{U}\otimes\myspace{V}$ jako
-\textit{tensorový součin prostorů} $\myspace{U}$ a $\myspace{V}$ právě tehdy pokud platí:
+Mějme vektorové prostory $\myspace{U}$, $\myspace{V}$ nad tělesem $\myspace{T}$ a bilineární zobrazení
+$\phi$ z $\myspace{U}\times\myspace{V}$ do vektorového prostoru značeného jako
+$\myspace{U}\otimes\myspace{V}$. Bilineární zobrazení $\phi$ budeme nazývat \textit{tensorový součin}
+a prostor $\myspace{U}\otimes\myspace{V}$ jako \textit{tensorový součin prostorů} $\myspace{U}$
+a $\myspace{V}$ právě tehdy pokud platí:
 \begin{enumerate}	
 \item množina obrazů $\left\lbrace\phi(u, v)|u\in\myspace{U}, v\in\myspace{V}\right\rbrace$ generuje celý
     prostor $\myspace{U}\otimes\myspace{V}$ (tzn. každý prvek prostoru lze vyjádřit jako lineární
     kombinaci prvků množiny obrazů).
-\item Pro libovolný vektorový prostor $\myspace{W}$ a libovolné bilineární zobrazení
-    $f: \myspace{U}\times\myspace{V}\rightarrow\myspace{W}$ existuje lineární zobrazení
+\item Pro libovolný vektorový prostor $\myspace{W}$ nad tělesem $\myspace{T}$ a libovolné bilineární
+    zobrazení $f: \myspace{U}\times\myspace{V}\rightarrow\myspace{W}$ existuje lineární zobrazení
     $F: \myspace{U}\otimes\myspace{V}\rightarrow\myspace{W}$ takové, že $f(\myvec{u}, \myvec{v})
-    = F(\phi(\myvec{u}, \myvec{v}))$ (jinak značeno $f = \phi\circ F$).
+    = F(\phi(\myvec{u}, \myvec{v}))$ (jinak značeno $f = F \circ \phi$).
 \end{enumerate}
 \end{definition}
 
@@ -2199,7 +2199,7 @@ Z vlastností bilineárního zobrazení zápis můžeme přepsat jako
 \end{equation*}
 Teď potřebujeme nalézt lineární zobrazení $F$ takové, aby výsledek vždy byl skalární
 součin $\myvec{x}\cdot\myvec{y}$. Pokud porovnáme výše uvedený součin matic, získáme
-lineární zobrazení
+zobrazení
 \begin{equation*}
 \begin{split}
 F(\phi(\myvec{\widetilde{e_1}}, \myvec{\widetilde{e_1}})) &=
@@ -2212,21 +2212,287 @@ F(\phi(\myvec{\widetilde{e_2}}, \myvec{\widetilde{e_2}})) &=
     \myvec{\widetilde{e_2}}\cdot\myvec{\widetilde{e_2}} \\
 \end{split}
 \end{equation*}
+tedy
+\begin{equation*}
+F(\alpha_{11}\phi(\myvec{\widetilde{e_1}}, \myvec{\widetilde{e_1}}) + \cdots 
+  + \alpha_{22}\phi(\myvec{\widetilde{e_2}}, \myvec{\widetilde{e_2}})) 
+= \alpha_{11}\myvec{\widetilde{e_1}}\cdot\myvec{\widetilde{e_1}} + \cdots
+  + \alpha_{22}\myvec{\widetilde{e_2}}\cdot\myvec{\widetilde{e_2}}
+\end{equation*}
 Pokud oprávněně váháte, zda $F$ je skutečně lineární zobrazení, vězte, že
 $\phi(\myvec{\widetilde{e_1}}, \myvec{\widetilde{e_1}})$, 
 $\phi(\myvec{\widetilde{e_1}}, \myvec{\widetilde{e_2}})$,
 $\phi(\myvec{\widetilde{e_2}}, \myvec{\widetilde{e_1}})$ a
 $\phi(\myvec{\widetilde{e_2}}, \myvec{\widetilde{e_2}})$ tvoří bázi prostoru
-$\myvec{U}\otimes\myvec{W}$, což si časem dokážeme. A pokud známe obrazy
-báze, známe celé lineární zobrazení (to koneckonců jsou ta čísla, pokud
-lineární zobrazení vyjádříme jako matici).
+$\myspace{U}\otimes\myspace{W}$, což si časem dokážeme. Tedy každý prvek prostoru
+$\myspace{U}\otimes\myspace{V}$ lze vyjádřit jako jejich lineární kombinace
+a tu lze dosadit do výše uvedeného předpisu. Zobrazení je tedy zřejmě lineární.
 
 \medskip\noindent
 Pochopili jste příklad? Pokud ano, udělejte si pašáka. Právě jste stvořili
-\textbf{metrický tensor}, který je základem obecné teorie relativity (samozřejmě
-ale ve 4-rozměrném prostoročase).
+\textbf{metrický tensor}, který je základem obecné teorie relativity - samozřejmě
+ale ve 4-rozměrném prostoročase.
 \end{example}
 
+\section{Vlastnosti tensorového součinu}
+
+\noindent
+V této kapitole rozebereme charakteristické vlastnosti tensorového součinu. Začneme tím, že si rozšíříme
+značení. V naší definici jsme bilineární zobrazení nazvané tensorový součin značili řeckým písmenkem
+$\phi$. Toto značení budeme i nadále používat v situacích, kdy budeme chtít zdůraznit bilinearitu
+tensorového součinu. Běžnější značení v učebnicích a dále i v této vypadá takto: $\phi(\myvec{u}, \myvec{v}) = \myvec{u}\otimes\myvec{v}$.
+
+Toto nové značení ovšem může působit poněkud zavádějícím způsobem. Začátečník má tendendenci předpokládat,
+že každý prvek prostoru $\myspace{U}\otimes\myspace{V}$ lze vyjádřit jako $\myvec{u}\otimes\myvec{v}$.
+\textbf{Tato představa, jakkoliv působí přirozeně, je mylná!} Tensorový součin, tedy zobrazení $\phi$
+v naší definici, \textbf{není surjektivní} (není \textit{na}). Toto tvrzení se dá snadno nahlédnout,
+pokud si vezmu dva páry lineárně nezávislých vektorů $\myvec{u_1}, \myvec{u_2}$ a $\myvec{v_1}, \myvec{v_2}$
+a sečtu jejich tensorové součiny: $\myvec{u_1}\otimes\myvec{v_1} + \myvec{u_2}\otimes\myvec{v_2}$.
+Z definice bilineárního zobrazení takto vzniklý prvek prostoru není obrazem žádného prvku z
+$\myspace{U}\times\myspace{V}$ - nelze ho zapsat jako součet v jednom z parametrů.
+
+\medskip\noindent
+V rozboru vlastností tensorového součinu začneme jednoduchým tvrzením, které říká, že všechny možné
+tensorové součiny jsou vlastně stejné - existuje mezi nimi přirozený isomorfismus. Jinými slovy
+můžeme tensorový součin považovat za jednoznačný.
+
+\begin{lemma}
+Mějme dva vektorové prostory $\myspace{U}$ a $\myspace{V}$ nad tělesem $\myspace{T}$. K nim dva
+různé tensorové součiny $\phi_1: \myspace{U}\times\myspace{V}\rightarrow\myspace{U}\otimes_1\myspace{V}$
+a $\phi_2: \myspace{U}\times\myspace{V}\rightarrow\myspace{U}\otimes_2\myspace{V}$. Pak existuje
+přirozený isomorfismus $\myspace{U}\otimes_1\myspace{V}\rightarrow\myspace{U}\otimes_2\myspace{V}$,
+tedy $\myspace{U}\otimes_1\myspace{V}\cong\myspace{U}\otimes_2\myspace{V}$.
+\end{lemma}
+
+\begin{proof}
+Abychom tvrzení dokázali, jednoduše aplikujeme definici (v jiných textech se to označuje jako
+použití univerzální vlastnosti):
+\begin{center}
+\includesvg[width=200pt]{tensor_product_isomorphism}
+\end{center}
+Tensorový součin $\phi_1$ je z definice bilineární zobrazení, proto pro něj, také z definice, musí
+existovat linearizace pomocí tensorového součinu $\phi_2$. Stejná úvaha platí i pro tensorový součin
+$\phi_2$. Získáváme tak rovnice
+\begin{equation*}
+\begin{split}
+\phi_1(\myvec{u}, \myvec{v}) &= F_1(\phi_2(\myvec{u}, \myvec{v})) \\
+\phi_2(\myvec{u}, \myvec{v}) &= F_2(\phi_1(\myvec{u}, \myvec{v}))
+\end{split}
+\end{equation*}
+Pokud druhou rovnici dosadíme do první, získáme
+\begin{equation*}
+\phi_1(\myvec{u}, \myvec{v}) = F_1(F_2(\phi_1(\myvec{u}, \myvec{v})))
+\end{equation*}
+Je tedy zřejmé, že kombinace zobrazení $F_1 \circ F_2$ musí být identita. Nejásejte, je tu samozřejmě
+zádrhel. Víme, že funguje jako identita pouze na obrazech tensorového součinu $\phi_1$
+(tzn. na těch prvcích $\myspace{U}\otimes_1\myspace{V}$, které lze zapsat jako
+$\myvec{u}\otimes_1\myvec{v}$). Pro důkaz tvrzení potřebujeme dokázat, že funguje jako identita
+pro celý prostor $\myspace{U}\otimes_1\myspace{V}$.
+
+Zde do hry vstupuje první podmínka definice, kterou jsme prozatím ignorovali. Ta říká, že obrazy
+tensorového součinu generují celý prostor. Tedy, každý prvek $\myvec{\chi}\in\myspace{U}\otimes_1\myspace{V}$
+lze zapsat jako lineární kombinaci obrazů tensorového součinu
+\begin{equation*}
+\myvec{\chi} =  \sum_{i}\alpha_i\myvec{u_i}\otimes\myvec{v_i}
+\end{equation*}
+Pokud takto rozepsaný prvek dosadíme do kombinace zobrazení $F_1 \circ F_2$ a použijeme vlastnosti
+lineárního zobrazení ($F_1$ a $F_2$ jsou z definice lineární), získáme
+\begin{equation*}
+\begin{split}
+F_1(F_2(\myvec{\chi})) &= F_1(F_2(\sum_{i}\alpha_i\myvec{u_i}\otimes\myvec{v_i}))
+  = F_1(\sum_{i}\alpha_i F_2(\myvec{u_i}\otimes\myvec{v_i})) \\
+  &= \sum_{i}\alpha_i F_1(F_2(\myvec{u_i}\otimes\myvec{v_i}))
+  = \sum_{i}\alpha_i\myvec{u_i}\otimes\myvec{v_i} = \myvec{\chi}
+\end{split}
+\end{equation*}
+(Na konci jsme využili fakt, že $F_1 \circ F_2$ funguje jako identita na obrazech $\phi_1$.)
+Lineární zobrazení $F_1 \circ F_2$ je tedy identitou na celém prostoru
+$\myspace{U}\otimes_1\myspace{V}$.
+
+Aby zobrazení $F_1 \circ F_2$ bylo identitou, musí být zobrazení $F_2$ prosté - pokud by nebylo,
+dva různé prvky by se mapovaly na stejný obraz a zobrazení $F_1$ by je z definice zobrazení
+převedlo zpět na stejný prvek.
+
+Aby zobrazení $F_1 \circ F_2$ bylo identitou, musí být zobrazní $F_1$ \textit{na}. Pokud by nebylo,
+existoval by prvek, který není jejím obrazem. Pokud bychom ho dosadili do $F_1 \circ F_2$, nedostali
+bychom identický prvek.
+
+Získali jsme tak závěr, že $F_1$ je surjektivní (\textit{na}) a $F_2$ je injektivní (\textit{prosté}).
+
+Nyní zopakujeme celý postup znovu, akorát na začátku dosadíme první rovnici do druhé. Stejnou
+úvahou získáme, že $F_2 \circ F_1$ je také identita, $F_1$ je injektivní a $F_2$ je surjektivní.
+Obě lineární zobrazení tedy jsou bijektivní, a tím jsme našli námi hledaný přirozený isomorfismus
+- dokonce rovnou v obou směrech.
+
+\end{proof}
+
+\medskip\noindent
+Velmi podobným postupem dokážeme \textbf{komutativitu} tensorového součinu, jinými slovy že
+prostor $\myspace{U}\otimes\myspace{V}$ je přirozeně isomorfní s prostorem
+$\myspace{V}\otimes\myspace{U}$. To je praktická vlastnost, která nám v budoucnu umožní měnit
+pořadí indexů pro tensory v prostorech s konečnou bází.
+
+\begin{lemma}
+Mějme dva vektorové prostory $\myspace{U}$ a $\myspace{V}$ nad tělesem $\myspace{T}$. K nim dva
+tensorové součiny $\phi_1: \myspace{U}\times\myspace{V}\rightarrow\myspace{U}\otimes\myspace{V}$
+a $\phi_2: \myspace{V}\times\myspace{U}\rightarrow\myspace{V}\otimes\myspace{U}$. Pak existuje
+přirozený isomorfismus $\myspace{U}\otimes\myspace{V}\rightarrow\myspace{V}\otimes\myspace{U}$,
+tedy $\myspace{U}\otimes\myspace{V}\cong\myspace{V}\otimes\myspace{U}$.
+\end{lemma}
+
+\begin{proof}
+Schéma, podle kterého důkaz povedeme tentokrát, je na následujícím obrázku:
+\begin{center}
+\includesvg[width=300pt]{tensor_product_comutativity}
+\end{center}
+Zobrazení $f$ a $h$ nadefinujeme následovně:
+\begin{equation*}
+\begin{split}
+f(\myvec{u}, \myvec{v}) &= \phi_2(\myvec{v}, \myvec{u}) \\
+h(\myvec{v}, \myvec{u}) &= \phi_1(\myvec{u}, \myvec{v})
+\end{split}
+\end{equation*}
+Protože zobrazení $\phi_1$ a $\phi_2$ jsou bilineární, i zobrazení $f$ a $h$ jsou zřejmě
+bilineární (je triviální si ukázat, že podmínky bilineárního zobrazení stále platí, i když
+jsme otočili argumenty). Tedy podle definice tensorového součinu musí pro obě zobrazení
+existovat linearizace
+\begin{equation*}
+\begin{split}
+f(\myvec{u}, \myvec{v}) &= F(\phi_1(\myvec{u}, \myvec{v})) \\
+h(\myvec{v}, \myvec{u}) &= H(\phi_2(\myvec{v}, \myvec{u})
+\end{split}
+\end{equation*}
+Pokud použiji definici funkcí $f$ a $h$ a dosadím druhou rovnici do první rovnice, získám
+\begin{equation*}
+\begin{split}
+\phi_2(\myvec{v}, \myvec{u}) = f(\myvec{u}, \myvec{v}) = F(\phi_1(\myvec{u}, \myvec{v})) 
+  = F(h(\myvec{v}, \myvec{u})) = F(H(\phi_2(\myvec{v}, \myvec{u}))
+\end{split}
+\end{equation*}
+Pokud máte silný pocit deja vu, výjimečně to není chyba Matrixu. Dostali jsme se do stejné
+situace, jako v předchozím důkazu o jednoznačnosti tensorového součinu. Stejným postupem
+tedy odvodíme, že $F \circ H$ je identita, a že $H$ je injektivní (prosté) a $F$ surjektivní
+(na).
+
+A úplně stejně pak můžeme dosadit první rovnici do druhé
+\begin{equation*}
+\begin{split}
+\phi_1(\myvec{u}, \myvec{v}) = h(\myvec{v}, \myvec{u}) = H(\phi_2(\myvec{v}, \myvec{u}))
+  = H(f(\myvec{u}, \myvec{v})) = H(F(\phi_1(\myvec{u}, \myvec{v}))
+\end{split}
+\end{equation*}
+a tím dojít k závěru, že i $H \circ F$ je identita a $H$ je surjektivní (na) a $F$ je
+injektivní (prosté).
+
+Tedy zobrazení $F$ a $H$ jsou bijekce a náš kýžený přirozený isomorfismus.
+\end{proof}
+
+\medskip\noindent
+Postup se nám viditelně osvědčil, proto ho použijeme znovu. Tentokrát pro důkaz asociativity
+tensorového součinu. Asociativita je podstatná vlastnost, protože nám umožní rozšířit tensory
+z bilineárních zobrazení na obecně multilineární.
+
+\begin{lemma}
+Mějme vektorové prostory $\myspace{U}$, $\myspace{V}$ a $\myspace{W}$ nad tělesem $\myspace{T}$.
+K nim tensorové součiny
+$\phi_1: \myspace{U}\times(\myspace{V}\otimes\myspace{W})\rightarrow
+  \myspace{U}\otimes(\myspace{V}\otimes\myspace{W})$
+a $\phi_2: (\myspace{U}\otimes\myspace{V})\times\myspace{W}\rightarrow
+  (\myspace{U}\otimes\myspace{V})\otimes\myspace{W}$. Pak existuje přirozený isomorfismus
+$\myspace{U}\otimes(\myspace{V}\otimes\myspace{W})\rightarrow
+  (\myspace{U}\otimes\myspace{V})\otimes\myspace{W}$,
+tedy $\myspace{U}\otimes(\myspace{V}\otimes\myspace{W})\cong
+  (\myspace{U}\otimes\myspace{V})\otimes\myspace{W}$.
+\end{lemma}
+
+Jinými slovy můžeme zapomenout na závorky, protože prostory jsou až na isomorfismus stejné.
+
+\begin{proof}
+I zde použijeme podobné schéma
+\begin{center}
+\includesvg[width=300pt]{tensor_product_asociativity}
+\end{center}
+Tentokrát konstrukce zobrazení $f$ a $h$ nebude tak triviální, jako v předchozím případě.
+Jako první myšlenka by se nabízela možnost
+\begin{equation*}
+f(\myvec{u}, \myvec{v}\otimes\myvec{w}) = \phi_2(\myvec{u}\otimes\myvec{v}, \myvec{w})
+\end{equation*}
+která ale nemůže fungovat. Jak jsme si již řekli, ne každý prvek prostoru $\myspace{V}\otimes\myspace{W}$
+lze napsat jako $\myvec{v}\otimes\myvec{w}$, proto ani není možné ho rozložit na vektory
+a použít je na druhé straně rovnice. Předchozí zápis proto funguje pouze na obrazech
+tensorového součinu $\myspace{V}\otimes\myspace{W}$.
+
+Nezbývá nám než opět využít první bod definice tensorového součinu, který říká, že obrazy
+generují celý prostor a zobrazení nadefinovat takto
+\begin{equation*}
+f(\myvec{u}, \myvec{\chi}) = f(\myvec{u}, \sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i}) 
+  = \sum_{i}\alpha_i\phi_2(\myvec{u}\otimes\myvec{v_i}, \myvec{w_i})
+\end{equation*}
+Abychom toto zobrazení mohli použít, potřebujeme dokázat, že je bilineární. V opačném
+případě bychom nemohli použít univerzální vlastnost a nedostali bychom se k hledanému
+isomorfismu. Začněme tedy dokazovat jednotlivé axiomy bilineárního zobrazení.
+
+\begin{equation*}
+\begin{split}
+f(\myvec{u_1} + \myvec{u_2}, \sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i})
+  = \sum_{i}\alpha_i\phi_2((\myvec{u_1} + \myvec{u_2})\otimes\myvec{v_i}, \myvec{w_i})
+\end{split}
+\end{equation*}
+S využitím vlastností bilineárních zobrazení je možné rovnici přepsat
+\begin{equation*}
+\begin{split}
+f(\myvec{u_1} + \myvec{u_2}, \sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i})
+= \sum_{i}\alpha_i\phi_2(\myvec{u_1}\otimes\myvec{v_i} + \myvec{u_2}\otimes\myvec{v_i}, \myvec{w_i}) \\
+= \sum_{i}\left(\alpha_i\phi_2(\myvec{u_1}\otimes\myvec{v_i}, \myvec{w_i}) 
+   + \alpha_i\phi_2(\myvec{u_2}\otimes\myvec{v_i}, \myvec{w_i})\right) \\
+= f(\myvec{u_1}, \sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i}) 
+   + f(\myvec{u_2}, \sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i})
+\end{split}
+\end{equation*}
+
+\noindent
+Druhý axiom vyžaduje být lineární v druhém argumentu. Zde je výsledek jednoduše daný asociativitou
+sčítání
+\begin{equation*}
+\begin{split}
+f(\myvec{u}, \sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i} + \sum_{j}\alpha_j\myvec{v_j}\otimes\myvec{w_j}) \\
+= \sum_{i}\alpha_i\phi_2(\myvec{u}\otimes\myvec{v_i}, \myvec{w_i})
+    + \sum_{j}\alpha_j\phi_2(\myvec{u}\otimes\myvec{v_j}, \myvec{w_j}) \\
+= f(\myvec{u}, \sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i}) 
+    + f(\myvec{u}, \sum_{j}\alpha_j\myvec{v_j}\otimes\myvec{w_j})
+\end{split}
+\end{equation*}
+
+\noindent
+Jako poslední vyřešíme násobení skalárem. Z definice a vlastností bilineárního zobrazení dostáváme
+\begin{equation*}
+\begin{split}
+\beta f(\myvec{u}, \sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i})
+= \beta \sum_{i}\alpha_i\phi_2(\myvec{u}\otimes\myvec{v_i}, \myvec{w_i}) \\
+= \sum_{i}\beta\alpha_i\phi_2(\myvec{u}\otimes\myvec{v_i}, \myvec{w_i})
+= \sum_{i}\alpha_i\phi_2(\beta\myvec{u}\otimes\myvec{v_i}, \myvec{w_i}) \\
+= \sum_{i}\alpha_i\phi_2(\myvec{\beta u}\otimes\myvec{v_i}, \myvec{w_i})
+= f(\beta\myvec{u}, \sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i})
+\end{split}
+\end{equation*}
+a podobně
+\begin{equation*}
+\begin{split}
+\beta f(\myvec{u}, \sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i})
+= \beta \sum_{i}\alpha_i\phi_2(\myvec{u}\otimes\myvec{v_i}, \myvec{w_i}) \\
+= \sum_{i}\beta\alpha_i\phi_2(\myvec{u}\otimes\myvec{v_i}, \myvec{w_i})
+= f(\myvec{u}, \sum_{i}\beta\alpha_i\myvec{v_i}\otimes\myvec{w_i}) \\
+= f(\myvec{u}, \beta\sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i})
+\end{split}
+\end{equation*}
+tedy námi nadefinované zobrazení $f$ je bilineární. Podobným způsobem můžeme nadefinovat
+bilineární zobrazení $h$ jako
+\begin{equation*}
+h(\myvec{\theta}, \myvec{w}) = h(\sum_{i}\alpha_i\myvec{u_i}\otimes\myvec{v_i}, \myvec{w}) 
+= \sum_{i}\alpha_i\phi_1(\myvec{u_i}, \myvec{v_i}\otimes\myvec{w})
+\end{equation*}
+
+\end{proof}
 
 \section{Kroneckerův součin}
 
