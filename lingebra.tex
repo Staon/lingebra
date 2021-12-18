@@ -2001,6 +2001,53 @@ w_1 & w_2 & w_3
 \end{align*}
 \end{example}
 
+\section{Vsuvka: nekonečnědimenzionální vektorový prostor}
+
+\noindent
+Zdá se, že než se pustíme do tensorů, budeme muset udělat ještě jednu odbočku. Tento můj text
+začíná lineárním zobrazením a předpokládá, že čtenář zná pojem vektorový prostor. S čím se ale
+v běžných kurzech lineární algebry často nesetká, je prostor, který nemá konečnou bázi. Protože
+obecná definice tensorů pro takové prostory platí také, upřesníme si, co se takovým prostorem
+vlastně myslí.
+
+Báze byla definovaná jako minimální množina lineárně nezávislých vektorů, která generuje celý
+vektorový prostor - každý vektor lze vyjádřit jako lineární kombinaci bázových vektorů. U konečných
+bází tato definice není problematická. U nekonečných ovšem problém nastává - jak sečíst nekonečné
+množství vektorů? U nekonečných součtů už není možné libovolně otáčet pořadí prvků nebo různě
+závorkovat. Naše báze ale nemá žádné uspořádání, takže ani nelze nadefinovat konkrétní pořadí.
+
+Řešení je ve skutečnosti velmi jednoduché. Sice budeme pracovat s nekonečnou bází, ale budeme
+vyžadovat, aby každý vektor šel vyjádřit jako \textbf{lineární kombinace konečného počtu vektorů
+báze!} A obecněji, pokud tvrdíme, že nějaká podmnožina vektorového prostoru generuje celý prostor,
+vždy se jedná o konečné lineární kombinace.
+
+I když to možná na první pohled vypadá, že jsme si omezili možnosti, existuje důkaz, že taková
+báze existuje pro každý vektorový prostor - tedy za předpokladu, ža čtenář akceptuje kontroverzní
+Zornovo lemma (případně ekvivalentní axiom výběru).
+
+Bohužel důkaz nám nedává žádný návod, jak takovou bázi zkonstruovat. Takže sice víme, že báze
+existuje, ale v drtivé většině případů nevíme, jak vypadá.
+
+\begin{example}
+Vezměme si příklad prostoru $\mathcal{P}(\mathbb{R})$ všech polynomů nad reálnými čísly.
+Každý polynom je konečný součet násobků funkcí $x^n$, tedy báze prostoru je množina funkcí
+$\{1, x, x^2, x^3, \hdots\}$. Toto je jeden ze vzácných případů, kdy bázi dokážeme popsat.
+\end{example}
+
+\begin{example}
+Jiný příklad je prostor $\mathbb{R}^\infty$, tzn. rozšíření standardních aritmetických prostorů
+na nekonečné n-tice, tedy vlastně prostor posloupností. Jako první myšlenka by se nabízela možnost
+seskládat bázi z vektorů $(\hdots, 0, 0, 1, 0, 0, \hdots)$. Tato báze by ovšem nedokázala
+vygenerovat posloupnost $(1, 1, 1, \hdots)$ - součet by nebyl konečný. Ani přidání tohoto
+vektoru do báze (je lineárně nezávislý, takže ho můžeme přidat) nám příliš nepomůže - pořád
+bychom nedokázali vygenerovat $(1, 2, 3, 4, \hdots)$. Máme zde prostor, jehož bázi neznáme,
+pouze věříme, že existuje.
+
+Jen pro zajímavost, všimněte si, že množina konvergentních posloupností tvoří podprostor
+$\mathbb{R}^\infty$ - součet konvergentních posloupností je opět konvergentní posloupnost,
+násobek konvergentní posloupnosti je opět konvergentní posloupnost.
+\end{example}
+
 \section{Jak zavést tensory, aneb univerzální vlastnost}
 
 \noindent
@@ -2013,37 +2060,39 @@ tak, jako v předchozích - začneme s obecnou definicí nezávislou na volbě b
 rozebírat, jak se tensory chovají v souřadnicích.
 
 \begin{definition}
+\label{def:tensor_product_1}
 Mějme vektorové prostory $\myspace{U}$, $\myspace{V}$ nad tělesem $\myspace{T}$ a bilineární zobrazení
 $\phi$ z $\myspace{U}\times\myspace{V}$ do vektorového prostoru značeného jako
 $\myspace{U}\otimes\myspace{V}$. Bilineární zobrazení $\phi$ budeme nazývat \textit{tensorový součin}
 a prostor $\myspace{U}\otimes\myspace{V}$ jako \textit{tensorový součin prostorů} $\myspace{U}$
 a $\myspace{V}$ právě tehdy pokud platí:
 \begin{enumerate}	
-\item množina obrazů $\left\lbrace\phi(u, v)|u\in\myspace{U}, v\in\myspace{V}\right\rbrace$ generuje celý
-    prostor $\myspace{U}\otimes\myspace{V}$ (tzn. každý prvek prostoru lze vyjádřit jako lineární
-    kombinaci prvků množiny obrazů).
 \item Pro libovolný vektorový prostor $\myspace{W}$ nad tělesem $\myspace{T}$ a libovolné bilineární
     zobrazení $f: \myspace{U}\times\myspace{V}\rightarrow\myspace{W}$ existuje lineární zobrazení
     $F: \myspace{U}\otimes\myspace{V}\rightarrow\myspace{W}$ takové, že $f(\myvec{u}, \myvec{v})
     = F(\phi(\myvec{u}, \myvec{v}))$ (jinak značeno $f = F \circ \phi$).
+\item množina obrazů $\left\lbrace\phi(u, v)|u\in\myspace{U}, v\in\myspace{V}\right\rbrace$ generuje
+    \footnote{Nezapomeňte, ``generuje`` znamená konečné lineární kombinace!} celý prostor
+    $\myspace{U}\otimes\myspace{V}$ (tzn. každý prvek prostoru lze vyjádřit jako lineární
+    kombinaci prvků množiny obrazů).
 \end{enumerate}
 \end{definition}
 
 Na začátku kapitoly jsem sliboval, že tato definice bude nejvíce intuitivní a snadná. A jsem si dost
 jistý, že vám teď tak nepřipadá. Proto si ji nyní rozebereme podrobněji.
 
-První bod definice je spíše technický a bude potřeba v následných důkazech. V tento okamžik
-se jím příliš zabývat nemusíme.
+Druhý bod definice je technický a bude potřeba v následných důkazech. V tento okamžik
+se jím zabývat nemusíme.
 
-Zato ten druhý je zajímavější. Pro přehlednost si ukážeme obrázek, který vám umožní si během
+Zato ten první je podstatně zajímavější. Pro přehlednost si ukážeme obrázek, který vám umožní si během
 čtení ukazovat prstem, o čem zrovna mluvíme.
 \begin{center}
 \includesvg[width=200pt]{universal_property}
 \end{center}
 
-Druhý bod definice totiž říká, že každé bilineární zobrazení můžeme \textit{linearizovat}.
-Pomocí tensorového součinu dokážeme převést libovolné bilineární zobrazení na lineární
-zobrazení. A to se nám vyplatí, protože s lineárním zobrazením už umíme pracovat.
+Bod totiž říká, že každé bilineární zobrazení můžeme \textit{linearizovat}. Pomocí tensorového
+součinu dokážeme převést libovolné bilineární zobrazení na lineární zobrazení. A to se nám vyplatí,
+protože s lineárním zobrazením už umíme pracovat.
 
 Např. pokud máme prostory s konečnou bází (tzn. vektory vyjádřené jako souřadnice) dokážeme
 bilineární zobrazení vyjádřit jako ``pole čísel``, stejně jako to dokážeme pro libovolné lineární
@@ -2225,7 +2274,7 @@ $\phi(\myvec{\widetilde{e_1}}, \myvec{\widetilde{e_2}})$,
 $\phi(\myvec{\widetilde{e_2}}, \myvec{\widetilde{e_1}})$ a
 $\phi(\myvec{\widetilde{e_2}}, \myvec{\widetilde{e_2}})$ tvoří bázi prostoru
 $\myspace{U}\otimes\myspace{W}$, což si časem dokážeme. Tedy každý prvek prostoru
-$\myspace{U}\otimes\myspace{V}$ lze vyjádřit jako jejich lineární kombinace
+$\myspace{U}\otimes\myspace{V}$ lze vyjádřit jako jejich lineární kombinace,
 a tu lze dosadit do výše uvedeného předpisu. Zobrazení je tedy zřejmě lineární.
 
 \medskip\noindent
@@ -2289,7 +2338,7 @@ zádrhel. Víme, že funguje jako identita pouze na obrazech tensorového souči
 $\myvec{u}\otimes_1\myvec{v}$). Pro důkaz tvrzení potřebujeme dokázat, že funguje jako identita
 pro celý prostor $\myspace{U}\otimes_1\myspace{V}$.
 
-Zde do hry vstupuje první podmínka definice, kterou jsme prozatím ignorovali. Ta říká, že obrazy
+Zde do hry vstupuje druhá podmínka definice, kterou jsme prozatím ignorovali. Ta říká, že obrazy
 tensorového součinu generují celý prostor. Tedy, každý prvek $\myvec{\chi}\in\myspace{U}\otimes_1\myspace{V}$
 lze zapsat jako lineární kombinaci obrazů tensorového součinu
 \begin{equation*}
@@ -2422,7 +2471,7 @@ lze napsat jako $\myvec{v}\otimes\myvec{w}$, proto ani není možné ho rozloži
 a použít je na druhé straně rovnice. Předchozí zápis proto funguje pouze na obrazech
 tensorového součinu $\myspace{V}\otimes\myspace{W}$.
 
-Nezbývá nám než opět využít první bod definice tensorového součinu, který říká, že obrazy
+Nezbývá nám než opět využít druhý bod definice tensorového součinu, který říká, že obrazy
 generují celý prostor a zobrazení nadefinovat takto
 \begin{equation*}
 f(\myvec{u}, \myvec{\chi}) = f(\myvec{u}, \sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i}) 
@@ -2452,10 +2501,15 @@ f(\myvec{u_1} + \myvec{u_2}, \sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i})
 
 \noindent
 Druhý axiom vyžaduje být lineární v druhém argumentu. Zde je výsledek jednoduše daný asociativitou
-sčítání
+a komutativitou sčítání - součet dvou sum můžeme nahradit jednou sumou, která postupně sčítá prvky
+přes indexy $i$, následně přes indexy $j$. Tuhle sumu použít v definici zobrazení $f$ a následně
+ji zase rozdělit na dvě sumy\footnote{Lineární kombinace jsou konečné, proto není žádný problém
+tento postup udělat.}.
 \begin{equation*}
 \begin{split}
-f(\myvec{u}, \sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i} + \sum_{j}\alpha_j\myvec{v_j}\otimes\myvec{w_j}) \\
+f(\myvec{u}, \sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i} + \sum_{j}\alpha_j\myvec{v_j}\otimes\myvec{w_j})
+= f(\myvec{u}, \sum_{k=i,j}\alpha_k\myvec{v_k}\otimes\myvec{w_k}) \\
+= \sum_{k=i,j}\alpha_k\phi_2(\myvec{u}\otimes\myvec{v_k}, \myvec{w_k})
 = \sum_{i}\alpha_i\phi_2(\myvec{u}\otimes\myvec{v_i}, \myvec{w_i})
     + \sum_{j}\alpha_j\phi_2(\myvec{u}\otimes\myvec{v_j}, \myvec{w_j}) \\
 = f(\myvec{u}, \sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i}) 
@@ -2492,6 +2546,127 @@ h(\myvec{\theta}, \myvec{w}) = h(\sum_{i}\alpha_i\myvec{u_i}\otimes\myvec{v_i}, 
 = \sum_{i}\alpha_i\phi_1(\myvec{u_i}, \myvec{v_i}\otimes\myvec{w})
 \end{equation*}
 
+\medskip\noindent
+A nyní už nám nic nebrání použít univerzální vlastnost a zopakovat osvědčený postup.
+\begin{equation*}
+\begin{split}
+f(\myvec{u}, \sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i}) 
+  = F(\phi_1(\myvec{u}, \sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i})) \\
+  = \sum_{i}\alpha_i F(\phi_1(\myvec{u}, \myvec{v_i}\otimes\myvec{w_i}))
+\end{split}
+\end{equation*}
+V prvním kroku jsme použili univerzální vlastnost, ve druhém jsme sumu pomocí
+vlastnostní bilineárního a lineárního zobrazení dostali ven. Nyní za $\phi_1$
+dosadíme zobrazení $h$. Protože zde dosazujeme přímo obrazy tensorového součinu,
+suma v zobrazení $h$ obsahuje pouze jeden sčítanec a můžeme ji zapomenout.
+\begin{equation*}
+\begin{split}
+f(\myvec{u}, \sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i}) 
+= \sum_{i}\alpha_i F(h(\myvec{u}\otimes\myvec{v_i}, \myvec{w_i}))
+\end{split}
+\end{equation*}
+Po opětovném využití univerzální vlastnosti dostáváme:
+\begin{equation*}
+\begin{split}
+f(\myvec{u}, \sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i}) 
+= \sum_{i}\alpha_i F(H(\phi_2(\myvec{u}\otimes\myvec{v_i}, \myvec{w_i})))
+\end{split}
+\end{equation*}
+a s využitím vlastností lineárních zobrazení vrátíme sumu zpět dovnitř a dostaneme
+se zpět k definici funkce $f$
+\begin{equation*}
+\begin{split}
+f(\myvec{u}, \sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i}) 
+= F(H(\sum_{i}\alpha_i\phi_2(\myvec{u}\otimes\myvec{v_i}, \myvec{w_i}))) \\
+= F(H(f(\myvec{u}, \sum_{i}\alpha_i\myvec{v_i}\otimes\myvec{w_i})))
+\end{split}
+\end{equation*}
+Na základě stejných úvah jako v předchozích důkazech je zobrazení $F \circ H$ identita.
+A stejně tak můžeme postup zopakovat v opačném směru, čímž získám, že $H \circ F$
+je identita. A opět kombinací těchto dvou faktů dostáváme, že $F$ i $H$ jsou bijektivní,
+tudíž námi hledaný isomorfismus.
+\end{proof}
+
+\section{Alternativní definice}
+
+\noindent
+K definici tensorového součinu \ref{def:tensor_product_1} existuje ekvivalentní alternativa:
+\begin{definition}
+\label{def:tensor_product_2}
+Mějme vektorové prostory $\myspace{U}$, $\myspace{V}$ nad tělesem $\myspace{T}$ a bilineární zobrazení
+$\phi$ z $\myspace{U}\times\myspace{V}$ do vektorového prostoru značeného jako
+$\myspace{U}\otimes\myspace{V}$. Bilineární zobrazení $\phi$ budeme nazývat \textit{tensorový součin}
+a prostor $\myspace{U}\otimes\myspace{V}$ jako \textit{tensorový součin prostorů} $\myspace{U}$
+a $\myspace{V}$ právě tehdy pokud platí:
+\begin{enumerate}	
+\item Pro libovolný vektorový prostor $\myspace{W}$ nad tělesem $\myspace{T}$ a libovolné bilineární
+	zobrazení $f: \myspace{U}\times\myspace{V}\rightarrow\myspace{W}$ existuje lineární zobrazení
+	$F: \myspace{U}\otimes\myspace{V}\rightarrow\myspace{W}$ takové, že $f(\myvec{u}, \myvec{v})
+	= F(\phi(\myvec{u}, \myvec{v}))$ (jinak značeno $f = F \circ \phi$).
+\item Zobrazení $F$ je jednoznačné, tzn. existuje právě jedno.
+\end{enumerate}
+\end{definition}
+Jak čtenář může vidět, definice se liší pouze v druhé podmínce - potřebu generovat celý prostor
+nahradila existence právě jednoho lineárního zobrazení. Tyto dvě definice jsou ekvivalentní, což
+si dokážeme v následujícím důkazu.
+
+\begin{proof}
+Důkaz povedeme tradičně, že dokážeme oba směry ekvivalence. Směr ``generuje $\Rightarrow$ jednoznačná``
+sporem:
+
+\medskip\noindent
+předpokládejme, že lineární zobrazení není jednoznačné, tzn. existují $F_1 \neq F_2$ taková, že
+$f(\myvec{u}, \myvec{v}) = F_1(\phi(\myvec{u}, \myvec{v})) = F_2(\phi(\myvec{u}, \myvec{v}))$.
+Pak z vlastnosti, že množina obrazů generuje celý prostor, pro libovolný prvek $\myvec{\chi} = \myspace{U}\otimes\myspace{V}$ můžu psát:
+\begin{equation*}
+\begin{split}
+F_1(\myvec{\chi}) = F_1(\sum_{i}\alpha_i\myvec{u_i}\otimes\myvec{v_i})
+= \sum_{i}\alpha_i F_1(\myvec{u_i}\otimes\myvec{v_i}) \\
+= \sum_{i}\alpha_i F_2(\myvec{u_i}\otimes\myvec{v_i})
+= F_2(\sum_{i}\alpha_i\myvec{u_i}\otimes\myvec{v_i}) = F_2(\myvec{\chi})
+\end{split}
+\end{equation*}
+(sumu můžeme dostat ven pomocí vlastností lineárního zobrazení, použít předpoklad, a následně
+sumu vrátit zpět dovnitř). Dosáhli jsme sporu s předpokladem, že zobrazení není jednoznačné.
+Tedy zobrazení jednoznačné je. Což není nic objevného - lineární zobrazení je jednoznačně
+definované obrazy báze, nebo v tomto případě obrazy generující množiny.
+
+\medskip\noindent
+Směr ``jednoznačná $\Rightarrow$ generuje`` je náročnější. Opět důkaz povedeme sporem, a budeme
+předpokládat, že množina obrazů tensorového součinu negeneruje celý prostor
+$\myspace{U}\otimes\myspace{V}$. To znamená, že množina obrazů tensorového součinu generuje
+podprostor $\myspace{G}\subset\myspace{U}\otimes\myspace{V}$. Do toho podprostoru nadefinujeme
+zobrazení $\myspace{U}\times\myspace{V}\rightarrow\myspace{G}$ jako
+$\phi'(\myvec{u}, \myvec{v}) = \phi(\myvec{u}, \myvec{v})$.
+\begin{center}
+\includesvg[width=250pt]{alternative_def}
+\end{center}
+Toto zobrazení je zjevně bilineární, protože tensorový součin $\phi$ je z definice bilineární.
+Proto pro něj existuje linearizace $\phi'(\myvec{u}, \myvec{v}) = P(\phi(\myvec{u}, \myvec{v}))$.
+
+Nyní vytvořme nové zobrazení $i$ zpět do prostoru $\myspace{U}\otimes\myspace{V}$, které každému
+prvku v $\myspace{G}$ přiřadí stejný prvek v prostoru $\myspace{U}\otimes\myspace{V}$
+$i(\myvec{\chi}) = \myvec{\chi}$ ($\myspace{G}$ je podprostor, proto takové zobrazení je možné).
+
+A teď přichází další trik - položíme tensorový součin jako naše obecné bilineární zobrazení
+$f$ v definici. Tensorový součin je sám o sobě bilineární zobrazení, proto pro něj musí existovat
+linearizace $I$, pro kterou platí $\phi(\myvec{u}, \myvec{v}) = I(\phi(\myvec{u}, \myvec{v}))$.
+Zcela zjevně takovým zobrazením je identita.
+
+Nyní tedy máme dvě zobrazení, které fungují jako linearizace tensorového součinu $\phi$ - identitu
+$I$ a složené zobrazení $i \circ P$:
+\begin{itemize}
+\item $\phi(\myvec{u}, \myvec{v}) = \phi'(\myvec{u}, \myvec{v}) = i(\phi'(\myvec{u}, \myvec{v}))
+    = i(P(\phi(\myvec{u}, \myvec{v})))$
+\item zobrazení $i$ a $P$ jsou obě lineární (první triviálně, druhé z definice tensorového součinu),
+    proto jejich složení je také lineární.
+\end{itemize}
+Protože ale podle předpokladu je linearizace jednoznačná, tato dvě zobrazení musí být stejná,
+tedy $I = i \circ P$. A protože identita $I$ je triviálně surjektivní (\textit{na}), musí být
+surjektivní i zobrazení $i$. A protože je zároveň triviálně injektivní (\textit{prosté}), zobrazení
+$i$ je bijektivní, a zároveň identita (přiřazuje prvku stejný prvek), prostory $\myspace{G}$
+a $\myspace{U}\otimes\myspace{V}$ musí být stejné. Tedy množina obrazů tensorového součinu generuje
+celý prostor $\myspace{U}\otimes\myspace{V}$, což je spor s naším předpokladem.
 \end{proof}
 
 \section{Kroneckerův součin}
