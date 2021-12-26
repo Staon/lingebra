@@ -2064,7 +2064,7 @@ rozebírat, jak se tensory chovají v souřadnicích.
 Mějme vektorové prostory $\myspace{U}$, $\myspace{V}$ nad tělesem $\myspace{T}$ a bilineární zobrazení
 $\phi$ z $\myspace{U}\times\myspace{V}$ do vektorového prostoru značeného jako
 $\myspace{U}\otimes\myspace{V}$. Bilineární zobrazení $\phi$ budeme nazývat \textit{tensorový součin}
-a prostor $\myspace{U}\otimes\myspace{V}$ jako \textit{tensorový součin prostorů} $\myspace{U}$
+a dvojici $(\phi, \myspace{U}\otimes\myspace{V})$ jako \textit{tensorový součin prostorů} $\myspace{U}$
 a $\myspace{V}$ právě tehdy pokud platí:
 \begin{enumerate}	
 \item Pro libovolný vektorový prostor $\myspace{W}$ nad tělesem $\myspace{T}$ a libovolné bilineární
@@ -2596,7 +2596,7 @@ K definici tensorového součinu \ref{def:tensor_product_1} existuje ekvivalentn
 Mějme vektorové prostory $\myspace{U}$, $\myspace{V}$ nad tělesem $\myspace{T}$ a bilineární zobrazení
 $\phi$ z $\myspace{U}\times\myspace{V}$ do vektorového prostoru značeného jako
 $\myspace{U}\otimes\myspace{V}$. Bilineární zobrazení $\phi$ budeme nazývat \textit{tensorový součin}
-a prostor $\myspace{U}\otimes\myspace{V}$ jako \textit{tensorový součin prostorů} $\myspace{U}$
+a dvojici $(\phi, \myspace{U}\otimes\myspace{V})$ jako \textit{tensorový součin prostorů} $\myspace{U}$
 a $\myspace{V}$ právě tehdy pokud platí:
 \begin{enumerate}	
 \item Pro libovolný vektorový prostor $\myspace{W}$ nad tělesem $\myspace{T}$ a libovolné bilineární
@@ -2611,11 +2611,12 @@ nahradila existence právě jednoho lineárního zobrazení. Tyto dvě definice 
 si dokážeme v následujícím důkazu.
 
 \begin{proof}
-Důkaz povedeme tradičně, že dokážeme oba směry ekvivalence. Směr ``generuje $\Rightarrow$ jednoznačná``
-sporem:
+Důkaz povedeme tradičně, že dokážeme oba směry ekvivalence. Začněmš jednodušším směrem
+``generuje $\Rightarrow$ jednoznačná``:
 
 \medskip\noindent
-předpokládejme, že lineární zobrazení není jednoznačné, tzn. existují $F_1 \neq F_2$ taková, že
+Důkaz povedeme sporem. Předpokládejme tedy, že lineární zobrazení není jednoznačné,
+tzn. existují $F_1 \neq F_2$ taková, že
 $f(\myvec{u}, \myvec{v}) = F_1(\phi(\myvec{u}, \myvec{v})) = F_2(\phi(\myvec{u}, \myvec{v}))$.
 Pak z vlastnosti, že množina obrazů generuje celý prostor, pro libovolný prvek $\myvec{\chi} = \myspace{U}\otimes\myspace{V}$ můžu psát:
 \begin{equation*}
@@ -2668,6 +2669,130 @@ $i$ je bijektivní, a zároveň identita (přiřazuje prvku stejný prvek), pros
 a $\myspace{U}\otimes\myspace{V}$ musí být stejné. Tedy množina obrazů tensorového součinu generuje
 celý prostor $\myspace{U}\otimes\myspace{V}$, což je spor s naším předpokladem.
 \end{proof}
+
+\section{Multilinearita}
+
+\noindent
+Až doteď jsme pracovali pouze s bilineárním zobrazením a jeho linearizací. Nicméně lemma dokazující, že
+tensorový součin je až na isomorfismus asociativní, naznačuje, že není důvod se omezovat pouze zobrazení
+o dvou parametrech.
+
+V textech, které jsem četl, se rozšíření na multilinearitu provedlo extensí definic a technickou
+úpravou vět pro více proměnných. Což je bezpochyby správný postup, a možná i správnější, než o co
+se pokusím já zde - ukážu, že pomocí (bilineárního) tensorového součinu, jak jsme si ho nadefinovali,
+je možné libovolné multilineární zobrazení jednoznačně zredukovat na bilineární. Tedy ve velkém závěru
+kapitoly nám bude stačit dokázat, že tensorový součin existuje pro bilineární zobrazení.
+
+Vezměme tedy multilineární zobrazení $f(\myvec{u}, \myvec{v}, \myvec{w}):
+\myspace{U}\times\myspace{V}\times\myspace{W}\rightarrow\myspace{X}$, kde všechny vektorové prostory
+jsou nad stejným tělesem.
+
+Nyní si zvolme libovolný vektor $\myvec{u}$ a zobrazení pro něj ``zafixujme``:
+\begin{equation*}
+f(\myvec{u}, \myvec{v}, \myvec{w}) = g_{\myvec{u}}(\myvec{v}, \myvec{w})
+\end{equation*}
+Z multilinearity zobrazení $f$ přímo vyplývá, že zobrazení $g_{\myvec{u}}$ je bilineární (čtenář
+si sám jistě dokáže ověřit, že všechny 3 axiomy platí). To znamená, že pro něj existuje jednoznačná
+linearizace
+\begin{equation*}
+g_{\myvec{u}}(\myvec{v}, \myvec{w}) = G_{\myvec{u}}(\phi(\myvec{v}, \myvec{w}))
+\end{equation*}
+Nadefinujme si tedy nové zobrazení
+\begin{equation*}
+f'(\myvec{u}, \myvec{\chi}) = G_{\myvec{u}}(\myvec{\chi}))
+\end{equation*}
+kde $\myvec{\chi}\in\myspace{V}\otimes\myspace{W}$. Pokud dokážeme, že toto zobrazení je bilineární,
+našli jsme hledanou redukci původního zobrazení $f$, protože z předchozích kroků platí
+\begin{equation*}
+f(\myvec{u}, \myvec{v}, \myvec{w}) = G_{\myvec{u}}(\phi(\myvec{v}, \myvec{w})) 
+  = f'(\myvec{u}, \phi(\myvec{v}, \myvec{w})) = f'(\myvec{u}, \myvec{v}\otimes\myvec{w})
+\end{equation*}
+
+Prokázat linearitu v parametru $\myvec{\chi}$ je snadné, vyplývá přímo z vlastností lineárního
+zobrazení $G_{\myvec{u}}$. Linearita v parametru $\myvec{u}$ je komplikovanější - zde se budeme
+muset opřít o vlastnosti původního multilineárního zobrazení $f$ a druhou podmínku definice
+tensorového součinu, která říká, že obrazy tensorového součinu generují celý prostor:
+\begin{equation*}
+\begin{split}
+f'(\myvec{u_1}+\myvec{u_2}, \myvec{\chi}) 
+  = f'(\myvec{u_1}+\myvec{u_2}, \sum_{i}\alpha_i\phi(\myvec{v_i}, \myvec{w_i})) \\
+= G_{\myvec{u_1} + \myvec{u_2}}(\sum_{i}\alpha_i\phi(\myvec{v_i}, \myvec{w_i}))
+  = \sum_{i}\alpha_i G_{\myvec{u_1} + \myvec{u_2}}(\phi(\myvec{v_i}, \myvec{w_i})) \\
+= \sum_{i}\alpha_i g_{\myvec{u_1} + \myvec{u_2}}(\myvec{v_i}, \myvec{w_i})
+  = \sum_{i}\alpha_i f(\myvec{u_1} + \myvec{u_2}, \myvec{v_i}, \myvec{w_i}) \\
+= \sum_{i}\alpha_i (f(\myvec{u_1}, \myvec{v_i}, \myvec{w_i}) + f(\myvec{u_2}, \myvec{v_i}, \myvec{w_i})) \\
+= \sum_{i}\alpha_i f(\myvec{u_1}, \myvec{v_i}, \myvec{w_i}) 
+  + \sum_{i}\alpha_i f(\myvec{u_2}, \myvec{v_i}, \myvec{w_i}) \\
+= \sum_{i}\alpha_i g_{\myvec{u_1}}(\myvec{v_i}, \myvec{w_i}) 
+  + \sum_{i}\alpha_i g_{\myvec{u_2}}(\myvec{v_i}, \myvec{w_i}) \\
+= \sum_{i}\alpha_i G_{\myvec{u_1}}(\phi(\myvec{v_i}, \myvec{w_i})) 
+  + \sum_{i}\alpha_i G_{\myvec{u_2}}(\phi(\myvec{v_i}, \myvec{w_i})) \\
+= G_{\myvec{u_1}}(\sum_{i}\alpha_i\phi(\myvec{v_i}, \myvec{w_i})) 
+  + G_{\myvec{u_2}}(\sum_{i}\alpha_i\phi(\myvec{v_i}, \myvec{w_i})) \\
+= f'(\myvec{u_1}, \myvec{\chi}) + f'(\myvec{u_2}, \myvec{\chi})
+\end{split}
+\end{equation*}
+a podobný veletoč symbolů a písmenek můžeme provést i pro násobení skalárem:
+\begin{equation*}
+\begin{split}
+f'(\beta\myvec{u}, \myvec{\chi}) 
+= f'(\beta\myvec{u}, \sum_{i}\alpha_i\phi(\myvec{v_i}, \myvec{w_i}))
+= G_{\beta\myvec{u}}(\sum_{i}\alpha_i\phi(\myvec{v_i}, \myvec{w_i})) \\
+= \sum_{i}\alpha_i G_{\beta\myvec{u}}(\phi(\myvec{v_i}, \myvec{w_i}))
+= \sum_{i}\alpha_i g_{\beta\myvec{u}}(\myvec{v_i}, \myvec{w_i})
+= \sum_{i}\alpha_i f(\beta\myvec{u}, \myvec{v_i}, \myvec{w_i}) \\
+= \beta\sum_{i}\alpha_i f(\myvec{u}, \myvec{v_i}, \myvec{w_i})
+= \beta\sum_{i}\alpha_i g_{\myvec{u}}(\myvec{v_i}, \myvec{w_i})
+= \beta\sum_{i}\alpha_i G_{\myvec{u}}(\phi(\myvec{v_i}, \myvec{w_i})) \\
+= \beta G_{\myvec{u}}(\sum_{i}\alpha_i\phi(\myvec{v_i}, \myvec{w_i}))
+= \beta f'(\myvec{u}, \myvec{\chi})
+\end{split}
+\end{equation*}
+
+Ukázali jsme, že trilineární zobrazení dokážeme zredukovat na bilineární, kde jednu dvojici parametrů
+nahradíme jejich tensorovým součinem. Pro toto bilineární zobrazení z definice existuje linearizace
+\begin{equation*}
+f'(\myvec{u}, \myvec{v}\otimes\myvec{w}) = F'(\myvec{u}\otimes(\myvec{v}\otimes\myvec{w}))
+\end{equation*}
+a zřejmě je tato linearizace i linearizací celého trilineárního zobrazení $f$, protože
+\begin{equation*}
+f(\myvec{u}, \myvec{v}, \myvec{w}) = f'(\myvec{u}, \myvec{v}\otimes\myvec{w})
+\end{equation*}
+Navíc z lemma o asociativitě tensorového součinu víme, že je jedno, kterou dvojici parametrů
+nahradíme tensorovým součinem, protože výsledné tensorové součiny prostorů jsou přirozeně
+isomorfní. Můžeme tedy zapomenout na závorky a tvrdit, že pro každé trilineární zobrazení
+$f(\myvec{u}, \myvec{v}, \myvec{w})$ existuje jeho jednoznačná linearizace
+$F(\myvec{u}\otimes\myvec{v}\otimes\myvec{w})$, samozřejmě za předpokladu, že naše definice
+tensorového součinu je platná, což plánujeme dokázat ve velkém finále kapitoly o tensorech.
+
+Pomocí matematické indukce dokážeme stejné tvrzení rozšířit i na více-lineární zobrazení. Zcela
+stejným postupem zafixujeme jeden parametr
+\begin{equation*}
+f(\myvec{u}, \myvec{v_1}, \myvec{v_2}, \hdots) = g_u(\myvec{v_1}, \myvec{v_2}, \hdots)
+\end{equation*}
+Toto (n-1)-lineární zobrazení pomocí indukčního předpokladu zlinearizujeme
+\begin{equation*}
+g_u(\myvec{v_1}, \myvec{v_2}, \hdots) = G_u(\myvec{v_1}\otimes\myvec{v_2}\otimes\cdots)
+\end{equation*}
+a nadefinujeme zobrazení
+\begin{equation*}
+f'(\myvec{u}, \myvec{\chi}) = G_u(\myvec{\chi})
+\end{equation*}
+které je na základě stejných úvah bilineární. Pro něj najdeme linearizaci, která je zároveň
+jednoznačnou linearizací i původního multilineárního zobrazení
+$f(\myvec{u}, \myvec{v_1}, \myvec{v_2}, \hdots)$.
+
+Tedy závěrem, pokud prokážeme, že existuje tensorový součin pro libovolné dva vektorové prostory
+nad stejným tělesem, který dokáže linearizovat libovolné bilineární zobrazení z těchto dvou
+prostorů, pak tensorový součin (jako multilineární zobrazení) existuje i pro libovolný počet
+$\geq$ 2 vektorových prostorů nad stejným tělesem, který dokáže linearizovat libovolné multilineární
+zobrazení z těchto prostorů.
+
+
+
+
+
+
 
 \section{Kroneckerův součin}
 
