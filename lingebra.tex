@@ -805,6 +805,7 @@ A s existujícím nulovým prvkem už není problém nalézt opačný prvek, jak
 
 Nyní věříme, že duální prostor je vektorový prostor. Zkusme nyní zkonstruovat jeho bázi.
 
+\label{def:dual_basis}
 Mějme vektorový prostor $\myspace{V}$ s bází $\{\myvec{b_1}, \ldots, \myvec{b_n}\}$ a k němu duální
 vektorový prostor $\mydual{V}$. Pro libovolný kovektor $\mymap{\varphi} \in \mydual{V}$ a libovolný
 vektor $\myvec{x} = \myscalar{\alpha_1}\myvec{b_1} + \cdots + \myscalar{\alpha_n}\myvec{b_n} \in 
@@ -2115,9 +2116,9 @@ tzn. nějakým skrytým způsobem se provedla transformace do $\myspace{U}\otime
 Zároveň existují další definice, které tensory zavádějí. A v nich by pojem tensor odkazoval
 zase na jiné prvky jiného prostoru. Jak je vidět, pojem tensor není úplně jednoznačný.
 V následujícím textu ho budeme používat volně ve významu $\phi$ a $F$ dohromady, tzn. jako
-alternativní vyjádření nějakého bilineárního (pozdějí multilineárního) zobrazení.
+alternativní vyjádření nějakého bilineárního (později multilineárního) zobrazení.
 
-Druhý bod konečně přichází s intuitivní představou, co můžeme tensory popsat. Tensor odpovídá
+První bod konečně přichází s intuitivní představou, co můžeme tensory popsat. Tensor odpovídá
 bilineárnímu (a později tensory rozšíříme na multilineární) zobrazení. Tzn. cokoliv, co se
 chová jako nějaká forma násobení, lze vyjádřit jako tensor. Pokud jste dosud, podobně jako já,
 tápali nad obecným popisem vyjadřovací schopnosti tensorů, nyní máte odpověď.
@@ -2273,15 +2274,54 @@ $\phi(\myvec{\widetilde{e_1}}, \myvec{\widetilde{e_1}})$,
 $\phi(\myvec{\widetilde{e_1}}, \myvec{\widetilde{e_2}})$,
 $\phi(\myvec{\widetilde{e_2}}, \myvec{\widetilde{e_1}})$ a
 $\phi(\myvec{\widetilde{e_2}}, \myvec{\widetilde{e_2}})$ tvoří bázi prostoru
-$\myspace{U}\otimes\myspace{W}$, což si časem dokážeme. Tedy každý prvek prostoru
-$\myspace{U}\otimes\myspace{V}$ lze vyjádřit jako jejich lineární kombinace,
-a tu lze dosadit do výše uvedeného předpisu. Zobrazení je tedy zřejmě lineární.
+$\myspace{U}\otimes\myspace{W}$, což si časem dokážeme. A obrazy báze jednoznačně
+určují celé lineární zobrazení.
 
 \medskip\noindent
 Pochopili jste příklad? Pokud ano, udělejte si pašáka. Právě jste stvořili
 \textbf{metrický tensor}, který je základem obecné teorie relativity - samozřejmě
 ale ve 4-rozměrném prostoročase.
 \end{example}
+
+\noindent
+Podle naší definice pro každé bilineární zobrazení existuje jeho linearizace. Můžeme si ale položit
+opačnou otázku: je každé lineární zobrazení $\myspace{U}\otimes\myspace{V}\rightarrow\myspace{W}$
+linearizací nějakého bilineárního zobrazení $\myspace{U}\times\myspace{V}\rightarrow\myspace{W}$?
+
+\begin{lemma}
+\label{lemma:lin_to_bilin}
+Mějme vektorové prostory $\myspace{U}, \myspace{V}, \myspace{W}$ nad stejným tělesem $\myspace{T}$
+a tensorový součin $\phi: \myspace{U}\times\myspace{V}\rightarrow\myspace{U}\otimes\myspace{V}$.
+Pak každé lineární zobrazení $F: \myspace{U}\otimes\myspace{V}\rightarrow\myspace{W}$ je linearizací
+nějakého bilineárního zobrazení $f: \myspace{U}\times\myspace{V}\rightarrow\myspace{W}$,
+tedy $\exists f \in \mathcal{B}(\myspace{U}\times\myspace{V}\rightarrow\myspace{W})$ takové, že
+$f(\myvec{u}, \myvec{v}) = F(\phi(\myvec{u}, \myvec{v}))$.
+\end{lemma}
+
+\begin{proof}
+Důkaz tvrzení je snadný. Nejdříve zkonstruujeme zobrazení $f$ očekávatelným předpisem
+$f(\myvec{u}, \myvec{v}) = F(\phi(\myvec{u}, \myvec{v}))$. A pokud prokážeme, že toto zobrazení
+je bilineární, pak máme vyhráno. A ono jednoduchou aplikací vlastností lineárního zobrazení
+$F$ a bilineárního zobrazení $\phi$ je:
+\begin{equation*}
+\begin{split}
+f(\myvec{u_1} + \myvec{u_2}, \myvec{v}) = F(\phi(\myvec{u_1} + \myvec{u_2}, \myvec{v}))
+  = F(\phi(\myvec{u_1}, \myvec{v}) + \phi(\myvec{u_2}, \myvec{v})) \\
+= F(\phi(\myvec{u_1}, \myvec{v})) + F(\phi(\myvec{u_2}, \myvec{v}))
+  = f(\myvec{u_1}, \myvec{v}) + f(\myvec{u_2}, \myvec{v})
+\end{split}
+\end{equation*}
+a násobení skalárem
+\begin{equation*}
+\begin{split}
+f(\alpha\myvec{u}, \myvec{v}) = F(\phi(\alpha\myvec{u}, \myvec{v}))
+= F(\alpha\phi(\myvec{u}, \myvec{v}))
+= \alpha F(\phi(\myvec{u}, \myvec{v})) \\
+= \alpha f(\myvec{u}, \myvec{v})
+\end{split}
+\end{equation*}
+Podobný postup můžeme zopakovat i pro parametr $\myvec{v}$.
+\end{proof}
 
 \section{Vlastnosti tensorového součinu}
 
@@ -2670,6 +2710,33 @@ a $\myspace{U}\otimes\myspace{V}$ musí být stejné. Tedy množina obrazů tens
 celý prostor $\myspace{U}\otimes\myspace{V}$, což je spor s naším předpokladem.
 \end{proof}
 
+\noindent
+Přímým důsledkem této alternativní definice a lemma \ref{lemma:lin_to_bilin} je následující
+tvrzení
+
+\begin{lemma}
+Mějme vektorové prostory $\myspace{U}, \myspace{V}, \myspace{W}$ nad stejným tělesem $\myspace{T}$.
+Pak vektorový prostor bilineárních zobrazení
+$\mathcal{B}(\myspace{U}\times\myspace{V}\rightarrow\myspace{W})$
+je isomorfní s vektorovým prostorem lineárních zobrazení
+$\mathcal{L}(\myspace{U}\otimes\myspace{V}\rightarrow\myspace{W})$, tzn.
+$\mathcal{B}(\myspace{U}\times\myspace{V}\rightarrow\myspace{W}) \cong
+\mathcal{L}(\myspace{U}\otimes\myspace{V}\rightarrow\myspace{W})$
+\end{lemma}
+
+\begin{proof}
+Důkaz tvrzení je prostý. Zkonstruujeme zobrazení $\Psi: \mathcal{B}(\myspace{U}\times\myspace{V}\rightarrow\myspace{W}) \rightarrow
+\mathcal{L}(\myspace{U}\otimes\myspace{V}\rightarrow\myspace{W})$ tak, že každému
+bilineárnímu zobrazení přiřadíme jeho linearizaci $\Psi(f) = F$. Protože linearizace
+je právě jedna, je konstrukce zobrazení v pořádku. Protože zobrazení $f$ i $F$ musí vracet
+stejné hodnoty $f(\myvec{u}, \myvec{v}) = F(\myvec{u}\otimes\myvec{v})$, zobrazení $\Psi$
+musí být injektivní (\textit{prosté}). A protože podle lemma \ref{lemma:lin_to_bilin}
+je každé lineární zobrazení $F$ linearizací nějakého bilineárního zobrazení $f$, pak zobrazení
+$\Psi$ musí být i surjektivní (\textit{na}). Máme tedy bijektivní zobrazení. Pokud je zároveň
+lineární, pak jsme nalezli hledaný isomorfismus. A lineární je triviálně opět z faktu,
+že zobrazení $f$ a $F$ vrací stejné hodnoty $f(\myvec{u}, \myvec{v}) = F(\myvec{u}\otimes\myvec{v})$.
+\end{proof}
+
 \section{Multilinearita}
 
 \noindent
@@ -2788,11 +2855,168 @@ prostorů, pak tensorový součin (jako multilineární zobrazení) existuje i p
 $\geq$ 2 vektorových prostorů nad stejným tělesem, který dokáže linearizovat libovolné multilineární
 zobrazení z těchto prostorů.
 
+\section{Báze tensorového součinu}
 
+\noindent
+Až doteď jsme pracovali s vektorovými prostory tak obecně, jak to šlo. Omezme se nyní pouze na
+prostory s konečnou bází. Jinými slovy na prostory, kde jejich prvky lze vyjádřit jako souřadnice
+oproti nějaké konečné bázi. Anebo ještě jinak na prostory, které jsou prakticky použitelné ve
+fyzice.
 
+Pokud mám dva vektorové prostory s konečnou bází, dává smysl si položit otázku, jak bude
+vypadat báze jejich tensorového součinu. A odpověď pravděpodobně nebude příliš překvapivá.
 
+\begin{lemma}
+Mějme dva vektorové prostory s konečnou bází $\myspace{U}$ a $\myspace{V}$ nad stejným tělesem
+$\myspace{T}$, jejich tensorový součin $(\phi, \myspace{U}\otimes\myspace{V})$, bázi prostoru
+$\myspace{U}$ $\{\myvec{u_1}, \dots, \myvec{u_m}\}$ a bázi prostoru $\myspace{V}$
+$\{\myvec{v_1}, \dots, \myvec{v_n}\}$. Pak množina $\{\myvec{u_i}\otimes\myvec{v_j}| i \in
+\{1, \dots, m\}, j \in \{1, \dots, n\}\}$ tvoří bázi prostoru $\myspace{U}\otimes\myspace{V}$.
+\end{lemma}
 
+Jinými slovy tensorový součin všech kombinací bázových vektorů tvoří bázi tensorového součinu
+prostorů. Dimenze $dim(\myspace{U}\otimes\myspace{V})$ je tedy součin dimenzí jednotlivých
+prostorů $dim(\myspace{U}).dim(\myspace{V})$.
 
+\begin{proof}
+Abychom prokázali, že množina $\{\myvec{u_i}\otimes\myvec{v_j}\}$ tvoří bázi, musíme dokázat
+dvě věci:
+\begin{enumerate}
+	\item množina generuje celý prostor $\myspace{U}\otimes\myspace{V}$
+	\item a je lineárně nezávislá.
+\end{enumerate}
+
+První část je jednoduchá. Vezměme dva libovolné vektory $\myvec{u}\in\myspace{U}$ a
+$\myvec{v}\in\myspace{V}$ a vyjádřeme je jako lineární kombinaci vůči bázím
+$\myvec{u} = \sum_{i}\alpha_i\myvec{u_i}$ a $\myvec{v} = \sum_{j}\beta_j\myvec{v_j}$.
+Tyto vektory dosaďme do tensorového součinu:
+\begin{equation*}
+\begin{split}
+\phi(\myvec{u}, \myvec{v}) = \phi(\sum_{i}\alpha_i\myvec{u_i}, \sum_{j}\beta_j\myvec{v_j})
+\end{split}
+\end{equation*}
+Pokud aplikujeme vlastnosti bilineárního zobrazení, zápis můžeme přepsat
+\begin{equation*}
+\begin{split}
+\phi(\myvec{u}, \myvec{v}) = \sum_{i}\sum_{j}\alpha_i\beta_j\phi(\myvec{u_i}, \myvec{v_j})
+  = \sum_{i}\sum_{j}\alpha_i\beta_j\myvec{u_i}\otimes\myvec{v_j}
+\end{split}
+\end{equation*}
+Každý obraz tensorového součinu je tedy možné zapsat jako lineární kombinaci tensorových součinů
+bázových vektorů. Nyní vstoupí do hry druhá podmínka v definici tensorového součinu, která říká,
+že množina obrazů generuje celý prostor $\myspace{U}\otimes\myspace{V}$. Tedy libovolný prvek
+$\chi\in\myspace{U}\otimes\myspace{V}$ lze zapsat jako lineární kobinaci obrazů tensorového
+součinu
+\begin{equation*}
+\begin{split}
+\chi = \sum_{k}\gamma_k\myvec{u_k}\otimes\myvec{v_k}
+\end{split}
+\end{equation*}
+Pozor! Vektory $\myvec{u_k}$ a $\myvec{v_k}$ zde nejsou bázové vektory, ale libovolné vektory
+prostorů $\myspace{U}$ a $\myspace{V}$! Z předchozího už víme, že tensorový součin vektorů
+$\myvec{u_k}\otimes\myvec{v_k}$ lze vyjádřit jako lineární kombinaci tensorových součinů
+bázových vektorů:
+\begin{equation*}
+\begin{split}
+\chi = \sum_{k}\gamma_k\sum_{i}\sum_{j}\alpha_{k_i}\beta_{k_j}\myvec{u_i}\otimes\myvec{v_j}
+  = \sum_{k}\sum_{i}\sum_{j}\gamma_k\alpha_{k_i}\beta_{k_j}\myvec{u_i}\otimes\myvec{v_j}
+\end{split}
+\end{equation*}
+a pokud součet přeuzávorkuji, získám lineární kombinaci tensorových součinů bázových vektorů
+\begin{equation*}
+\begin{split}
+\chi = \sum_{i}\sum_{j}(\sum_{k}\gamma_k\alpha_{k_i}\beta_{k_j})\myvec{u_i}\otimes\myvec{v_j}
+\end{split}
+\end{equation*}
+
+\medskip\noindent
+Dokázat druhý bod je o něco složitější. Pro tento účel si zkonstruujeme pomocné bilineární
+zobrazení a jeho linearizací následně vyvrátíme předpoklad, že množina tensorových
+součinů bázových vektorů je lineárně závislá.
+
+Pro konstrukci zobrazení si vezmeme duální báze prostorů $\myspace{U^*}$ a $\myspace{V^*}$
+$\{\psi_1, \dots, \psi_m\}$ a $\{\varphi_1, \dots, \varphi_n\}$. Pomocí nich nadefinujeme
+zobrazení
+\begin{equation*}
+\begin{split}
+\vartheta_{ij}(\myvec{u}, \myvec{v}) = \psi_i(\myvec{u})\varphi_j(\myvec{v})
+\end{split}
+\end{equation*}
+V tento okamžik si budete muset vzpomenout, jak jsme definovali duální bázi (\ref{def:dual_basis}).
+Protože lineární forma duální báze vrací 1, pokud je do ní dosazený příslušný bázový vektor, a
+vrací 0, pokud do ní dosadíme jiný bázový vektor, pro zobrazení $\vartheta_{ij}$ platí
+\begin{equation*}
+\begin{split}
+\vartheta_{ij}(\myvec{u_k}, \myvec{v_l}) = \psi_i(\myvec{u_k})\varphi_j(\myvec{v_l}) =
+\begin{cases}
+  1 \: i = k \wedge j = l \\
+  0 \: i \neq k \vee j \neq l
+\end{cases}
+\end{split}
+\end{equation*}
+
+Součin lineárních forem je zjevně bilineární zobrazení (čtenář si může sám dosadit
+součet vektorů nebo násobení skalárem), proto podle definice tensorového součinu pro něj existuje
+linearizace
+\begin{equation*}
+\begin{split}
+\vartheta_{ij}(\myvec{u}, \myvec{v}) = T_{ij}(\phi(\myvec{u}, \myvec{v})) = T_{ij}(\myvec{u}\otimes\myvec{v})
+\end{split}
+\end{equation*}
+
+Nyní předpokládejme, že množina tensorových součinů bázových vektorů není lineárně nezávislá,
+tedy že existuje netriviální lineární kombinace
+\begin{equation*}
+\begin{split}
+\sum_{i}\sum_{j}\gamma_{ij}\myvec{u_i}\otimes\myvec{v_j} = \myvec{0}
+\end{split}
+\end{equation*}
+Zvolme si indexy $k$ a $l$ takové, aby $\gamma_{kl} \neq 0$ (musí existovat, protože kombinace
+je netriviální). Sčítanec s indexy $k$ a $l$ převedeme na pravou stranu rovnice (opačný prvek
+existuje z definice tělesa) a rovnici vynásobíme skalárem inverzním k $-\gamma_{kl}$ (opět
+existuje z definice tělesa, protože je nenulový)
+\begin{equation*}
+\begin{split}
+\sum_{i\in\{1, \dots, m\}\setminus\{k\}}
+  \sum_{j\in\{1, \dots, n\}\setminus\{l\}}\gamma'_{ij}\myvec{u_i}\otimes\myvec{v_j} 
+  = \myvec{u_k}\otimes\myvec{v_l}
+\end{split}
+\end{equation*}
+Obě strany rovnice můžeme dosadit do lineárního zobrazení $T_{kl}$
+\begin{equation*}
+\begin{split}
+T_{kl}(\sum_{i\in\{1, \dots, m\}\setminus\{k\}}
+  \sum_{j\in\{1, \dots, n\}\setminus\{l\}}\gamma'_{ij}\myvec{u_i}\otimes\myvec{v_j})
+  = T_{kl}(\myvec{u_k}\otimes\myvec{v_l})
+\end{split}
+\end{equation*}
+a pomocí vlastností lineárního zobrazení dostaneme sumy ``ven``
+\begin{equation*}
+\begin{split}
+\sum_{i\in\{1, \dots, m\}\setminus\{k\}}
+  \sum_{j\in\{1, \dots, n\}\setminus\{l\}}\gamma'_{ij}T_{kl}(\myvec{u_i}\otimes\myvec{v_j})
+  = T_{kl}(\myvec{u_k}\otimes\myvec{v_l})
+\end{split}
+\end{equation*}
+Na levé straně rovnice je každý prvek $T_{kl}(\myvec{u_i}\otimes\myvec{v_j}) = 0$, zatímco
+pravá strana je rovná $1$:
+\begin{equation*}
+\begin{split}
+\sum_{i\in\{1, \dots, m\}\setminus\{k\}}
+  \sum_{j\in\{1, \dots, n\}\setminus\{l\}}\gamma'_{ij}0 = 1
+\end{split}
+\end{equation*}
+Nula vynásobená s čímkoliv je opět nula a součet nul je nula, tedy dostáváme rozpor
+\begin{equation*}
+\begin{split}
+0 = 1
+\end{split}
+\end{equation*}
+Z předpokladu lineární závislosti jsme došli k logickému rozporu, tedy množina tensorových součinů
+bázových vektorů musí být lineárně nezávislá.
+\end{proof}
+
+\end{document}
 
 \section{Kroneckerův součin}
 
@@ -2872,217 +3096,5 @@ Kroneckerův součin ale \textbf{není obecně komutativní}: $a \otimes b \neq 
 je v principu ``skorokomutativní``. Otočením operandů vzniknou stejné prvky, protože násobení
 prvků komutativní je, ale změní se pořadí indexů. Takže vznikne pole se stejnými hodnotami,
 ale jinak rozvržené, a které permutací indexů dokážeme přetransformovat do stejné podoby.
-
-\section{Jak zavést tensory?}
-
-\noindent
-Až doteď jsme na tensory koukali intuitivně jako na nějaká pole čísel, různé ``divně`` zapsané matice.
-Pole čísel je ale prostě jenom pole čísel. Tensorem ho dělají až operace, které s ním lze provádět.
-A abychom mohli definovat operace, musíme tensory zavést formálně.
-
-Zatímco předchozí kapitoly o vektorových a duálních prostorech se pokoušely zavádět vektory
-a kovektory obecně, a teprve později přešly do souřadnic, u tensorů půjdeme opačnou cestou.
-Následující kapitoly až do odvolání budou pracovat s aritmetickými vektory, kovektory a tensory,
-tzn. v podobě polí čísel, protože to je asi nejvíc běžný způsob a asi taky nevíc názorný zpusob,
-jak se tensory zavádí. A teprve později se pokusíme definici zobecnit, aby byla na souřadnicích
-nezávislá.
-
-Než začneme být formálnější, začněme příkladem. Možná jste už někde zaslechli tvrzení, že lineární
-zobrazení je tensor řádu 2, přesněji tensor $(1,1)$, který má jednu kontravariantní a jednu
-kovariantní složku. Co to má znamenat? Jako první idea se nabízí zkonstruovat lineární zobrazení
-jako kombinaci jednoho vektoru a jednoho kovektoru. A když jsme v předchozí kapitole probrali
-Kroneckerův součin, tak použijeme ten:
-
-\begin{equation*}
-\begin{split}
-& \left(\begin{array}{c} a_1 \\ a_2\end{array}\right)\otimes\left(\begin{array}{cc}b_1 & b_2\end{array}\right) =
-\left(\begin{blockarray}{cc}
-\begin{block}{(cc)}
-a_1 b_1 & a_1 b_2 \\
-\end{block}
-\begin{block}{(cc)}
-a_2 b_1 & a_2 b_2 \\
-\end{block}
-\end{blockarray}\right)
-\end{split}
-\end{equation*}
-Pokud si odmyslíte vnitřní závorkování, vznikla nám matice, tedy skutečně lineární zobrazení.
-
-Je ovšem také zřejmé, že druhá řádka je násobek první, tudíž řádky nejsou lineárně nezávislé. Obecně
-pokud vynásobíme vektor a kovektor, vznikne matice stupně 1, tzn. pouze s jednou lineárně nezávislou
-řádkou. Tímto způsobem tedy jsme schopní vytvořit pouze velmi omezenou množinu lineárních
-zobrazení\footnote{
-    V principu jde o lineární zobrazení, které jakýkoliv vektor nasměruje vždy do stejného
-    směru a pouze mu změní velikost.
-}.
-
-Je tedy zřejmé, že tensory obecně nemůžeme konstruovat tak, že vezmeme menší tensory a zkombinujeme
-je, ale musíme k problému přistoupit jinak. Výchozí myšlenka pro nás bude fakt, že matice stejného
-rozměru tvoří vektorový prostor (za domácí úkol si dokažte, že splňují axiomy). A stejně tak
-i všechna lineární zobrazení $\myspace{V}\rightarrow\myspace{W}$ tvoří vektorový prostor
-(koukněte se, jak jsme nadefinovali sčítání a násobení skalárem v kapitole XXX o lineárních
-formách).
-
-To znamená, že naší snahou bude vytvořit bázi matic resp. lineárních zobrazení. Máme Kroneckerův
-součin a přímo se nabízí zkombinovat bázové vektory a kovektory.
-
-\begin{example}
-Vezměme nejjednodušší příklad dvourozměrného vektorového prostoru $\myspace{V}$ a jeho duálního
-prostoru $\mydual{V}$ s ortonormální bází.
-\begin{equation*}
-e_1 = \left(\begin{array}{c}1 \\ 0\end{array}\right),
-e_2 = \left(\begin{array}{c}0 \\ 1\end{array}\right),
-\epsilon_1 = \left(\begin{array}{cc}1 & 0\end{array}\right),
-\epsilon_2 = \left(\begin{array}{cc}0 & 1\end{array}\right)
-\end{equation*}
-Pokud zkombinuji každý s každým, získám čtyři matice:
-\begin{equation*}
-\begin{split}
-e_1 \otimes \epsilon_1 &= \left(\begin{array}{c}1 \\ 0\end{array}\right) \otimes \left(\begin{array}{cc}1 & 0\end{array}\right) =
-\left(\begin{array}{cc}1 & 0 \\ 0 & 0 \end{array}\right) \\
-e_1 \otimes \epsilon_2 &= \left(\begin{array}{c}1 \\ 0\end{array}\right) \otimes \left(\begin{array}{cc}0 & 1\end{array}\right) =
-\left(\begin{array}{cc}0 & 1 \\ 0 & 0 \end{array}\right) \\
-e_2 \otimes \epsilon_1 &= \left(\begin{array}{c}0 \\ 1\end{array}\right) \otimes \left(\begin{array}{cc}1 & 0\end{array}\right) =
-\left(\begin{array}{cc}0 & 0 \\ 1 & 0 \end{array}\right) \\
-e_2 \otimes \epsilon_2 &= \left(\begin{array}{c}0 \\ 1\end{array}\right) \otimes \left(\begin{array}{cc}0 & 1\end{array}\right) =
-\left(\begin{array}{cc}0 & 0 \\ 0 & 1 \end{array}\right)
-\end{split}
-\end{equation*}
-V tomto jednoduchém případě je zcela zřejmé, že matice jsou lineárně nezávislé a jsou schopné vygenerovat libovolnou matici
-(koeficienty lineární kombinace přímo odpovídají hodnotám, které na konkrétní pozici chceme). Kombinací bázových vektorů
-a kovektorů nám vznikla báze prostoru lineárních zobrazení.
-
-\end{example}
-
-\noindent
-Máme tedy jasnou myšlenku: tensor bude prvek vektorového prostoru, který vznikne kombinací vektorových
-prostorů tensorů menších řádů. Což znamená, že rekursivně se dostaneme až ke krajním případům: tensorům
-řádu 1, tedy k vektorům a kovektorům. Tzn. takzvaně kontravariantní a kovariantní složky tensoru
-odpovídají krajním prostorům vektorů a kovektorů, ze kterých je složený prostor ve kterém se tensor
-nachází.
-
-Jak už jsme si ukázali, Kroneckerův součin je asociativní, takže nezáleží, jakým postupem prostor
-složíme. Např. pokud budu chtít složit prostor $\myspace{V} \otimes \mydual{V} \otimes \myspace{V}
-\otimes \myspace{V}$, je jedno, jestli nejdříve sloučím první dva a druhé dva, a následně je dám
-dohromady, nebo jestli budu postupně po jednom přidávat. Na druhou stranu součin není komutativní,
-takže na pořadí záleží a není možné ho měnit.
-
-Myšlenka nastíněna, nyní nás čeká skutečná práce: musíme dokázat, že složením bází dvou prostorů
-získáme opět bázi. Pro tento účel nejdříve musíme dokázat, že tensory stvořené Kroneckerovým
-součinem z báze menších prostorů jsou lineárně nezávislé. A protože celkvový důkaz se příliš utápí
-v indexech, nejdříve ho uděláme pro speciální malý případ.
-
-\begin{example}
-Mějme dvourozměrný vektorový prostor $\myspace{V}$ s bází
-\begin{equation*}
-\begin{split}
-\myvec{v_1} &= \left(\begin{array}{c}v_{11} \\ v_{12}\end{array}\right) \\
-\myvec{v_2} &= \left(\begin{array}{c}v_{21} \\ v_{22}\end{array}\right)
-\end{split}
-\end{equation*}
-a k němu příslušný duální prostor $\mydual{V}$ s bází
-\begin{equation*}
-\begin{split}
-\myvec{\theta_1} &= \left(\begin{array}{cc}\theta_{11} & \theta_{12}\end{array}\right) \\
-\myvec{\theta_2} &= \left(\begin{array}{cc}\theta_{21} & \theta_{22}\end{array}\right)
-\end{split}
-\end{equation*}
-Nyní budeme předpokládat, že lineární zobrazení vzniklá kombinací bázových vektorů a kovektorů
-jsou lineárně závislá, tzn. že existuje nenulová kombinace taková, že
-\begin{equation*}
-\alpha (\myvec{v_1}\otimes\myvec{\theta_1}) + \beta (\myvec{v_1}\otimes\myvec{\theta_2}) 
-  + \gamma (\myvec{v_2}\otimes\myvec{\theta_1}) + \delta (\myvec{v_2}\otimes\myvec{\theta_2}) = \myvec{0}
-\end{equation*}
-což ve složkách vypadá:
-\begin{equation*}
-\begin{split}
-\alpha\left(\begin{array}{cc}v_{11}\theta_{11} & v_{11}\theta_{12} \\ v_{12}\theta_{11} & v_{12}\theta_{12}\end{array}\right)
-+ \beta\left(\begin{array}{cc}v_{11}\theta_{21} & v_{11}\theta_{22} \\ v_{12}\theta_{21} & v_{12}\theta_{22}\end{array}\right)
-+ \gamma\left(\begin{array}{cc}v_{21}\theta_{11} & v_{21}\theta_{12} \\ v_{22}\theta_{11} & v_{22}\theta_{12}\end{array}\right) \\
-+\; \delta\left(\begin{array}{cc}v_{21}\theta_{21} & v_{21}\theta_{22} \\ v_{22}\theta_{21} & v_{22}\theta_{22}\end{array}\right)
-= \left(\begin{array}{cc} 0 & 0 \\ 0 & 0 \end{array}\right)
-\end{split}
-\end{equation*}
-tak vznikají 4 rovnice:
-\begin{equation*}
-\begin{split}
-\alpha v_{11}\theta_{11} + \beta v_{11}\theta_{21} + \gamma v_{21}\theta_{11} + \delta v_{21}\theta_{21} &= 0 \\
-\alpha v_{11}\theta_{12} + \beta v_{11}\theta_{22} + \gamma v_{21}\theta_{12} + \delta v_{21}\theta_{22} &= 0 \\
-\alpha v_{12}\theta_{11} + \beta v_{12}\theta_{21} + \gamma v_{22}\theta_{11} + \delta v_{22}\theta_{21} &= 0 \\
-\alpha v_{12}\theta_{12} + \beta v_{12}\theta_{22} + \gamma v_{22}\theta_{12} + \delta v_{22}\theta_{22} &= 0
-\end{split}
-\end{equation*}
-členy nyní přeskládáme a uzávorkujeme:
-\begin{equation*}
-\begin{split}
-(\alpha v_{11} + \gamma v_{21})\theta_{11} + (\beta v_{11} + \delta v_{21})\theta_{21} &= 0 \\
-(\alpha v_{11} + \gamma v_{21})\theta_{12} + (\beta v_{11} + \delta v_{21})\theta_{22} &= 0 \\
-(\alpha v_{12} + \gamma v_{22})\theta_{11} + (\beta v_{12} + \delta v_{22})\theta_{21} &= 0 \\
-(\alpha v_{12} + \gamma v_{22})\theta_{12} + (\beta v_{12} + \delta v_{22})\theta_{22} &= 0
-\end{split}
-\end{equation*}
-Nyní se pozorně podívejte na obsahy závorek. Zjistíte, že se tam po všech potřebných složkách
-objevují lineární kombinace $\alpha\myvec{v_1} + \gamma\myvec{v_2}$
-a $\beta\myvec{v_1} + \delta\myvec{v_2}$. Je tedy zřejmé, že alespoň jedna závorka musí být nenulová.
-V opačném případě by vektory $\myvec{v_1}$ a $\myvec{v_2}$ nebyly lineárně nezávislé, potažmo ani
-báze.
-
-Tuto nenulovou závorku si zvolím a vezmu všechny rovnice, ve kterých se vyskytuje (např. všechny rovnice,
-kde je $\alpha v_{12} + \gamma v_{22}$, pokud to je ta nenulová). Je vidět, že tyto rovnice určují po
-složkách nenulovou lineární kombinaci (alespoň jeden z koeficientů je nenulový - to je ta naše závorka)
-vektorů $\myvec{\theta_1}$ a $\myvec{\theta_2}$, která ovšem dává nulový prvek (nuly na pravé straně rovnice).
-Tzn. vektory $\myvec{\theta_1}$ a $\myvec{\theta_2}$ jsou lineárně závislé, což je spor s původním předpokladem,
-že tvoří bázi. Tedy lineární zobrazení vzniklá kombinací bázových vektorů a kovektorů jsou lineárně nezávislá.
-
-\end{example}
-
-\noindent
-Tak a teď obecně.
-
-\begin{lemma}
-Mějme prostor $\myspace{T}$ polí řádu $n$ s bází $\myvec{t^1},\hdots,\myvec{t^q}$
-a druhý prostor $\myspace{V}$ polí řádu $m$ s bází $\myvec{v^1},\hdots,\myvec{v^r}$.
-Množina polí vzniklých Kroneckerovým součinem bázových vektorů $\myvec{z^{11}} = \myvec{t^1}\otimes\myvec{v^1},
-\hdots,\myvec{z^{1r}} = \myvec{t^1}\otimes\myvec{v^r},\myvec{z^{21}} = \myvec{t^2}\otimes\myvec{v^1},\hdots,
-\myvec{z^{qr}} = \myvec{t^q}\otimes\myvec{v^r}$ je lineárně nezávislá vzhledem ke standardním operacím
-násobení skalárem a sčítání po složkách.
-\end{lemma}
-
-\begin{proof}
-Důkaz povedeme úplně stejně, jako v předchozím příkladu. Budeme předpokládat, že existuje nenulová lineární
-kombinace
-\begin{equation*}
-\alpha^{11}\myvec{z^{11}} + \cdots + \alpha^{qr}\myvec{z^{qr}} = \myvec{0}
-\end{equation*}
-Pokud rovnici rozepíšeme do složek, dostaneme \textbf{spoustu} rovnic ve všech možných kombinacích spodních
-indexů $i_1,\hdots,i_n,j_1,\hdots,j_m$:
-\begin{equation*}
-\alpha^{11}t^1_{i_1\hdots i_n}v^1_{j_1\hdots j_m} + \alpha^{12}t^1_{i_1\hdots i_n}v^2_{j_1\hdots j_m} + \cdots 
-+ \alpha^{qr}t^q_{i_1\hdots i_n}t^r_{j_1\hdots j_m} = 0
-\end{equation*}
-Pokud rovnice přeskládáme a uzávorkujeme:
-\begin{equation*}
-\begin{split}
-(\alpha^{11}t^1_{i_1\hdots i_n} + \alpha^{21}t^2_{i_1\hdots i_n} + \cdots + \alpha^{q1}t^q_{i_1\hdots i_n})v^1_{j_1\hdots j_m} & \\
-+ (\alpha^{12}t^1_{i_1\hdots i_n} + \alpha^{22}t^2_{i_1\hdots i_n} + \cdots + \alpha^{q2}t^q_{i_1\hdots i_n})v^2_{j_1\hdots j_m} & \\
-\vdots & \\
-+ (\alpha^{1r}t^1_{i_1\hdots i_n} + \alpha^{2r}t^2_{i_1\hdots i_n} + \cdots + \alpha^{qr}t^q_{i_1\hdots i_n})v^r_{j_1\hdots j_m} & = 0
-\end{split}
-\end{equation*}
-Pokud se podíváte na obsah závorek, zjistíte, že obsahují $r$ různých lineárních kombinací přes všechny potřebné složky polí
-$\myvec{t^1},\hdots,\myvec{t^q}$. (Že skutečně pro všechny složky je vidět, pokud si zafixuji indexy $j_1,\hdots,j_m$ do jedné
-konkrétní hodnoty. Pak musí existovat rovnice pro všechny kombinace $i_1,\hdots,i_n$.) Tedy, alespoň jedna závorka musí být nenulová,
-protože jinak by pole $\myvec{t^1},\hdots,\myvec{t^q}$ nebyla lineárně nezávislá, potažmo by nebyla báze.
-
-Jednu nenulovou závorku si zvolím a vyberu všechny rovnice, které ji obsahují. Získám tak nenulovou (protože obsahuje mou zvolenou
-nenulovou závorku) lineární kombinaci přes všechny složky polí $\myvec{v^1},\hdots,\myvec{v^r}$ (tentokrát jsou zafixované indexy
-$i_1,\hdots,i_n$, které určují zvolenou závorku, a musí se proiterovat všechny kombinace indexů $j_1,\hdots,j_m$), která ovšem dává
-nulové pole. To je v rozporu s předpokladem, že pole $\myvec{v^1},\hdots,\myvec{v^r}$ tvoří bázi, potažmo jsou lineárně nezávislá.
-Tedy, nenulová lineární kombinace polí $\myvec{z^{11}},\hdots,\myvec{z^{qr}}$ nemůže existovat.
-
-\end{proof}
-
-
-\end{document}
 
 
