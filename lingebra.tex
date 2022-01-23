@@ -2867,6 +2867,7 @@ Pokud mám dva vektorové prostory s konečnou bází, dává smysl si položit 
 vypadat báze jejich tensorového součinu. A odpověď pravděpodobně nebude příliš překvapivá.
 
 \begin{lemma}
+\label{lemma:tensor_basis}
 Mějme dva vektorové prostory s konečnou bází $\myspace{U}$ a $\myspace{V}$ nad stejným tělesem
 $\myspace{T}$, jejich tensorový součin $(\phi, \myspace{U}\otimes\myspace{V})$, bázi prostoru
 $\myspace{U}$ $\{\myvec{u_1}, \dots, \myvec{u_m}\}$ a bázi prostoru $\myspace{V}$
@@ -3014,6 +3015,314 @@ Nula vynásobená s čímkoliv je opět nula a součet nul je nula, tedy dostáv
 \end{equation*}
 Z předpokladu lineární závislosti jsme došli k logickému rozporu, tedy množina tensorových součinů
 bázových vektorů musí být lineárně nezávislá.
+\end{proof}
+
+\section{Tensory, duální prostory a bilineární formy}
+
+\noindent
+Možná to tak nevypadá, ale nyní zahajujeme klíčovou kapitolu, kterou se dostaneme k praktickému
+použití tensorů. Až doteď jsme vlastně pouze ukazovali, že tensor odpovídá multilineárnímu
+zobrazení. Známe vyjadřovací schopnosti a víme, kde je možné tensor použít. Prozatím jsme
+se ale příliš nepříbližili k ničemu, co jsme viděli v úvodním příkladu. Co jsou složky tensorů?
+Co je kontrakce tensoru? Jak vyjádřit tensor jako ``pole čísel``? A jak konečně nadefinovat
+tensor namísto tensorového součinu? Abychom mohli najít příslušné odpovědi, musíme se dostat
+k další alternativní definici tensorů. A cesta to nebude snadná, už jenom proto, že si možná
+navodíte alergii na slovo duální...
+
+Pokud jste pozorně studovali předchozí důkaz věty \ref{lemma:tensor_basis} dokazující, že
+tensorové součiny bází tvoří bázi tensorového součinu, možná jste si všimli, jak jsme zkonstruovali
+pomocné bilineární zobrazení $\vartheta_{ij}$:
+\begin{equation*}
+\begin{split}
+\vartheta_{ij}(\myvec{u_k}, \myvec{v_l}) = \psi_i(\myvec{u_k})\varphi_j(\myvec{v_l}) =
+\begin{cases}
+1 \: i = k \wedge j = l \\
+0 \: i \neq k \vee j \neq l
+\end{cases}
+\end{split}
+\end{equation*}
+Pokud vydolujete z paměti konstrukci duální báze (\ref{def:dual_basis}), zjistíte, že se podmínky
+nápadně podobají. Bilineární formy $\vartheta_{ij}$ samozřejmě netvoří bázi duálního prostoru,
+protože nejsou lineární. Ale jejich linearizace $T_{ij}$ již ano. Prostor linearizací bilineárních
+forem $\mathcal{B}(\myspace{U}\times\myspace{V}\rightarrow\myspace{T})$ tvoří duální prostor
+(z definice duálního prostoru) $(\myspace{U}\otimes\myspace{V})^*$ a linearizace bilineárních
+forem $\vartheta_{ij}$ tvoří jeho bázi. Víme, že prostory bilineárních zobrazení a jejich linearizací
+jsou isomorfní, formálně $\mathcal{B}(\myspace{U}\times\myspace{V}\rightarrow\myspace{T})\cong
+\mathcal{L}(\myspace{U}\otimes\myspace{V}\rightarrow\myspace{T}) = (\myspace{U}\otimes\myspace{V})^*$.
+
+Toto ne zas tak moc objevné zjištění nás přivádí blíže k definici pojmu tensor, kterou jsme v souvislosti
+s definicí tensorového součinu odmítli provést. Důvod byl, že prvky tensorového součinu neodpovídaly
+tomu, co si pod pojmem tensor představují fyzici - pro ně je tensor právě ona linearizace vyjádřená
+jako ``pole čísel``. Nyní jsme ale linearizace bilineárních forem ztotožnili (až na isomorfismus)
+s prvky duálního tensorového součinu. Pořád ještě to není ono, ale blížíme se.
+
+Abychom dosáhli cíle a tensory skutečně ztotožnili s prvky tensorového součinu prostorů, budeme
+potřebovat nalézt další dva isomorfismy. (Těch nikdy není dost, že?) Jako první musíme najít
+vztah mezi duálním tensorovým součinem $(\myspace{U}\otimes\myspace{V})^*$ a nějakým jiným
+ne-duálním tensorovým součinem.
+
+\begin{lemma}
+Mějme vektorové prostory konečné dimenze $\myspace{U}$ a $\myspace{V}$ nad stejným tělesem $\myspace{T}$.
+Pak tensorový součin duálních prostorů $\myspace{U^*}\otimes\myspace{V^*}$ je přirozeně isomorfní
+s duálním tensorovým součinem $(\myspace{U}\otimes\myspace{V})^*$,
+tzn. $\myspace{U^*}\otimes\myspace{V^*}\cong(\myspace{U}\otimes\myspace{V})^*$.
+\end{lemma}
+
+Jinými slovy, ztotožňujeme linearizace bilineárních forem s prvky tensorového součinu duálních
+prostorů. Tedy už s reálným tensorovým součinem prostorů, byť jeho ``operandy`` jsou duální
+prostory.
+
+\begin{proof}
+Abychom tvrzení dokázali, musíme zkonstruovat bijektivní lineární zobrazení
+$\Gamma: \myspace{U^*}\otimes\myspace{V^*}\rightarrow(\myspace{U}\otimes\myspace{V})^*$. Určitý
+návod nám už poskytl předchozí důkaz, kdy jsme konstruovali bázi duálního tensorového součinu
+jako násobky duální báze. Jestliže jsme bázi vytvořili jako násobení kovektorů, nemohli bychom
+použít stejný trik? Zkusme následující předpis:
+\begin{equation*}
+\Gamma(\myvec{\varphi}\otimes\myvec{\psi})(\myvec{u}\otimes\myvec{v}) 
+  = \myvec{\varphi}(\myvec{u})\myvec{\psi}(\myvec{v})
+\end{equation*}
+kde $\myvec{\varphi}\in\myspace{U^*}$, $=\myvec{\psi}\in\myspace{V^*}$, $\myvec{u}\in\myspace{U}$
+a $\myvec{v}\in\myspace{V}$.
+
+Tato definice na první pohled není úplná. Zaprvé tensorové součiny obsahují i prvky,
+které nejsou obrazy tensorového součinu vektorů, tudíž předpis definuje zobrazení z podmnožiny
+prostoru $\myspace{U^*}\otimes\myspace{V^*}$. Zadruhé pravá strana je viditelně bilineární
+zobrazení, proto nemůže být prvekm duálního prostoru.
+
+Řešení druhého problému je snadné. Pro každou bilineární formu existuje její linearizace,
+která pro stejné prvky vrací stejné hodnoty. Zobrazení $\Gamma$ tedy ve skutečnosti vrací
+linearizaci $T_{\varphi\psi}$. Což je také důvod, proč v předpisu dosazujeme prvek
+$\myvec{u}\otimes\myvec{v}$ - tím jsme vlastně řekli, že vracíme linearizaci.
+
+Pro řešení prvního problému potřebujeme příslušně dodefinovat zobrazení i pro ostatní prvky
+prostoru $\myspace{U^*}\otimes\myspace{V^*}$. A samozřejmě tak, abychom dostali lineární
+zobrazení.
+
+Pro tento krok použijeme starou známou pravdu, že obrazy báze definují lineární zobrazení
+jednoznačně. Pokud nadefinuji zobrazení $f$ tak, že libovolné lineární kombinaci báze
+přiřadí stejnou lineární kombinaci jejich obrazů
+\begin{equation*}
+\begin{split}
+f(\sum_i\alpha_i\myvec{e_i}) = \sum_i\alpha_i f(\myvec{e_i})
+\end{split}
+\end{equation*}
+získám lineární zobrazení (čtenář si jistě dokáže do tohoto předpisu dosadit součet vektorů
+a násobek skalárem, aby si to ověřil).
+
+Předpis zobrazení $\Gamma$ nám jednoznačně určuje obrazy báze - stačí bázové vektory do předpisu
+dosadit. Pomocí předchozího postupu obrazy definují lineární zobrazení. Pokud prokážeme, že
+toto lineární zobrazení vrací stejnou hodnotu pro všechny další určené prvky, získáme lineární
+zobrazení, které dodefinuje zobrazení $\Gamma$ na celý prostor $\myspace{U^*}\otimes\myspace{V^*}$.
+
+Když do do předpisu zobrazení $\Gamma$ dosadíme libovolný obraz tensorového součinu, kovektory,
+na pravé straně můžeme vyjádřit jako lineární kombinace vůči jejich bázím:
+\begin{equation*}
+\begin{split}
+\Gamma(\myvec{\varphi}\otimes\myvec{\psi})(\myvec{u}\otimes\myvec{v}) =
+  \left(\sum_{i}\alpha_i\myvec{\varphi_i}\right)(\myvec{u})
+  \left(\sum_{j}\beta_j\myvec{\psi_j}\right)(\myvec{v})
+\end{split}
+\end{equation*}
+z definice sčítání kovektorů můžeme přepsat jako
+\begin{equation*}
+\begin{split}
+\Gamma(\myvec{\varphi}\otimes\myvec{\psi})(\myvec{u}\otimes\myvec{v}) =
+  \left(\sum_{i}\alpha_i\myvec{\varphi_i}(\myvec{u})\right)
+  \left(\sum_{j}\beta_j\myvec{\psi_j}(\myvec{v})\right)
+\end{split}
+\end{equation*}
+a nakonec roznásobíme závorky
+\begin{equation*}
+\begin{split}
+\Gamma(\myvec{\varphi}\otimes\myvec{\psi})(\myvec{u}\otimes\myvec{v}) =
+  \sum_{i}\sum_{j}\alpha_i\beta_j\myvec{\varphi_i}(\myvec{u})\myvec{\psi_j}(\myvec{v})
+\end{split}
+\end{equation*}
+což odpovídá
+\begin{equation*}
+\begin{split}
+\Gamma(\myvec{\varphi}\otimes\myvec{\psi})(\myvec{u}\otimes\myvec{v}) =
+  \sum_{i}\sum_{j}\alpha_i\beta_j\Gamma(\myvec{\varphi_i}\otimes\myvec{\psi_j})(\myvec{u}\otimes\myvec{v})
+\end{split}
+\end{equation*}
+Z definice tensorového součinu (tensorový součin je bilineární zobrazení) víme, že
+\begin{equation*}
+\begin{split}
+\myvec{\varphi}\otimes\myvec{\psi} 
+  = \left(\sum_i\alpha_i\myvec{\varphi_i}\right)\otimes\left(\sum_j\beta_j\myvec{\psi_j}\right)
+  = \sum_i\sum_j\alpha_i\beta_j\myvec{\varphi_i}\otimes\myvec{\psi_j}
+\end{split}
+\end{equation*}
+($\alpha_i$ a $\beta_j$ jsou skutečně stejné zde i v předchozím, protože se v obou případech jedná
+o stejné lineární kombinace). Dostáváme tedy
+\begin{equation*}
+\begin{split}
+\Gamma(\sum_i\sum_j\alpha_i\beta_j\myvec{\varphi_i}\otimes\myvec{\psi_j})
+  = \sum_{i}\sum_{j}\alpha_i\beta_j\Gamma(\myvec{\varphi_i}\otimes\myvec{\psi_j})
+\end{split}
+\end{equation*}
+Slovy: obraz lineární kombinace báze je stejná lineární kombinace obrazů báze. Máme tedy
+zobrazení $\Gamma$ dobře dodefinované - je definované pro celý prostor, a zároveň je lineární.
+
+\medskip\noindent
+Teď chceme dokázat, že zobrazení $\Gamma$ je prosté. Předpokládejme, že existují dva prvky
+$\Omega_1\neq\Omega_2\in\myspace{U^*}\otimes\myspace{V^*}$, které vrací stejnou hodnotu.
+\begin{equation*}
+\begin{split}
+0 = \Gamma(\Omega_1)(\myvec{u}\otimes\myvec{v}) - \Gamma(\Omega_2)(\myvec{u}\otimes\myvec{v})
+\end{split}
+\end{equation*}
+Oba prvky můžeme vyjádřit jako lineární kombinaci vůči bázím
+\begin{equation*}
+\begin{split}
+0 = \Gamma(\sum_{i,j}\alpha_{ij}\myvec{\varphi_i}\otimes\myvec{\psi_j})(\myvec{u}\otimes\myvec{v}) 
+  - \Gamma(\sum_{i,j}\beta_{ij}\myvec{\varphi_i}\otimes\myvec{\psi_j})(\myvec{u}\otimes\myvec{v})
+\end{split}
+\end{equation*}
+Protože $\Gamma$ je lineární, můžeme sumy vystrčit ven
+\begin{equation*}
+\begin{split}
+0 = \sum_{i,j}\alpha_{ij}\Gamma(\myvec{\varphi_i}\otimes\myvec{\psi_j})(\myvec{u}\otimes\myvec{v}) 
+- \sum_{i,j}\beta_{ij}\Gamma(\myvec{\varphi_i}\otimes\myvec{\psi_j})(\myvec{u}\otimes\myvec{v})
+\end{split}
+\end{equation*}
+Součty přeuzávorkovat
+\begin{equation*}
+\begin{split}
+0 = \sum_{i,j}(\alpha_{ij} - \beta_{ij})\Gamma(\myvec{\varphi_i}\otimes\myvec{\psi_j})
+  (\myvec{u}\otimes\myvec{v})
+\end{split}
+\end{equation*}
+Nyní můžeme dosadit podle definice zobrazení $\Gamma$
+\begin{equation*}
+\begin{split}
+0 = \sum_{i,j}(\alpha_{ij} - \beta_{ij})\myvec{\varphi_i}(\myvec{u})\myvec{\psi_j}(\myvec{v})
+\end{split}
+\end{equation*}
+a za bilineární formu $\myvec{\varphi_i}(\myvec{u})\myvec{\psi_j}(\myvec{v})$ dosadit její
+linearizaci
+\begin{equation*}
+\begin{split}
+0 = \sum_{i,j}(\alpha_{ij} - \beta_{ij})T_{ij}(\myvec{u}\otimes\myvec{v})
+\end{split}
+\end{equation*}
+Jak již víme, $T_{ij}$ tvoří bázi duálního prostoru $(\myspace{U}\otimes\myspace{V})^*$, tedy
+jsou lineárně nezávislé. Jediná jejich nenulová lineární kombinace je ta triviální.
+Z toho vyplývá, že $\forall i,j: \alpha_{ij}-\beta_{ij} = 0$, tedy $\alpha_{ij} = \beta_{ij}$
+a následně $\Omega_1 = \Omega_2$, což je spor s předpokladem. Zobrazení $\Gamma$ je prosté.
+
+\medskip\noindent
+Důkaz, že zobrazení je surjektivní (\textit{na}) si můžeme hodně zjednodušit. Víme, že dimenze
+prostoru
+\begin{equation*}
+dim(\myspace{U^*}\otimes\myspace{V^*}) = dim(\myspace{U^*})dim(\myspace{V^*})
+\end{equation*}
+Pro prostory s konečnou dimenzí platí, že dimenze jejich duálního prostoru je stejná, tedy
+\begin{equation*}
+dim(\myspace{U^*}\otimes\myspace{V^*}) = dim(\myspace{U})dim(\myspace{V})
+\end{equation*}
+Dále víme, že
+\begin{equation*}
+dim(\myspace{U}\otimes\myspace{V}) = dim(\myspace{U})dim(\myspace{V})
+\end{equation*}
+a dimenze duálního tensorového součinu je opět stejná
+\begin{equation*}
+dim((\myspace{U}\otimes\myspace{V})^*) = dim(\myspace{U})dim(\myspace{V})
+\end{equation*}
+Dostáváme, že
+\begin{equation*}
+dim(\myspace{U^*}\otimes\myspace{V^*}) = dim((\myspace{U}\otimes\myspace{V})^*)
+\end{equation*}
+Pokud mám injektivní (\textit{prosté}) zobrazení mezi prostory o stejné dimenzi, zobrazení je
+zároveň surjektivní (\textit{na}). Zobrazení $\Gamma$ tedy je bijektivní, nebo-li isomorfismem
+prostorů $\myspace{U^*}\otimes\myspace{V^*}$ a $(\myspace{U}\otimes\myspace{V})^*$.
+\end{proof}
+
+\noindent
+Každý jistě vnímá, jak je předchozí zjištění vzrušující! Ztotožnili jsme prostor linearizací
+bilineárních forem s tensorovým součinem odpovídajících duálních prostorů. Vzhledem k isomorfismu
+$\myspace{V^{**}}\cong\myspace{V}$ je každý tensorový součin prostorů isomorfní s nějakým prostorem
+linearizací bilineárních forem, a začíná dávat smysl nazývat jeho prvky tensory:
+\begin{equation*}
+\def\arraystretch{2.0}
+\begin{array}{|c|c|c|}
+\hline
+\text{Formy} & \text{Linearizace} & \text{Tensorový součin} \\
+\hline
+\mathcal{B}(\myspace{U}\times\myspace{V}\rightarrow\myspace{T}) &
+\mathcal{L}(\myspace{U}\otimes\myspace{V}\rightarrow\myspace{T}) = (\myspace{U}\otimes\myspace{V})^* &
+\myspace{U^*}\otimes\myspace{V^*} \\
+\hline
+\mathcal{B}(\myspace{U}\times\myspace{V^*}\rightarrow\myspace{T}) &
+\mathcal{L}(\myspace{U}\otimes\myspace{V^*}\rightarrow\myspace{T}) = (\myspace{U}\otimes\myspace{V^*})^* &
+\myspace{U^*}\otimes\myspace{V} \\
+\hline
+\mathcal{B}(\myspace{U^*}\times\myspace{V}\rightarrow\myspace{T}) &
+\mathcal{L}(\myspace{U^*}\otimes\myspace{V}\rightarrow\myspace{T}) = (\myspace{U^*}\otimes\myspace{V})^* &
+\myspace{U}\otimes\myspace{V^*} \\
+\hline
+\mathcal{B}(\myspace{U^*}\times\myspace{V^*}\rightarrow\myspace{T}) &
+\mathcal{L}(\myspace{U^*}\otimes\myspace{V^*}\rightarrow\myspace{T}) = (\myspace{U^*}\otimes\myspace{V^*})^* &
+\myspace{U}\otimes\myspace{V} \\
+\hline
+\end{array}
+\end{equation*}
+
+\noindent
+Zvídavý čtenář si ale může položit otázku, jestli jsme se příliš neomezili. V obecné definici tensorového
+součinu pracujeme s libovolným bilineárním zobrazením. Tady jásáme nad ztotožněním prostoru bilineárních
+forem. Pokud bychom takto tensory nadefinovali, co budeme dělat s bilineárními zobrazeními, které formy
+nejsou?
+
+Zde přichází do hry druhý slibovaný isomorfismus. Pravda totiž je, že se ve skutečnosti ničím neomezujeme.
+
+\begin{lemma}
+Mějme vektorové prostory konečné dimenze $\myspace{U}$ a $\myspace{V}$ oba nad tělesem $\myspace{T}$.
+Pak prostor lineárních zobrazení $\mathcal{L}(\myspace{U}\rightarrow\myspace{V})$ je 
+přirozeně isomorfní s prostorem bilineárních forem
+$\mathcal{B}(\myspace{U}\times\myspace{V^*}\rightarrow\myspace{T})$, formálně
+$\mathcal{L}(\myspace{U}\rightarrow\myspace{V})\cong
+\mathcal{B}(\myspace{U}\times\myspace{V^*}\rightarrow\myspace{T})$.
+\end{lemma}
+
+Tato věta ukazuje, že je možné libovolné lineární zobrazení jednoznačně převést na bilineární formu.
+K ní dokážeme najít linearizaci, a ta už je isomorfní s prvkem nějakého tensorového součinu. Pokud
+si vzpomenete, jak jsme rozšiřovali tensorový součin na multilineární zobrazení, pochopíte, že
+tato věta nás ve skutečnosti neomezuje pouze na lineární zobrazení - pro libovolné bilineární a
+multilineární zobrazení jsme schopni nalézt jeho linearizaci, a tu rozšířit na bilineární formu,
+pro kterou opět nalezneme linearizaci, která je prvkem nějakého tensorového součinu, akorát již
+více jak dvou prostorů. Omezení se na bilineární či multilineární formy nám neubírá žádnou obecnost.
+
+\begin{proof}
+Pro důkaz použijme následující zobrazení
+\begin{equation*}
+\Gamma(L(\myvec{u})) = B(\myvec{u}, \varphi) = \varphi(L(\myvec{u}))
+\end{equation*}
+Pokud prokážeme, že toto zobrazení je lineární a bijektivní, máme vyhráno.
+Linearita je snadná, přímo vyplývá z faktu, že $\varphi$ je lineární forma
+\begin{equation*}
+\begin{split}
+\Gamma((\alpha L_1 + L_2)(\myvec{u})) = \varphi((\alpha L_1 + L_2)(\myvec{u}))
+  = \varphi(\alpha L_1(\myvec{u}) + L_2(\myvec{u}))) \\
+  = \alpha\varphi(L_1(\myvec{u})) + \varphi(L_2(\myvec{u})))
+  = \alpha\Gamma(L_1(\myvec{u})) + \Gamma(L_2(\myvec{u}))
+\end{split}
+\end{equation*}
+
+Zobrazení je poměrně snadno injektivní (\textit{prosté}). Pokud bychom měli dvě různá lineární
+zobrazení $L_1 \neq L_2$, pro která $\Gamma(L_1)=\Gamma(L_2)$, pak musí pro libovolné $\myvec{u}$
+a libovolné $\varphi$ platit
+\begin{equation*}
+\varphi(L_1(\myvec{u})) = \varphi(L_2(\myvec{u}))
+\end{equation*}
+Protože lineární zobrazení nejsou stejná, musí
+$\exists\myvec{u'}: L_1(\myvec{u'})\neq L_2(\myvec{u'})$. Pokud tento vektor dosadíme do předchozí
+rovnice, získáme spor
+\begin{equation*}
+\varphi(L_1(\myvec{u'})) \neq \varphi(L_2(\myvec{u'}))
+\end{equation*}
+
 \end{proof}
 
 \end{document}
