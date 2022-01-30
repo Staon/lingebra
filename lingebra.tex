@@ -1086,7 +1086,7 @@ musí být kolmé.
 Vektor $\mycoord{a}$ jsou souřadnice kovektoru v ortonormální bázi, proto platí geometrická analogie
 ``vrstevnic`` a jejich normály popisovaná v kapitole XXX.
 
-\section{Duální prostor duálního prostoru}
+\section{Duální prostor duálního prostoru}\label{section:dual-dual}
 
 \noindent V matematice je normální, že ze šíleností můžete skládat další šílenosti. Protože duální
 prostor je vektorový prostor, pak je možné vytvořit duální prostor duálního prostoru jako
@@ -3093,7 +3093,7 @@ zobrazení, proto nemůže být prvekm duálního prostoru.
 Řešení druhého problému je snadné. Pro každou bilineární formu existuje její linearizace,
 která pro stejné prvky vrací stejné hodnoty. Zobrazení $\Gamma$ tedy ve skutečnosti vrací
 linearizaci $T_{\varphi\psi}$. Což je také důvod, proč v předpisu dosazujeme prvek
-$\myvec{u}\otimes\myvec{v}$ - tím jsme vlastně řekli, že vracíme linearizaci.
+$\myvec{u}\otimes\myvec{v}$.
 
 Pro řešení prvního problému potřebujeme příslušně dodefinovat zobrazení i pro ostatní prvky
 prostoru $\myspace{U^*}\otimes\myspace{V^*}$. A samozřejmě tak, abychom dostali lineární
@@ -3310,19 +3310,43 @@ Linearita je snadná, přímo vyplývá z faktu, že $\varphi$ je lineární for
 \end{split}
 \end{equation*}
 
-Zobrazení je poměrně snadno injektivní (\textit{prosté}). Pokud bychom měli dvě různá lineární
-zobrazení $L_1 \neq L_2$, pro která $\Gamma(L_1)=\Gamma(L_2)$, pak musí pro libovolné $\myvec{u}$
-a libovolné $\varphi$ platit
-\begin{equation*}
-\varphi(L_1(\myvec{u})) = \varphi(L_2(\myvec{u}))
-\end{equation*}
-Protože lineární zobrazení nejsou stejná, musí
-$\exists\myvec{u'}: L_1(\myvec{u'})\neq L_2(\myvec{u'})$. Pokud tento vektor dosadíme do předchozí
-rovnice, získáme spor
-\begin{equation*}
-\varphi(L_1(\myvec{u'})) \neq \varphi(L_2(\myvec{u'}))
-\end{equation*}
+Pokud lemma platí, což se právě snažíme dokázat, její důsledky jsou poměrně velké. Proto bychom
+si zobrazení měli rozebrat trochu podrobněji. Jak je možné, že prostor zobrazení s jedním
+parametrem může být shodný s prostorem zobrazení se dvěma parametry? Nevím jak vám, ale mě
+to nedávalo smysl. Odpověď nám opět podá kapitola o duálním prostoru.
 
+Vezměme si libovolný vektor $\myvec{u}$ a dosaďme ho do lineárního zobrazení $L(\myvec{u}) = \myvec{v}$.
+Nyní ten samý vektor dosaďme do bilineární formy $B$
+\begin{equation*}
+g_{\myvec{u}}(\varphi) = B(\myvec{u}, \varphi) = \varphi(L(\myvec{u})) = \varphi(\myvec{v})
+\end{equation*}
+Pokud si vzpomenete na důkaz isomorfismu vektorového prostoru a jeho dvojitého duálu v kapitole
+\ref{section:dual-dual}, zjistíte, že jsme dostali přesně ten prvek dvojitého duálu
+\begin{equation*}
+g_{\myvec{u}}(\varphi) = \varphi(\myvec{v}) = \mycocovec{v}(\varphi)
+\end{equation*}
+To znamená, že jsme vlastně dostali dvě podobná zobrazení. Pokud do lineárního zobrazení
+$L$ dosadím vektor $\myvec{u}$, dostanu vektor $\myvec{v}$. Pokud do bilineárního zobrazení
+$B$ dosadím vektor $\myvec{u}$, dostanu ko-kovektor $\mycocovec{v}$. V tento okamžik zobrazení
+$\Gamma$ začíná dávat smysl, protože spojuje dvě zobrazení se stejnou vypovídací hodnotou.
+
+Nyní už je poměrně snadné dokázat, že zobrazení je injektivní (\textit{prosté}). Pokud mám
+dvě rozdílná zobrazení $L_1 \neq L_2$, pak musí existovat vektor $\myvec{u}$ pro které
+$L_1(\myvec{u}) \neq L_2(\myvec{u})$ (jinak by zobrazení nebyla rozdílná). Pokud tento vektor
+dosadíme do bilineárních forem daných zobrazením $\Gamma$, dostáváme dva rozdílné ko-kovektory 
+\begin{equation*}
+\Gamma(L_1)(\myvec{u}) = \mycocovec{L_1(\myvec{u}))} \neq
+    \mycocovec{L_2(\myvec{u}))} = \Gamma(L_2)(\myvec{u})
+\end{equation*}
+a tedy bilineární formy musí být rozdílné.
+
+Dokázat, že zobrazení je surjektivní (\textit{na}) lze opět udělat porovnáním dimenzí. Prostor
+lineárních zobrazení má dimenzi $dim(\myspace{U})dim(\myspace{V})$, což je stejné jako dimenze
+prostoru bilineárních forem\footnote{
+    Dimenzi prostoru lineárních zobrazení jsme tu neprobírali, ale pro rychlou orientaci se
+    čtenář může odrazit od rozměrů odpovídající matice. Dimenzi bilineární formy si čtenář
+    dokáže snadno odvodit od dimenze příslušného tensorového součinu.
+}. Pokud máme injektivní zobrazení mezi prostory stejné dimenze, zobrazení musí být i surjektivní.
 \end{proof}
 
 \end{document}
