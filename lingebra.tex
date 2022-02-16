@@ -1028,9 +1028,8 @@ Zkusme nyní vyjádřit velikost vektoru rozdílu (na obrázku červeně):
 \end{split}
 \end{equation*}
 Nyní zkusme vyjádřit velikost červené hrany pomocí známé cosinové věty\footnote{
-  Neplést s Kozinovou větou! Cosinovou větu zde dokazovat nebudeme, čtenář důkaz může snadno nalézt
-  na Internetu. Pro naše účely je potřeba vědět, že se dá dokázat geometricky bez potřeby skalárního
-  součinu.
+  Cosinovou větu zde dokazovat nebudeme, čtenář důkaz může snadno nalézt na Internetu. Pro naše účely
+  je potřeba vědět, že se dá dokázat geometricky bez potřeby skalárního součinu.
 }:
 \begin{equation*}
 \|\myvec{a}-\myvec{b}\|^2 = \|\myvec{a}\|^2 + \|\myvec{b}\|^2 - 2\|\myvec{a}\|\|\myvec{b}\|cos\theta
@@ -3348,6 +3347,199 @@ prostoru bilineárních forem\footnote{
     dokáže snadno odvodit od dimenze příslušného tensorového součinu.
 }. Pokud máme injektivní zobrazení mezi prostory stejné dimenze, zobrazení musí být i surjektivní.
 \end{proof}
+
+\begin{example}
+\noindent
+Předchozí věty si rozhodně zaslouží konkrétní příklad, protože alespoň pro mne jsou dost
+abstraktní.
+
+Vezměme si jednoduché lineární zobrazení $L: \myspace{R}^2\rightarrow\myspace{R}^2$ dané předpisem
+\begin{equation*}
+L(\myvec{x}) = \left(
+\begin{array}{c}
+2 x_1 + x_2 \\
+x_1 - 2 x_2
+\end{array}
+\right)
+\end{equation*}
+
+Podle druhé věty toto lineární zobrazení je přirozeně isomorfní s bilineární formou
+$B: \myspace{R}^{2*}\times\myspace{R}^2\rightarrow\myspace{R}$, a to podle předpisu
+\begin{equation*}
+B(\myvec{\varphi}, \myvec{x}) = \myvec{\varphi}(L(\myvec{x}))
+\end{equation*}
+Vyjádřeme si nejdříve formu $\varphi$, pokud do ní dosadíme libovolný vektor
+\begin{equation*}
+\begin{split}
+\myvec{\varphi}(\myvec{y}) = \varphi_1\myvec{\epsilon_1}(\myvec{y}) + \varphi_2\myvec{\epsilon_2}(\myvec{y})
+\end{split}
+\end{equation*}
+Nyní vyjádříme vektor $\myvec{y}$ vůči jeho bázi
+\begin{equation*}
+\begin{split}
+\myvec{\varphi}(\myvec{y}) 
+  = \varphi_1\myvec{\epsilon_1}(y_1\myvec{e_1} + y_2\myvec{e_2}) + \varphi_2\myvec{\epsilon_2}(y_1\myvec{e_1} + y_2\myvec{e_2}) \\
+= \varphi_1 y_1\myvec{\epsilon_1}(\myvec{e_1}) + \varphi_1 y_2\myvec{\epsilon_1}(\myvec{e_2}) 
+  + \varphi_2 y_1\myvec{\epsilon_2}(\myvec{e_1}) + \varphi_2 y_2\myvec{\epsilon_2}(\myvec{e_2})
+\end{split}
+\end{equation*}
+A pokud si vzpomenete na definici duální báze, kdy vrací $0$ a kdy $1$, dostaneme výsledek
+\begin{equation*}
+\begin{split}
+\myvec{\varphi}(\myvec{y}) = \varphi_1 y_1 + \varphi_2 y_2
+\end{split}
+\end{equation*}
+(Což mimochodem odpovídá maticovému součinu řádkového a sloupcového vektoru, jak jsme tvrdili v kapitole
+o duálních prostorech.) Nyní dosaďme za vektor $y$ předpis lineárního zobrazení $L$
+\begin{equation*}
+\begin{split}
+\myvec{\varphi}(L(\myvec{x})) = \varphi_1(2x_1 + x_2) + \varphi_2(x_1 - 2x_2) \\
+  = 2\varphi_1 x_1 + \varphi_1 x_2 + \varphi_2 x_1 - 2\varphi_2 x_2
+\end{split}
+\end{equation*}
+Nalezli jsme tedy bilineární formu, která je isomorfním obrazem k původnímu lineárnímu zobrazení $L$
+\begin{equation*}
+\begin{split}
+B(\myvec{\varphi}, \myvec{x}) = 2\varphi_1 x_1 + \varphi_1 x_2 + \varphi_2 x_1 - 2\varphi_2 x_2
+\end{split}
+\end{equation*}
+Povšimněte si, že koeficienty v předpise jsou pořád stejné, jako byly původně v lineárním zobrazení.
+To samozřejmě je očekávatelné, vzhledem k tomu, že jsme si ukázali, že bilineární forma je vlastně
+stejná jako lineární zobrazení, pouze výsledek vyjadřuje jako prvek prostoru $\myspace{R}^{2**}$.
+
+Tím že jsme nalezli isomorfní bilineární formu, dostáváme do ruky další možnost - můžeme dosadit
+nějaký konkrétní kovektor a zkombinovat ho tak s lineárním zobrazením. Možná si vzpomenete, že
+v motivačním příkladu na začátku kapitoly jsme něco takového udělali - dosadili jsme kovektor,
+který vracel hodnotu polynomu v bodě $1$, do lineárního zobrazení, které substituovalo do
+polynomu $u - t$. Tím jsme získali kovektor, který vrací hodnotu v bodě $1$ polynomu po substituci.
+
+Máme bilineární formu, tedy dalším krokem bude nalézt její linearizaci
+$H\in\mathcal{L}(\myspace{R}^{2*}\otimes\myspace{R}^2\rightarrow\myspace{R}) 
+ = (\myspace{R}^{2*}\otimes\myspace{R}^2)^*$. Z bilinearity tensorového součinu víme
+\begin{equation*}
+\begin{split}
+\myvec{\varphi}\otimes\myvec{x} = \varphi_1 x_1\myvec{\epsilon_1}\otimes\myvec{e_1}
+ + \varphi_1 x_2\myvec{\epsilon_1}\otimes\myvec{e_2}
+ + \varphi_2 x_1\myvec{\epsilon_2}\otimes\myvec{e_1}
+ + \varphi_2 x_2\myvec{\epsilon_2}\otimes\myvec{e_2}
+\end{split}
+\end{equation*}
+Linearizace $H$ musí splňovat
+\begin{equation*}
+\begin{split}
+B(\myvec{\varphi}, \myvec{x}) &= H(\myvec{\varphi}\otimes\myvec{x}) \\
+  &= \varphi_1 x_1 H(\myvec{\epsilon_1}\otimes\myvec{e_1})
+    + \varphi_1 x_2 H(\myvec{\epsilon_1}\otimes\myvec{e_2})
+    + \varphi_2 x_1 H(\myvec{\epsilon_2}\otimes\myvec{e_1}) \\
+    &+ \varphi_2 x_2 H(\myvec{\epsilon_2}\otimes\myvec{e_2})
+\end{split}
+\end{equation*}
+Pokud tento zápis porovnáme s vyjádřením bilineární formy $B$ o kousek výše, dostaneme
+\begin{equation*}
+\begin{split}
+H(\myvec{\epsilon_1}\otimes\myvec{e_1}) &= 2 \\
+H(\myvec{\epsilon_1}\otimes\myvec{e_2}) &= 1 \\
+H(\myvec{\epsilon_2}\otimes\myvec{e_1}) &= 1 \\
+H(\myvec{\epsilon_2}\otimes\myvec{e_2}) &= -2
+\end{split}
+\end{equation*}
+a protože $\myvec{\epsilon_i}\otimes\myvec{e_i}$ tvoří bázi, máme kompletní definici
+lineární formy $H$.
+
+Máme linearizaci a je čas uplatnit první větu z této kapitoly: nalézt isomorfní prvek tensorového
+součinu duálních prostorů $\myvec{y}\otimes\myvec{\mu}\in \myspace{R}^2\otimes\myspace{R}^{2*}$
+takový, pro který platí
+\begin{equation*}
+\begin{split}
+H(\myspace{\varphi}\otimes\myvec{x}) = \mycocovec{y}(\myvec{\varphi})\myspace{\mu}(\myvec{x})
+\end{split}
+\end{equation*}
+Po vyjádření všech činitelů vůči jejím bázím
+\begin{equation*}
+\begin{split}
+\mycocovec{y}(\myvec{\varphi})\myspace{\mu}(\myvec{x})
+  = (\varphi_1 y_1 \mycocovec{e_1}(\myvec{\epsilon_1})
+  + \varphi_1 y_2 \mycocovec{e_1}(\myvec{\epsilon_2})
+  + \varphi_2 y_1 \mycocovec{e_2}(\myvec{\epsilon_1})
+  + \varphi_2 y_2 \mycocovec{e_2}(\myvec{\epsilon_2})) \\
+    (x_1 \mu_1 \myvec{\epsilon_1}(\myvec{e_1})
+  + x_1 \mu_2 \myvec{\epsilon_1}(\myvec{e_2})
+  + x_2 \mu_1 \myvec{\epsilon_2}(\myvec{e_1})
+  + x_2 \mu_2 \myvec{\epsilon_2}(\myvec{e_2}))
+\end{split}
+\end{equation*}
+Pokud si opět vzpomeneme na definici duální báze, výraz se nám značně zjednoduší
+\begin{equation*}
+\begin{split}
+\mycocovec{y}(\myvec{\varphi})\myspace{\mu}(\myvec{x})
+  = (\varphi_1 y_1 + \varphi_2 y_2)(x_1 \mu_1 + x_2 \mu_2)
+\end{split}
+\end{equation*}
+a po roznásobení dostaneme
+\begin{equation*}
+\begin{split}
+\mycocovec{y}(\myvec{\varphi})\myspace{\mu}(\myvec{x})
+= \varphi_1 x_1 y_1 \mu_1 + \varphi_1 x_2 y_1 \mu_2 + \varphi_2 x_1 y_2 \mu_1 + \varphi_2 x_2 y_2 \mu_2
+\end{split}
+\end{equation*}
+Porovnáním tohoto zápisu s linearizací $H$ dostáváme souřadnice prvku $\myvec{y}\otimes\myvec{\mu}$
+\begin{equation*}
+\begin{split}
+y_1 \mu_1 &= 2 \\
+y_1 \mu_2 &= 1 \\
+y_2 \mu_1 &= 1 \\
+y_2 \mu_2 &= -2
+\end{split}
+\end{equation*}
+tedy hledaný prvek, zde již můžeme hrdě říci tensor, je
+\begin{equation*}
+\begin{split}
+\myvec{y}\otimes\myvec{\mu} 
+  = 2\myvec{e_1}\otimes\myvec{\epsilon_1}
+  + \myvec{e_1}\otimes\myvec{\epsilon_2}
+  + \myvec{e_2}\otimes\myvec{\epsilon_1}
+  - 2\myvec{e_2}\otimes\myvec{\epsilon_2}
+\end{split}
+\end{equation*}
+\end{example}
+
+\noindent
+Objevné důsledky dvou vět v této kapitole nás dostávají k dalším alternativním definicím tensorů
+a tensorovým součinům. Například této:
+
+\begin{definition}
+Tenzorovým součinem vektorových prostorů $\myspace{U}$ a $\myspace{V}$ myslíme prostor všech
+bilineárních forem $\mathcal{L}(\myspace{U}\times\myspace{V}\rightarrow\myspace{T})$ a
+značíme ho $\myspace{U}\otimes\myspace{V}$. Jeho prvky nazýváme tensory.
+\end{definition}
+
+Anebo jiná definice, kterou její autor považuje za pedagogicky nejstravitelnější
+\footnote{Posuďte sami.}:
+
+\begin{definition}
+Nechť $\myspace{X}$ a $\myspace{Y}$ jsou množiny a $\myspace{K}$ je těleso. Tenzorovým součinem
+forem $f: \myspace{X}\rightarrow\myspace{K}$, $g: \myspace{Y}\rightarrow\myspace{K}$ nazýváme
+funkci $f\otimes g: \myspace{X}\times\myspace{Y}\rightarrow\myspace{K}$ danou předpisem
+$(f\otimes g)(\myvec{x}, \myvec{y}) = f(\myvec{x})g(\myvec{y})$ pro $x\in \myspace{X}$ a $y\in\myspace{Y}$.
+
+Tenzorovým součinem lineárních podprostorů
+$\myspace{U}\subseteq\mathcal{L}(\myspace{X}\rightarrow\myspace{K})$
+a $\myspace{V}\subseteq\mathcal{L}(\myspace{Y}\rightarrow\myspace{K})$ nazýváme lineární podprostor 
+$\myspace{U}\otimes\myspace{V}$ vektorového prostoru
+$\mathcal{B}(\myspace{X}\times\myspace{Y}\rightarrow\myspace{K})$
+generovaný všemi funkcemi $f\otimes g$, kde $f\in\myspace{U}$, $g\in\myspace{V}$.
+\end{definition}
+
+\noindent
+Bez ohledu na alternativní definice, důsledky této kapitoly jsou velké. Můžeme se omezit pouze
+na lineární, bilineární či multilineární formy, protože víme, že každé lineární, bilineární
+nebo multilineární zobrazení dokážeme jednoznačně převést na formu. A druhý důsledek je,
+že konečně máme definici pojmu tensor: prvek tensorového součinu duálních
+prostorů.
+
+Nezapomínejme ovšem, že jsme se omezili pouze na prostory s konečnou bází. Popravdě
+autor vlastně netuší, jestli by věty uvedené v této kapitole platily i pro prostory s nekonečnou
+bází. Pokud to čtenář náhodou ví, může mi doplnit znalosti.
 
 \end{document}
 
