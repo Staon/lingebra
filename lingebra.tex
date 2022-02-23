@@ -7,6 +7,8 @@
 \usepackage{svg}
 \usepackage{amsmath}
 \usepackage{blkarray}
+\usepackage{bm}
+\usepackage{upgreek}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definice}[chapter]
@@ -16,14 +18,14 @@
 
 % Book styles
 \newcommand{\myscalar}[1]{#1}
-\newcommand{\myvec}[1]{\mathbf{#1}}
+\newcommand{\myvec}[1]{\bm{#1}}
 \newcommand{\mycoord}[1]{\overrightarrow{\mathbf{#1}}}
 \newcommand{\mymatrix}[1]{\mathbf{#1}}
 \newcommand{\myspace}[1]{\mathbb{#1}}
 \newcommand{\mymap}[1]{#1}
 \newcommand{\mydual}[1]{\myspace{#1^{*}}}
 \newcommand{\mydouble}[1]{\myspace{#1^{**}}}
-\newcommand{\mycocovec}[1]{\myvec{\widehat{#1}}}
+\newcommand{\mycocovec}[1]{\mathbf{\widehat{#1}}}
 
 \begin{document}
 
@@ -3081,7 +3083,7 @@ použít stejný trik? Zkusme následující předpis:
 \Gamma(\myvec{\varphi}\otimes\myvec{\psi})(\myvec{u}\otimes\myvec{v}) 
   = \myvec{\varphi}(\myvec{u})\myvec{\psi}(\myvec{v})
 \end{equation*}
-kde $\myvec{\varphi}\in\myspace{U^*}$, $=\myvec{\psi}\in\myspace{V^*}$, $\myvec{u}\in\myspace{U}$
+kde $\myvec{\varphi}\in\myspace{U^*}$, $\myvec{\psi}\in\myspace{V^*}$, $\myvec{u}\in\myspace{U}$
 a $\myvec{v}\in\myspace{V}$.
 
 Tato definice na první pohled není úplná. Zaprvé tensorové součiny obsahují i prvky,
@@ -3091,8 +3093,8 @@ zobrazení, proto nemůže být prvekm duálního prostoru.
 
 Řešení druhého problému je snadné. Pro každou bilineární formu existuje její linearizace,
 která pro stejné prvky vrací stejné hodnoty. Zobrazení $\Gamma$ tedy ve skutečnosti vrací
-linearizaci $T_{\varphi\psi}$. Což je také důvod, proč v předpisu dosazujeme prvek
-$\myvec{u}\otimes\myvec{v}$.
+linearizaci $T_{\varphi\psi}$, která pro vektory $\myvec{u}$ a $\myvec{v}$ dává stejné
+hodnoty. (Proto také v předpisu zarytě vektory vypisujeme.)
 
 Pro řešení prvního problému potřebujeme příslušně dodefinovat zobrazení i pro ostatní prvky
 prostoru $\myspace{U^*}\otimes\myspace{V^*}$. A samozřejmě tak, abychom dostali lineární
@@ -3114,7 +3116,7 @@ dosadit. Pomocí předchozího postupu obrazy definují lineární zobrazení. P
 toto lineární zobrazení vrací stejnou hodnotu pro všechny další určené prvky, získáme lineární
 zobrazení, které dodefinuje zobrazení $\Gamma$ na celý prostor $\myspace{U^*}\otimes\myspace{V^*}$.
 
-Když do do předpisu zobrazení $\Gamma$ dosadíme libovolný obraz tensorového součinu, kovektory,
+Když do předpisu zobrazení $\Gamma$ dosadíme libovolný obraz tensorového součinu, kovektory,
 na pravé straně můžeme vyjádřit jako lineární kombinace vůči jejich bázím:
 \begin{equation*}
 \begin{split}
@@ -3349,6 +3351,8 @@ prostoru bilineárních forem\footnote{
 \end{proof}
 
 \begin{example}
+\label{example:tensor-isomorphisms}
+
 \noindent
 Předchozí věty si rozhodně zaslouží konkrétní příklad, protože alespoň pro mne jsou dost
 abstraktní.
@@ -3358,7 +3362,7 @@ Vezměme si jednoduché lineární zobrazení $L: \myspace{R}^2\rightarrow\myspa
 L(\myvec{x}) = \left(
 \begin{array}{c}
 2 x_1 + x_2 \\
-x_1 - 2 x_2
+3 x_1 - 2 x_2
 \end{array}
 \right)
 \end{equation*}
@@ -3393,14 +3397,14 @@ A pokud si vzpomenete na definici duální báze, kdy vrací $0$ a kdy $1$, dost
 o duálních prostorech.) Nyní dosaďme za vektor $y$ předpis lineárního zobrazení $L$
 \begin{equation*}
 \begin{split}
-\myvec{\varphi}(L(\myvec{x})) = \varphi_1(2x_1 + x_2) + \varphi_2(x_1 - 2x_2) \\
-  = 2\varphi_1 x_1 + \varphi_1 x_2 + \varphi_2 x_1 - 2\varphi_2 x_2
+\myvec{\varphi}(L(\myvec{x})) = \varphi_1(2x_1 + x_2) + \varphi_2(3x_1 - 2x_2) \\
+  = 2\varphi_1 x_1 + \varphi_1 x_2 + 3\varphi_2 x_1 - 2\varphi_2 x_2
 \end{split}
 \end{equation*}
 Nalezli jsme tedy bilineární formu, která je isomorfním obrazem k původnímu lineárnímu zobrazení $L$
 \begin{equation*}
 \begin{split}
-B(\myvec{\varphi}, \myvec{x}) = 2\varphi_1 x_1 + \varphi_1 x_2 + \varphi_2 x_1 - 2\varphi_2 x_2
+B(\myvec{\varphi}, \myvec{x}) = 2\varphi_1 x_1 + \varphi_1 x_2 + 3\varphi_2 x_1 - 2\varphi_2 x_2
 \end{split}
 \end{equation*}
 Povšimněte si, že koeficienty v předpise jsou pořád stejné, jako byly původně v lineárním zobrazení.
@@ -3439,7 +3443,7 @@ Pokud tento zápis porovnáme s vyjádřením bilineární formy $B$ o kousek v�
 \begin{split}
 H(\myvec{\epsilon_1}\otimes\myvec{e_1}) &= 2 \\
 H(\myvec{\epsilon_1}\otimes\myvec{e_2}) &= 1 \\
-H(\myvec{\epsilon_2}\otimes\myvec{e_1}) &= 1 \\
+H(\myvec{\epsilon_2}\otimes\myvec{e_1}) &= 3 \\
 H(\myvec{\epsilon_2}\otimes\myvec{e_2}) &= -2
 \end{split}
 \end{equation*}
@@ -3487,7 +3491,7 @@ Porovnáním tohoto zápisu s linearizací $H$ dostáváme souřadnice prvku $\m
 \begin{split}
 y_1 \mu_1 &= 2 \\
 y_1 \mu_2 &= 1 \\
-y_2 \mu_1 &= 1 \\
+y_2 \mu_1 &= 3 \\
 y_2 \mu_2 &= -2
 \end{split}
 \end{equation*}
@@ -3497,7 +3501,7 @@ tedy hledaný prvek, zde již můžeme hrdě říci tensor, je
 \myvec{y}\otimes\myvec{\mu} 
   = 2\myvec{e_1}\otimes\myvec{\epsilon_1}
   + \myvec{e_1}\otimes\myvec{\epsilon_2}
-  + \myvec{e_2}\otimes\myvec{\epsilon_1}
+  + 3\myvec{e_2}\otimes\myvec{\epsilon_1}
   - 2\myvec{e_2}\otimes\myvec{\epsilon_2}
 \end{split}
 \end{equation*}
@@ -3509,7 +3513,7 @@ a tensorovým součinům. Například této:
 
 \begin{definition}
 Tenzorovým součinem vektorových prostorů $\myspace{U}$ a $\myspace{V}$ myslíme prostor všech
-bilineárních forem $\mathcal{L}(\myspace{U}\times\myspace{V}\rightarrow\myspace{T})$ a
+bilineárních forem $\mathcal{B}(\myspace{U}\times\myspace{V}\rightarrow\myspace{T})$ a
 značíme ho $\myspace{U}\otimes\myspace{V}$. Jeho prvky nazýváme tensory.
 \end{definition}
 
@@ -3531,15 +3535,334 @@ generovaný všemi funkcemi $f\otimes g$, kde $f\in\myspace{U}$, $g\in\myspace{V
 \end{definition}
 
 \noindent
-Bez ohledu na alternativní definice, důsledky této kapitoly jsou velké. Můžeme se omezit pouze
+Bez ohledu na alternativní definice, důsledky této kapitoly jsou důležité. Můžeme se omezit pouze
 na lineární, bilineární či multilineární formy, protože víme, že každé lineární, bilineární
 nebo multilineární zobrazení dokážeme jednoznačně převést na formu. A druhý důsledek je,
-že konečně máme definici pojmu tensor: prvek tensorového součinu duálních
-prostorů.
+že konečně máme definici pojmu tensor: prvek tensorového součinu duálních prostorů.
 
-Nezapomínejme ovšem, že jsme se omezili pouze na prostory s konečnou bází. Popravdě
-autor vlastně netuší, jestli by věty uvedené v této kapitole platily i pro prostory s nekonečnou
-bází. Pokud to čtenář náhodou ví, může mi doplnit znalosti.
+V tomto místě je potřeba připomenout, že jsme se již omezili na prostory s konečnou bází. Pokud
+autor ví, tak obě zde zveřejněná lemmata lze dokázat i pro prostory s nekonečnou dimenzí. Ale to
+už je mimo rozsah této učebnice.
+
+\section{Tensory v souřadnicích}
+
+\noindent
+V úvodním motivačním příkladu jsme s tensory pracovali jako s ``poli čísel``. To je vlastně ten
+hlavní bod pro praktické počítání s tensory - fyzici tensory jinak nepoužívají. My ovšem zatím
+pracovali pouze s bi/multilineárními zobrazeními, pole čísel jsme nikde nepotkali. Tento nedostatek
+se pokusíme napravit v této kapitole.
+
+Pro začátek zopakujeme trochu obecněji, co jsme udělali v příkladu předchozí kapitoly. Vezměme si
+dva vektorové prostory $\myspace{U}$ a $\myspace{V}$ nad stejným tělesem $\myspace{T}$, oba s konečnou
+bází $\{\myvec{u_1},\hdots\myvec{u_m}\}$ a $\{\myvec{v_1},\hdots\myvec{u_v}\}$. A mějme bilineární
+formu $B: \myspace{U}\times\myspace{V}\rightarrow\myspace{T}$. K této formě nyní hledáme její linearizaci
+\begin{equation*}
+\begin{split}
+B(\myvec{u}, \myvec{v}) = H(\myvec{u}\otimes\myvec{v})
+\end{split}
+\end{equation*}
+Vyjádřeme si nyní tensorový součin vektorů $\myvec{u}$ a $\myvec{v}$ vyjádřené vůči jejím bázím.
+\begin{equation*}
+\begin{split}
+\myvec{u}\otimes\myvec{v} = \left(u_1\myvec{u_1} + \cdots + u_m\myvec{u_m}\right)\otimes\left(v_1\myvec{v_1} + \cdots + v_n\myvec{v_n}\right)
+\end{split}
+\end{equation*}
+Tensorový součin je bilineární zobrazení a jeho vlastností můžeme výraz rozepsat
+\begin{equation*}
+\begin{split}
+\myvec{u}\otimes\myvec{v} = u_1 v_1\myvec{u_1}\otimes\myvec{v_1} + u_1 v_2\myvec{u_1}\otimes\myvec{v_2} 
+  + \cdots + u_m v_n\myvec{u_m}\otimes\myvec{v_n}
+\end{split}
+\end{equation*}
+Pokud toto dosadíme do linearizace $H$ a aplikujeme vlastnosti lineárního zobrazení, dostáváme
+\begin{equation*}
+\begin{split}
+H(\myvec{u}\otimes\myvec{v}) &= u_1 v_1H(\myvec{u_1}\otimes\myvec{v_1}) 
+  + u_1 v_2H(\myvec{u_1}\otimes\myvec{v_2}) + \cdots \\
+  &\cdots + u_m v_nH(\myvec{u_m}\otimes\myvec{v_n})
+\end{split}
+\end{equation*}
+Víme, že lineární zobrazení je jednoznačně definované obrazy báze. Tensorové součiny bází
+jsou báze tensorového součinu prostorů, proto nám stačí za $H(\myvec{u_i}\otimes\myvec{v_j})$
+jednoduše dosadit $B(\myvec{u_i}, \myvec{v_j})$. Tím jsme získali linearizaci.
+
+My už ovšem také víme, že jako pojem tensor jsme si nenadefinovali tuto linearizaci, ale prvek
+tensorového součinu duálních prostorů, který je s linearizací spojen isomorfním zobrazením.
+Ten potřebujeme nyní nalézt. Označme ho jako $\myvec{\mu}\otimes\myvec{\vartheta}$, kde
+$\myvec{\mu}\in\myspace{U}^*$ a $\myvec{\vartheta}\in\myspace{V}^*$.
+Z předchozího víme, že musí splňovat následující rovnost
+\begin{equation*}
+\begin{split}
+\myvec{\mu}(\myvec{u})\myvec{\vartheta}(\myvec{v}) = H(\myvec{u}\otimes\myvec{v})
+\end{split}
+\end{equation*}
+Jak kovektory tak vektory vyjádříme vůči jejich bázi. Protože máme prostory s konečnou dimenzí,
+velikost bází prostorů a jejich duálních prostorů jsou stejné.
+\begin{equation*}
+\begin{split}
+\myvec{\mu}(\myvec{u})\myvec{\vartheta}(\myvec{v}) =
+(\mu_1\myvec{\mu_1} + \cdots + \mu_m\myvec{\mu_m})(u_1\myvec{u_1} + \cdots + u_m\myvec{u_m})\\
+(\vartheta_1\myvec{\vartheta_1} + \cdots \vartheta_n\myvec{\vartheta_n})(v_1\myvec{v_1} 
+  + \cdots + v_n\myvec{v_n})
+\end{split}
+\end{equation*}
+(Pozor na závorky! Jedny jsou skutečně závorky, druhé určují parametr zobrazení.) Pokud využiji
+definici sčítání kovektorů a vlastnosti lineárního zobrazení, získám následující ošklivý rozklad
+\begin{equation*}
+\begin{split}
+\myvec{\mu}(\myvec{u})\myvec{\vartheta}(\myvec{v}) =
+\left(\mu_1 u_1 \myvec{\mu_1}(\myvec{u_1}) + \mu_1 u_2 \myvec{\mu_1}(\myvec{u_2}) + \cdots 
+  + \mu_m u_m \myvec{\mu_m}(\myvec{u_m})\right) \\
+\left(\vartheta_1 v_1 \myvec{\vartheta_1}(\myvec{v_1}) + \vartheta_1 v_2 \myvec{\vartheta_1}(\myvec{v_2}) 
+  + \cdots + \vartheta_n v_n \myvec{\vartheta_n}(\myvec{v_n})\right)
+\end{split}
+\end{equation*}
+Pokud si vzpomeneme na definici duální báze, výraz se výrazně zjednodušší, protože všechny výrazy
+$\myvec{\mu_i}(\myvec{u_i}) = 1$ a $\myvec{\mu_i}(\myvec{u_j}) = 0, i\neq j$ (a podobně pro
+$\myvec{\vartheta}$ a $\myvec{v}$). Tedy nám v závorkách zůstanou pouze koeficienty se stejným indexem.
+\begin{equation*}
+\begin{split}
+\myvec{\mu}(\myvec{u})\myvec{\vartheta}(\myvec{v}) =
+  \left(\mu_1 u_1 + \cdots + \mu_m u_m \right)
+  \left(\vartheta_1 v_1 + \cdots + \vartheta_n v_n \right)
+\end{split}
+\end{equation*}
+Nyní závorky můžeme roznásobit
+\begin{equation*}
+\begin{split}
+\myvec{\mu}(\myvec{u})\myvec{\vartheta}(\myvec{v}) &=
+  \mu_1\vartheta_1 u_1 v_1 + \mu_1\vartheta_2 u_1 v_2 + \cdots + \mu_1\vartheta_n u_1 v_n \\
+  &+ \mu_2\vartheta_1 u_2 v_1 + \mu_2\vartheta_2 u_2 v_2 + \cdots + \mu_2\vartheta_n u_2 v_n\\
+  &\vdots \\
+  &+ \mu_m\vartheta_1 u_m v_1 + \mu_m\vartheta_2 u_m v_2 + \cdots + \mu_m\vartheta_n u_m v_n
+\end{split}
+\end{equation*}
+Pokud tento ošklivý zápis porovnáme s vyjádřením linearizace $H$ výše (víme, že se musí rovnat),
+dostaneme
+\begin{equation*}
+\begin{split}
+\mu_i\vartheta_j = H(\myvec{u_i}\otimes\myvec{v_j}) = B(\myvec{u_i}, \myvec{v_j})
+\end{split}
+\end{equation*}
+Teď můžeme vyjádřit tensorový součin kovektorů $\myvec{\mu}$ a $\myvec{\vartheta}$
+\begin{equation*}
+\begin{split}
+\myvec{\mu}\otimes\myvec{\vartheta} &=
+  \mu_1\vartheta_1\myvec{\mu_1}\otimes\myvec{\vartheta_1} + \cdots 
+    + \mu_1\vartheta_n\myvec{\mu_1}\otimes\myvec{\vartheta_n} \\
+  & + \mu_2\vartheta_1\myvec{\mu_2}\otimes\myvec{\vartheta_1} + \cdots 
+    + \mu_2\vartheta_n\myvec{\mu_2}\otimes\myvec{\vartheta_n} \\
+  &\vdots \\
+  & + \mu_m\vartheta_1\myvec{\mu_m}\otimes\myvec{\vartheta_1} + \cdots 
+    + \mu_m\vartheta_n\myvec{\mu_m}\otimes\myvec{\vartheta_n}
+\end{split}
+\end{equation*}
+O kousek výše máme vyjádření koeficientů $\mu_i\vartheta_j$ (jedná se o stejné koeficienty, protože
+jde o stejnou lineární kombinaci bázových vektorů), tedy námi hledaný tensor má následující
+podobu
+\begin{equation*}
+\begin{split}
+\myvec{\mu}\otimes\myvec{\vartheta} 
+  = \sum_{i=1}^{m}\sum_{j=1}^{n}B(\myvec{u_i}, \myvec{v_j})\myvec{\mu_i}\otimes\myvec{\vartheta_j}
+\end{split}
+\end{equation*}
+Nalezli jsme souřadnice tensoru vůči jeho bázi a zbývá nám zapsat je hezky do podoby pole. Jako první
+pokus zkusíme vytvořit matici.
+\begin{equation*}
+\mymatrix{B} = 
+\left(\begin{array}{cccc}
+  B(\myvec{u_1}, \myvec{v_1}) & B(\myvec{u_1}, \myvec{v_2}) & \cdots & B(\myvec{u_1}, \myvec{v_n}) \\
+  B(\myvec{u_2}, \myvec{v_1}) & B(\myvec{u_2}, \myvec{v_2}) & \cdots & B(\myvec{u_2}, \myvec{v_n}) \\
+  \vdots & \vdots & \ddots & \vdots \\
+  B(\myvec{u_m}, \myvec{v_1}) & B(\myvec{u_m}, \myvec{v_2}) & \cdots & B(\myvec{u_m}, \myvec{v_n})
+\end{array}\right)
+\end{equation*}
+Toto se často dělá - typický případ ve fyzice je Cauchyho napěťový tensor. Bohužel samoukům mého
+ražení to opět způsobuje bolesti hlavy - jak se, proboha, taková matice liší od lineárního zobrazení?
+Z předchozí kapitoly víme, že lineární zobrazení je ekvivalentní bilineární formě s jedním vektorem
+a jedním kovektorem. Zde máme bilineární formu se dvěma vektory. Ale zapsaná matice vypadá stejně.
+
+Poučení z toho plyne, že pokud se ve fyzice setkáte s tensorem zapsaným jako matice, musíte si
+nejdříve z kontextu zjistit, jakou bilineární formu popisuje. Matice sama o sobě není dostatečný
+popis.
+
+To je ovšem ve fyzice. V motivačním příkladu jsme už naznačili způsob, jak se s touto nejednoznačností
+vypořádat. A budeme ho v textu nadále používat. Kontravariantní složky (souřadnice vektorů)
+budeme psát do sloupců, kovariantní složky (souřadnice kovektorů) budeme psát do řádek. Náš tensor
+$\myvec{\mu}\otimes\myvec{\vartheta}$ je lineární kombinací báze ve tvaru
+$\myvec{\mu_i}\otimes\myvec{\vartheta_j}$, tedy dvou kovariantních složek. Výsledné ``pole čísel``
+tedy bude řádkový vektor řádkových vektorů.
+\begin{equation*}
+\mymatrix{B} = 
+\left(\begin{array}{ccc}
+  \left(
+    B(\myvec{u_1}, \myvec{v_1}) \cdots B(\myvec{u_1}, \myvec{v_n})
+  \right) &
+  \cdots &
+  \left(
+    B(\myvec{u_m}, \myvec{v_1}) \cdots B(\myvec{u_m}, \myvec{v_n})
+  \right)
+\end{array}\right)
+\end{equation*}
+
+\medskip\noindent
+Zkusme nyní postup zopakovat pro bilineární formu, která jako argumenty přijímá
+kovektory. Mějme tedy bilineární formu $D:\myspace{U}^*\times\myspace{V}^*\rightarrow\myspace{T}$
+a k němu nalezneme linearizaci $F$
+\begin{equation*}
+\begin{split}
+D(\myvec{\mu}, \myvec{\vartheta}) = F(\myvec{\mu}\otimes\myvec{\vartheta})
+\end{split}
+\end{equation*}
+Stejným postupem získáme
+\begin{equation*}
+\begin{split}
+F(\myvec{\mu}\otimes\myvec{\vartheta}) &= \mu_1\vartheta_1 D(\myvec{\mu_1}\otimes\myvec{\vartheta_1})
+  + \mu_1\vartheta_2 D(\myvec{\mu_1}\otimes\myvec{\vartheta_2})
+  + \cdots + \\
+  & + \mu_m\vartheta_n D(\myvec{\mu_m}\otimes\myvec{\vartheta_n})
+\end{split}
+\end{equation*}
+A pokud linearizaci proženeme isomorfismem
+\begin{equation*}
+\begin{split}
+F(\myvec{\mu}\otimes\myvec{\vartheta}) = \mycocovec{u}(\myvec{\mu})\mycocovec{v}(\myvec{\vartheta})
+\end{split}
+\end{equation*}
+získáme tensor
+\begin{equation*}
+\begin{split}
+\mycocovec{u}\otimes\mycocovec{v} = \sum_{i=1}^{m}\sum_{j=1}^{n}D(\myvec{\mu_i}, \myvec{\vartheta_j})
+  \mycocovec{u}_i\otimes\mycocovec{v}_j
+\end{split}
+\end{equation*}
+a protože dvojitý duální prostor je přirozeně isomorfní s původním prostorem, můžeme převést na tensor
+\begin{equation*}
+\begin{split}
+\myvec{u}\otimes\myvec{v} = \sum_{i=1}^{m}\sum_{j=1}^{n}D(\myvec{\mu_i}, \myvec{\vartheta_j})
+  \myvec{u}_i\otimes\myvec{v}_j
+\end{split}
+\end{equation*}
+Náš tensor tedy  má dvě kontravariantní složky, jeho zápis do pole je sloupcový vektor sloupcových
+vektorů
+\begin{equation*}
+\begin{split}
+\mymatrix{D} = 
+\left(\begin{array}{c}
+  \left(\begin{array}{c}
+    D(\myvec{\mu_1}, \myvec{\vartheta_1}) \\
+    \vdots \\
+    D(\myvec{\mu_1}, \myvec{\vartheta_m})
+  \end{array}\right) \\
+  \vdots \\
+  \left(\begin{array}{c}
+    D(\myvec{\mu_m}, \myvec{\vartheta_1}) \\
+    \vdots \\
+    D(\myvec{\mu_m}, \myvec{\vartheta_m})
+  \end{array}\right)
+\end{array}\right)
+\end{split}
+\end{equation*}
+
+Pokud tedy mám bilineární formu, výsledný tensor má dvě složky odpovídající argumentům formy. Ovšem
+složka je obrácená - pokud je argument vektor, složka je kovektor, pokud je argument kovektor,
+složka je vektor. Nebo jinými slovy, pokud je argument kontravariantní, složka je kovariantní,
+a naopak.
+
+\begin{example}
+
+V příkladu v předchozí kapitole \ref{example:tensor-isomorphisms} jsme pro lineární zobrazení 
+\begin{equation*}
+L(\myvec{x}) = \left(
+\begin{array}{c}
+2 x_1 + x_2 \\
+3x_1 - 2 x_2
+\end{array}
+\right)
+\end{equation*}
+odvodili tensor
+\begin{equation*}
+\begin{split}
+\myvec{y}\otimes\myvec{\mu} 
+= 2\myvec{e_1}\otimes\myvec{\epsilon_1}
++ \myvec{e_1}\otimes\myvec{\epsilon_2}
++ 3\myvec{e_2}\otimes\myvec{\epsilon_1}
+- 2\myvec{e_2}\otimes\myvec{\epsilon_2}
+\end{split}
+\end{equation*}
+Tensor obsahuje první kontravariantní složku a druhou kovariantní. Zápis do pole tedy bude sloupcový
+vektor řádkových vektorů:
+\begin{equation*}
+\begin{split}
+\mymatrix{L} =
+\left(\begin{blockarray}{cc}
+  \begin{block}{(cc)}
+    2 & 1 \\
+  \end{block}
+  \begin{block}{(cc)}
+    3 & -2 \\
+  \end{block}
+\end{blockarray}
+\right)
+\end{split}
+\end{equation*}
+Pokud se pořádně podíváte, dostal jsme přesně stejnou matici, jakou bychom získali přímo pro zobrazení
+$L$, pouze máme navíc závorkování, abychom dokázali rozeznat jednotlivé složky tensoru. To je pochopitelně
+očekávaný výsledek - tensory považujeme za zobecnění vektorů, kovektorů i lineárních zobrazení.
+
+Narozdíl od běžného maticového násobení u tensorů můžeme prohodit indexy. Potom bychom měli
+tensor
+\begin{equation*}
+\begin{split}
+\myvec{\mu}\otimes\myvec{y} 
+= 2\myvec{\epsilon_1}\otimes\myvec{e_1}
++ 3\myvec{\epsilon_1}\otimes\myvec{e_2}
++ \myvec{\epsilon_2}\otimes\myvec{e_1}
+- 2\myvec{\epsilon_2}\otimes\myvec{e_2}
+\end{split}
+\end{equation*}
+a příslušná matice by vypadala takto
+\begin{equation*}
+\begin{split}
+\mymatrix{L} =
+\left(
+  \begin{array}{cc}
+    \left(
+      \begin{array}{c}
+        2 \\ 3
+      \end{array}
+    \right) &
+    \left(
+      \begin{array}{c}
+        1 \\ -2
+      \end{array}
+    \right)
+  \end{array}
+\right)
+\end{split}
+\end{equation*}
+Opět nám vyšla stejná matice, pouze závorkování je jiné. Ani toto není neočekávaný výsledek - tensorový
+součin je až na isomorfismus komutativní. A isomorfismus se nám zde projevuje jako odlišné závorky.
+
+Je potřeba si uvědomit, že se s prohozením indexů musí změnit i bilineární forma, kterou tensor
+representuje - musí se jí prohodit argumenty
+\begin{equation*}
+\begin{split}
+\widetilde{B}: \myspace{R}^2\times\myspace{R}^{2*}\rightarrow\myspace{R}^2
+\end{split}
+\end{equation*}
+s tím, že
+\begin{equation*}
+\begin{split}
+\widetilde{B}(\myvec{u}, \myvec{\varphi}) = B(\myvec{\varphi}, \myvec{u})
+\end{split}
+\end{equation*}
+\end{example}
+
+\medskip\noindent
+Zatím jsme dosazovali pouze vektory a kovektory. Co když ale argument bilineární formy bude
+jiný složitější tensor? Narozdíl od vektorů a kovektorů, tensor má více složek. Jak se s nimi
+bude pracovat?
 
 \end{document}
 
