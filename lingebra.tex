@@ -3554,7 +3554,7 @@ se pokusíme napravit v této kapitole.
 
 Pro začátek zopakujeme trochu obecněji, co jsme udělali v příkladu předchozí kapitoly. Vezměme si
 dva vektorové prostory $\myspace{U}$ a $\myspace{V}$ nad stejným tělesem $\myspace{T}$, oba s konečnou
-bází $\{\myvec{u_1},\hdots\myvec{u_m}\}$ a $\{\myvec{v_1},\hdots\myvec{u_v}\}$. A mějme bilineární
+bází $\{\myvec{u_1},\hdots\myvec{u_m}\}$ a $\{\myvec{v_1},\hdots\myvec{v_n}\}$. A mějme bilineární
 formu $B: \myspace{U}\times\myspace{V}\rightarrow\myspace{T}$. K této formě nyní hledáme její linearizaci
 \begin{equation*}
 \begin{split}
@@ -3863,6 +3863,225 @@ s tím, že
 Zatím jsme dosazovali pouze vektory a kovektory. Co když ale argument bilineární formy bude
 jiný složitější tensor? Narozdíl od vektorů a kovektorů, tensor má více složek. Jak se s nimi
 bude pracovat?
+
+Pro naše pozorování tedy vezmeme tři vektorové prostory $\myspace{U}$, $\myspace{V}$ a $\myspace{W}$
+nad stejným tělesem $\myspace{T}$. Prostory mají konečnou bázi $\{\myvec{u_1}, \hdots, \myvec{u_m}\}$,
+$\{\myvec{v_1}, \hdots, \myvec{v_n}\}$ a $\{\myvec{w_1}, \hdots, \myvec{w_o}\}$. A mějme bilineární
+formu $B: (\myspace{U}\otimes\myspace{V})\times\myspace{W}\rightarrow\myspace{T}$. Jak se změní
+náš předchozí postup?
+
+Ve skutečnosti se skoro nezmění. $\myspace{U}\otimes\myspace{V}$ je vektorový prostor, proto se k němu
+můžeme chovat stejně jako k jakémukoliv jinému vektoru. Takže opět začneme hledáním linearizace
+\begin{equation*}
+\begin{split}
+B(\myvec{u}\otimes\myvec{v}, \myvec{w}) = H((\myvec{u}\otimes\myvec{v})\otimes\myvec{w})
+\end{split}
+\end{equation*}
+Pokud obojí vyjádříme jako lineární kombinaci vůči jejich bázím a aplikujeme vlastnosti lineárního
+zobrazení (stejný postup, jako pro vektor výše), dostáváme
+\begin{equation*}
+\begin{split}
+H(&(\myvec{u}\otimes\myvec{v})\otimes\myvec{w}) = \\
+  &u_1 v_1 w_1 H((\myvec{u_1}\otimes\myvec{v_1})\otimes\myvec{w_1})
+  + \cdots + u_1 v_1 w_o H((\myvec{u_1}\otimes\myvec{v_1})\otimes\myvec{w_o}) \\
+  &u_1 v_2 w_1 H((\myvec{u_1}\otimes\myvec{v_2})\otimes\myvec{w_1})
+  + \cdots + u_1 v_2 w_o H((\myvec{u_1}\otimes\myvec{v_2})\otimes\myvec{w_o}) \\
+  &\vdots \\
+  &u_1 v_n w_1 H((\myvec{u_1}\otimes\myvec{v_n})\otimes\myvec{w_1})
+  + \cdots + u_1 v_n w_o H((\myvec{u_1}\otimes\myvec{v_n})\otimes\myvec{w_o}) \\
+  &u_2 v_1 w_1 H((\myvec{u_2}\otimes\myvec{v_1})\otimes\myvec{w_1})
+  + \cdots + u_2 v_n w_o H((\myvec{u_2}\otimes\myvec{v_n})\otimes\myvec{w_o}) \\
+  &\vdots \\
+  &u_m v_1 w_1 H((\myvec{u_m}\otimes\myvec{v_1})\otimes\myvec{w_1})
+  + \cdots + u_m v_n w_o H((\myvec{u_m}\otimes\myvec{v_n})\otimes\myvec{w_o}) \\
+\end{split}
+\end{equation*}
+To už je poněkud šílený zápis, takže začneme ho psát pomocí symbolů sumy
+\begin{equation*}
+\begin{split}
+H(&(\myvec{u}\otimes\myvec{v})\otimes\myvec{w}) =
+  \sum_{i=1}^{m}\sum_{j=1}^{n}\sum_{k=1}^{o}u_i v_j w_k H((\myvec{u_i}\otimes\myvec{v_j})\otimes\myvec{w_k})
+\end{split}
+\end{equation*}
+Nyní hledáme isomorfní prvek tensorového součinu duálních prostorů. Prvek opět označíme jako
+$\myvec{\mu}\otimes\myvec{\vartheta}$, kde $\myvec{\mu}\in(\myspace{U}\otimes\myspace{V})^*$ a
+$\myvec{\vartheta}\in\myspace{W}^*$.
+\begin{equation*}
+\begin{split}
+H(&(\myvec{u}\otimes\myvec{v})\otimes\myvec{w}) 
+  = \myvec{\mu}(\myvec{u}\otimes\myvec{v})\myvec{\vartheta}(\myvec{w})
+\end{split}
+\end{equation*}
+Pokud jak vektory tak kovektory vyjádříme vůči jejich bázi
+\begin{equation*}
+\begin{split}
+\myvec{\mu}&(\myvec{u}\otimes\myvec{v})\myvec{\vartheta}(\myvec{w}) = 
+  \mu\left(\sum_{i=1}^{m}\sum_{j=1}^{n}u_i v_j \myvec{u_i}\otimes\myvec{v_j}\right)
+  \vartheta\left(\sum_{k=1}^{o}w_k\myvec{w_k}\right) \\
+&= \left(\sum_{i=1}^{m}\sum_{j=1}^{n}u_i v_j \mu(\myvec{u_i}\otimes\myvec{v_j})\right)
+  \left(\sum_{k=1}^{o}w_k\vartheta(\myvec{w_k})\right) \\
+&= \left(\sum_{i=1}^{m}\sum_{j=1}^{n}u_i v_j
+     \left(\sum_{a=1}^{m}\sum_{b=1}^{n}\mu_{ab}\myvec{\mu_{ab}}(\myvec{u_i}\otimes\myvec{v_j})\right)\right) \\
+  &\left(\sum_{k=1}^{o}w_k \left(\sum_{c=1}^{o}\vartheta_k\myvec{\vartheta_c}(\myvec{w_k})\right)\right) \\
+\end{split}
+\end{equation*}
+A pokud si opět vzpomeneme na definici duální báze, většina členů nám vypadne (jsou 0) a zůstanou nám pouze
+ty se stejnými indexy (tam je duální báze rovna 1).
+\begin{equation*}
+\begin{split}
+\myvec{\mu}&(\myvec{u}\otimes\myvec{v})\myvec{\vartheta}(\myvec{w}) = 
+  \left(\sum_{i=1}^{m}\sum_{j=1}^{n}u_i v_j \mu_{ij}\right)
+  \left(\sum_{k=1}^{o}w_k \vartheta_k\right)
+\end{split}
+\end{equation*}
+A po roznásobení závorek získáme
+\begin{equation*}
+\begin{split}
+\myvec{\mu}&(\myvec{u}\otimes\myvec{v})\myvec{\vartheta}(\myvec{w}) = 
+  \sum_{i=1}^{m}\sum_{j=1}^{n}\sum_{k=1}^{o}u_i v_j w_k \mu_{ij}\vartheta_k
+\end{split}
+\end{equation*}
+Porovnáním s linearizací tedy dostáváme výsledný tensor
+\begin{equation*}
+\begin{split}
+\myvec{\mu}\otimes\myvec{\vartheta} =
+  \sum_{i=1}^{m}\sum_{j=1}^{n}\sum_{k=1}^{o} B((\myvec{u_i}\otimes\myvec{v_j}, \myvec{w_k}))
+    \myvec{\mu_{ij}\otimes\myvec{\vartheta_k}}
+\end{split}
+\end{equation*}
+Výsledek je sice hezký, ale vadí nám zde prvek $\myvec{\mu}$ - není nijak viditelně svázaný se složkami
+$\myvec{u}$ a $\myvec{v}$, tedy vlastně nevíme, co si pod ním představit. Abychom tento problém
+vyřešili, musíme pokračovat dále a opět využít isomorfismus z předchozí kapitoly. Prvek
+$\myvec{\mu}\in(\myspace{U}\otimes\myspace{V})^*$, tedy víme, že musí být isomorfní s prvkem
+prostoru $\myspace{U}^*\otimes\myspace{V}^*$. To znamená, že potřebujeme najít
+$\myvec{\nu}\otimes\myvec{\gamma}\in\myspace{U}^*\otimes\myspace{V}^*$ takové, aby platilo
+\begin{equation*}
+\begin{split}
+\myvec{\mu}(\myvec{u}\otimes\myvec{v}) = \myvec{\nu}(\myvec{u})\myvec{\gamma}(\myvec{v})
+\end{split}
+\end{equation*}
+Po zopakování všech stejných triků, které jsme již několikrát použili v předchozích krocích,
+dostáváme
+\begin{equation*}
+\begin{split}
+\myvec{\nu}(\myvec{u})\myvec{\gamma}(\myvec{v}) = \sum_{i=1}^{m}\sum_{j=1}^{n}u_i v_j \nu_i\gamma_j
+\end{split}
+\end{equation*}
+Pokud tento výraz porovnáme s vyjádřením $\myvec{\mu}(\myvec{u}\otimes\myvec{v})$ (koukněte se
+výše před tím, než jsme roznásobili závorky)
+\begin{equation*}
+\begin{split}
+\myvec{\nu}(\myvec{u})\myvec{\gamma}(\myvec{v}) =
+  \sum_{i=1}^{m}\sum_{j=1}^{n}u_i v_j \mu_{ij}
+  = \sum_{i=1}^{m}\sum_{j=1}^{n}u_i v_j \nu_i\gamma_j
+\end{split}
+\end{equation*}
+vychází, že
+\begin{equation*}
+\begin{split}
+\mu_{ij} = \nu_i\gamma_j
+\end{split}
+\end{equation*}
+Dostáváme tedy rovnici
+\begin{equation*}
+\begin{split}
+(\myvec{\nu}(\myvec{u})\myvec{\gamma}(\myvec{v}))\myvec{\vartheta}(\myvec{w}) = 
+  \sum_{i=1}^{m}\sum_{j=1}^{n}\sum_{k=1}^{o}u_i v_j w_k \nu_i\gamma_j\vartheta_k
+\end{split}
+\end{equation*}
+a odpovídající isomorfní tensor
+\begin{equation*}
+\begin{split}
+(\myvec{\nu}\otimes\myvec{\gamma})\otimes\myvec{\vartheta} =
+  \sum_{i=1}^{m}\sum_{j=1}^{n}\sum_{k=1}^{o} B(\myvec{u_i}\otimes\myvec{v_j}, \myvec{w_k})
+    (\myvec{\nu_i}\otimes\myvec{\gamma_j})\otimes\myvec{\vartheta_k}
+\end{split}
+\end{equation*}
+Protože víme, že tensorový součin je až na isomorfismus asociativní, můžeme si odpustit závorky.
+Také z kapitoly, kdy jsme tensorový součin rozšiřovali na multilineární zobrazení, víme, že existuje
+multilineární forma, která hodnotami odpovídá naší bilineární formě $B$. Dostáváme tak konečný
+zápis
+\begin{equation*}
+\begin{split}
+\myvec{\nu}\otimes\myvec{\gamma}\otimes\myvec{\vartheta} =
+  \sum_{i=1}^{m}\sum_{j=1}^{n}\sum_{k=1}^{o} \dot{B}(\myvec{u_i}, \myvec{v_j}, \myvec{w_k})
+    \myvec{\nu_i}\otimes\myvec{\gamma_j}\otimes\myvec{\vartheta_k}
+\end{split}
+\end{equation*}
+Vidíme, že tensor jako argument multilineárního zobrazení, se ``rozpadne`` na své složky. Proto je nám
+jedno, jestli pracujeme s tensorem jako celek, nebo jeho jednotlivými složkami. A můžeme si volně
+měnit závorkování, někdy pracovat s jednou složkou, někdy s více najednou.
+
+Také je vidět, že složky tensoru na vstupu bilineární formy, se ``invertovaly`` do svých duálních
+prostorů, takže se vlastně po složkách chovají úplně stejně jako vektory a kovektory. Tento fakt
+také ukazuje další ze zádrhelů, se kterými se samouk setká - proč se v operaci kontrakce vždy musí
+``potkat`` kontravariantní index s kovariantním. Kontrakce je v principu dosazení do formy, a tensor
+má složky zinvertované. O tom však podrobněji až v dalších kapitolách.
+
+\begin{example}
+Vyjádřeme si jako tensor determinant v $\myspace{R}^3$
+
+\begin{equation*}
+\begin{split}
+D(&\myvec{u}, \myvec{v}, \myvec{w}) =
+\begin{vmatrix}
+u_1 & u_2 & u_3 \\
+v_1 & v_2 & v_3 \\
+w_1 & w_2 & w_3
+\end{vmatrix} = \\
+&= u_1v_2w_3 + u_2v_3w_1 + u_3v_1w_2 - u_3v_2w_1 - u_2v_1w_3 - u_1v_3w_2
+\end{split}
+\end{equation*}
+Teď nalezněme jeho linearizaci
+\begin{equation*}
+\begin{split}
+D(\myvec{u}, \myvec{v}, \myvec{w}) = H(\myvec{u}\otimes\myvec{v}\otimes\myvec{w})
+  = \sum_{i=1}^{3}\sum_{j=1}^{3}\sum_{k=1}^{3}u_i v_j w_k D(\myvec{e_i}, \myvec{e_j}, \myvec{e_k})
+\end{split}
+\end{equation*}
+Tři sumy nám dávají 27 sčítanců, nicméně výše jich máme pouze 6. To je dané tím, že většina
+determinantů pro kombinace bázových vektorů bude rovna 0, pouze varianty, kdy jedničky budou umístěny
+na diagonálách (i na posunutých), bude dávat 1 nebo -1. Výsledný tensor bude mít tento zápis
+\begin{equation*}
+\begin{split}
+\myvec{\nu}\otimes\myvec{\gamma}\otimes\myvec{\vartheta} =
+  \sum_{i=1}^{3}\sum_{j=1}^{3}\sum_{k=1}^{3} D(\myvec{e_i}, \myvec{e_j}, \myvec{e_k})
+    \myvec{\epsilon_i}\otimes\myvec{\epsilon_j}\otimes\myvec{\epsilon_k}
+\end{split}
+\end{equation*}
+Protože máme 3 kovariantní složky, zápis do matice bude řádkový vektor, složený z řádkových vektorů
+řádkových vektorů (zápis je zalomený, aby se vešel na šírku stránky, ale jedná se o jednu řádku).
+\begin{equation*}
+\begin{split}
+(&((0\;0\;0)\;(0\;0\;1)\;(0\;-1\;0))\\
+ &((0\;0\;-1)\;(0\;0\;0)\;(1\;0\;0))\\
+ &((0\;1\;0)\;(-1\;0\;0)\;(0\;0\;0)))
+\end{split}
+\end{equation*}
+\end{example}
+
+\medskip\noindent
+Závěrem této kapitoly můžeme navrhnout obecné pravidlo. Pokud máme multilineární formu
+$M: \myspace{U}_1\times\cdots\times\myspace{U}_n\rightarrow\myspace{T}$, pak pro něj
+nalezneme odpovídající tensor $\myvec{\chi}\in\myspace{U}_1^*\otimes\cdots\times\myspace{U}_n^*$
+v podobě
+\begin{equation*}
+\begin{split}
+\myvec{\chi} = \sum_{i_1}\cdots\sum_{i_n}
+M(\myvec{e_{1_{i_1}}}, \hdots, \myvec{e_{n_{i_n}}})
+  \myvec{\epsilon_{1_{i_1}}}\otimes\cdots\otimes\myvec{\epsilon_{n_{i_n}}}
+\end{split}
+\end{equation*}
+kde $\myvec{e_{i_j}}$ jsou bázové vektory vektorových prostorů a $\myvec{\epsilon_{i_j}}$
+jsou vektory jejich duálních bází. A podobně jako matice lineárního zobrazení obsahuje
+obrazy bázových vektorů, prvky tensoru zapsaného jako pole čísel jsou obrazy všech kombinací
+bázových vektorů (pracujeme s formou, proto obraz je skalár)
+\begin{equation*}
+\begin{split}
+\chi_{i_1\hdots i_n} = M_{i_1\hdots i_n} = M(\myvec{e_{1_{i_1}}}, \hdots, \myvec{e_{n_{i_n}}})
+\end{split}
+\end{equation*}
+(Prvky pole značíme obvykle stejným písmenkem jako původní multilineární formu.)
 
 \end{document}
 
