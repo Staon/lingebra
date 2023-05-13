@@ -3645,7 +3645,8 @@ dostaneme
 \mu_i\vartheta_j = H(\myvec{u_i}\otimes\myvec{v_j}) = B(\myvec{u_i}, \myvec{v_j})
 \end{split}
 \end{equation*}
-Teď můžeme vyjádřit tensorový součin kovektorů $\myvec{\mu}$ a $\myvec{\vartheta}$
+Pokud vyjádříme tensorový součin kovektorů $\myvec{\mu}$ a $\myvec{\vartheta}$, kde
+kovektory vyjádříme jako složky a použijeme vlastnosti bilineárního zobrazení, dostaneme:
 \begin{equation*}
 \begin{split}
 \myvec{\mu}\otimes\myvec{\vartheta} &=
@@ -3658,9 +3659,9 @@ Teď můžeme vyjádřit tensorový součin kovektorů $\myvec{\mu}$ a $\myvec{\
     + \mu_m\vartheta_n\myvec{\mu_m}\otimes\myvec{\vartheta_n}
 \end{split}
 \end{equation*}
-O kousek výše máme vyjádření koeficientů $\mu_i\vartheta_j$ (jedná se o stejné koeficienty, protože
-jde o stejnou lineární kombinaci bázových vektorů), tedy námi hledaný tensor má následující
-podobu
+Součiny $\mu_i\vartheta_j$ jsou součiny stejných souřadnic, jako v předchozím součinu kovektorů,
+tudíž ze ně můžeme dosadit $B(\myvec{u_i}, \myvec{v_j})$ a získáme hledaný prvek tensorového
+součinu duálních prostorů, který nyní můžeme hrdě označit přímo slovem tensor:
 \begin{equation*}
 \begin{split}
 \myvec{\mu}\otimes\myvec{\vartheta} 
@@ -3678,18 +3679,18 @@ pokus zkusíme vytvořit matici.
   B(\myvec{u_m}, \myvec{v_1}) & B(\myvec{u_m}, \myvec{v_2}) & \cdots & B(\myvec{u_m}, \myvec{v_n})
 \end{array}\right)
 \end{equation*}
-Toto se často dělá - typický případ ve fyzice je Cauchyho napěťový tensor. Bohužel samoukům mého
-ražení to opět způsobuje bolesti hlavy - jak se, proboha, taková matice liší od lineárního zobrazení?
-Z předchozí kapitoly víme, že lineární zobrazení je ekvivalentní bilineární formě s jedním vektorem
-a jedním kovektorem. Zde máme bilineární formu se dvěma vektory. Ale zapsaná matice vypadá stejně.
+Toto se ve fyzice často dělá. Bohužel samoukům mého ražení to opět způsobuje bolesti hlavy - jak se,
+proboha, taková matice liší od lineárního zobrazení? Z předchozí kapitoly víme, že lineární
+zobrazení je ekvivalentní bilineární formě s jedním vektorem a jedním kovektorem. Zde máme
+bilineární formu se dvěma vektory. Ale zapsaná matice vypadá stejně.
 
 Poučení z toho plyne, že pokud se ve fyzice setkáte s tensorem zapsaným jako matice, musíte si
 nejdříve z kontextu zjistit, jakou bilineární formu popisuje. Matice sama o sobě není dostatečný
 popis.
 
 To je ovšem ve fyzice. V motivačním příkladu jsme už naznačili způsob, jak se s touto nejednoznačností
-vypořádat. A budeme ho v textu nadále používat. Kontravariantní složky (souřadnice vektorů)
-budeme psát do sloupců, kovariantní složky (souřadnice kovektorů) budeme psát do řádek. Náš tensor
+vypořádat. Kontravariantní složky (souřadnice vektorů) budeme psát do sloupců, kovariantní složky
+(souřadnice kovektorů) budeme psát do řádek. Náš tensor
 $\myvec{\mu}\otimes\myvec{\vartheta}$ je lineární kombinací báze ve tvaru
 $\myvec{\mu_i}\otimes\myvec{\vartheta_j}$, tedy dvou kovariantních složek. Výsledné ``pole čísel``
 tedy bude řádkový vektor řádkových vektorů.
@@ -4063,8 +4064,8 @@ Protože máme 3 kovariantní složky, zápis do matice bude řádkový vektor, 
 
 \medskip\noindent
 Závěrem této kapitoly můžeme navrhnout obecné pravidlo. Pokud máme multilineární formu
-$M: \myspace{U}_1\times\cdots\times\myspace{U}_n\rightarrow\myspace{T}$, pak pro něj
-nalezneme odpovídající tensor $\myvec{\chi}\in\myspace{U}_1^*\otimes\cdots\times\myspace{U}_n^*$
+$M: \myspace{U}_1\times\cdots\times\myspace{U}_n\rightarrow\myspace{T}$, pak pro ni
+nalezneme odpovídající tensor $\myvec{\chi}\in\myspace{U}_1^*\otimes\cdots\otimes\myspace{U}_n^*$
 v podobě
 \begin{equation*}
 \begin{split}
@@ -4101,7 +4102,7 @@ Formalismus zavedl Albert Einstein v průběhu své práce nad obecnou relativit
     a souřadnice kovektorů) má indexy dole. Co se transformuje s inverzní transformací (duální
     báze a souřadnice vektorů) má indexy nahoře.
   \item Pokud se ve výrazu vyskytují dva stejné indexy zápis znamená součet přes všechny hodnoty,
-    který index může nabývat. Toto pravidlo platí v rámci jednoho termu (součin několika prvků).
+    které index může nabývat. Toto pravidlo platí v rámci jednoho termu (součin několika prvků).
     U tensorů je běžné, že toto pravidlo vyžaduje navíc, aby byl jeden index nahoře a jeden
     dole. V tomto textu ho nevyžadujeme, ale pokud se s touto notací někde setkáte, musíte
     si zjistit, jestli se očekává, nebo ne.
@@ -4169,7 +4170,7 @@ y^i = L^i_j x^j
 \end{equation*}
 Vektory $\myvec{x}$ a $\myvec{y}$ jsou kontravariantní, proto jejich indexy jsou nahoře. Lineární
 zobrazení má jednu kontravariantní a jednu kovariantní složku, proto má index nahoře i dole. Na pravé
-straně je term, který obsahuje dvakrát index $i$, proto pravá strana odpovídá součtu
+straně je term, který obsahuje dvakrát index $j$, proto pravá strana odpovídá součtu
 \begin{equation*}
 \begin{split}
 y^i = L^i_1 x^1 + L^i_2 x^2 + L^i_3 x^3
@@ -4258,6 +4259,68 @@ x_i y^i + z_i a^i
 \end{split}
 \end{equation*}
 \end{example}
+
+\section{Kroneckerův součin}
+
+\noindent
+V předchozích kapitolách jsme si ukázali, že každou bilineární formu
+$B:\myspace{U}\times\myspace{V}\rightarrow\myspace{T}$ pro prostory
+s konečnou dimenzí lze jednoznačně vyjádřit jako tensor
+\begin{equation*}
+\begin{split}
+\myvec{\mu}\otimes\myvec{\vartheta} 
+= \sum_{i=1}^{m}\sum_{j=1}^{n}B(\myvec{u_i}, \myvec{v_j})\myvec{\mu_i}\otimes\myvec{\vartheta_j}
+\end{split}
+\end{equation*}
+což lze snadněji zapsat v sumační konvenci jako
+\begin{equation*}
+\begin{split}
+\myvec{\mu}\otimes\myvec{\vartheta} = B^{ij}\myvec{\mu_i}\otimes\myvec{\vartheta_j}
+\end{split}
+\end{equation*}
+a koeficienty $B^{ij}$ zapsat do pole čísel.
+
+Koeficienty nejsou nic jiného než souřadnice tensoru, protože víme, že tensorové
+součiny bází tvoří bázi prostoru tensorového součinu. Tzn. ono pole čísel není
+nic jiného, než jinak naformátovaný aritmetický vektor. Aritmetické vektory
+dokážeme jednoduše sčítat po složkách, proto stejným způsobem dokážeme sčítat
+i tensory. A asi nebude příliš překvapivé, že tato operace bude odpovídat součtu
+bilineárních forem, což vyplývá z definice tensorového součinu. Vezměme si následující
+formu
+\begin{equation*}
+\begin{split}
+B(\myvec{u}, \myvec{v}) = B_1(\myvec{u}, \myvec{v}) + B_2(\myvec{u}, \myvec{v})
+\end{split}
+\end{equation*}
+Formy $B_1$ a $B_2$ můžeme vyjádřit jako tensory, a pokud je sečteme, získáme
+\begin{equation*}
+\begin{split}
+B_1^{ij}\myvec{\mu_i}\otimes\myvec{\vartheta_j} + B_2^{ij}\myvec{\mu_i}\otimes\myvec{\vartheta_j}
+  = \left(B_1^{ij} + B_2^{ij}\right)\myvec{\mu_i}\otimes\myvec{\vartheta_j}
+\end{split}
+\end{equation*}
+což je tensor odpovídající bilineární formě $B$. A stejným způsobem dokážeme
+tensor vynásobit skalárem.
+\begin{equation*}
+\begin{split}
+\alpha B(\myvec{u}, \myvec{v}) \cong \alpha B^{ij}\myvec{\mu_i}\otimes\myvec{\vartheta_j}
+\end{split}
+\end{equation*}
+Nejedná se o nijak překvapivé závěry, na důkazech isomorfismů obou prostorů jsme strávili
+spoustu času. Uvádím to zde pouze na zdůraznění, že s tensory vyjádřenými jako souřadnice
+můžeme pracovat naprosto shodně, jako se souřadnicemi vektorů.
+
+Práce se souřadnicemi nás ale přivádí k dalšímu způsobu zavedení tensorů, se který se
+člověk v literatuře může potkat. Náš tensor je lineární kombinace tensorových součinů
+bází a dokážeme ho vypsat jako pole čísel. Ale i každý tensorový součin bází dokážeme
+vypsat jako pole čísel. V nejjednodušším případě jako pole samých nul kromě jedné
+jedničky na odpovídají pozici $ij$. Ale samozřejmě je možné bázové vektory vyjádřit
+jako souřadnice vůči jiné bázi, pak čísla v poli budou víc divoká.
+
+To nás vede k otázce, jestli existuje nějaký způsob, jak ze souřadnic bázových vektorů
+$\myvec{\mu_i}$ a $\myvec{\vartheta_i}$ vytvořit souřadnice bázových vektorů tensorového
+součinu $\myvec{\mu_i}\otimes\myvec{\vartheta_i}$.
+
 
 \end{document}
 
