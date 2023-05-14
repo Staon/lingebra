@@ -9,6 +9,7 @@
 \usepackage{blkarray}
 \usepackage{bm}
 \usepackage{upgreek}
+\usepackage{tensor}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definice}[chapter]
@@ -4104,8 +4105,8 @@ Formalismus zavedl Albert Einstein v průběhu své práce nad obecnou relativit
   \item Pokud se ve výrazu vyskytují dva stejné indexy zápis znamená součet přes všechny hodnoty,
     které index může nabývat. Toto pravidlo platí v rámci jednoho termu (součin několika prvků).
     U tensorů je běžné, že toto pravidlo vyžaduje navíc, aby byl jeden index nahoře a jeden
-    dole. V tomto textu ho nevyžadujeme, ale pokud se s touto notací někde setkáte, musíte
-    si zjistit, jestli se očekává, nebo ne.
+    dole. V tomto textu ho většinou budeme aplikovat, ale pokud se s touto notací někde setkáte,
+    musíte si zjistit, jestli se očekává, nebo ne.
 \end{enumerate}
 Jak záhy uvidíme, sumační konvence by nám dost zjednodušila život v předchozích kapitolách.
 Ale bohužel zatím nám chyběly znalosti ji pochopit. Ukažme si nyní několik příkladů.
@@ -4275,7 +4276,7 @@ s konečnou dimenzí lze jednoznačně vyjádřit jako tensor
 což lze snadněji zapsat v sumační konvenci jako
 \begin{equation*}
 \begin{split}
-\myvec{\mu}\otimes\myvec{\vartheta} = B^{ij}\myvec{\mu_i}\otimes\myvec{\vartheta_j}
+\myvec{\mu}\otimes\myvec{\vartheta} = B_{ij}\myvec{\mu^i}\otimes\myvec{\vartheta^j}
 \end{split}
 \end{equation*}
 a koeficienty $B^{ij}$ zapsat do pole čísel.
@@ -4289,118 +4290,216 @@ bilineárních forem, což vyplývá z definice tensorového součinu. Vezměme 
 formu
 \begin{equation*}
 \begin{split}
-B(\myvec{u}, \myvec{v}) = B_1(\myvec{u}, \myvec{v}) + B_2(\myvec{u}, \myvec{v})
+A(\myvec{u}, \myvec{v}) = B(\myvec{u}, \myvec{v}) + C(\myvec{u}, \myvec{v})
 \end{split}
 \end{equation*}
-Formy $B_1$ a $B_2$ můžeme vyjádřit jako tensory, a pokud je sečteme, získáme
+Formy $B$ a $C$ můžeme vyjádřit jako tensory, a pokud je sečteme, získáme
 \begin{equation*}
 \begin{split}
-B_1^{ij}\myvec{\mu_i}\otimes\myvec{\vartheta_j} + B_2^{ij}\myvec{\mu_i}\otimes\myvec{\vartheta_j}
-  = \left(B_1^{ij} + B_2^{ij}\right)\myvec{\mu_i}\otimes\myvec{\vartheta_j}
+B_{ij}\myvec{\mu^i}\otimes\myvec{\vartheta^j} + C_{ij}\myvec{\mu^i}\otimes\myvec{\vartheta^j}
+  = \left(B_{ij} + C_{ij}\right)\myvec{\mu^i}\otimes\myvec{\vartheta^j}
 \end{split}
 \end{equation*}
-což je tensor odpovídající bilineární formě $B$. A stejným způsobem dokážeme
+což je tensor odpovídající bilineární formě $A$. A stejným způsobem dokážeme
 tensor vynásobit skalárem.
 \begin{equation*}
 \begin{split}
-\alpha B(\myvec{u}, \myvec{v}) \cong \alpha B^{ij}\myvec{\mu_i}\otimes\myvec{\vartheta_j}
+\alpha B(\myvec{u}, \myvec{v}) \cong \alpha B_{ij}\myvec{\mu^i}\otimes\myvec{\vartheta^j}
 \end{split}
 \end{equation*}
 Nejedná se o nijak překvapivé závěry, na důkazech isomorfismů obou prostorů jsme strávili
 spoustu času. Uvádím to zde pouze na zdůraznění, že s tensory vyjádřenými jako souřadnice
 můžeme pracovat naprosto shodně, jako se souřadnicemi vektorů.
 
-Práce se souřadnicemi nás ale přivádí k dalšímu způsobu zavedení tensorů, se který se
+Práce se souřadnicemi nás ale přivádí k dalšímu způsobu zavedení tensorů, se kterým se
 člověk v literatuře může potkat. Náš tensor je lineární kombinace tensorových součinů
-bází a dokážeme ho vypsat jako pole čísel. Ale i každý tensorový součin bází dokážeme
-vypsat jako pole čísel. V nejjednodušším případě jako pole samých nul kromě jedné
-jedničky na odpovídají pozici $ij$. Ale samozřejmě je možné bázové vektory vyjádřit
-jako souřadnice vůči jiné bázi, pak čísla v poli budou víc divoká.
+bází a dokážeme ho vypsat jako pole čísel. To nás navádí k otázce, jestli i tensorový
+součin můžeme provést v souřadnicích. Odpověď je velmi nepřekvapivě ano, dokonce jsme
+tuto operaci v předchozím textu mnohokrát udělali.
+\begin{equation*}
+\begin{split}
+\myvec{\mu}\otimes\myvec{\vartheta} 
+= \left(\sum_i\mu_i\myvec{\mu_i}\right)\otimes\left(\sum_j\vartheta_j\myvec{\vartheta_j}\right)
+\end{split}
+\end{equation*}
+a z vlastností bilineárního zobrazení dostaneme
+\begin{equation*}
+\begin{split}
+\myvec{\mu}\otimes\myvec{\vartheta} 
+= \sum_i\sum_j\mu_i\vartheta_j\myvec{\mu_i}\otimes\myvec{\vartheta_j}
+\end{split}
+\end{equation*}
+případně v sumační konvenci
+\begin{equation*}
+\begin{split}
+\myvec{\mu}\otimes\myvec{\vartheta} = \mu_i\vartheta_j\myvec{\mu^i}\otimes\myvec{\vartheta^j}
+\end{split}
+\end{equation*}
+Jak je vidět, výsledná souřadnice pro bázi $\myvec{\mu^i}\otimes\myvec{\vartheta^j}$ je
+součin původních souřadnic vektorů $\mu_i\vartheta_j$.
 
-To nás vede k otázce, jestli existuje nějaký způsob, jak ze souřadnic bázových vektorů
-$\myvec{\mu_i}$ a $\myvec{\vartheta_i}$ vytvořit souřadnice bázových vektorů tensorového
-součinu $\myvec{\mu_i}\otimes\myvec{\vartheta_i}$.
+Tomuto součinu každé složky s každou složkou se říká \textbf{Kroneckrův součin}, a dá
+se velmi jednoduše zapsat ve složkách:
+\begin{equation*}
+\begin{split}
+\left(\myvec{\mu}\otimes\myvec{\vartheta}\right)_{ij} = \mu_i\vartheta_j
+\end{split}
+\end{equation*}
+a značí se stejnou značkou jako tensorový součin. Pokud rozlišuji mezi kontravariatními
+a kovariantními složkami, indexy po součinu zůstávají, kde byly. (Umístění indexů pouze
+napovídá zvláštní formátování souřadnic, Kroneckerovu součinu na formátování nezáleží,
+on jednoduše musí vynásobit každý s každým.)
 
+Už jsme si řekli, že tensorové součiny vektorů netvoří celý prostor tensorového součinu.
+Zde je to opět vidět, protože ne každou lineární kombinaci bází tensorového součinu dokážeme
+vypsat jako součin navzájem se střídajících koeficientů.
 
-\end{document}
+Tensory, které jsou přímo obrazem vektorových součinů, se v literatuře nazývají
+\textbf{čisté tensory} (anglicky \textbf{pure tensors}) a jedná se o poměrně omezenou
+podmnožinu tensorů.
 
-\section{Kroneckerův součin}
-
-\noindent
-Dříve než se pustíme přímo do tensorů, rozeberme podrobněji operaci, která nás dále bude neustále provázet:
-\textit{Kroneckerův součin}. Kroneckerův součin pracuje nad poli čísel, což pro nás bude vyjádření tensoru
-v souřadnicích. Základní princip je jednoduchý: každý prvek levého operandu nahradíme pravým operandem a jeho
-prvky vynásobíme nahrazenou hodnotou. Například:
+\begin{example}
 
 \begin{equation*}
 \begin{split}
-& \left(\begin{array}{c}1 \\ 2\end{array}\right)\otimes\left(\begin{array}{c}3 \\ 4\end{array}\right) =
-\left(\begin{blockarray}{c}
-\begin{block}{c}
-1 \left(\begin{array}{c}3 \\ 4\end{array}\right) \\
-2 \left(\begin{array}{c}3 \\ 4\end{array}\right) \\
-\end{block}
-\end{blockarray}\right) =
-\left(\begin{blockarray}{c}
-\begin{block}{(c)}
-1 \times 3 \\
-1 \times 4 \\
-\end{block}
-\begin{block}{(c)}
-2 \times 3 \\
-2 \times 4 \\
-\end{block}
-\end{blockarray}\right) =
-\left(\begin{blockarray}{c}
-\begin{block}{(c)}
-3 \\
-4 \\
-\end{block}
-\begin{block}{(c)}
-6 \\
-8 \\
-\end{block}
-\end{blockarray}\right)
+\left(1\;2\right)\otimes\left(\begin{array}{c}3 \\ 4\end{array}\right)
+=\left(
+\left(\begin{array}{c}
+1.3 \\ 1.4
+\end{array}\right)
+\left(\begin{array}{c}
+2.3 \\ 2.4
+\end{array}\right)
+\right)
+=\left(
+\left(\begin{array}{c}
+3 \\ 4
+\end{array}\right)
+\left(\begin{array}{c}
+6 \\ 8
+\end{array}\right)
+\right)
 \end{split}
 \end{equation*}
-Výsledkem tedy je dvourozměrné pole - první index určuje vnořené pole, druhý index prvek v něm, tedy
-$a_{11} = 3, a_{12} = 4, a_{21} = 6, a_{22} = 8$.
 
-Obecně tedy, pokud mám k-rozměrné pole $a$ a n-rozměrné pole $b$, jejich Kroneckerův součin 
-$s = a \otimes b$ bude "k plus n"-rozměrné pole s prvky podle předpisu:
+Vynásobili jsme jednu kovariantní s jednou kontravariantní složkou, čímž jsme dostali
+tensor typu $(1, 1)$, jinými slovy jsme získali lineární zobrazení. Řádky/sloupce takto
+vzniklé matice nejsou lineárně nezávislé (vždy stejný vektor násobený stejnou
+souřadnicí), stupeň matice je 1. Z toho vyplývá, že se jedná o poměrně dost degradované
+lineární zobrazení.
+
+Zápis příkladu vyjádřený po složkách by byl velmi jednoduchý:
 \begin{equation*}
-s_{i_1 \cdots i_k j_1 \cdots j_n} = a_{i_1 \cdots i_k} b_{j_1 \cdots j_n}
+\begin{split}
+c\indices{_i^j} = a_i b^j
+\end{split}
 \end{equation*}
-Kroneckerův součin je vlastně poměrně jednoduchá operace, která vynásobí každý prvek s každým
-a uspořádá je do nového pole kopírujícího struktury původních dvou.
+	
+\end{example}
 
-Kroneckerův součin demonstruje jev, se kterým se v tensorové algebře budeme potýkat: příliš rychle
-narůstá složitost. Pokud vynásobím dvě pole, rozměr výsledného pole roste se součtem rozměrů polí,
-počet prvků roste s násobkem počtu prvků. Velmi záhy tak zápis ve dvourozměrné ploše papírů přestane
-být čitelný a budeme se muset uchylovat k zápisu po složkách s indexy, jako je popsaný součin výše.
-Ale i v tomto zápisu začne počet indexů přerůstat hladinu srozumitelnosti.
+\begin{example}
+Nic nám nebrání násobit i tensory s více složkami (tensor sám o sobě je také vektor).
 
-Co můžeme o Kroneckerově součinu říci dále? Tak např. je \textbf{asociativní}:
 \begin{equation*}
-(a \otimes b) \otimes c = a \otimes (b \otimes c)
-\end{equation*}
-což poměrně jednoduše vyplývá z toho, že násobení prvků je asociativní:
-\begin{equation*}
-(a_{i_1 \cdots i_n} b_{j_1 \cdots j_o})c_{k_1 \cdots k_p} = a_{i_1 \cdots i_n} (b_{j_1 \cdots j_o} c_{k_1 \cdots k_p})
-\end{equation*}
-I na násobení skalárem (roznásobení každého prvku pole) se chová očekávaně:
-\begin{equation*}
-\alpha (a \otimes b) = (\alpha a) \otimes b = a \otimes (\alpha b)
-\end{equation*}
-což opět jednodušše vyplývá z asociativity a komutativity násobení jednotlivých prvků:
-\begin{equation*}
-\alpha (a_{i_1 \cdots i_n} b_{j_1 \cdots j_o}) = (\alpha a_{i_1 \cdots i_n}) b_{j_1 \cdots j_o}
-= a_{i_1 \cdots i_n} (\alpha b_{j_1 \cdots j_o})
+\begin{split}
+\left(
+\left(\begin{array}{c}
+3 \\ 4
+\end{array}\right)
+\left(\begin{array}{c}
+6 \\ 8
+\end{array}\right)
+\right)\otimes\left(5\;6\right)
+&=\left(
+\left(\begin{array}{c}
+\left(3.5 \; 3.6\right) \\ \left(4.5 \; 4.6\right)
+\end{array}\right)
+\left(\begin{array}{c}
+\left(6.5 \; 6.6\right) \\ \left(8.5 \; 8.6\right)
+\end{array}\right)
+\right) \\
+&=\left(
+\left(\begin{array}{c}
+\left(15 \; 18\right) \\ \left(20 \; 24\right)
+\end{array}\right)
+\left(\begin{array}{c}
+\left(30 \; 36\right) \\ \left(40 \; 46\right)
+\end{array}\right)
+\right)
+\end{split}
 \end{equation*}
 
-Kroneckerův součin ale \textbf{není obecně komutativní}: $a \otimes b \neq b \otimes a$. Ale
-je v principu ``skorokomutativní``. Otočením operandů vzniknou stejné prvky, protože násobení
-prvků komutativní je, ale změní se pořadí indexů. Takže vznikne pole se stejnými hodnotami,
-ale jinak rozvržené, a které permutací indexů dokážeme přetransformovat do stejné podoby.
+Takto jsme získali tensor typu $(1, 2)$ (jedna kontravariantní a 2 kovariantní
+složky). Součin vyjádřený po složkách vypadá takto:
+\begin{equation*}
+\begin{split}
+h\indices{_i^j_k} = c\indices{_i^j} d\indices{_k}
+\end{split}
+\end{equation*}
 
+\end{example}
 
+Ačkoliv čisté tensory samy o sobě nejsou moc užitečné, hodí se nám pro vyjádření
+báze prostoru tensorového součinu vzniklé součinem bázových vektorů. To jsou také
+čisté tensory. Dostáváme tak bázi vyjádřenou jako pole čísel, tzn. podobně jako
+můžeme mít bázi vyjádřenou jako souřadnice vektorů.
+
+\begin{example}
+Nejjednodušší příklad jsou bázové vektory vyjadřené jako souřadnice vůči sobě.
+
+\begin{equation*}
+\begin{split}
+\left(1 \; 0\right)\otimes\left(\begin{array}{c}1 \\ 0\end{array}\right)
+=\left(
+\left(\begin{array}{c}1 \\ 0\end{array}\right)
+\left(\begin{array}{c}0 \\ 0\end{array}\right)
+\right)
+\end{split}
+\end{equation*}
+
+\begin{equation*}
+\begin{split}
+\left(0 \; 1\right)\otimes\left(\begin{array}{c}1 \\ 0\end{array}\right)
+=\left(
+\left(\begin{array}{c}0 \\ 0\end{array}\right)
+\left(\begin{array}{c}1 \\ 0\end{array}\right)
+\right)
+\end{split}
+\end{equation*}
+
+\begin{equation*}
+\begin{split}
+\left(1 \; 0\right)\otimes\left(\begin{array}{c}0 \\ 1\end{array}\right)
+=\left(
+\left(\begin{array}{c}0 \\ 1\end{array}\right)
+\left(\begin{array}{c}0 \\ 0\end{array}\right)
+\right)
+\end{split}
+\end{equation*}
+
+\begin{equation*}
+\begin{split}
+\left(0 \; 1\right)\otimes\left(\begin{array}{c}0 \\ 1\end{array}\right)
+=\left(
+\left(\begin{array}{c}0 \\ 0\end{array}\right)
+\left(\begin{array}{c}0 \\ 1\end{array}\right)
+\right)
+\end{split}
+\end{equation*}
+
+\end{example}
+
+\noindent
+I toto je způsob, který se někdy používá pro zavedení tensorů - tensor je lineární
+kombinace takovýchto "polí čísel", které vznikly jako Kroneckerův součin souřadnic
+bázových vektorů jednotlivých složek tensoru.
+
+Pochopitelně, pokud bázové vektory vyjádříme jako souřadnice vůči jiné bázi, pole čísel
+už nebudou tak krásně nulo-jedničková.
+
+Kroneckerův součin není komutativní. Ale je "skoro-komutativní" - násobení souřadnic
+samo o sobě komutativní je a prohození operandů nám pouze otočí pořadí indexů. To také
+není překvapivý závěr - víme, že tensorový součin je komutativní až na jednoduchý
+isomorfismus.
+
+\end{document}
