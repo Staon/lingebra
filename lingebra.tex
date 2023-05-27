@@ -4338,7 +4338,7 @@ případně v sumační konvenci
 Jak je vidět, výsledná souřadnice pro bázi $\myvec{\mu^i}\otimes\myvec{\vartheta^j}$ je
 součin původních souřadnic vektorů $\mu_i\vartheta_j$.
 
-Tomuto součinu každé složky s každou složkou se říká \textbf{Kroneckrův součin}, a dá
+Tomuto součinu každé složky s každou složkou se říká \textbf{Kroneckerův součin}, dá
 se velmi jednoduše zapsat ve složkách:
 \begin{equation*}
 \begin{split}
@@ -4423,7 +4423,7 @@ Nic nám nebrání násobit i tensory s více složkami (tensor sám o sobě je 
 \left(15 \; 18\right) \\ \left(20 \; 24\right)
 \end{array}\right)
 \left(\begin{array}{c}
-\left(30 \; 36\right) \\ \left(40 \; 46\right)
+\left(30 \; 36\right) \\ \left(40 \; 48\right)
 \end{array}\right)
 \right)
 \end{split}
@@ -4445,7 +4445,7 @@ báze prostoru tensorového součinu vzniklé součinem bázových vektorů. To 
 můžeme mít bázi vyjádřenou jako souřadnice vektorů.
 
 \begin{example}
-Nejjednodušší příklad jsou bázové vektory vyjadřené jako souřadnice vůči sobě.
+Nejjednodušší příklad jsou bázové vektory vyjádřené jako souřadnice vůči sobě.
 
 \begin{equation*}
 \begin{split}
@@ -4501,5 +4501,166 @@ Kroneckerův součin není komutativní. Ale je "skoro-komutativní" - násoben�
 samo o sobě komutativní je a prohození operandů nám pouze otočí pořadí indexů. To také
 není překvapivý závěr - víme, že tensorový součin je komutativní až na jednoduchý
 isomorfismus.
+
+\section{Rozšíření a kontrakce tensoru}
+
+\noindent
+Pořád čekáte, kdy konečně začneme s tensory nějak počítat? Už se to konečně blíží!
+Ale dříve, než se dostaneme k těm asi nejpodstatnějším operacím s tensory, zkusíme
+si nejdříve rozebrat, co jsme to vlastně vytvořili za nestvůru.
+
+V motivačním příkladu jsme na tensory hleděli jako na soustavů operátorů a jejich
+kombinování. Jak to souvisí s tím, co jsme dosud viděli? Vezměme si jako příklad
+lineární zobrazení $L: \myspace{U}\rightarrow\myspace{V}$. Už víme, že toto zobrazení
+můžeme nahradit bilineární formou $B: \myspace{U}\times\myspace{V^*}\rightarrow\myspace{T}$.
+Co se stane, pokud do formy dosadíme vektor $\myvec{u}$ a kovektor $\myvec{\mu}$
+necháme volný?
+\begin{equation*}
+\begin{split}
+B(\myvec{u}, \myvec{\mu}) = C(\myvec{\mu})
+\end{split}
+\end{equation*}
+Lineární forma $C$ je prvkem dvojitého duálního prostoru $C\in\myspace{V^{**}}$, který
+je přirozeně isomorfní s prostorem $\myspace{V}$. Jinými slovy, vyšel nám vektor.
+Isomorfismus mezi zobrazením $L$ a formou $B$ jsme nadefinovali jako
+$B(\myvec{u}, \myvec{\mu}) = C(\myvec{\mu}) = \myvec{\mu}(L(\myvec{u}))$, což je přímo
+prvek isomorfní s vektorem $L(\myvec{u})$ (viz. důkaz isomorfismu
+$\myvec{V}$ a $\myvec{V^{**}}$). Takže jsme skutečně dostali ekvivalent původního
+lineárního zobrazení.
+
+Co se naopak stane, pokud dosadíme kovektor $\myvec{\mu}$ a vektor $\myvec{u}$ necháme
+volný?
+\begin{equation*}
+\begin{split}
+B(\myvec{u}, \myvec{\mu}) = D(\myvec{u})
+\end{split}
+\end{equation*}
+Lineární forma $D$ je prvkem duálního prostoru $D\in\myspace{V^*}$. Jinými slovy,
+získali jsme kovektor. Protože $D(\myvec{u}) = \myvec{\mu}(L(\myvec{u}))$,
+získali jsme kovektor, který vrací hodnotu pro vektor $\myvec{u}$ po transformaci
+zobrazením $L$. Je zřejmé, že podobné hrátky lze provozovat s jakoukoliv multilineární
+formou.
+
+To je poněkud zvláštní. Doteď jsme byli zvyklí, že máme objekty, do kterých z jedné
+strany něco dosadíme a z druhé strany nám vypadne výsledek. Multilineární forma
+ale trochu připomíná programovací jazyk Prolog, kde si programátor může volit,
+které parametry jsou vstupní a které výstupní. To samé platí i zde - dosadím
+za některé parametry a zbylé parametry tvoří výsledek (dostanu jinou multilineární
+formu).
+
+Fajn. Už máme operátor, který umíme dosazováním zjednodušovat. Jak ale vytvořit nový
+větší operátor ze dvou menších? Nejjednodušší možnost je dvě formy vynásobit,
+tedy přesněji vynásobit skaláry, které jsou výsledkem bilineárních forem.
+\begin{equation*}
+\begin{split}
+C(\myvec{u}, \myvec{v}, \myvec{w}, \myvec{x}) = A(\myvec{u}, \myvec{v})B(\myvec{w}, \myvec{x})
+\end{split}
+\end{equation*}
+Pokud vektory $\myvec{u}$, $\myvec{v}$, $\myvec{w}$ a $\myvec{x}$ vyjádřím
+jako lineární kombinaci báze a použiji vlastnosti bilineární formy, dostanu
+\begin{equation*}
+\begin{split}
+C(\myvec{u}, \myvec{v}, \myvec{w}, \myvec{x}) &= 
+  \left(\sum_{i}\sum_{j}v^i u^j A(\myvec{u_i}, \myvec{v_j})\right)
+  \left(\sum_{k}\sum_{l}w^k x^l B(\myvec{w_k}, \myvec{x_l})\right) \\
+&= \sum_{i}\sum_{j}\sum_{k}\sum_{l} v^i u^j w^k x^l 
+  A(\myvec{u_i}, \myvec{v_j}) B(\myvec{w_k}, \myvec{x_l})
+\end{split}
+\end{equation*}
+I na tomto jednoduchém případu je krásně vidět výhoda sumační konvence,
+protože pokud ji použijeme, dostaneme podstatně jednodušší zápis:
+\begin{equation*}
+\begin{split}
+C(\myvec{u}, \myvec{v}, \myvec{w}, \myvec{x})
+= v^i u^j w^k x^l A(\myvec{u_i}, \myvec{v_j}) B(\myvec{w_k}, \myvec{x_l})
+\end{split}
+\end{equation*}
+a pro jednoduchost hodnoty bilineárních forem s dosazenými bázovými vektory
+budeme značit jako $A\indices{_i_j}$ - už víme, že se jedná o souřadnice
+tensoru, takže takové značení je přirozené. 
+\begin{equation*}
+\begin{split}
+C(\myvec{u}, \myvec{v}, \myvec{w}, \myvec{x}) = v^i u^j w^k x^l A\indices{_i_j} B\indices{_k_l}
+\end{split}
+\end{equation*}
+Zároveň víme, že i forma $C$ lze vyjádřit v souřadnicích (v sumační konvenci):
+\begin{equation*}
+\begin{split}
+C(\myvec{u}, \myvec{v}, \myvec{w}, \myvec{x}) = v^i u^j w^k x^l C\indices{_i_j_k_l}
+\end{split}
+\end{equation*}
+Pokud tedy předchozí předpisy porovnáme, získáváme
+\begin{equation*}
+\begin{split}
+C\indices{_i_j_k_l} = A\indices{_i_j} B\indices{_k_l}
+\end{split}
+\end{equation*}
+Pokud si vyjádříme odpovídající tensory $A\in\myspace{U^*}\otimes\myspace{V^*}$
+a $B\in\myspace{W^*}\otimes\myspace{X^*}$ (v sumační konvenci)
+\begin{equation*}
+\begin{split}
+A &= A\indices{_i_j} \myvec{\epsilon^i}\otimes\myvec{\mu^j} \\
+B &= B\indices{_k_l} \myvec{\vartheta^k}\otimes\myvec{\sigma^l}
+\end{split}
+\end{equation*}
+a odpovídající tensor $C\in\myspace{U^*}\otimes\myspace{V^*}\otimes\myspace{W^*}\otimes\myspace{X^*}$
+(v sumační konvenci)
+\begin{equation*}
+\begin{split}
+C = A\indices{_i_j} B\indices{_k_l}
+\myvec{\epsilon^i}\otimes\myvec{\mu^j}\otimes\myvec{\vartheta^k}\otimes\myvec{\sigma^l}
+\end{split}
+\end{equation*}
+Operace, která tímto způsobem spojí dva tensory, se nazývá \textbf{rozšíření tensoru}
+a její význam na straně multilineárních forem je jejich vynásobení. Na souřadnicích
+se provádí nám již známým Kroneckerovým součinem, což není příliš překvapivé, protože
+v předchozí kapitole jsme nedělali nic jiného, než že jsme rozšiřovali dva tensory -
+i vektor je tensor.
+
+V případě Kroneckerova součinu dvou vektorů máme drobný technický problém - nelze
+jej vykládat jako násobení dvou forem. Je ale velmi snadno řešitelný nahrazením
+vektorů jejich protějšky v dvojitém duálním prostoru.
+
+Na první pohled rozšíření tensoru není příliš praktická operace. Určitě mohou existovat
+situace, kdy nás zajímá součin forem, ale ve většině případů budeme rozšiřovat tensory,
+které representují zobrazení a vynásobení jejich forem moc smyslu nedává. Rozšíření
+tensoru dává význam především ve spojitosti s operací, kterou si popíšeme nyní.
+
+Jako příklad si vezměme dvě bilineární formy $A: \myspace{U}\times\myspace{V^*}\rightarrow\myspace{T}$
+a $B: \myspace{W}\times\myspace{U^*}\rightarrow\myspace{T}$, o kterých už víme, že
+odpovídají lineárním zobrazením $L_A: \myspace{U}\rightarrow\myspace{V}$
+a $L_B: \myspace{W}\rightarrow\myspace{U}$.
+
+Pokud do formy $B$ dosadím jeden konkrétní vektor $\myvec{w}$ a druhý parametr nechám
+volný, získám formu (v sumační konvenci)
+\begin{equation*}
+\begin{split}
+\mycocovec{v}(\myvec{\sigma}) = B(\myvec{w}, \myvec{\sigma}) = u^i \sigma_j B\indices{_i^j}
+  = \sigma_j v^j
+\end{split}
+\end{equation*}
+O formě $\mycocovec{v}$ víme, že je isomorfní s vektorem $\myvec{v} = L_B(\myvec{w})$.
+Zkusme nyní tento vektor dosadit do formy $A$ a opět nechat její kovektor volný (v sumační
+konvenci)
+\begin{equation*}
+\begin{split}
+A(L_B(\myvec{w}), \myvec{\rho})
+= A(\myvec{v}, \myvec{\rho}) = v^i \rho_j A\indices{_i^j} 
+= \left(u^k B\indices{_k^i}\right) \rho_j A\indices{_i^j}
+\end{split}
+\end{equation*}
+Získali jsme tak novou bilineární formu $C: \myspace{W}\times\myspace{V^*}\rightarrow\myspace{T}$
+(v sumační konvenci)
+\begin{equation*}
+\begin{split}
+C(\myvec{w}, \myvec{\rho}) = A(L_B(\myvec{w}), \myvec{\rho}) = u^k \rho_j C\indices{_k^j}
+\end{split}
+\end{equation*}
+kde porovnáním předchozího zápisu (v sumační konvenci)
+\begin{equation*}
+\begin{split}
+C\indices{_k^j} = B\indices{_k^i} A\indices{_i^j}
+\end{split}
+\end{equation*}
 
 \end{document}
