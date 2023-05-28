@@ -4596,7 +4596,11 @@ C\indices{_i_j_k_l} = A\indices{_i_j} B\indices{_k_l}
 \end{split}
 \end{equation*}
 Pokud si vyjádříme odpovídající tensory $A\in\myspace{U^*}\otimes\myspace{V^*}$
-a $B\in\myspace{W^*}\otimes\myspace{X^*}$ (v sumační konvenci)
+a $B\in\myspace{W^*}\otimes\myspace{X^*}$\footnote{
+	Z nedostatku písmenek zde i dále budeme značit tensory stejným písmenem,
+	jak odpovídající multilineární formu. Asi to může být trochu zmatečné,
+	ale autor doufá, že čtenář z kontextu význam pozná.
+} (v sumační konvenci)
 \begin{equation*}
 \begin{split}
 A &= A\indices{_i_j} \myvec{\epsilon^i}\otimes\myvec{\mu^j} \\
@@ -4623,9 +4627,17 @@ vektorů jejich protějšky v dvojitém duálním prostoru.
 
 Na první pohled rozšíření tensoru není příliš praktická operace. Určitě mohou existovat
 situace, kdy nás zajímá součin forem, ale ve většině případů budeme rozšiřovat tensory,
-které representují zobrazení a vynásobení jejich forem moc smyslu nedává. Rozšíření
-tensoru dává význam především ve spojitosti s operací, kterou si popíšeme nyní.
+které representují zobrazení a vynásobení jejich forem moc smyslu nedává. Anebo dává?
 
+Ve skutečnosti ano. Rozšířením vznikne čistý tensor. Původní tensory si v novém
+sloučeném žijí odděleně. Pokud dosadíme do obou, výsledkem bude čistý tensor slučující
+výsledky obou. Můžeme na ně tedy koukat jako na dvojici výsledků. V předchozím
+příkladu jsme sloučili zobrazení $A$ a $B$. Pokud dosadíme za vektor $\myvec{u}$
+a $\myvec{w}$ získáme dva kovektory sloučené dohromady
+$A_{\myvec{u}}(\myvec{v})B_{\myvec{w}}(\myvec{x})$.
+
+\medskip\noindent
+Rozšíření tensoru nabývá význam hlavně až ve spojitosti s další operací.
 Jako příklad si vezměme dvě bilineární formy $A: \myspace{U}\times\myspace{V^*}\rightarrow\myspace{T}$
 a $B: \myspace{W}\times\myspace{U^*}\rightarrow\myspace{T}$, o kterých už víme, že
 odpovídají lineárním zobrazením $L_A: \myspace{U}\rightarrow\myspace{V}$
@@ -4635,7 +4647,7 @@ Pokud do formy $B$ dosadím jeden konkrétní vektor $\myvec{w}$ a druhý parame
 volný, získám formu (v sumační konvenci)
 \begin{equation*}
 \begin{split}
-\mycocovec{v}(\myvec{\sigma}) = B(\myvec{w}, \myvec{\sigma}) = u^i \sigma_j B\indices{_i^j}
+\mycocovec{v}(\myvec{\sigma}) = B(\myvec{w}, \myvec{\sigma}) = w^i \sigma_j B\indices{_i^j}
   = \sigma_j v^j
 \end{split}
 \end{equation*}
@@ -4646,14 +4658,15 @@ konvenci)
 \begin{split}
 A(L_B(\myvec{w}), \myvec{\rho})
 = A(\myvec{v}, \myvec{\rho}) = v^i \rho_j A\indices{_i^j} 
-= \left(u^k B\indices{_k^i}\right) \rho_j A\indices{_i^j}
+= \left(w^k B\indices{_k^i}\right) \rho_j A\indices{_i^j}
 \end{split}
 \end{equation*}
-Získali jsme tak novou bilineární formu $C: \myspace{W}\times\myspace{V^*}\rightarrow\myspace{T}$
-(v sumační konvenci)
+(Všimněte si, že jsme zde přejmenovali indexy oproti zápisu ko-kovektoru výše.
+V sumační konvenci se jedná o běžnou činnost.) Získali jsme tak novou bilineární
+formu $C: \myspace{W}\times\myspace{V^*}\rightarrow\myspace{T}$ (v sumační konvenci)
 \begin{equation*}
 \begin{split}
-C(\myvec{w}, \myvec{\rho}) = A(L_B(\myvec{w}), \myvec{\rho}) = u^k \rho_j C\indices{_k^j}
+C(\myvec{w}, \myvec{\rho}) = A(L_B(\myvec{w}), \myvec{\rho}) = w^k \rho_j C\indices{_k^j}
 \end{split}
 \end{equation*}
 kde porovnáním předchozího zápisu (v sumační konvenci)
@@ -4662,5 +4675,146 @@ kde porovnáním předchozího zápisu (v sumační konvenci)
 C\indices{_k^j} = B\indices{_k^i} A\indices{_i^j}
 \end{split}
 \end{equation*}
+
+Předchozí postup provedený na straně tensorů by vypadal následovně. Nejdříve
+si vyjádříme odpovídající tensory (v sumační konvenci)
+\begin{equation*}
+\begin{split}
+A &= A\indices{_i^j} \myvec{\epsilon^i}\otimes\myvec{v_j} \\
+B &= B\indices{_k^l} \myvec{\vartheta^k}\otimes\myvec{u_l}
+\end{split}
+\end{equation*}
+Tensor $A$ rozšířím o tensor $B$ (v sumační konvenci)
+\begin{equation*}
+\begin{split}
+M = A\indices{_i^j} B\indices{_k^l}
+\myvec{\epsilon^i}\otimes\myvec{v_j}\otimes\myvec{\vartheta^k}\otimes\myvec{u_l}
+\end{split}
+\end{equation*}
+a následně propojím kontravariantní složku $B$ (index $l$), která reprezentuje
+výsledek lineárního zobrazení $L_B$, s kovariantní složkou $A$ (index $i$),
+která reprezentuje vstupní parametr lineárního zobrazení $L_A$ (v sumační konvenci)
+\begin{equation*}
+\begin{split}
+C = A\indices{_h^j} B\indices{_k^h}\myvec{v_j}\otimes\myvec{\vartheta^k}
+  = C\indices{^j_k} \myvec{v_j}\otimes\myvec{\vartheta^k}
+\end{split}
+\end{equation*}
+což je tensor, který zřejmě reprezentuje lineární formu $C$, která vznikla
+dosazením $L_B$ do $A$ (pouze se nám otočilo pořadí indexů).
+
+Operace, kdy si zvolím jednu kontravariantní a jednu kovariantní složku
+tensoru a vytvořím nový tensor, který má zvolené složky odstraněné a souřadnice
+vzniknou posčítáním původních souřadnic zvolených složek se shodnými indexy,
+se nazývá \textbf{kontrakce tensoru} (Zahradník používá slovo \textbf{úžení}).
+
+Jak jsme si ukázali, její význam na straně multilineárních zobrazení ve
+spojitosti s rozšířením tensoru (tzn. pokud kontrahuji složky ze dvou tensorů,
+které jsme rozšířením spojili do jednoho) je sloučení dvou operací do jedné,
+jinými slovy dosazení výsledku jednoho zobrazení do druhého (proto nám taky
+v případě kontrakce dvou lineárních zobrazení nevyšlo nic jiného než násobení
+matic).
+
+Kontrakce se může použít i pro složky z jednoho nerozebiratelného tensoru.
+V případě lineárního zobrazení vám tak vyjde hodnota, která se označuje názvem
+\textbf{stopa}. Nepochybuji, že matematici mají pro stopu spoustu úžasných využití,
+ale já nejsem matematik, tak pro mne moc význam nemá. Osobně věřím, že hlavní
+využití kontrakce v praktických fyzikálních aplikacích je právě v kombinaci
+operací.
+
+\begin{example}
+Předchozí text si zaručeně zaslouží příklady. Začněme tím nejjednodušším,
+dosadíme vektor do lineárního zobrazení. Mějme lineární zobrazení
+(odpovídající bilineární formu)
+$L: \myspace{U}\times\myspace{V^*}\rightarrow\myspace{T}$ a vektor
+$\myvec{u}\in\myspace{U}$. Odpovídající tensor $L \in \myspace{U^*}\otimes\myspace{V}$
+je
+\begin{equation*}
+\begin{split}
+L = L\indices{_i^j} \myvec{\epsilon^i}\otimes\myvec{v_j}
+\end{split}
+\end{equation*}
+Tensor bychom nyní chtěli rozšířit o vektor $\myvec{u}$. Ze strany zobrazení
+to není technicky možné - vektor není forma, proto ho nemůžeme vynásobit s jinou
+formou. Musíme sáhnout po isomorfním vektoru $\mycocovec{u}\in\myspace{V^{**}}$,
+který už formou je a existuje k němu tensor $\sigma\in\myspace{V^*}$.
+\begin{equation*}
+\begin{split}
+L\otimes\sigma = L\indices{_i^j} u^k \myvec{\epsilon^i}\otimes\myvec{v_j}\otimes\myvec{u_k}
+\end{split}
+\end{equation*}
+a nyní zkontrahujeme složky $k$ a $i$
+\begin{equation*}
+\begin{split}
+v = L\indices{_h^j} u^h \myvec{v_j}
+\end{split}
+\end{equation*}
+Výsledkem je přímo vektor, jak bychom od správného lineárního zobrazení očekávali.
+
+Pokud se koukneme na souřadnice pořádně, zjistíme, že jsme nedostali nic jiného
+než maticové násobení matice a sloupcového vektoru.
+
+\end{example}
+
+\begin{example}
+Metrický tensor. Metrický tensor je bilineární zobrazení, které přijímá dva vektory
+a vrací jejich skalární součin (dot product): $g: \myspace{V}\times\myspace{V}\rightarrow\myspace{T}$.
+Odpovídající tensor má podobu
+\begin{equation*}
+\begin{split}
+g = g\indices{_i_j} \myvec{\epsilon^i}\otimes\myvec{\epsilon^j}
+\end{split}
+\end{equation*}
+Dosadit do něho oba vektory můžeme několika způsoby. Buď rozšíříme o vektor,
+kontrahujeme, rozšíříme o druhý vektor a opět kontrahujeme
+\begin{equation*}
+\begin{split}
+&(g\indices{_i_j} u^k) v^l (\myvec{\epsilon^i}\otimes\myvec{\epsilon^j}\otimes\myvec{u_k})\otimes\myvec{u_l} \\
+&(g\indices{_i_j} u^i) v^l \myvec{\epsilon^j}\otimes\myvec{u_l} \\
+&(g\indices{_i_j} u^i) v^j
+\end{split}
+\end{equation*}
+anebo nejdříve sloučíme oba vektory do jednoho tensoru, tím pak rozšíříme metrický tensor a zkontrahujeme
+\begin{equation*}
+\begin{split}
+&g\indices{_i_j} (u^k v^l) (\myvec{\epsilon^i}\otimes\myvec{\epsilon^j})\otimes(\myvec{u_k}\otimes\myvec{u_l}) \\
+&g\indices{_i_j} (u^i v^j)
+\end{split}
+\end{equation*}
+Samozřejmě v obou případech dostáváme stejný výsledek.
+
+Zajímavá je situace, kdy do metrického tensoru dosadíme pouze jeden vektor
+\begin{equation*}
+\begin{split}
+&g\indices{_i_j} u^k \myvec{\epsilon^i}\otimes\myvec{\epsilon^j}\otimes\myvec{u_k} \\
+&g\indices{_i_j} u^i \myvec{\epsilon^j}
+\end{split}
+\end{equation*}
+čímž jsme získali kovektor. Pokud tento kovektor dosadíme do inverzního metrického
+tensoru, který spočítáme z rovnice $g\indices{_i_j} g\indices{^j^k} = \delta\indices{_i^k}$
+($\delta$ je Kroneckerovo delta, viz. XXX), dostaneme zpět původní vektor
+\begin{equation*}
+\begin{split}
+&g\indices{^h^l} (g\indices{_i_j} u^i) (\myvec{u_h}\otimes\myvec{u_l})\otimes\myvec{\epsilon^j} \\
+&(g\indices{^h^k} g\indices{_i_k}) u^i \myvec{u_h} \\
+&u^i \myvec{u_i} \\
+\end{split}
+\end{equation*}
+Pokud náhodou bádáte, jak se nám v poslední řádce změnil index $h$ na index $i$, odpověď
+je jednoduchá - součty koeficientů metrických tensorů v závorce jsou pro $i\neq h$ rovny
+nule a pro $i = h$ rovny 1 (z definice Kroneckerova $\delta$). Tzn. zůstanou pouze prvky,
+kde $i = h$.
+
+V prostoru s metrikou tak máme možnost metrickým tensorem přesouvat indexy nahoru a dolu.
+Pokud jsme navíc v prostoru s ortogonální bází, vektory a kovektory mají stejné souřadnice
+(metrický tensor se rovná Kroneckerovu $\delta$) a přestává mít význam rozlišovat horní
+a dolní indexy. V řadě fyzikálních učebnic se s touto podmínkou počítá, a proto se konvence
+s horními a dolními indexy vůbec nezavádí - k ohromné radosti samouků, kteří se to pak snaží
+pochopit.
+
+\end{example}
+
+
+
 
 \end{document}
