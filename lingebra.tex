@@ -4746,7 +4746,7 @@ L\otimes\sigma = L\indices{_i^j} u^k \myvec{\epsilon^i}\otimes\myvec{v_j}\otimes
 a nyní zkontrahujeme složky $k$ a $i$
 \begin{equation*}
 \begin{split}
-v = L\indices{_h^j} u^h \myvec{v_j}
+\myvec{v} = L\indices{_h^j} u^h \myvec{v_j}
 \end{split}
 \end{equation*}
 Výsledkem je přímo vektor, jak bychom od správného lineárního zobrazení očekávali.
@@ -4783,6 +4783,11 @@ anebo nejdříve sloučíme oba vektory do jednoho tensoru, tím pak rozšíří
 \end{equation*}
 Samozřejmě v obou případech dostáváme stejný výsledek.
 
+Aby druhá možnost na straně lineárních zobrazení byla možná, musíme zobrazení
+$g: \myspace{V}\times\myspace{V}\rightarrow\myspace{T}$ převést na isomorfní
+lineární zobrazení $G: \myspace{V}\otimes\myspace{V}\rightarrow\myspace{T}$
+a do něho dosadit sloučený tensor obou vektorů.
+
 Zajímavá je situace, kdy do metrického tensoru dosadíme pouze jeden vektor
 \begin{equation*}
 \begin{split}
@@ -4806,11 +4811,132 @@ nule a pro $i = h$ rovny 1 (z definice Kroneckerova $\delta$). Tzn. zůstanou po
 kde $i = h$.
 
 V prostoru s metrikou tak máme možnost metrickým tensorem přesouvat indexy nahoru a dolu.
-Pokud jsme navíc v prostoru s ortogonální bází, vektory a kovektory mají stejné souřadnice
+Pokud jsme navíc v prostoru s ortonormální bází, vektory a kovektory mají stejné souřadnice
 (metrický tensor se rovná Kroneckerovu $\delta$) a přestává mít význam rozlišovat horní
 a dolní indexy. V řadě fyzikálních učebnic se s touto podmínkou počítá, a proto se konvence
 s horními a dolními indexy vůbec nezavádí - k ohromné radosti samouků, kteří se to pak snaží
 pochopit.
+
+\end{example}
+
+\begin{example}
+Hookův zákon. Fyzika zavádí Hookův zákon v tensorovém tvaru (infinitezimální, tzn. působící
+v někonečně malém objemu mechanického kontinua) v následující podobě:
+\begin{equation*}
+\begin{split}
+\myvec{\sigma} = \myvec{c}\myvec{\varepsilon}
+\end{split}
+\end{equation*}
+Na levé straně je praotec všech tensorů, po kterém dostaly jméno - \textbf{Cauchyho
+napěťový tensor}. Po bližším ohledání člověk zjistí, že se vlastně jedná o obyčejné
+lineární zobrazení \footnote{Je trochu frusturující, že po celé práci, co jsme
+si s tensory dali, je praotec všech tensorů jen obyčejné lineární zobrazení.},
+které po dosazení jednotkové normály plochy, která objem ``řízne'', vrací mechanické
+napětí na ni působící.
+
+Lineární zobrazení lze vyjádřit jako matici čísel, pro která mají fyzici konkrétní
+vysvětlení - na diagonále jsou hlavní (tažná) napětí, která objem prodlužují ve směru
+os, ostatní jsou tečná (smyková) napětí, která se snaží kostičku objemu zkřivit
+do stran. Pro naše účely stačí vědět, že se jedná o bilineární formu
+$\myspace{R}^{3}\times\myspace{R}^{3*}\rightarrow\myspace{R}$ a odpovídající tensor
+má podobu $\sigma\indices{_i^j}\myvec{\sigma^i}\otimes\myvec{e_j}$.
+
+Podobně i tensor $\myvec{\varepsilon}$ na pravé straně je lineární zobrazení.
+Označuje se jako \textbf{tensor malých deformací}. Jeho význam je zobrazení,
+které pro zadaný polohový vektor bodu kontinua před deformací vrací nový polohový
+vektor, kam se bod deformací posunul. Opět se tedy jedná o bilineární formu
+$\myspace{R}^{3}\times\myspace{R}^{3*}\rightarrow\myspace{R}$ s odpovídajícím
+tensorem $\varepsilon\indices{_i^j}\myvec{\epsilon^i}\otimes\myvec{e_j}$.
+
+Tento zápis Hookova zákona, ačkoliv je ve fyzice s tensory často používaný,
+je velmi zavádějící. Jaký význam má písmenko $\myvec{c}$, které násobíme
+s tensorem $\myvec{\varepsilon}$? K dispozici máme pouze dvě možnosti:
+násobení skalárem a rozšíření tensoru (Kroneckerův součin). Rozšíření
+tensoru to zaručeně není, protože tomu neodpovídá stupeň tensoru $\myvec{\sigma}$.
+Skalár by to mohl být, ale hádáme, že fyzika takhle jednoduchá není. $\myvec{c}$
+musí vyjadřovat materiálové vlastnosti, které jsou závislé na krystalové struktuře,
+tzn. v různých směrech se může chovat různě.
+
+Tedy se nejedná ani o jedno z násobení a dostáváme se k dalšímu zdroji bolavé
+hlavy samouků: fyzici tímto zápisem říkají, že závislost je \textit{lineární},
+násobí tensor deformací jakousi pseudokonstantou. $\myvec{c}$ tedy nakonec
+není nic jiného než opět lineární zobrazení, do kterého z jedné strany dosazujeme
+tensor deformací, na druhé straně nám vypadává tensor napětí.
+
+Tento tensor se nazývá \textbf{tensor elasticity} (anglicky \textbf{stiffness tensor}
+nebo \textbf{elasticity tensor}) a odpovídá bilineárnímu zobrazení
+\begin{equation*}
+\begin{split}
+(\myspace{R}^{3}\times\myspace{R}^{3*}\rightarrow\myspace{R})
+\times
+(\myspace{R}^{3}\times\myspace{R}^{3*}\rightarrow\myspace{R})^*
+\rightarrow\myspace{R}
+\end{split}
+\end{equation*}
+My už ovšem známe isomorfismy, které nám umožní nahradit lineární zobrazení
+v závorkách tensory
+\begin{equation*}
+\begin{split}
+(\myspace{R}^{3*}\otimes\myspace{R}^{3})
+\times
+(\myspace{R}^{3*}\otimes\myspace{R}^{3})^*
+\rightarrow\myspace{R}
+\end{split}
+\end{equation*}
+a pravou závorku nahradíme známým isomorfismem do tensorového součinu
+duálních prostorů
+\begin{equation*}
+\begin{split}
+(\myspace{R}^{3*}\otimes\myspace{R}^{3})
+\times
+(\myspace{R}^{3}\otimes\myspace{R}^{3*})
+\rightarrow\myspace{R}
+\end{split}
+\end{equation*}
+A pro tuto bilineární formu nyní najdeme odpovídající isomorfní tensor
+(a zároveň aplikujeme asociativitu tensorového součinu) dostaneme
+tensor $\myvec{c}\in\myspace{R}^3\otimes\myspace{R}^{3*}\otimes\myspace{R}^{3*}\otimes\myspace{R}^3$:
+\begin{equation*}
+\begin{split}
+\myvec{c} = c\indices{^i_j_k^l}\myvec{e_i}\otimes\myvec{\epsilon^j}\otimes\myvec{\epsilon^k}\otimes\myvec{e_l}
+\end{split}
+\end{equation*}
+kde index $i$ souvisí s polohovým vektorem dosazovaným do tensoru deformací, index $j$ s výsledným
+polohovým vektorem po deformaci, index $k$ s normálovým vektorem dosazovaným do napěťového
+tensoru a index $l$ s výsledným napětím působícím na plochu.
+
+Pokud tedy tensor $\myvec{c}$ rozšíříme o tensor $\myvec{\varepsilon}$ a zkontrahujeme (tzn. dosadíme
+$\myvec{\varepsilon}$ do lineárního zobrazení $\myvec{c}$), získáme Hookův zákon
+\begin{equation*}
+\begin{split}
+\myvec{\sigma} = c\indices{^i_j_k^l}\varepsilon\indices{_i^j}\myvec{\epsilon^k}\otimes\myvec{e_l}
+\end{split}
+\end{equation*}
+nebo jenom v souřadnicích
+\begin{equation*}
+\begin{split}
+\sigma\indices{_k^l} = c\indices{^i_j_k^l}\varepsilon\indices{_i^j}
+\end{split}
+\end{equation*}
+
+\medskip\noindent
+Na tomto příkladu je vidět pár problémů, které se s tensory pojí. Prvním je příliš velký
+růst složitosti. Tensor elasticity je tensor čtvrtého řádu, který má 4 složky dimenze
+3. Tedy se skládá z $3^4 = 81$ souřadnic\footnote{
+    V tomto případě situace není tak špatná. Tensory jsou symetrické a další snížení
+    počtu koeficientů obvykle způsobí nějaká symetrie v krystalické mříži materiálu.}.
+A teď si představte tensor 4 řádu v obecné relativitě v čtyřrozměrném
+prostoročasu~- $4^4 = 256$ souřadnic.
+
+Druhý problém je pedagogický. Je jím způsob, kterým se tensory zavádí ve fyzice.
+Obvykle se nějak odvodí koeficienty, podle souřadnic se naskládají do pole,
+prohlásí se \uv{toto je tensor,} a pak se s ním začnou dělat tajemné operace
+bez vysvětlení významu (jako např. výše uvedené ``násobení''). Tímto způsobem se
+zavádí Hookův zákon (viz. Novotný, mechanika kontinua), stejně tak se obvykle
+zavádí tensory v obecné relativitě. Student pak vidí, že se nějakým
+způsobem násobí souřadnice, ale pokud si položí otázky \uv{skutečně jsem tuto
+operaci mohl udělat a skutečně mi dává, co si myslím, že dává?} odpověď obvykle
+není vidět.
 
 \end{example}
 
