@@ -27,6 +27,7 @@
 \newcommand{\mydual}[1]{\myspace{#1^{*}}}
 \newcommand{\mydouble}[1]{\myspace{#1^{**}}}
 \newcommand{\mycocovec}[1]{\mathbf{\widehat{#1}}}
+\newcommand{\mycocoord}[1]{\widehat{#1}}
 
 \begin{document}
 
@@ -4861,7 +4862,7 @@ vysvětlení - na diagonále jsou hlavní (tažná) napětí, která objem prodl
 os, ostatní jsou tečná (smyková) napětí, která se snaží kostičku objemu zkřivit
 do stran. Pro naše účely stačí vědět, že se jedná o bilineární formu
 $\myspace{R}^{3}\times\myspace{R}^{3*}\rightarrow\myspace{R}$ a odpovídající tensor
-má podobu $\sigma\indices{_i^j}\myvec{\sigma^i}\otimes\myvec{e_j}$.
+má podobu $\sigma\indices{_i^j}\myvec{\epsilon^i}\otimes\myvec{e_j}$.
 
 Podobně i tensor $\myvec{\varepsilon}$ na pravé straně je lineární zobrazení.
 Označuje se jako \textbf{tensor malých deformací}. Jeho význam je zobrazení,
@@ -4871,8 +4872,8 @@ $\myspace{R}^{3}\times\myspace{R}^{3*}\rightarrow\myspace{R}$ s odpovídajícím
 tensorem $\varepsilon\indices{_i^j}\myvec{\epsilon^i}\otimes\myvec{e_j}$.
 
 Tento zápis Hookova zákona, ačkoliv je ve fyzice s tensory často používaný,
-je velmi zavádějící. Jaký význam má písmenko $\myvec{c}$, které násobíme
-s tensorem $\myvec{\varepsilon}$? K dispozici máme pouze dvě možnosti:
+je trochu zavádějící. Jaký význam má písmenko $\myvec{c}$, které násobíme
+s tensorem $\myvec{\varepsilon}$? Náš aktuální arzenál nabízí pouze dvě možnosti:
 násobení skalárem a rozšíření tensoru (Kroneckerův součin). Rozšíření
 tensoru to zaručeně není, protože tomu neodpovídá stupeň tensoru $\myvec{\sigma}$.
 Skalár by to mohl být, ale hádáme, že fyzika takhle jednoduchá není. $\myvec{c}$
@@ -4880,10 +4881,11 @@ musí vyjadřovat materiálové vlastnosti, které jsou závislé na krystalové
 tzn. v různých směrech se může chovat různě.
 
 Tedy se nejedná ani o jedno z násobení a dostáváme se k dalšímu zdroji bolavé
-hlavy samouků: fyzici tímto zápisem říkají, že závislost je \textit{lineární},
-násobí tensor deformací jakousi pseudokonstantou. $\myvec{c}$ tedy nakonec
-není nic jiného než opět lineární zobrazení, do kterého z jedné strany dosazujeme
-tensor deformací, na druhé straně nám vypadává tensor napětí.
+hlavy samouků: fyzici tímto zápisem rovnou kombinují rozšíření a kontrakci
+tensoru dohromady. Jinými slovy, aplikujeme tensor $\myvec{\varepsilon}$
+na tensor $\myvec{c}$. Tensor $\myvec{c}$ tedy není nic jiného, než lineární
+zobrazení, do kterého z jedné strany dosazujeme tensor deformací, na druhé straně
+nám vypadává tensor napětí.
 
 Tento tensor se nazývá \textbf{tensor elasticity} (anglicky \textbf{stiffness tensor}
 nebo \textbf{elasticity tensor}) a odpovídá bilineárnímu zobrazení
@@ -5005,32 +5007,97 @@ což opět není nic nového. Kovektor je kovariatní - následuje transformaci.
 Transformace ko-kovektoru. Prvek dvojitého duálu je isomorfní s vektorem,
 proto by se měl transformovat s inverzní transformací. Pojďme si to ověřit.
 
-Víme, že transformovaný ko-kovektor musí vracet stejné hodnoty jako před
-transformací
+Transformovaný ko-kovektor vypadá, podle mustru výše, takto:
 \begin{equation*}
 \begin{split}
-\mycocovec{u'}(\myvec{\varphi'}) = \mycocovec{u}(\myvec{\varphi})
+\mycocovec{u'}(\myvec{\varphi'}) = \mycocovec{u}(R(\myvec{\varphi}))
 \end{split}
 \end{equation*}
-Z definice duálního prostoru levou stranu můžeme vyjádřit jako
+Zobrazení $R$, které zde má význam transformačního zobrazení kovektorů,
+sice nemáme vypsané formálně, ale v předchozím příkladu jsme ho odvodili
+ve složkách:
 \begin{equation*}
 \begin{split}
-\mycocovec{u'}(\myvec{\varphi'}) = \myvec{\varphi'}(\myvec{u'})
-  = \myvec{\varphi}(T(\myvec{u'}))
+\varphi'_j = \varphi_i T\indices{^i_j}
 \end{split}
 \end{equation*}
-a pravou stranu
+a jeho inverzní zobrazení po složkách je:
 \begin{equation*}
 \begin{split}
-\mycocovec{u}(\myvec{\varphi}) = \myvec{\varphi}(\myvec{u})
+\varphi_i = \varphi'_j S\indices{^j_i}
 \end{split}
 \end{equation*}
-Pokud se mají obě strany rovnat, musí platit
+Pokud tedy ko-kovektor vyjádříme po složkách a dosadíme transformaci kovektoru,
+dostáváme:
 \begin{equation*}
 \begin{split}
-\myvec{\varphi}(\myvec{u}) = \myvec{\varphi}(T(\myvec{u'}))
+\mycocoord{u}\indices{^i}\varphi\indices{_i} = \mycocoord{u}\indices{^i}\varphi'_j S\indices{^j_i}
+  = \mycocoord{u'}\indices{^j}\varphi'_j
 \end{split}
 \end{equation*}
+zřejmě tedy
+\begin{equation*}
+\begin{split}
+\mycocoord{u'}\indices{^j} = \mycocoord{u}\indices{^i} S\indices{^j_i}
+\end{split}
+\end{equation*}
+Ko-kovektor se tedy transformuje kontravariantně, což jsme očekávali.
+
+Všimněte si, že formálně jsou zobrazení $R$ a jeho inverze jiná, než
+původní zobrazení $T$ a $S$, protože převádí jiný vektorový prostor
+(zde dvojitý duál). Ale jejich tensory mají shodné souřadnice.
+
+\end{example}
+
+\begin{example}
+Transformace lineárního zobrazení. Víme, že lineární zobrazení vyjadřujeme
+jako tensor s jednou kontravariantní a jednou kovariantní složkou. Jeho
+transformace odpovídá\footnote{
+	Výraz není formálně úplně správně, protože zobrazení $S$ nepřevádí kovektory - na začátku
+	kapitoly jsme si ho nadefinovali jako zobrazení vektorů inverzní k transformačnímu
+	zobrazení. Ale víme, že existuje k němu odpovídající zobrazení, které transformuje
+	kovektory a je vyjádřené stejnými souřadnicemi tensoru, jako zobrazení $S$.
+}:
+\begin{equation*}
+\begin{split}
+L(\myvec{u}, \myvec{\rho}) = L(T(\myvec{u'}), S(\myvec{\rho'})) = L'(\myvec{u'}, \myvec{\rho'})
+\end{split}
+\end{equation*}
+Nové zobrazení tedy vznikne aplikací $T$ na kovariantní složku a aplikací $S$ na kontravariantní
+(nezapomeňme, že složky tensoru mají kontravarianci a kovarianci opačně než parametry zobrazení):
+\begin{equation*}
+\begin{split}
+{L'}\indices{_i^j} = L\indices{_k^l} T\indices{^k_i} S\indices{^j_l}
+\end{split}
+\end{equation*}
+Výsledek opět není příliš překvapivý. Vyšlo nám úplně to samé, co v lineární algebře
+a maticovém vyjádření lineárního zobrazení. Nová matice vznikne vynásobením postupných
+kroků:
+\begin{enumerate}
+\item pomocí transformace $T$ převést vektor z nových souřadnic do starých,
+\item ten dosadit do původního lineárního zobrazení,
+\item výsledek pomocí transformace $S$ převést zpět do nových souřadnic.
+\end{enumerate}
+\begin{equation*}
+\begin{split}
+\mymatrix{L'} = \mymatrix{S}\mymatrix{L}\mymatrix{T}
+\end{split}
+\end{equation*}
+Z maticového násobení je odvozena nepsaná konvence, kterou je možné nalézt
+v některých učebnicích, že kontravariantní transformace se píší vlevo
+a kovariantní vpravo. Náš předchozí výsledek by tedy vypadal takto:
+\begin{equation*}
+\begin{split}
+{L'}\indices{_i^j} = S\indices{^j_l} L\indices{_k^l} T\indices{^k_i} 
+\end{split}
+\end{equation*}
+
+\noindent
+Myslím, že tímto můžeme kapitolu o souřadnicích uzavřít. Princip zůstává stejný
+pro jakýkoliv jiný tensor. Pokud má více složek, bude jednoduše potřeba aplikovat
+více transformací. Tím jsme se dostali k další definici tensoru, kterou můžete
+nalézt ve starších učebnicích fyziky jako \textit{pole čísel, kde řádkové složky
+následují kovariantní transformaci a sloupcové složky kontravariantní.}
 
 \end{example}
 
