@@ -5130,8 +5130,8 @@ $\myspace{U}\otimes\myspace{V}$ takové, že splňují podmínky v definici XXX.
 
 \noindent
 První názornější varianta vlastně pouze formalizuje způsob, jakým jsme s tensorovým
-součinem doteď pracovali - jako s určitými značkami, jejichž kombinace zastupují
-prvky tensorového součinu prostorů.
+součinem doteď pracovali - jako s matematickými výrazy, které zastupují prvky
+tensorového součinu, ale za kterými neznáme konkrétní hodnotu.
 
 \begin{proof}
 Důkaz bude vedený v následujících krocích:
@@ -5149,9 +5149,10 @@ Důkaz bude vedený v následujících krocích:
 O kousek výše jsme řekli, že pouze zformalizujeme způsob, jakým jsme doteď
 se tensorovým součinem pracovali. Nadefinujme si tedy množinu $\myspace{E}$
 \textit{matematických výrazů}, tzn. \textit{řetězů} obsahujících symboly
-z množiny $\myspace{U}\cup\myspace{V}\cup\myspace{T}\cup\{\otimes, +, (, )\}$
-takových, že:
+z množiny $\myspace{U}\cup\myspace{V}\cup\myspace{T}\cup\{\otimes, +, (, ),
+\myvec{0}\}$ takových, že:
 \begin{itemize}
+\item $\myvec{0}\in\myspace{E}$
 \item $\myvec{u}\in\myspace{U}, \myvec{v}\in\myspace{V}
     \Rightarrow \myvec{u}\otimes\myvec{v}\in\myspace{E}$
 \item $\myvec{e}\in\myspace{E}, \alpha\in\myspace{T}
@@ -5211,17 +5212,21 @@ axiomy vektorového prostoru:
 \item Invariance vektoru: $(1\myvec{e}) \leftrightarrow \myvec{e}$
 \end{itemize}
 To byla ta jednodušší pravidla. Abychom splnili axiomy vektorového prostoru, potřebujeme
-také existenci nulového prvku. Za nulový prvek budeme považovat třídu, kde prvky budou
-v relaci s prvkem $(0\myvec{e})$, tedy máme transformační pravidlo
+také existenci nulového prvku. Zavedli jsme si speciální symbol $\myvec{0}$, tedy za nulový
+prvek budeme považovat třídu, která ho obsahuje. Zatím ale nemáme žádnou jeho vazbu
+k ostatním prvkům. Proto zavedeme další transformační pravidlo
 \begin{itemize}
-\item nulový prvek: $(0\myvec{e}) \leftrightarrow \varepsilon$ (pravá strana znamená
-    prázdný řetěz).
+\item nulový prvek: $(0\myvec{e}) \leftrightarrow \myvec{0}$.
 \end{itemize}
-a z tohoto už snadno vyplývá požadovaná podmínka o existenci opačného prvku, stačí vzít stejný
-prvek množiny $\myspace{E}$ vynásobený opačným prvkem tělesa 
-$((\alpha\myvec{e}) + (\beta\myvec{e})) \leftrightarrow (0\myvec{e})$, kde $\beta = -\alpha$.
-Tuto podmínku už nemusíme kódovat jako další transformační pravidlo, protože už je pokrytá
-předchozími pravidly.
+Požadovaný axiom vektorového prostoru $\myvec{e} + \myvec{0} = \myvec{e}$ již vyplývá
+z tohoto pravidla a pravidla pro distribuci $\myvec{e} + \myvec{0} \rightarrow
+\myvec{e} + 0\myvec{e} \rightarrow 1\myvec{e} + 0\myvec{e} \rightarrow 1\myvec{e}
+\rightarrow \myvec{e}$.
+
+Poslední axiom vektorového prostoru požaduje existenci opačného prvku. Ta nám zde
+výchází z předchozího pravidla a existence opačného prvku tělesa. Jako opačný prvek
+vezmeme stejný výraz vynásobený opačným skalárem $((\alpha\myvec{e}) + (\beta\myvec{e}))
+\rightarrow (0\myvec{e}) \rightarrow \myvec{0}$, kde $\beta = -\alpha$.
 
 Tím jsme ještě neskončili. V množině máme ještě jednu značku, kterou jsme transformačními
 pravidly nepokryli - zbývá nám zakódovat bilinearitu tensorového součinu.
@@ -5244,7 +5249,7 @@ Všimněte si, že všechna pravidla jsou obousměrná, což je nutná podmínka
 symetrie relace $\sim$.
 
 Nyní už jednoduše položíme množinu $\myspace{U}\otimes\myspace{V}$ rovnou množině
-tříd ekvivalence $\myspace{E}{/}{\sim}$. Abychom získali vektorový prostor, musíme ji
+tříd ekvivalence $\myspace{E}[\sim]$. Abychom získali vektorový prostor, musíme ji
 doplnit o operace sčítání a násobení skalárem. Pro tento účel použijeme sčítání
 a násobení tak, jak jsme ho definovali výše. Pouze musíme prokázat, že jsou dobře
 definované i pro třídy ekvivalence, tzn. při kombinaci libovolných prvků náležejících
@@ -5279,18 +5284,18 @@ transformační pravidla jsme záměrně vymýšleli tak, aby axiomy splněné b
     \sim ((\alpha\myvec{e_1}) + (\alpha\myvec{e_2}))$ přímou aplikací pravidla.
 \item Invariance vektoru: $(1\myvec{e}) \sim \myvec{e}$ přímou aplikací pravidla.
 \item Existence nulového prvku. Jako nulový prvek funguje třída ekvivalence obsahující
-    prázdný řetěz. Pokud prázdný řetěz sečtu s jakýmkoliv jiným výrazem, můžu ho
-    přetransformovat $(\myvec{e} + \varepsilon) \rightarrow (\myvec{e} + (0\myvec{e}))
+    prvek $\myvec{0}$. Pokud ho sečtu s jakýmkoliv jiným výrazem, můžu ho
+    přetransformovat $(\myvec{e} + \myvec{0}) \rightarrow (\myvec{e} + (0\myvec{e}))
     \rightarrow ((1\myvec{e}) + (0\myvec{e})) \rightarrow (1\myvec{e}) \rightarrow \myvec{e}$,
-    tedy $(\myvec{e} + \varepsilon) \sim \myvec{e}$. Vzhledem k transformačním pravidlům
-    pro tensorový součin do nulové třídy patří také všechny prvky $\myvec{0}\otimes\myvec{v}$
-    a $\myvec{u}\otimes\myvec{0}$, protože jdou přetransformovat na $(0\myvec{u}\otimes\myvec{v})$,
-    potažmo na $\varepsilon$.
+    tedy $(\myvec{e} + \myvec{0}) \sim \myvec{e}$.
+    
+    Vzhledem k transformačním pravidlům pro tensorový součin do nulové třídy patří také
+    všechny prvky $\myvec{0}\otimes\myvec{v}$ a $\myvec{u}\otimes\myvec{0}$, protože
+    jdou přetransformovat na $(0\myvec{u}\otimes\myvec{v})$, potažmo na $\myvec{0}$.
 \item Existence opačného prvku. Libovolný prvek lze přetransformovat $\myvec{e} 
     \rightarrow (1\myvec{e})$. Pokud k němu přičtu prvek $(-1\myvec{e})$ získám nulový prvek
-    transformací $((1\myvec{e}) + (-1\myvec{e})) \rightarrow (0\myvec{e}) \rightarrow \varepsilon$.
+    transformací $((1\myvec{e}) + (-1\myvec{e})) \rightarrow (0\myvec{e}) \rightarrow \myvec{0}$.
 \end{enumerate}
-
 První krok důkazu jsme úspěšně zakončili. Vytvořili jsme množinu s operacemi tvořícími vektorový
 prostor.
 
@@ -5311,7 +5316,6 @@ $\phi(\myvec{u}, \myvec{v}) = \myvec{u}\otimes\myvec{v}$. Je skutečně bilineá
     což je skalární násobek obrazu $\odot(\alpha, \phi(\myvec{u_2}, \myvec{v}))$.
 \item A opět to samé můžeme zopakovat s druhým parametrem.
 \end{enumerate}
-
 Druhý krok důkazu jsme také zakončili úspěšně. Máme bilineární zobrazení $\phi$.
 
 \medskip\noindent
@@ -5332,36 +5336,59 @@ $\phi$. Druhá podmínka je tedy splněná.
 \medskip\noindent
 A blížíme se do finále. Potřebujeme prokázat první podmínku definice. Mějme tedy
 libovolné bilineární zobrazení $f:\myspace{U}\times\myspace{V}\rightarrow\myspace{W}$.
-Pro něj nadefinujeme zobrazení $F:\myspace{U}\otimes\myspace{V}\rightarrow\myspace{W}$
-tak, aby platilo $f(\myvec{u}, \myvec{v}) = F(\myvec{u}\otimes\myvec{v})$. Je toto
-zobrazení lineární?
+Pro něj nadefinujeme zobrazení $F':\myspace{E}\rightarrow\myspace{W}$
+tak, aby platily podmínky:
+\begin{itemize}
+\item $F'(\myvec{0}) = \myvec{0}$,
+\item $F'(\myvec{u}\otimes\myvec{v}) = f(\myvec{u}, \myvec{v})$,
+\item $F'((\alpha\myvec{e})) = \alpha F'(\myvec{e})$,
+\item $F'((\myvec{e_1} + \myvec{e_2})) = F'(\myvec{e_1}) + F'(\myvec{e_2})$.
+\end{itemize}
+Zobrazení je nadefinované korektně, protože jsme pokryly všechna definiční pravidla
+množiny $\myspace{E}$, tudíž pro každý prvek množiny $\myspace{E}$ máme danou
+hodnotu.
 
-Linearitu zobrazení budeme opět prokazovat v několika krocích. Jako první prokážeme
-linearitu vůči násobení skalárem obrazu zobrazení $\phi$.
-\begin{equation*}
-\begin{split}
-F(\alpha\myvec{u}\otimes\myvec{v}) = \alpha f(\myvec{u}, \myvec{v}) = \alpha F(\myvec{u}\otimes\myvec{v})
-\end{split}
-\end{equation*}
-To bylo jednoduché. Teď prokážeme linearitu sčítání dvou obrazů zobrazení $\phi$, které lze
-sečíst (jeden z parametrů je stejný).
-\begin{equation*}
-\begin{split}
-F((\myvec{u_1}\otimes\myvec{v} + \myvec{u_2}\otimes\myvec{v})) 
-&= f(\myvec{u_1} + \myvec{u_2}, \myvec{v}) = f(\myvec{u_1}, \myvec{v}) + f(\myvec{u_2}, \myvec{v}) \\
-&= F(\myvec{u_1}\otimes\myvec{v}) + F(\myvec{u_2}\otimes\myvec{v})
-\end{split}
-\end{equation*}
-a to samé lze provést v druhém parametru.
+My však potřebujeme zobrazení z množiny tříd ekvivalence $F: \myspace{U}\otimes\myspace{V}
+\rightarrow\myspace{W}$. Pokud prokážeme, že zobrazení $F'$ vrací stejnou hodnotu pro
+každý prvek stejné třídy ekvivalence, nalezli jsme zobrazení $F$.
 
-Žel, ne každý součet lze takto zredukovat. Zde si musíme pomoct jinak. Vyjádřeme si nejdříve
-dva součty
-\begin{equation*}
-\begin{split}
-f(\myvec{u_1}, \myvec{v_1}) + f(\myvec{u_1}, \myvec{v_2}) = F(\myvec{u_1}\otimes\myvec{v_1}) + F(\myvec{u_1}\otimes\myvec{v_2}) \\
-\end{split}
-\end{equation*}
+Toto prokázat znamená projít všechna transformační pravidla, co jsme si nadefinovali,
+a ukázat, že nemění hodnotu zobrazení $F'$. Transformační pravidla odvozená od
+axiomů vektorového prostoru jsou jednoduchá a čtenář si je jistě dokáže zkontrolovat
+sám (např. komutativita: $F'((\myvec{e_1} + \myvec{e_2})) = F'(\myvec{e_1}) + F'(\myvec{e_2})
+= F'(\myvec{e_2}) + F'(\myvec{e_1}) = F'((\myvec{e_2} + \myvec{e_1}))$).
 
+Zajímavější pravidla jsou ta odvozená od bilinearity tensorového součinu. Zde se musíme
+opřít o bilineární zobrazení $f$.
+\begin{itemize}
+\item $F'(\myvec{u}\otimes\myvec{v}) = f(\myvec{u}, \myvec{v}) 
+= f(\myvec{u_1} + \myvec{u_2}, \myvec{v}) = f(\myvec{u_1}, \myvec{v}) 
++ f(\myvec{u_2}, \myvec{v}) = F'(\myvec{u_1}\otimes\myvec{v}) + F'(\myvec{u_2}\otimes\myvec{v})
+= F'((\myvec{u_1}\otimes\myvec{v} + \myvec{u_2}\otimes\myvec{v}))$.
+\item $F'(\myvec{u_1}\otimes\myvec{v}) = f(\myvec{u_1}, \myvec{v}) 
+= f(\alpha\myvec{u_2}, \myvec{v}) = \alpha f(\myvec{u_2}, \myvec{v})
+= \alpha F'(\myvec{u_2}\otimes\myvec{v}) = F'((\alpha \myvec{u_2}\otimes\myvec{v}))$.
+\end{itemize}
+a to samé lze zopakovat ve druhém parametru.
+
+Zobrazení $F'$ tedy skutečně vrací stejné hodnoty pro prvky ze stejných tříd ekvivalence,
+čímž jsme získali zobrazení $F: \myspace{U}\otimes\myspace{V}\rightarrow\myspace{W}$
+předpisem $F(\myspace{E}[\myvec{e}]) = F'(\myvec{e})$.
+
+A zbývá poslední triviální krok: prokázat, že zobrazení $F$ je linearizací bilineárního
+zobrazení $f$:
+\begin{itemize}
+\item zobrazení je zřejmě lineární, protože $F(\myspace{E}[(\myvec{e_1} + \myvec{e_2})])
+= F'((\myvec{e_1} + \myvec{e_2})) = F'(\myvec{e_1}) + F'(\myvec{e_2})
+= F(\myspace{E}[\myvec{e_1}]) + F(\myspace{E}[\myvec{e_2}])$
+a $F(\myspace{E}[(\alpha\myvec{e})]) = F'((\alpha\myvec{e})) = \alpha F'(\myvec{e})
+= \alpha F(\myspace{E}[\myvec{e}])$.
+\item Zobrazení pro obrazy tensorového součinu vrací hodnoty bilineárního zobrazení $f$:
+$F(\myspace{E}[\myvec{u}\otimes\myvec{v}]) = F'(\myvec{u}\otimes\myvec{v}) 
+= f(\myvec{u}, \myvec{v})$.
+\end{itemize}
+Tadá, máme hotovo. Zkonstruovali jsme tensorový součin a ověřili jsme, že platí univerzální
+vlastnost.
 \end{proof}
 
 \end{document}
