@@ -48,7 +48,7 @@ Text si neklade žádné nároky na matematickou přesnost. Koneckonců nenapsal
 ale programátor, který se samostudiem pokoušel naučit něco nového. Spíše se jedná o poznámky
 a popsané úvahy, které musel udělat, když se prokousával spoustou matematických textů
 a pokoušel se je pochopit. Vlastně tímto textem danou látku vysvětluje především sám sobě.
-Přesto si autor fandí, že pro jiné samouky by text mohl být přínosem a ulehčí jim cestu
+Přesto si autor fandí, že pro jiné samouky by mohl být přínosem a ulehčí jim cestu
 k pochopení.
 
 Text je určený samoukům, kteří už v současné době znají základy lineární algebry: maticové
@@ -123,7 +123,7 @@ nulový prvek:
 lineárního zobrazení, čtvrtá přičítá opačný vektor k obrazu vektoru $\myvec{v}$.) Důsledkem
 této vlastnosti je, že posunutí (přičtení nenulového vektoru) \textbf{není} lineární zobrazení
 (nulu převede na neulový vektor). To je v praxi poměrně velké omezení a matematici ho řeší
-pomocí tzv. affinních zobrazení a prostorů, které si podrobněji probereme v kapitole XXX.
+pomocí tzv. affinních zobrazení a prostorů.
 
 \begin{example}\textbf{Identita} - jedno z nejjednodušších zobrazení je takové, které převádí vektor
 na ten samý:
@@ -520,10 +520,7 @@ Souřadnice vektoru se tedy transformují \textbf{opačně}, než se transformuj
 Například pokud souřadnicovou soustavu otočíme o úhel $\alpha$ doprava, souřadnice vektoru
 se změní tak, jakoby se vektor v původní souřadnicové soustavě otočil o stejný úhel doleva.
 Pokud zvětším měřítko, souřadnice vektoru se změní, jakoby se měřítko vektoru zmenšilo (viz.
-příklad XXX).
-
-Tato vlastnost se nazývá \textit{kontravariance} a budeme se jí společně s jejím protějškem
-\textit{kovariancí} zabývat v kapitole XXX.
+příklad XXX). Tato vlastnost se nazývá \textit{kontravariance}.
 
 \chapter{Duální vektorový prostor}
 
@@ -1452,8 +1449,11 @@ Pokud je učebnice poněkud pokrokovější, tak vám také dá příklady:
 \end{itemize}
 
 \noindent
-Jasné, ne? Situaci navíc komplikuje, že existují 3 různé, různě obecné, způsoby,
-jak tensory zavést. Do toho se plete Einsteinova sumační notace, která samoukům
+Jasné, ne? Situaci navíc komplikuje, že existuje řada různých, různě obecných
+způsobů\footnote{
+	Množina způsobů, jak tensory zavést je zaručeně spočetná. Konečností si ale
+	nejsem zrovna jistý.
+} jak tensory zavést. Do toho se plete Einsteinova sumační notace, která samoukům
 dokáže značně zamotat hlavu. Aby toho nebylo málo, ještě je možné za určitých podmínek
 nerozlišovat kovariantní a kontravariantní složky, takže samouk narazí jednou na text,
 který je rozlišuje, a jindy na text, který je nerozlišuje, a jen těžko hledá, co mají
@@ -5138,16 +5138,14 @@ Důkaz bude vedený v následujících krocích:
 \begin{enumerate}
 	\item nejprve zkonstruujeme prostor $\myspace{U}\otimes\myspace{V}$,
 	\item následně zkonstruujeme zobrazení $\phi$ (tensorový součin),
-	\item že obrazy tensorového součinu generují celý prostor
+	\item ověříme, že obrazy tensorového součinu generují celý prostor
 	    $\myspace{U}\otimes\myspace{V}$ (druhá podmínka definice).
-	\item a nakonec dokážeme, že zobrazení $F$ (očekávaná linearizace
-	    libovolného bilineárního zobrazení z 
-	    $\myspace{U}\times\myspace{V}\rightarrow\myspace{W}$) je
-	    skutečně lineární (druhá podmínka definice).
+	\item A nakonec pro libovolné bilineární zobrazení zkonstruujeme
+	    jeho linearizaci, čímž naplníme první podmínku definice.
 \end{enumerate}
 
 O kousek výše jsme řekli, že pouze zformalizujeme způsob, jakým jsme doteď
-se tensorovým součinem pracovali. Nadefinujme si tedy množinu $\myspace{E}$
+s tensorovým součinem pracovali. Nadefinujme si tedy množinu $\myspace{E}$
 \textit{matematických výrazů}, tzn. \textit{řetězů} obsahujících symboly
 z množiny $\myspace{U}\cup\myspace{V}\cup\myspace{T}\cup\{\otimes, +, (, ),
 \myvec{0}\}$ takových, že:
@@ -5389,6 +5387,102 @@ $F(\myspace{E}[\myvec{u}\otimes\myvec{v}]) = F'(\myvec{u}\otimes\myvec{v})
 \end{itemize}
 Tadá, máme hotovo. Zkonstruovali jsme tensorový součin a ověřili jsme, že platí univerzální
 vlastnost.
+\end{proof}
+
+Předchozí důkaz je, podle mne, poměrně dost názorný, ale také je dost pracný. V matematické
+literatuře se s ním nesetkáte\footnote{
+	Koneckonců jsem ho celý vytvořil sám. Ale tím netvrdím, že jsem ho vymyslel. Popravdě
+	už vlastně ani nevím, kde jsem myšlenku na něj získal - jestli z vlastní hlavy, nebo
+	jsem ji někde četl.
+}. Setkáte se ovšem s jinou konstrukcí, která je matematicky výrazně elegantnější, i když
+ve své podstatě vlastně stejná.
+
+\begin{proof}
+Postup tohoto důkazu je stejný jako v předchozím. Nejprve konstrukce prostoru
+$\myspace{U}\otimes\myspace{V}$, konstrukce tensorového součinu $\phi$, následně
+ověření generování celého prostoru, a nakonec konstrukce linearizace pro libovolné
+bilineární zobrazení.
+
+Liší se tím, že používá dvě již existující konstrukce lineární algebry (které jsme si
+v této knize zatím nijak nezavedli). Tou první je tzv. \textit{free vector space} (česky
+jsem našel označení \textit{formální lineární obal}).
+
+Formální lineární obal je prostor funkcí s \textit{konečným počtem nenulových bodů} (operace
+sčítání a násobení skalárem jsou definované klasicky ``bodě'' $(f_1 + f_2)(\myvec{u}) 
+= f_1(\myvec{u}) + f_2(\myvec{u})$ a $(\alpha f)(\myvec{u}) = \alpha f(\myvec{u})$). V našem
+konkrétním případě půjde o funkce $\myspace{U}\times\myspace{V}\rightarrow\myspace{T}$
+(a prostor budeme dále značit $\myspace{M}$).
+
+Tato divná definice znamená skutečně, co říká - jedná se o funkce, které vždy vrací 0, kromě
+konečného počtu bodů $(\myvec{u}, \myvec{v})$. Pokud množiny $\myspace{U}$ a $\myspace{V}$
+nejsou konečné, dimenze prostoru bude nekonečná (bodů je nekonečně a navzájem se neovlivňují).
+Naštěstí pro nás se jedná o jeden ze vzácných případů, kdy známe jeho bázi - jsou jí funkce
+\begin{equation*}
+\Delta_{\myvec{u}, \myvec{v}}(\myvec{u'}, \myvec{v'}) =
+\begin{cases}
+1 & \myvec{u} = \myvec{u'} \wedge \myvec{v} = \myvec{v'} \\
+0 & jinak
+\end{cases}
+\end{equation*}
+A protože se jedná o funkce s konečným počtem nenulových bodů, lze každou vyjádřit jako
+konečný součet těchto bázových funkcí.
+
+Výhoda této konstrukce je, že je již vektorovým prostorem. Proto si můžeme odpustit
+celou práci s axiomy vektorového prostoru, která nám zabrala v minulém důkazu dost práce.
+
+Jak konstrukci použijeme? V předchozím důkazu jsme celý prostor stvořili
+jako lineární kombinace základních atomů $\myvec{u}\otimes\myvec{v}$. V tomto důkazu
+jako základní atomy použijeme bázové funkce $\Delta_{\myvec{u}, \myvec{v}}$. Prvky
+prostoru nám tak budou tvořit cosi, co by programátor označil za bitmapu - pokud
+funkce pro vektory $\myvec{u}$ a $\myvec{v}$ vrátí hodnotu $\alpha$, pak prvek
+vznikl přičtením $\alpha \myvec{u}\otimes\myvec{v}$.
+
+Trochu jsme předběhli, jako prvky $\myvec{u}\otimes\myvec{v}$ označujeme obrazy tensorového
+součinu, který jsme zatím nenadefinovali. Ale čtenáři je už asi zřejmé, že naším cílem
+je definice tensorového součinu $\phi(\myvec{u}, \myvec{v}) = \Delta_{\myvec{u}, \myvec{v}}$.
+
+Ačkoliv jsme si ušetřili práci s axiomy vektorového prostoru, nemáme vyhráno, protože
+potřebujeme zakódovat bilinearitu tensorového součinu. Jinými slovy, potřebujeme
+ztotožnit prvky prostoru, které jsou z hlediska tensorového součinu ekvivalentní.
+
+Pro tento účel nejdříve nadefinujeme podprostor $\myspace{N}$ prvků vzniklých jako
+lineární kombinace (lineární obal) rozdílů prvků ekvivalentních z hlediska
+tensorového součinu\footnote{
+	Osobně jsem měl trochu problém toto pochopit. Takže v následujícím seznamu
+	jsou konkrétní funkce, které vznikly popsanými operacemi. A podprostor je
+	těmito funkcemi generovaný.
+}:
+\begin{itemize}
+\item $\Delta_{\myvec{u_1} + \myvec{u_2}, \myvec{v}} - \Delta_{\myvec{u_1}, \myvec{v}}
+  - \Delta_{\myvec{u_2}, \myvec{v}}$,
+\item $\Delta_{\alpha\myvec{u}, \myvec{v}} - \alpha\Delta_{\myvec{u}, \myvec{v}}$,
+\item $\Delta_{\myvec{u}, \myvec{v_1} + \myvec{v_2}, } - \Delta_{\myvec{u}, \myvec{v_1}}
+- \Delta_{\myvec{u}, \myvec{v_2}}$,
+\item $\Delta_{\myvec{u}, \alpha\myvec{v}} - \alpha\Delta_{\myvec{u}, \myvec{v}}$,
+\end{itemize}
+a následně do stejné třídy ekvivalence zařadíme každé dva prvky formálního lineárního
+obalu, které se liší pouze hodnotou z tohoto podprostoru (tzn. pouze hodnotou, která
+je z hlediska tensorového součinu ekvivalentní) $\myvec{a} \sim \myvec{b}$, právě
+tehdy když $\myvec{a} - \myvec{b}\in\myspace{N}$ (relace je skutečně ekvivalence,
+jak se lze z vlastnostní vektorového prostoru přesvědčit). A jako prostor
+$\myspace{U}\otimes\myspace{V}$ položíme prostor tříd ekvivalence.
+
+Tento prostor je druhá mnou slibovaná matematická konstrukce použitá v tomto důkazu,
+která se nazývá \textit{faktorprostor} (anglicky \textit{factor space} nebo
+\textit{quotient space}). A typicky se značí $\myspace{M}/{\sim}$. A protože to má
+svůj hezký název, můžeme si už odpustit práci s dokazováním, že sčítání vektorů
+a násobení skalárem jsou dobře definované a skutečně jsme získali vektorový prostor
+- to už udělali jiní.
+
+V tento okamžik máme vytvořený prostor $\myspace{U}\otimes\myspace{V} = \myspace{M}/{\sim}$
+a nadefinovaný tensorový součin $\phi(\myvec{u}, \myvec{v}) = \Delta_{\myvec{u}, \myvec{v}}$.
+Zbývá nám prokázat, že obrazy tensorového součinu generují celý prostor, a zkonstruovat
+linearizaci pro libovolné bilineární zobrazení.
+
+První podmínka je snadná - obrazy tensorového součinu tvoří celou bázi prostoru $\myspace{M}$,
+tedy i generují celý prostor. I druhá podmínka je snadná, protože známe obrazy báze
+$F(\myvec{u}\otimes\myvec{v}) = F(\Delta_{\myvec{u}, \myvec{v}}) = f(\myvec{u}, \myvec{v})$,
+které jednoznačně definují lineární zobrazení. Důkaz je hotový.
 \end{proof}
 
 \end{document}
